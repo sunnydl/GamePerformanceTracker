@@ -12,3 +12,30 @@ Web App
 ### Covered games 
 * League of Legends 
 * ...More to come
+
+### Instruction
+1. Clone the repo into your local machine.
+2. Install the dependencies first before starting the app, use `npm install` or `npm i`.
+3. To run the frontend app, run `npm start` in frontend folder.
+4. Backend is still under development...
+
+### File Structure
+```
+./                        
+|- ...
+|- backend/                  # -> Back end
+    |- ...
+|- frontend/              # -> Front end
+    |- public
+    |- src
+        |- components               # util components
+        |- redux
+            |- ...states/reducers folders
+            |- ...
+            - hooks.ts                 # redux selector and dispatch simplified for ts
+            - store.ts                 # redux store
+        |- views                    # display components
+        - App.css                   # place to put all the css (for now, maybe forever)
+        - App.tsx                   # testing ground (for now)
+    |- ...
+```
