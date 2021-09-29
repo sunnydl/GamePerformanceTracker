@@ -7,7 +7,8 @@ Web App
 * React.js 
 * Node.js 
 * Express.js 
-* MongoDB 
+* MongoDB
+* Material UI
 ### Covered games 
 * League of Legends 
 * ...More to come
