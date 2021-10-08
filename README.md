@@ -13,6 +13,12 @@ Web App
 * League of Legends 
 * ...More to come
 
+### Release plan
+![ReleasePlan](https://user-images.githubusercontent.com/56567343/136513440-c0e55f35-ba4c-4ca7-b1be-063eb54dba11.png)
+
+### Sprint plan
+![SprintPlan](https://user-images.githubusercontent.com/56567343/136513551-bbd68a0d-611c-4b45-9bfa-bc52a5a233c2.png)
+
 ### Instruction
 1. Clone the repo into your local machine.
 2. Install the dependencies first before starting the app, use `npm install` or `npm i`.
@@ -39,3 +45,9 @@ Web App
         |- App.tsx                   # testing ground (for now)
     |- ...
 ```
+
+### Credit
+Icon: <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+
+### Disclaimer
