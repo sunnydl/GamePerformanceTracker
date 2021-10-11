@@ -14,10 +14,10 @@ Web App
 * ...More to come
 
 ### Release plan
-![ReleasePlan](https://user-images.githubusercontent.com/56567343/136513440-c0e55f35-ba4c-4ca7-b1be-063eb54dba11.png)
+![releasePlan](https://user-images.githubusercontent.com/56567343/136741075-aad6513e-9967-4708-9c37-b0d5b205dbbc.png)
 
-### Sprint plan
-![SprintPlan](https://user-images.githubusercontent.com/56567343/136513551-bbd68a0d-611c-4b45-9bfa-bc52a5a233c2.png)
+### Sprint plans
+Inside scrum_resource folder
 
 ### Instruction
 1. Clone the repo into your local machine.
