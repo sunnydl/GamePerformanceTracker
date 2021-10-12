@@ -1,6 +1,8 @@
-import express, { Router } from 'express'
-const router: Router = express.Router();
+import { Router } from 'express'
 
-router.get('/')
+const routes = (router: Router) => {
+    router.route("/")
+        .get()
+}
 
-export default router;
+export default routes;

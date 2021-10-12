@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import axios, { AxiosInstance } from 'axios';
 
 dotenv.config();
 
@@ -26,11 +27,21 @@ const SERVER = {
 
 //will manually update every 24 hours
 const RIOTAPIKEY = `RGAPI-2de1e69f-3552-4daf-b911-511bfc7f106a`;
+const REGION = "na1.api.riotgames.com";
+
+// set up axios to include riot api key, and export with config
+const axiosInstance: AxiosInstance = axios.create({
+    baseURL: `https://${REGION}`,
+    headers: {
+        'Content-Type': 'application/json',
+        'X-Riot-Token': RIOTAPIKEY,
+    }
+});
 
 const config = {
     mongo: MONGO,
     server: SERVER,
-    key: RIOTAPIKEY
+    axios: axiosInstance,
 };
 
 export default config;

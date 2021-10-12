@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import summonerInfoInterface from '../interfaces/summonerInfo';
+import summonerInfoInterface from '../interfaces/ISummonerInfo';
 
 const summonerInfoSchema: Schema = new Schema(
     {
