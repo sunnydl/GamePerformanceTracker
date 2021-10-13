@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import { increment, incrementByAmount } from '../redux/counter';
+import { increment, incrementByAmount } from '../redux/slices/counter';
 
 function Home() {
   const count = useAppSelector((state) => state.counter.value);
