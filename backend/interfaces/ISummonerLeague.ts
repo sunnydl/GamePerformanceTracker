@@ -1,14 +1,14 @@
 export default interface SummonerLeague {
-    leagueId: String;
-    queueType: String;
-    tier: String;
-    rank: String;
-    leaguePoints: Number;
-    wins: Number;
-    losses: Number;
-    hotStreak: Boolean;
-    freshBlood: Boolean;
-    inactive: Boolean;
+    leagueId: string;
+    queueType: string;
+    tier: string;
+    rank: string;
+    leaguePoints: number;
+    wins: number;
+    losses: number;
+    hotStreak: boolean;
+    freshBlood: boolean;
+    inactive: boolean;
     miniSeries: MiniSeries;
 }
 

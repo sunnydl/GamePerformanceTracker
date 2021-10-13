@@ -1,7 +1,9 @@
-import { Document } from 'mongoose';
-
-export default interface SummonerInfo extends Document {
-    userID: String;
-    userRank: String;
-    userTag: String;
+export default interface SummonerInfo{
+    accountID?: string;
+    profileIconId?: number;
+    revisionDate?: number;
+    name: string;
+    id: string;
+    puuid: string;
+    summonerLevel: number;
 };

@@ -1,8 +1,10 @@
 import SummonerInfo from "./ISummonerInfo";
+import SummonerLeague from "./ISummonerLeague";
 
 export default interface User {
-    email?: String;
+    email?: string;
     summonerInfo: SummonerInfo;
-    winRate: [Number];
-    matchIds: [String];
+    summonerLeague: SummonerLeague;
+    winRate: Array<number>;
+    matchIds: Array<string>;
 }
