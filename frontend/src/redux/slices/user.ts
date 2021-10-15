@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface UserState {
     summoner_name?: string,
     summoner_level?: number,
-    summoner_icon?: HTMLImageElement,
+    summoner_icon_url?: string,
     rank?: string,
     win_rate?: number,
 }
