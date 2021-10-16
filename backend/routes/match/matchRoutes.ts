@@ -1,6 +1,6 @@
 import express, { Router } from 'express'
-const router: Router = express.Router();
+const router: Router = express.Router()
 
-router.get('/')
+router.get('/');
 
 export default router;
