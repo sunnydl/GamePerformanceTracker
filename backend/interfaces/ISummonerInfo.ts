@@ -1,6 +1,6 @@
 export default interface SummonerInfo{
     accountID?: string;
-    profileIconId?: number;
+    profileIconId: number;
     revisionDate?: number;
     name: string;
     id: string;

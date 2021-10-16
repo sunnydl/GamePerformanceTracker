@@ -1,8 +1,7 @@
-import { Router } from 'express'
+import express, { Router } from 'express'
+import * as summonerController from '../../controllers/summonerController'
+const router: Router = express.Router()
 
-const routes = (router: Router) => {
-    router.route("/")
-        .get()
-}
+router.get('/', summonerController.getSummonerInfoByName);
 
-export default routes;
+export default router;

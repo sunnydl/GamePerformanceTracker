@@ -5,6 +5,11 @@ export default interface User {
     email?: string;
     summonerInfo: SummonerInfo;
     summonerLeague: SummonerLeague;
-    winRate: Array<number>;
+    winRate: Array<WinRates>;
     matchIds: Array<string>;
+}
+
+interface WinRates {
+    winRate: number;
+    date: number; // in yyyyMMddhhmmss or yyyyMMdd format
 }

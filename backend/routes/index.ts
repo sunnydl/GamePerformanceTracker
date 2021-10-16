@@ -1,8 +1,10 @@
 import express, { Router } from 'express'
+import summonerRoutes from './summoner/summonerInfoRoutes'
+import matchesRoutes from './match/matchRoutes'
 
 const router: Router = express.Router()
 
-router.use('/summonerInfo', require('./summoner/summonerInfoRoutes').default(router));
-router.use('/match-history', require('./match/matchRoutes').default(router));
+router.use('/summonerInfo', summonerRoutes);
+router.use('/matches', matchesRoutes);
 
 export default router;
