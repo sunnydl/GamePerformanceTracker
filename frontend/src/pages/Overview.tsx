@@ -4,15 +4,19 @@ import { Typography, Container, Avatar } from '@mui/material';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { setUserData } from '../redux/slices/user';
 
-function Overview() {
-  const { summoner_name, summoner_level, summoner_icon_url, rank, win_rate } = 
-    useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
+const getProfileURL = (iconID?: number | null) => {
+  return `http://ddragon.leagueoflegends.com/cdn/11.20.1/img/profileicon/${iconID}.png`;
+}
 
-  const handleClick = () => {
-    const prevLevel = summoner_level || 0;
-    dispatch(setUserData({ summoner_level: prevLevel + 1 }));
-  }
+function Overview() {
+  const {
+    summonerName, 
+    summonerLevel, 
+    summonerIcon, 
+    rank, 
+    winGames, 
+    lossGames, 
+  } = useAppSelector((state) => state.user);
 
   return (
     <header>
@@ -20,18 +24,17 @@ function Overview() {
         maxWidth="xs"
         sx={{ backgroundColor: 'skyblue' }}
       >
-        <Avatar alt="summoner icon" src={summoner_icon_url} />
+        <Avatar src={getProfileURL(summonerIcon)} />
         <Typography
           variant="h5"
           sx={{ color: 'white' }}
         >
-          Summoner Name: {summoner_name}<br />
-          Summoner level: {summoner_level}<br />
+          Summoner Name: {summonerName}<br />
+          Summoner level: {summonerLevel}<br />
           Rank: {rank}<br/>
           <br />
-          Win Rate: {win_rate}<br />
-          Win Games: 10000<br/>
-          Loss Games: 9000
+          Win Games: {winGames}<br/>
+          Loss Games: {lossGames}
         </Typography>
       </Container>
     </header>
