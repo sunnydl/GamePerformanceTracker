@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import axios, { AxiosInstance } from 'axios';
 
 dotenv.config();
 
@@ -26,7 +25,7 @@ const SERVER = {
 };
 
 //will manually update every 24 hours
-const RIOTAPIKEY = `RGAPI-1d223e25-6ce3-4c41-9063-0a89327035dd`;
+const RIOTAPIKEY = `RGAPI-b1ae01b1-364d-4a53-ada5-9e18c03893d7`;
 
 const config = {
     mongo: MONGO,
