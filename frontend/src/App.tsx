@@ -1,9 +1,9 @@
-import React, { KeyboardEvent } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 
 import axios from 'axios';
 
-import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
+import { Switch, Route, Link, Redirect, useHistory, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Overview from './pages/Overview';
 
@@ -59,32 +59,46 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function App() {
+  const history = useHistory();
+  const location = useLocation();
+
   const dispatch = useAppDispatch();
 
-  const handleSummonerSearchByName = (e: KeyboardEvent) => {
-    if (e.code === 'Enter') {
-      let element = e.target as HTMLInputElement;
-      let searchName = element.value;
-      console.log('searching for:', searchName);
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
 
-      axios.get(API_URL + 'summonerInfo', {
-        params: {
-          summonerName: searchName
-        }
-      })
-      .then((res) => {
-        const userData = res.data;
-        console.log('user found:', userData);
-        dispatch(setUserData(userData));
-      })
-      .catch((err) => {
-        console.log(err);
+    axios.get(API_URL + 'summonerInfo', {
+      params: {
+        summonerName: params.get('summonerName')
+      }
+    })
+    .then((res) => {
+      const userData = res.data;
+      console.log('user found:', userData);
+      dispatch(setUserData(userData));
+    })
+    .catch((err) => {
+      console.log(err.response || err);
+    });
+  }, [location.search]);
+
+  const handleSummonerSearchByName = (e: React.KeyboardEvent) => {
+    if (e.code === 'Enter') {
+      const element = e.target as HTMLInputElement;
+      const searchName = element.value;
+      console.log('searching for:', searchName, location);
+
+      history.push({
+        pathname: location.pathname,
+        search: new URLSearchParams({
+          summonerName: searchName,
+        }).toString(),
       });
     }
   }
 
   return (
-    <BrowserRouter>
+    <React.Fragment>
       <AppBar position='sticky'>
         <Toolbar variant='dense'>
           <IconButton
@@ -94,7 +108,7 @@ function App() {
             aria-label='menu'
             sx={{ mr: 2 }}
             component={Link}
-            to='/'
+            to={`/${location.search}`}
           >
             <AccessAlarmIcon /> {/* TODO: replace temporary icon */}
           </IconButton>
@@ -113,7 +127,7 @@ function App() {
           <Box sx={{ flexGrow: 1 }} />
 
           <Tabs variant='scrollable' textColor='inherit'>
-            <Tab label='Overview' component={Link} to='/overview' />
+            <Tab label='Overview' component={Link} to={`/overview${location.search}`} />
           </Tabs>
         </Toolbar>
       </AppBar>
@@ -127,7 +141,7 @@ function App() {
         </Route>
         <Redirect to='/' />
       </Switch>
-    </BrowserRouter>
+    </React.Fragment>
   );
 }
 
