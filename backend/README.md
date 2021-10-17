@@ -6,7 +6,7 @@
 
 #### GET api/summonerInfo/:summonerName
 ##### request input (Get request param):
-* summonerName
+* summonerName: string;
 ##### response: 
 * summonerName: string;
 * summonerLevel: number;
