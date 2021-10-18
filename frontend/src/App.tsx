@@ -65,35 +65,42 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
+    if (location.search) {
+      const params = new URLSearchParams(location.search);
 
-    axios.get(API_URL + 'summonerInfo', {
-      params: {
-        summonerName: params.get('summonerName')
+      const summonerName = params.get('summonerName');
+      if (summonerName) {
+        axios.get(API_URL + 'summonerInfo', {
+          params: {
+            summonerName: summonerName,
+          }
+        })
+        .then((res) => {
+          const userData = res.data;
+          console.log('user found:', userData);
+          dispatch(setUserData(userData));
+        })
+        .catch((err) => {
+          console.log(err.response || err);
+        });
       }
-    })
-    .then((res) => {
-      const userData = res.data;
-      console.log('user found:', userData);
-      dispatch(setUserData(userData));
-    })
-    .catch((err) => {
-      console.log(err.response || err);
-    });
+    }
   }, [location.search]);
 
   const handleSummonerSearchByName = (e: React.KeyboardEvent) => {
     if (e.code === 'Enter') {
       const element = e.target as HTMLInputElement;
       const searchName = element.value;
-      console.log('searching for:', searchName, location);
 
-      history.push({
-        pathname: location.pathname,
-        search: new URLSearchParams({
-          summonerName: searchName,
-        }).toString(),
-      });
+      if (searchName) {
+        console.log('searching for:', searchName, location);
+        history.push({
+          pathname: location.pathname,
+          search: new URLSearchParams({
+            summonerName: searchName,
+          }).toString(),
+        });
+      }  
     }
   }
 
