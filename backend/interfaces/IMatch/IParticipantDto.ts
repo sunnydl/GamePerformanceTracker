@@ -1,35 +1,6 @@
-//include match here!
-export default interface MatchDto {
-    metadataDto: MetadataDto;
-    info: InfoDto;
-}
+import PerksDto from "./PerksDto";
 
-interface MetadataDto {
-    // game version??? VVV
-    dataVersion: string;
-    matchId: string;
-    participants: Array<string>;
-}
-
-interface InfoDto {
-    gameCreation: number;
-    gameDuration: number;
-    gameEndTimestamp: number;
-    gameId: number;
-    gameMode: string;
-    gameName: string;
-    gameStartTimestamp: number;
-    gameType: string;
-    gameVersion: string;
-    mapId: number;
-    participants: Array<ParticipantDto>;
-    platformId: string;
-    queueId: number;
-    teams?: Array<TeamDto>;
-    tournamentCode?: string;
-}
-
-interface ParticipantDto {
+export default interface ParticipantDto {
     assists: number;
     baronKills: number;
     bountyLevel: number;
@@ -135,48 +106,4 @@ interface ParticipantDto {
     wardsKilled: number;
     wardsPlaced: number;
     win: boolean;
-}
-
-interface PerksDto {
-    statPerks: PerkStatsDto;
-    styles: Array<PerkStatsDto>;
-}
-
-interface PerkStatsDto {
-    defense: number;
-    flex: number;
-    offense: number;
-}
-
-interface PerkStyleSelectionDto {
-    perk: number;
-    var1: number;
-    var2: number;
-    var3: number;
-}
-
-interface TeamDto {
-    bans: Array<BanDto>;
-    objectives: ObjectivesDto;
-    teamId: number;
-    win: boolean;
-}
-
-interface BanDto {
-    championId: number;
-    pickTurn: number;
-}
-
-interface ObjectivesDto {
-    baron: ObjectiveDto;
-    champion: ObjectiveDto;
-    dragon: ObjectiveDto;
-    inhibitor: ObjectiveDto;
-    riftHerald: ObjectiveDto;
-    tower: ObjectiveDto;
-}
-
-interface ObjectiveDto {
-    first: boolean;
-    kills: number;
 }
