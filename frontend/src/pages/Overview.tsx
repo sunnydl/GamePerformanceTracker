@@ -20,23 +20,27 @@ function Overview() {
 
   return (
     <header>
-      <Container
-        maxWidth="xs"
-        sx={{ backgroundColor: 'skyblue' }}
-      >
-        <Avatar src={getProfileURL(summonerIcon)} />
-        <Typography
-          variant="h5"
-          sx={{ color: 'white' }}
+      {summonerName ? (
+        <Container
+          maxWidth="xs"
+          sx={{ backgroundColor: 'skyblue' }}
         >
-          Summoner Name: {summonerName}<br />
-          Summoner level: {summonerLevel}<br />
-          Rank: {rank}<br/>
-          <br />
-          Win Games: {winGames}<br/>
-          Loss Games: {lossGames}
-        </Typography>
-      </Container>
+          <Avatar src={getProfileURL(summonerIcon)} />
+          <Typography
+            variant="h5"
+            sx={{ color: 'white' }}
+          >
+            Summoner Name: {summonerName}<br />
+            Summoner level: {summonerLevel}<br />
+            Rank: {rank}<br/>
+            <br />
+            Win Games: {winGames}<br/>
+            Loss Games: {lossGames}
+          </Typography>
+        </Container>
+      ) : (
+        <div>User not found</div>
+      )}
     </header>
   );
 }

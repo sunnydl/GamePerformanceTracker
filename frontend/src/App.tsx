@@ -81,7 +81,8 @@ function App() {
           dispatch(setUserData(userData));
         })
         .catch((err) => {
-          console.log(err.response || err);
+          console.log('user not found:\n', err.response || err);
+          dispatch(setUserData({}));
         });
       }
     }
@@ -115,7 +116,7 @@ function App() {
             aria-label='menu'
             sx={{ mr: 2 }}
             component={Link}
-            to={`/${location.search}`}
+            to='/'
           >
             <AccessAlarmIcon /> {/* TODO: replace temporary icon */}
           </IconButton>
