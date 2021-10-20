@@ -24,8 +24,7 @@ const SERVER = {
     port: SERVER_PORT
 };
 
-//will manually update every 24 hours
-const RIOTAPIKEY = `RGAPI-e459a081-b105-474d-8748-a4fffdec5ac5`;
+const RIOTAPIKEY = `RGAPI-2a3228eb-6d19-445f-bf45-1104a3e4c282`;
 
 const config = {
     mongo: MONGO,

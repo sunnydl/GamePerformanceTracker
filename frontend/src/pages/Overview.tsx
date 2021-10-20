@@ -13,6 +13,8 @@ function Overview() {
     summonerName, 
     summonerLevel, 
     summonerIcon, 
+    summonerFound,
+    region,
     rank, 
     winGames, 
     lossGames, 
@@ -20,7 +22,7 @@ function Overview() {
 
   return (
     <header>
-      {summonerName ? (
+      {summonerFound ? (
         <Container
           maxWidth="xs"
           sx={{ backgroundColor: 'skyblue' }}
@@ -39,7 +41,7 @@ function Overview() {
           </Typography>
         </Container>
       ) : (
-        <div>User not found</div>
+        <div>User {summonerName} not found in {region}</div>
       )}
     </header>
   );
