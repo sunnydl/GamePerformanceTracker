@@ -7,6 +7,8 @@ interface UserState {
     rank?:          string | null,
     winGames?:      number | null,
     lossGames?:     number | null,
+    region?:        string | null,
+    summonerFound?: boolean| null,
 }
 
 const initialState: UserState = {
@@ -16,6 +18,8 @@ const initialState: UserState = {
     rank:           null,
     winGames:       null,
     lossGames:      null,
+    region:         null,
+    summonerFound:  null,
 }
 
 export const userSlice = createSlice({
@@ -34,6 +38,8 @@ export const userSlice = createSlice({
             state.rank          = action.payload.rank           ?? null;
             state.winGames      = action.payload.winGames       ?? null;
             state.lossGames     = action.payload.lossGames      ?? null;
+            state.region        = action.payload.region         ?? null;
+            state.summonerFound = action.payload.summonerFound  ?? null;
         },
     },
 })
