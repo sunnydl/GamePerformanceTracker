@@ -190,7 +190,7 @@ const infoDtoSchema = new Schema<InfoDto>({
 
 const matchDtoSchema = new Schema<MatchDto>({
     metadataDto: {type: metadataDtoSchema, required: true},
-    infoDto: {type: infoDtoSchema, required: true},
+    info: {type: infoDtoSchema, required: true},
 });
 
 export default mongoose.model<MatchDto>('MatchDto', matchDtoSchema);
