@@ -6,10 +6,11 @@ import * as exceptionHandler from "./exceptionHandler";
 export const getSummonerInfoByName = async (req: Request, res: Response) => {
     try {
         const summonerName: string = req.query.summonerName as string;
-        const summonerDTO = await getSummonerByName(summonerName) as SummonerDTO;
+        const region: string = req.query.region as string || 'NA'; // default as NA if no region input
+        const summonerDTO = await getSummonerByName(summonerName, region) as SummonerDTO;
         res.status(200).json(summonerDTO);
     } catch (err: any) {
-        res.status(exceptionHandler.exceptionCodeHandler(err.response.status)).send({
+        res.status(exceptionHandler.exceptionCodeHandler(err?.response?.status)).send({
             message: err.message,
             error: err.toString(),
         })

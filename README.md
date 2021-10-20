@@ -30,19 +30,24 @@ Inside scrum_resource folder
 ./                        
 |- ...
 |- backend/                  # -> Back end
-    |- ...
+    |- index.ts                     # main file/server
+    |- config/                      # config files
+    |- interfaces/                  # typescript interfaces
+    |- models/                      # mongoDB models
+    |- routes/                      # Rest endpoint Routes
+    |- controllers/                 # Rest endpoint controllers
+    |- services/                    # functions folder for handling business logic
 |- frontend/                 # -> Front end
     |- public/
     |- src/
-        |- components/               # util components
+        |- pages/               # pages
         |- redux/
             |- ...states/reducers folders
             |- ...
             |- hooks.ts                 # redux selector and dispatch simplified for ts
             |- store.ts                 # redux store
-        |- views/                    # display components
-        |- App.css                   # place to put all the css (for now, maybe forever)
-        |- App.tsx                   # testing ground (for now)
+        |- App.css                   # place to put css if needed
+        |- App.tsx                   # frontend app start point
     |- ...
 ```
 
