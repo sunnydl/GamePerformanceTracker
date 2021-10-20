@@ -22,7 +22,7 @@ const objectivesDtoSchema = new Schema<ObjectivesDto>({
     champion: {type: objectiveDtoSchema, required: true},
     dragon: {type: objectiveDtoSchema, required: true},
     inhibitor: {type: objectiveDtoSchema, required: true},
-    riftherald: {type: objectiveDtoSchema, required: true},
+    riftHerald: {type: objectiveDtoSchema, required: true},
     tower: {type: objectiveDtoSchema, required: true},
 });
 
@@ -190,5 +190,7 @@ const infoDtoSchema = new Schema<InfoDto>({
 
 const matchDtoSchema = new Schema<MatchDto>({
     metadataDto: {type: metadataDtoSchema, required: true},
-    infoDto: {type: infoDtoSchema, required: true}
+    infoDto: {type: infoDtoSchema, required: true},
 });
+
+export default mongoose.model<MatchDto>('MatchDto', matchDtoSchema);
