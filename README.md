@@ -19,6 +19,9 @@ Web App
 ### Sprint plans
 Inside scrum_resource folder
 
+### Wireframe Drafts
+[Available via Figma](https://www.figma.com/file/LUBg4mluBsOVX0mYmEDoPT/GPT-Wireframe?node-id=0%3A1)
+
 ### Instruction
 1. Clone the repo into your local machine.
 2. Install the dependencies first before starting the app, use `npm install` or `npm i`.
