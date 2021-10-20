@@ -1,21 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface UserState {
-    summonerName?: string | null,
+    summonerName?:  string | null,
     summonerLevel?: number | null,
-    summonerIcon?: number | null,
-    rank?: string | null,
-    winGames?: number | null,
-    lossGames?: number | null,
+    summonerIcon?:  number | null,
+    rank?:          string | null,
+    winGames?:      number | null,
+    lossGames?:     number | null,
+    region?:        string | null,
+    summonerFound?: boolean| null,
 }
 
 const initialState: UserState = {
-    summonerName: null,
-    summonerLevel: 0,
-    summonerIcon: null,
-    rank: null,
-    winGames: 0,
-    lossGames: 0,
+    summonerName:   null,
+    summonerLevel:  null,
+    summonerIcon:   null,
+    rank:           null,
+    winGames:       null,
+    lossGames:      null,
+    region:         null,
+    summonerFound:  null,
 }
 
 export const userSlice = createSlice({
@@ -23,10 +27,19 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUserData: (state, action: PayloadAction<UserState>) => {
-            Object.entries(action.payload).forEach(([k, v]) => {
-                let key = k as keyof UserState
-                state[key] = v;
-            })
+            // Object.keys(state).forEach((k) => {
+            //     let key = k as keyof UserState;
+            //     let value = action.payload[key] ?? null;
+            //     state[key] = value;
+            // })
+            state.summonerName  = action.payload.summonerName   ?? null;
+            state.summonerLevel = action.payload.summonerLevel  ?? null;
+            state.summonerIcon  = action.payload.summonerIcon   ?? null;
+            state.rank          = action.payload.rank           ?? null;
+            state.winGames      = action.payload.winGames       ?? null;
+            state.lossGames     = action.payload.lossGames      ?? null;
+            state.region        = action.payload.region         ?? null;
+            state.summonerFound = action.payload.summonerFound  ?? null;
         },
     },
 })
