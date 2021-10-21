@@ -1,8 +1,7 @@
 import React from 'react';
 import { Typography, Container, Avatar } from '@mui/material';
 
-import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import { setUserData } from '../redux/slices/user';
+import { useAppSelector } from '../redux/hooks';
 
 const getProfileURL = (iconID?: number | null) => {
   return `http://ddragon.leagueoflegends.com/cdn/11.20.1/img/profileicon/${iconID}.png`;

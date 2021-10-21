@@ -12,7 +12,7 @@ import { Box, AppBar, Toolbar, IconButton, Tabs, Tab, InputBase } from '@mui/mat
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import SearchIcon from '@mui/icons-material/Search';
 
-import { useAppSelector, useAppDispatch } from './redux/hooks';
+import { useAppDispatch } from './redux/hooks';
 import { setUserData } from './redux/slices/user';
 
 import Button from '@mui/material/Button';
@@ -104,7 +104,7 @@ function App() {
         });
       }
     }
-  }, [location.search]);
+  }, [location.search, dispatch]);
 
   const handleSummonerSearchByName = (e: React.KeyboardEvent) => {
     if (e.code === 'Enter') {
