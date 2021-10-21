@@ -25,9 +25,7 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 
-
-// NOTE: my current backend setup uses port 5000
-const API_URL = 'http://localhost:5000/api/';
+const API_URL = 'api/';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
