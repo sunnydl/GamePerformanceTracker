@@ -4,9 +4,10 @@ import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 
 import Home from './pages/Home';
-import Overview from './pages/Overview';
+import Overview from './pages/Overview/Overview';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         </Route>
         <Redirect to='/' />
       </Switch>
+      <Footer/>
     </React.Fragment>
   );
 }

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Typography, Container, Avatar } from '@mui/material';
 
-import { useAppSelector } from '../redux/hooks';
+import { useAppSelector } from '../../../redux/hooks';
 
 const getProfileURL = (iconID?: number | null) => {
   return `http://ddragon.leagueoflegends.com/cdn/11.20.1/img/profileicon/${iconID}.png`;
 }
 
-function Overview() {
+function UserSummary() {
   const {
     summonerName, 
     summonerLevel, 
@@ -50,4 +50,4 @@ function Overview() {
 
     
 
-export default Overview;
+export default UserSummary;

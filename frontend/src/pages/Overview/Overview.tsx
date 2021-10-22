@@ -1,0 +1,12 @@
+import React from 'react'
+import UserSummary from './components/UserSummary'
+import MatchSummary from './components/MatchSummary'
+
+export default function Overview() {
+    return (
+        <div>
+            <UserSummary/>
+            <MatchSummary/>
+        </div>
+    )
+}
