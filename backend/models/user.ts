@@ -1,5 +1,4 @@
 import mongoose, { Schema } from 'mongoose';
-import { StringDecoder } from 'string_decoder';
 import SummonerInfo from '../interfaces/ISummonerInfo';
 import SummonerLeague from '../interfaces/ISummonerLeague';
 import User from '../interfaces/IUser';

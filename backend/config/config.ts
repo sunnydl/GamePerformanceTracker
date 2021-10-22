@@ -13,7 +13,7 @@ const MONGO_OPTIONS = {
 };
 
 const SERVER_HOSTNAME = process.env.SERVER_HOSTNAME || 'localhost';
-const SERVER_PORT = process.env.SERVER_PORT || 3000;
+const SERVER_PORT = process.env.SERVER_PORT || 5000;
 
 const MONGO = {
     options: MONGO_OPTIONS,
@@ -24,7 +24,7 @@ const SERVER = {
     port: SERVER_PORT
 };
 
-const RIOTAPIKEY = `RGAPI-2a3228eb-6d19-445f-bf45-1104a3e4c282`;
+const RIOTAPIKEY = `RGAPI-22a9afda-508c-45d3-b2b2-ee729a747304`;
 
 const config = {
     mongo: MONGO,
