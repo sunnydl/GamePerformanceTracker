@@ -13,11 +13,11 @@ import SummonerSearchBar from './SummonerSearchBar';
 
 function NavBar() {
   const location = useLocation();
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(handleSearchParams(location.search));
-  }, [location.search]);
+  }, [dispatch, location.search]);
 
   return (
     <AppBar position='sticky'>
