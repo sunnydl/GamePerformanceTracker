@@ -21,27 +21,29 @@ function Overview() {
 
   return (
     <header>
-      {summonerFound ? (
         <Container
           maxWidth="xs"
           sx={{ backgroundColor: 'skyblue' }}
         >
-          <Avatar src={getProfileURL(summonerIcon)} />
-          <Typography
-            variant="h5"
-            sx={{ color: 'white' }}
-          >
-            Summoner Name: {summonerName}<br />
-            Summoner level: {summonerLevel}<br />
-            Rank: {rank}<br/>
-            <br />
-            Win Games: {winGames}<br/>
-            Loss Games: {lossGames}
-          </Typography>
+          {summonerFound ? (
+            <React.Fragment>
+              <Avatar src={getProfileURL(summonerIcon)} />
+              <Typography
+                variant="h5"
+                sx={{ color: 'white' }}
+              >
+                Summoner Name: {summonerName}<br />
+                Summoner level: {summonerLevel}<br />
+                Rank: {rank}<br/>
+                <br />
+                Win Games: {winGames}<br/>
+                Loss Games: {lossGames}
+              </Typography>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>User {summonerName} not found in {region}</React.Fragment>
+          )}
         </Container>
-      ) : (
-        <div>User {summonerName} not found in {region}</div>
-      )}
     </header>
   );
 }

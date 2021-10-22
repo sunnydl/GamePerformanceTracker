@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
+import axios from 'axios';
 
 interface UserState {
     summonerName?:  string | null,
@@ -22,7 +23,7 @@ const initialState: UserState = {
     summonerFound:  null,
 }
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
@@ -44,6 +45,36 @@ export const userSlice = createSlice({
     },
 })
 
+function handleSearchParams(query: string) {
+    return async (dispatch: Dispatch) => {
+        if (query) {
+            const params = new URLSearchParams(query);
+            const summonerName = params.get('summonerName');
+            const region = params.get('region');
+            console.log(region);
+            if (summonerName) {
+                axios.get('/api/summonerInfo', {
+                    params: {
+                    summonerName: summonerName,
+                    region: region,
+                    }
+                })
+                .then((res) => {
+                    const userData = res.data;
+                    console.log('user found:', userData);
+                    dispatch(setUserData({summonerFound: true, region: region, ...userData}));
+                })
+                .catch((err) => {
+                    console.log('user not found:\n', err.response || err);
+                    dispatch(setUserData({summonerFound: false, region: region, summonerName: summonerName}));
+                });
+            }
+        }
+    }
+}
+
 export const { setUserData } = userSlice.actions
 
 export default userSlice.reducer
+
+export { handleSearchParams }
