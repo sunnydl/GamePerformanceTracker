@@ -5,7 +5,6 @@ import { Typography } from '@mui/material';
 export default function Footer() {
 
     const FooterWrapper = styled('div')(({ theme }) => ({
-        padding: theme.spacing(0, 1),
         position: 'absolute',
         bottom: '0',
         width: '100%',

@@ -38,7 +38,7 @@ function NavBar() {
 
         <Box sx={{ flexGrow: 1 }} />
 
-        <Tabs variant='scrollable' value={false} textColor='inherit'>
+        <Tabs value={false} textColor='inherit'>
           <Tab label='overview' component={Link} to={`/overview${location.search}`} />
         </Tabs>
       </Toolbar>
