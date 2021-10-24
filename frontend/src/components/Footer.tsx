@@ -16,7 +16,7 @@ export default function Footer() {
 
     return (
         <FooterWrapper>
-            <Typography>hi</Typography>
+            <Typography>Footer</Typography>
         </FooterWrapper>
     )
 }
