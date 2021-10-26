@@ -7,9 +7,6 @@ import RandomeChart from './RandomeChart';
 export default function MatchSummary() {
 
     const MatchSummaryWrapper = styled('div')(({ theme }) => ({
-        height: '800px',
-        width: '100%',
-        textAlign: 'center',
     }));
 
     const Header = styled('article')(() => ({
@@ -41,13 +38,24 @@ export default function MatchSummary() {
                 </Typography>
             </Paragraph>
             <Grid container spacing={2}>
-                <Grid item xs={6}>
+                <Grid item xs={12} lg={6}>
                     <RandomeChart/>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} lg={6}>
                     <RandomeChart/>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} lg={6}>
+                    <RandomeChart/>
+                </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+                <Grid item xs={12} lg={6}>
+                    <RandomeChart/>
+                </Grid>
+                <Grid item xs={12} lg={6}>
+                    <RandomeChart/>
+                </Grid>
+                <Grid item xs={12} lg={6}>
                     <RandomeChart/>
                 </Grid>
             </Grid>
