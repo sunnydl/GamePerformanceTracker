@@ -4,7 +4,7 @@ import MatchDto from '../interfaces/IMatch/IMatchDto'
 import ParticipantDto from '../interfaces/IMatch/IParticipantDto';
 
 //given puuid, return the last 10 match list id.
-const getMatchListByPUUID = async(puuid: string, region: string): Promise<Array<string>> => {
+export const getMatchListByPUUID = async(puuid: string, region: string): Promise<Array<string>> => {
     const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region);
     if(matchListInfo.length){
         return matchListInfo as Array<string>;;
