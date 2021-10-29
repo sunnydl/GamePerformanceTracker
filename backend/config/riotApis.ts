@@ -53,7 +53,7 @@ export const findMatchHistoryInfo = async(puuid: string, region: string): Promis
 }
 
 // for match info given match id
-export const findMatchInfo = async(match_id: string, region: string): Promise<Array<MatchDto>> => {
+export const findMatchInfo = async(match_id: string, region: string): Promise<MatchDto> => {
     const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/${match_id}`);
-    return response.data as Array<MatchDto>;
+    return response.data as MatchDto;
 }
