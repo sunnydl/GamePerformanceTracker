@@ -1,13 +1,12 @@
 import React from 'react'
-import { Container } from '@mui/material';
 import UserSummary from './components/UserSummary'
-import MatchSummary from './components/MatchSummary'
+import MatchSummary from './components/MatchSummary/MatchSummary'
 
 export default function Overview() {
     return (
-        <Container>
+        <React.Fragment>
             <UserSummary/>
             <MatchSummary/>
-        </Container>
+        </React.Fragment>
     )
 }
