@@ -2,45 +2,31 @@ import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
 import axios from 'axios';
 
 interface UserState {
-    summonerName?:  string | null,
-    summonerLevel?: number | null,
-    summonerIcon?:  number | null,
-    rank?:          string | null,
-    winGames?:      number | null,
-    lossGames?:     number | null,
-    region?:        string | null,
-    summonerFound?: boolean| null,
+    summonerName?:  string,
+    summonerLevel?: number,
+    summonerIcon?:  number,
+    rank?:          string,
+    winGames?:      number,
+    lossGames?:     number,
+    region?:        string,
+    summonerFound?: boolean,
 }
 
-const initialState: UserState = {
-    summonerName:   null,
-    summonerLevel:  null,
-    summonerIcon:   null,
-    rank:           null,
-    winGames:       null,
-    lossGames:      null,
-    region:         null,
-    summonerFound:  null,
-}
+const initialState: UserState = {}
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
         setUserData: (state, action: PayloadAction<UserState>) => {
-            // Object.keys(state).forEach((k) => {
-            //     let key = k as keyof UserState;
-            //     let value = action.payload[key] ?? null;
-            //     state[key] = value;
-            // })
-            state.summonerName  = action.payload.summonerName   ?? null;
-            state.summonerLevel = action.payload.summonerLevel  ?? null;
-            state.summonerIcon  = action.payload.summonerIcon   ?? null;
-            state.rank          = action.payload.rank           ?? null;
-            state.winGames      = action.payload.winGames       ?? null;
-            state.lossGames     = action.payload.lossGames      ?? null;
-            state.region        = action.payload.region         ?? null;
-            state.summonerFound = action.payload.summonerFound  ?? null;
+            state.summonerName  = action.payload.summonerName   ?? undefined;
+            state.summonerLevel = action.payload.summonerLevel  ?? undefined;
+            state.summonerIcon  = action.payload.summonerIcon   ?? undefined;
+            state.rank          = action.payload.rank           ?? undefined;
+            state.winGames      = action.payload.winGames       ?? undefined;
+            state.lossGames     = action.payload.lossGames      ?? undefined;
+            state.region        = action.payload.region         ?? undefined;
+            state.summonerFound = action.payload.summonerFound  ?? undefined;
         },
     },
 })
@@ -50,7 +36,7 @@ function handleSearchParams(query: string) {
         if (query) {
             const params = new URLSearchParams(query);
             const summonerName = params.get('summonerName');
-            const region = params.get('region');
+            const region = params.get('region') ?? "NA"; // Defaults to NA region
             console.log(region);
             if (summonerName) {
                 axios.get('/api/summonerInfo', {
