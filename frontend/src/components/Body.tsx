@@ -5,15 +5,16 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from '../pages/Home';
 import Overview from '../pages/Overview/Overview';
 
-import { Container } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 function Body() {
+
+    const Container = styled('div')(() => ({
+        padding: '10vh 10vw 10vh 10vw'
+    }))
+
     return (
-        <Container sx={{
-            width: '100%',
-            paddingTop: '1rem',
-            paddingBottom: '4.5rem',
-        }}>
+        <Container>
             <Switch>
                 <Route exact path='/'>
                     <Home />
