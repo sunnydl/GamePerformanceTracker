@@ -5,14 +5,14 @@ export const MatchSummaryWrapper = styled('div')(({ theme }) => ({
     width: '100%',
     padding: '20px',
     minHeight: '1000px',
-    height: '100vh'
+    height: 'fit-content',
 }));
 
-export const MatchSummaryPaper = styled(Paper)(() => ({
+export const MatchSummaryPaper = styled('div')(() => ({
     backgroundColor: '#F2F7FD',
     borderRadius: '71px',
     minHeight: '1000px',
-    height: '100vh'
+    height: 'fit-content',
 }))
 
 export const Header = styled(Typography)(() => ({
@@ -32,6 +32,7 @@ export const ButtonSelections = styled('div')(() => ({
     width: '100%',
     display: 'flex',
     flexWrap: 'wrap',
+    height: 'fit-content',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
@@ -49,11 +50,13 @@ export const GraphWrapper = styled(Paper)(() => ({
     display: 'flex',
     flexWrap: 'wrap',
     width: '90%',
-    padding: 'auto',
-    margin: 'auto',
+    paddingLeft: 'auto',
+    paddingRight: 'auto',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     alignContent: 'center',
     justifyContent: 'center',
-    height: '600px',
+    height: '650px',
     paddingBottom: '1rem',
-    paddingTop: '6rem',
+    paddingTop: '2rem',
 }))
