@@ -1,6 +1,5 @@
 import React from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { styled } from '@mui/material/styles';
 
 export default function RandomeChart() {
 
@@ -48,14 +47,10 @@ export default function RandomeChart() {
           amt: 2100,
         },
       ];
-    
-    const Chart = styled(LineChart)(() => ({
-        backgroundColor: 'white'
-    }))
 
     return (
         <ResponsiveContainer width="90%" height="100%">
-            <Chart
+            <LineChart
             width={500}
             height={300}
             data={data}
@@ -73,7 +68,7 @@ export default function RandomeChart() {
             <Legend />
             <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
             <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-            </Chart>
+            </LineChart>
         </ResponsiveContainer>
     )
 }

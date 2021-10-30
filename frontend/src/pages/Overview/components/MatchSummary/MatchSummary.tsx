@@ -1,16 +1,22 @@
 import React from 'react'
-import { Typography, Grid, Button } from '@mui/material';
 import { useAppSelector } from '../../../../redux/hooks';
 
+// styles components
 import {
     MatchSummaryWrapper,
     MatchSummaryPaper,
     Header,
-    ParagraphWrapper,
     Paragraph,
     GraphWrapper,
-    ButtonsWrapper
+    ButtonSelections,
+    Buttons
 } from './style'
+
+// enums
+import {
+    NumOfGames,
+    Features
+} from './enums'
 
 import RandomeChart from './RandomeChart';
 
@@ -23,59 +29,27 @@ export default function MatchSummary() {
     return (
         <MatchSummaryWrapper>
             <MatchSummaryPaper>
-                <Header>
-                    <Typography 
-                        variant="h4"
-                        align="center"
-                    >
-                        {summonerName? summonerName:"Player"}'s Statistic
-                    </Typography>
+                <Header align="center">
+                    {summonerName? summonerName:"Player"}'s Statistics
                 </Header>
-                <ParagraphWrapper>
-                    <Paragraph 
-                        variant="subtitle1"
-                        align="center"
-                    >
-                        Choose a Time Frame
-                    </Paragraph>
-                </ParagraphWrapper>
-                <ButtonsWrapper>
-                    <Grid container>
-                        <Grid item xs={12} lg={4}>
-                            <Button>hi</Button>
-                        </Grid>
-                        <Grid item xs={12} lg={4}>
-                            <Button>hi</Button>
-                        </Grid>
-                        <Grid item xs={12} lg={4}>
-                            <Button>hi</Button>
-                        </Grid>
-                    </Grid>
-                </ButtonsWrapper>
+                <Paragraph 
+                    variant="subtitle1"
+                    align="center"
+                >
+                    Choose a Time Frame
+                </Paragraph>
+                <ButtonSelections>
+                    {NumOfGames.map((num: number) => (
+                        <Buttons variant="contained">{num} Games</Buttons>
+                    ))}
+                </ButtonSelections>
                 <GraphWrapper>
                     <RandomeChart/>
-                    <ButtonsWrapper>
-                        <Grid container>
-                            <Grid item xs={12} lg={2}>
-                                <Button>hi</Button>
-                            </Grid>
-                            <Grid item xs={12} lg={2}>
-                                <Button>hi</Button>
-                            </Grid>
-                            <Grid item xs={12} lg={2}>
-                                <Button>hi</Button>
-                            </Grid>
-                            <Grid item xs={12} lg={2}>
-                                <Button>hi</Button>
-                            </Grid>
-                            <Grid item xs={12} lg={2}>
-                                <Button>hi</Button>
-                            </Grid>
-                            <Grid item xs={12} lg={2}>
-                                <Button>hi</Button>
-                            </Grid>
-                        </Grid>
-                    </ButtonsWrapper>
+                    <ButtonSelections>
+                        {Features.map((feature: string) => (
+                            <Buttons variant="contained">{feature}</Buttons>
+                        ))}
+                    </ButtonSelections>
                 </GraphWrapper>
             </MatchSummaryPaper>
         </MatchSummaryWrapper>
