@@ -52,9 +52,8 @@ function UserSummary() {
           <Grid item xs={12} lg={6}>
             <CircleChart
               data={[
-                // Default value is 1, to render the chart
-                { name: "wins", value: winGames || 1, color: "#3880FF" },
-                { name: "losses", value: lossGames || 1, color: "#DFDFDF" },
+                { name: "wins", value: winGames, color: "#3880FF" },
+                { name: "losses", value: lossGames, color: "#DFDFDF" },
               ]}
               display={{ style: { fontSize: "1.5rem" }, value: `${winRate}%` }}
             />

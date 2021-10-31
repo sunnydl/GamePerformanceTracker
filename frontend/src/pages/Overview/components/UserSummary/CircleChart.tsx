@@ -1,12 +1,19 @@
 import React from 'react';
 
-import { PieChart, Pie, Label, Cell } from 'recharts';
+import { PieChart, Pie, Label, Cell,  } from 'recharts';
+
+const createEmptyChart = (data: { name: string, value: number, color: string }[]) => {
+    data.push({ name: "none", value: 1, color: "#DFDFDF" });
+    return data;
+}
 
 function CircleChart({ data, display }: { data: { name: string, value: number, color: string }[], display: { style: object, value: string } }) {
+    const total = data.reduce((sum, elem) => sum + elem.value, 0);
+
     return (
         <PieChart width={256} height={256}>
             <Pie
-                data={data}
+                data={total ? data : createEmptyChart(data)}
                 dataKey="value"
                 nameKey="name"
                 cx="50%"
