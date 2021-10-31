@@ -6,7 +6,7 @@ export const ProfileWrapper = styled(Box)(({ theme }) => ({
     flexDirection: "column",
     maxWidth: '512px',
     margin: 'auto',
-    padding: '20px 20px 60px 20px',
+    padding: '40px 20px 60px 20px',
     backgroundColor: '#F2F7FD',
     borderRadius: '71px',
     fontSize: '1.25rem',
@@ -37,7 +37,7 @@ export const ChartsWrapper = styled(Box)(({ theme }) => ({
     height: 'fit-content',
     marginLeft: 'auto',
     marginRight: 'auto',
-    padding: '20px',
+    padding: '40px 20px 20px 20px',
     backgroundColor: '#F2F7FD',
     borderRadius: '71px',
 
