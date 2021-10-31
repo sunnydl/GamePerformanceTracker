@@ -52,7 +52,7 @@ function NavBar() {
           component={Link}
           to='/'
         >
-          GRT {/* TODO: replace temporary icon */}
+          GPT {/* TODO: replace temporary icon */}
         </IconButton>
         <Box sx={{ flexGrow: 0.05 }} />
         <Tabs value={false} >
