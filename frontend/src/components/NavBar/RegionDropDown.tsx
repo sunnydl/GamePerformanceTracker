@@ -7,12 +7,12 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#18A0FB',
-      contrastText: '#fff',
-    },
-    secondary: {
       main: '#fff',
       contrastText: '#18A0FB',
+    },
+    secondary: {
+      main: '#18A0FB',
+      contrastText: '#fff',
     },
     error:{
       main: '#000',
@@ -53,9 +53,8 @@ function RegionDropDown({ options, selectedIndex, onSelect }: { options: string[
   };
 
   return (
-    <React.Fragment>
-      <ThemeProvider theme={theme}>
-      <ButtonGroup variant="contained" ref={anchorRef} aria-label="select region" color = "primary">
+    <ThemeProvider theme={theme}>
+      <ButtonGroup variant="contained" ref={anchorRef} aria-label="select region" color = "secondary">
         <Button onClick={handleClick}>{options[selectedIndex]}</Button>
         <Button
           size="small"
@@ -68,7 +67,6 @@ function RegionDropDown({ options, selectedIndex, onSelect }: { options: string[
           <ArrowDropDownIcon />
         </Button>
     </ButtonGroup>
-    </ThemeProvider>
 
     <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
         {({ TransitionProps, placement }) => (
@@ -97,7 +95,7 @@ function RegionDropDown({ options, selectedIndex, onSelect }: { options: string[
           </Grow>
         )}
       </Popper>
-    </React.Fragment>
+    </ThemeProvider>
   );
 }
 
