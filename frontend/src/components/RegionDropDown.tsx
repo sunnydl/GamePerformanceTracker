@@ -2,6 +2,24 @@ import React from 'react';
 
 import { Button, ButtonGroup, ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#18A0FB',
+      contrastText: '#fff',
+    },
+    secondary: {
+      main: '#fff',
+      contrastText: '#18A0FB',
+    },
+    error:{
+      main: '#000',
+      contrastText: '#000',
+    },
+  },
+});
 
 function RegionDropDown({ options, selectedIndex, onSelect }: { options: string[], selectedIndex: number, onSelect: React.Dispatch<React.SetStateAction<number>> }) {
   const anchorRef = React.useRef<HTMLDivElement>(null);
@@ -36,7 +54,8 @@ function RegionDropDown({ options, selectedIndex, onSelect }: { options: string[
 
   return (
     <React.Fragment>
-      <ButtonGroup variant="contained" ref={anchorRef} aria-label="select region">
+      <ThemeProvider theme={theme}>
+      <ButtonGroup variant="contained" ref={anchorRef} aria-label="select region" color = "primary">
         <Button onClick={handleClick}>{options[selectedIndex]}</Button>
         <Button
           size="small"
@@ -49,6 +68,8 @@ function RegionDropDown({ options, selectedIndex, onSelect }: { options: string[
           <ArrowDropDownIcon />
         </Button>
     </ButtonGroup>
+    </ThemeProvider>
+
     <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
         {({ TransitionProps, placement }) => (
           <Grow
