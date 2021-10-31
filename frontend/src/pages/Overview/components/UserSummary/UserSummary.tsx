@@ -38,7 +38,7 @@ function UserSummary() {
         <ProfileWrapper>
           <div className="icon-wrapper">
             <Avatar src={getProfileURL(summonerIcon)} sx={{ width: '256px', height: '256px' }} />
-            <text>{summonerName}</text>
+            {summonerName}
           </div>
           <div className="header-wrapper">Details</div>
           <div>Level:<span style={{ float: "right" }}>{summonerLevel}</span></div>
@@ -51,22 +51,24 @@ function UserSummary() {
         <ChartsWrapper>
           <Grid item xs={12} lg={6}>
             <CircleChart
+              title="Win Rate"
               data={[
                 { name: "wins", value: winGames, color: "#3880FF" },
                 { name: "losses", value: lossGames, color: "#DFDFDF" },
               ]}
-              display={{ style: { fontSize: "1.5rem" }, value: `${winRate}%` }}
+              label={{ style: { fontSize: "1.5rem" }, value: `${winRate}%` }}
             />
           </Grid>
           <Grid item xs={12} lg={6}>
             <CircleChart
+              title="Average KDA"
               data={[
                 // Default value is 1, to render the chart
                 { name: "kills", value: kills, color: "#77DD77" },
                 { name: "deaths", value: deaths, color: "#FF6961" },
                 { name: "assists", value: assists, color: "#3880FF" },
               ]}
-              display={{ style: { fontSize: "0.75rem" }, value: KDA }}
+              label={{ style: { fontSize: "0.75rem" }, value: KDA }}
             />
           </Grid>
         </ChartsWrapper>

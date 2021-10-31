@@ -7,7 +7,7 @@ const createEmptyChart = (data: { name: string, value: number, color: string }[]
     return data;
 }
 
-function CircleChart({ data, display }: { data: { name: string, value: number, color: string }[], display: { style: object, value: string } }) {
+function CircleChart({ title, data, label }: { title: string, data: { name: string, value: number, color: string }[], label: { style: object, value: string } }) {
     const total = data.reduce((sum, elem) => sum + elem.value, 0);
 
     return (
@@ -23,10 +23,22 @@ function CircleChart({ data, display }: { data: { name: string, value: number, c
                 innerRadius={60}
                 outerRadius={80}
             >
+                <Label
+                    style={{
+                        fontSize: "1.5rem",
+                        fontWeight: "bold",
+                        transform: "translate(0, -70%)"
+                    }}
+                    value={title}
+                />
                 {data.map((val, idx) => (
                     <Cell key={idx} fill={val.color} />
                 ))}
-                <Label style={display.style} value={display.value} position="center" />
+                <Label
+                    style={label.style}
+                    value={label.value}
+                    position="center"
+                />
             </Pie>
         </PieChart>
     );
