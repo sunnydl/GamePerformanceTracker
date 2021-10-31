@@ -49,7 +49,7 @@ export default function RandomeChart() {
       ];
 
     return (
-        <ResponsiveContainer width="90%" height="100%">
+        <ResponsiveContainer width="90%" height="80%">
             <LineChart
             width={500}
             height={300}
