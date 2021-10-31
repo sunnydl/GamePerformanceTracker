@@ -2,24 +2,6 @@ import React from 'react';
 
 import { Button, ButtonGroup, ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#fff',
-      contrastText: '#18A0FB',
-    },
-    secondary: {
-      main: '#18A0FB',
-      contrastText: '#fff',
-    },
-    error:{
-      main: '#000',
-      contrastText: '#000',
-    },
-  },
-});
 
 function RegionDropDown({ options, selectedIndex, onSelect }: { options: string[], selectedIndex: number, onSelect: React.Dispatch<React.SetStateAction<number>> }) {
   const anchorRef = React.useRef<HTMLDivElement>(null);
@@ -53,7 +35,7 @@ function RegionDropDown({ options, selectedIndex, onSelect }: { options: string[
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <React.Fragment>
       <ButtonGroup variant="contained" ref={anchorRef} aria-label="select region" color = "secondary">
         <Button onClick={handleClick}>{options[selectedIndex]}</Button>
         <Button
@@ -95,7 +77,7 @@ function RegionDropDown({ options, selectedIndex, onSelect }: { options: string[
           </Grow>
         )}
       </Popper>
-    </ThemeProvider>
+    </React.Fragment>
   );
 }
 
