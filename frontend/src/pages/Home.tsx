@@ -7,7 +7,7 @@ function Home() {
 
   return (
     <Container>
-      Landing page
+      <div data-testid="home">Landing page</div>
     </Container>
   )
 }
