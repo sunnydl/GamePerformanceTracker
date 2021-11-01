@@ -24,7 +24,7 @@ const SERVER = {
     port: SERVER_PORT
 };
 
-const RIOTAPIKEY = `RGAPI-22a9afda-508c-45d3-b2b2-ee729a747304`;
+const RIOTAPIKEY = `RGAPI-d585922b-d466-46d3-a386-78071c49c04d`;
 
 const config = {
     mongo: MONGO,

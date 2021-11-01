@@ -3,8 +3,8 @@ import './App.css';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+import Footer from './components/Footer/Footer';
 import NavBar from './components/NavBar/NavBar';
-import Footer from './components/Footer';
 
 import Home from './pages/Home';
 import Overview from './pages/Overview/Overview';
