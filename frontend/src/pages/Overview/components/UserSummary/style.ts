@@ -41,14 +41,15 @@ export const ChartsWrapper = styled(Box)(({ theme }) => ({
     backgroundColor: '#F2F7FD',
     borderRadius: '71px',
 
-    "& .recharts-wrapper": {
+    "& *": {
         marginLeft: 'auto',
         marginRight: 'auto',
     }
 }));
 
 export const CircleChartWrapper = styled('div')(({ theme }) => ({
-    position: "relative"
+    position: "relative",
+    width: "fit-content"
 }));
 
 // Do we want to create our own title using div, similar to labels?
