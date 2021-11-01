@@ -29,7 +29,6 @@ function UserSummary() {
   const winRate = (100 * winGames / ((winGames + lossGames) || 1)).toFixed();
   // TODO: retrieve kda data from some endpoint
   const kills = 25, deaths = 12, assists = 31;
-  // TODO: figure out how to display 3 lines of text with differing colors inside circle chart
 
   return (
     <Grid container spacing={2}>
@@ -62,7 +61,6 @@ function UserSummary() {
             <CircleChart
               title="Average KDA"
               data={[
-                // Default value is 1, to render the chart
                 { name: "kills", value: kills, color: "#77DD77" },
                 { name: "deaths", value: deaths, color: "#FF6961" },
                 { name: "assists", value: assists, color: "#3880FF" },
