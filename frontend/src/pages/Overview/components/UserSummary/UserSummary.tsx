@@ -30,7 +30,6 @@ function UserSummary() {
   // TODO: retrieve kda data from some endpoint
   const kills = 25, deaths = 12, assists = 31;
   // TODO: figure out how to display 3 lines of text with differing colors inside circle chart
-  const KDA = `${kills.toFixed(2)} ${deaths.toFixed(2)} ${assists.toFixed(2)}`;
 
   return (
     <Grid container spacing={2}>
@@ -56,7 +55,7 @@ function UserSummary() {
                 { name: "wins", value: winGames, color: "#3880FF" },
                 { name: "losses", value: lossGames, color: "#DFDFDF" },
               ]}
-              label={{ style: { fontSize: "1.5rem" }, value: `${winRate}%` }}
+              labels={[{ style: { fontSize: "1.5rem" }, value: `${winRate}%` }]}
             />
           </Grid>
           <Grid item xs={12} lg={6}>
@@ -68,7 +67,11 @@ function UserSummary() {
                 { name: "deaths", value: deaths, color: "#FF6961" },
                 { name: "assists", value: assists, color: "#3880FF" },
               ]}
-              label={{ style: { fontSize: "0.75rem" }, value: KDA }}
+              labels={[
+                { style: { color: "#77DD77" }, value: kills.toFixed(2) },
+                { style: { color: "#FF6961" }, value: deaths.toFixed(2) },
+                { style: { color: "#3880FF" }, value: assists.toFixed(2) },
+              ]}
             />
           </Grid>
         </ChartsWrapper>
