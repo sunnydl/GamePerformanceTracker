@@ -36,7 +36,7 @@ function RegionDropDown({ options, selectedIndex, onSelect }: { options: string[
 
   return (
     <React.Fragment>
-      <ButtonGroup variant="contained" ref={anchorRef} aria-label="select region">
+      <ButtonGroup variant="contained" ref={anchorRef} aria-label="select region" color = "secondary">
         <Button onClick={handleClick}>{options[selectedIndex]}</Button>
         <Button
           size="small"
@@ -49,6 +49,7 @@ function RegionDropDown({ options, selectedIndex, onSelect }: { options: string[
           <ArrowDropDownIcon />
         </Button>
     </ButtonGroup>
+
     <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
         {({ TransitionProps, placement }) => (
           <Grow

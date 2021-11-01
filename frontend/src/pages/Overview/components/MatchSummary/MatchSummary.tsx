@@ -40,14 +40,14 @@ export default function MatchSummary() {
                 </Paragraph>
                 <ButtonSelections>
                     {NumOfGames.map((num: number) => (
-                        <Buttons variant="contained">{num} Games</Buttons>
+                        <Buttons variant="contained" key={num}>{num} Games</Buttons>
                     ))}
                 </ButtonSelections>
                 <GraphWrapper>
                     <RandomeChart/>
                     <ButtonSelections>
                         {Features.map((feature: string) => (
-                            <Buttons variant="contained">{feature}</Buttons>
+                            <Buttons variant="contained" key={feature}>{feature}</Buttons>
                         ))}
                     </ButtonSelections>
                 </GraphWrapper>
