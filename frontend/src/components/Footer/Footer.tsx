@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { Typography, Tabs, Tab, Avatar } from '@mui/material';
+import { Tabs, Tab, Avatar } from '@mui/material';
 import { FooterWrapper, ParticipantsWrapper } from './style';
 
 export default function Footer() {
