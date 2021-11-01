@@ -52,7 +52,7 @@ function NavBar() {
           >
             GPT {/* TODO: add icon */}
           </IconButton>
-          <Box sx={{ flexGrow: 0.05 }} color='secondary'/>
+          <Box sx={{ flexGrow: 0.05 }} />
           <Tabs value={false} style={{ color: theme.palette.primary.contrastText }}>
             <Tab style={{ color: 'inherit' }} label='overview' component={Link} to={`/overview${location.search}`} />
             <Tab style={{ color: 'inherit' }} label='Match History'/>
