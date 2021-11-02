@@ -66,9 +66,9 @@ function UserSummary() {
                 { name: "assists", value: assists, color: "#3880FF" },
               ]}
               labels={[
-                { style: { color: "#77DD77" }, value: kills.toFixed(2) },
-                { style: { color: "#FF6961" }, value: deaths.toFixed(2) },
-                { style: { color: "#3880FF" }, value: assists.toFixed(2) },
+                { style: { fontSize: "0.875rem", color: "#77DD77" }, value: `Kills: ${kills.toFixed(2)}` },
+                { style: { fontSize: "0.875rem", color: "#FF6961" }, value: `Deaths: ${deaths.toFixed(2)}` },
+                { style: { fontSize: "0.875rem", color: "#3880FF" }, value: `Assists: ${assists.toFixed(2)}` },
               ]}
             />
           </Grid>
