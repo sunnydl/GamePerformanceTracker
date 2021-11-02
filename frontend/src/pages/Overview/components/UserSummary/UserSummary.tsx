@@ -46,8 +46,8 @@ function UserSummary() {
         </ProfileWrapper>
       </Grid>
       <Grid container item xs={12} lg={6}>
-        <ChartsWrapper>
-          <Grid item xs={12} lg={6}>
+        <Grid item xs={12}>
+          <ChartsWrapper>
             <CircleChart
               title="Win Rate"
               data={[
@@ -56,8 +56,6 @@ function UserSummary() {
               ]}
               labels={[{ style: { fontSize: "1.5rem" }, value: `${winRate}%` }]}
             />
-          </Grid>
-          <Grid item xs={12} lg={6}>
             <CircleChart
               title="Average KDA"
               data={[
@@ -71,8 +69,8 @@ function UserSummary() {
                 { style: { fontSize: "0.875rem", color: "#3880FF" }, value: `Assists: ${assists.toFixed(2)}` },
               ]}
             />
-          </Grid>
-        </ChartsWrapper>
+          </ChartsWrapper>
+        </Grid>
       </Grid>
     </Grid>
   );

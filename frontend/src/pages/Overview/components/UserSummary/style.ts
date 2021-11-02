@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 export const ProfileWrapper = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
-    maxWidth: '512px',
+    maxWidth: '600px',
     margin: 'auto',
     padding: '40px 20px 60px 20px',
     backgroundColor: '#F2F7FD',
@@ -22,11 +22,11 @@ export const ProfileWrapper = styled(Box)(({ theme }) => ({
 
     "& .header-wrapper": {
         borderBottom: "1px solid",
-        paddingBottom: "8px"
+        paddingBottom: "16px"
     },
 
     "& *": {
-        marginBottom: "8px",
+        marginBottom: "16px",
     }
 }));
 
@@ -34,17 +34,11 @@ export const ChartsWrapper = styled(Box)(({ theme }) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    height: 'fit-content',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    maxWidth: '600px',
+    margin: 'auto',
     padding: '40px 20px 20px 20px',
     backgroundColor: '#F2F7FD',
     borderRadius: '71px',
-
-    "& *": {
-        marginLeft: 'auto',
-        marginRight: 'auto',
-    }
 }));
 
 export const CircleChartWrapper = styled('div')(({ theme }) => ({
