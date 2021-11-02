@@ -10,7 +10,7 @@ import { styled } from '@mui/material/styles';
 function Body() {
 
     const Container = styled('div')(() => ({
-        padding: '10vh 10vw 10vh 10vw'
+        padding: '8vh 2vw 8vh 2vw'
     }))
 
     return (

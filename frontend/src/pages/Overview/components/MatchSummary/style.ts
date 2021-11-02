@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import { Typography, Paper, Button } from '@mui/material';
 
 export const MatchSummaryWrapper = styled('div')(({ theme }) => ({
-    width: '100%',
+    // width: '100%',
     padding: '20px',
     minHeight: '1000px',
     height: 'fit-content',
