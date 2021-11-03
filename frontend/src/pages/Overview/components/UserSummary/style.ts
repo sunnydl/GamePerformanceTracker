@@ -4,9 +4,9 @@ import { Box } from '@mui/material';
 export const ProfileWrapper = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
-    maxWidth: '512px',
+    maxWidth: '600px',
     margin: 'auto',
-    padding: '40px 20px 60px 20px',
+    padding: '40px 20px 40px 20px',
     backgroundColor: '#F2F7FD',
     borderRadius: '71px',
     fontSize: '1.25rem',
@@ -22,28 +22,64 @@ export const ProfileWrapper = styled(Box)(({ theme }) => ({
 
     "& .header-wrapper": {
         borderBottom: "1px solid",
-        paddingBottom: "8px"
+        paddingBottom: "16px"
+    },
+
+    "& .body-wrapper > div > span": {
+        float: "right"
     },
 
     "& *": {
-        marginBottom: "8px",
+        marginBottom: "16px",
     }
 }));
 
 export const ChartsWrapper = styled(Box)(({ theme }) => ({
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center",
-    height: 'fit-content',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    justifyContent: "space-evenly",
+    maxWidth: '600px',
+    margin: 'auto',
     padding: '40px 20px 20px 20px',
     backgroundColor: '#F2F7FD',
     borderRadius: '71px',
+}));
 
-    "& *": {
-        marginLeft: 'auto',
-        marginRight: 'auto',
+export const FavoriteChampionWrapper = styled(Box)(({ theme }) => ({
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
+    maxWidth: '600px',
+    margin: 'auto',
+    padding: '20px 20px 20px 20px',
+    backgroundColor: '#F2F7FD',
+    borderRadius: '71px',
+
+    "& .title-wrapper": {
+        width: '100%',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: '1.5rem'
+    },
+
+    "& .body-wrapper": {
+        marginTop: "8px",
+        textAlign: "center",
+
+        "& .label-wrapper": {
+            fontSize: "1.25rem",
+            fontWeight: "bold",
+            marginBottom: "8px"
+        }
+    },
+
+    "& .icon-wrapper > .MuiAvatar-root": {
+        margin: "auto"
+    },
+
+    "& > *": {
+        width: "256px",
+        marginBottom: "24px",
     }
 }));
 
