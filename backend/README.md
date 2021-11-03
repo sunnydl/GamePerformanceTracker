@@ -4,7 +4,7 @@
 1. Switch the Riot api key set in /backend/config/config.ts to your api key on [Riot developer portal](https://developer.riotgames.com/). (dev key expires everyday, so need to be reset just in case when developing.)
 2. Do `npm run dev` to run the server
 
-#### GET api/summonerInfo/:summonerName
+#### GET api/summonerInfo/:summonerName/:region
 ##### request input (Get request param):
 * summonerName: string;
 * region: (Optional) string;  
@@ -15,3 +15,4 @@
 * rank: string;
 * winGames: number;
 * lossGames: number;
+* favChamps: Array<string>;
