@@ -1,5 +1,5 @@
 import { info } from 'console';
-import * as riotApis from '../config/riotApis'
+import * as riotApis from '../riotApis/riotApis'
 import MatchDto from '../interfaces/IMatch/IMatchDto'
 import ParticipantDto from '../interfaces/IMatch/IParticipantDto';
 import currency from 'currency.js';
