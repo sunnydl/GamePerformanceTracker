@@ -18,11 +18,11 @@ export default function Footer() {
             </Tabs>
             <hr style={{ backgroundColor: "black", border: "none", height: "1px", width: "90%" }} />
             <ParticipantsWrapper>
-                <Avatar src="https://avatars.githubusercontent.com/u/56567343?v=4" component={Link} to={{ pathname: "https://www.twitter.com/" }} target="_blank" />
-                <Avatar src="https://avatars.githubusercontent.com/u/35276423?v=4" component={Link} to={{ pathname: "https://www.google.com/" }} target="_blank" />
-                <Avatar src="https://avatars.githubusercontent.com/u/56567343?v=4" component={Link} to={{ pathname: "https://www.facebook.com/" }} target="_blank" />
-                <Avatar src="https://avatars.githubusercontent.com/u/56567343?v=4" component={Link} to={{ pathname: "https://www.amazon.com/" }} target="_blank" />
-                <Avatar src="https://avatars.githubusercontent.com/u/56567343?v=4" component={Link} to={{ pathname: "https://www.bing.com/" }} target="_blank" />
+                <Avatar src="https://avatars.githubusercontent.com/u/56567343?v=4" component={Link} to={{ pathname: "https://github.com/sunnydl" }} target="_blank" />
+                <Avatar src="https://avatars.githubusercontent.com/u/35276423?v=4" component={Link} to={{ pathname: "https://github.com/mzhou579" }} target="_blank" />
+                <Avatar src="https://avatars.githubusercontent.com/u/60027265?v=4" component={Link} to={{ pathname: "https://github.com/Hao-bot-5000" }} target="_blank" />
+                <Avatar src="https://avatars.githubusercontent.com/u/46057691?v=4" component={Link} to={{ pathname: "https://github.com/erlyu" }} target="_blank" />
+                <Avatar src="https://avatars.githubusercontent.com/u/3110882?v=4" component={Link} to={{ pathname: "https://github.com/Jventoo" }} target="_blank" />
             </ParticipantsWrapper>
             <div>All content and trademarks property of their respective owners.</div>
         </FooterWrapper>
