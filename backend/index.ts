@@ -1,4 +1,5 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
+import http from 'http'
 import path from 'path';
 import config from './config/config';
 import logging from './config/logging';
@@ -11,6 +12,7 @@ import api from './routes/index'
 const NAMESPACE = 'Server';
 
 const app = express();
+export const server = new http.Server(app);
 
 // set up mongoose connection
 mongoose
@@ -26,17 +28,17 @@ mongoose
         
     });
 
-app.use((req, res, next) => {
-    /** Log the req */
-    logging.info(NAMESPACE, `METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
+// app.use((req, res, next) => {
+//     /** Log the req */
+//     logging.info(NAMESPACE, `METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
 
-    res.on('finish', () => {
-        /** Log the res */
-        logging.info(NAMESPACE, `METHOD: [${req.method}] - URL: [${req.url}] - STATUS: [${res.statusCode}] - IP: [${req.socket.remoteAddress}]`);
-    });
+//     res.on('finish', () => {
+//         /** Log the res */
+//         logging.info(NAMESPACE, `METHOD: [${req.method}] - URL: [${req.url}] - STATUS: [${res.statusCode}] - IP: [${req.socket.remoteAddress}]`);
+//     });
 
-    next();
-});
+//     next();
+// });
 
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
@@ -58,10 +60,15 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get('/', (req: Request, res: Response) => {
+    res.status(200).send("app is running fine");
+})
 app.use('/api', api);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server running on port: ${PORT}`);
 });
+
+export default app;

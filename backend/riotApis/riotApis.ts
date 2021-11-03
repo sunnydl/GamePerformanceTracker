@@ -3,6 +3,7 @@ import config from "../config/config";
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import SummonerLeague from "../interfaces/ISummonerLeague";
 import ChampionMastery from "../interfaces/IChampionMastery";
+import MatchDto from "../interfaces/IMatch/IMatchDto";
 
 interface Regions {
     [key: string]: string;
@@ -22,6 +23,10 @@ const REGION: Regions = {
     'OC': 'oc1.api.riotgames.com',
     'TR': 'tr1.api.riotgames.com',
     'RU': 'ru.api.riotgames.com',
+};
+const MATCH_REGION: Regions = {
+    'NA': 'americas.api.riotgames.com',
+    // regions will be added
 };
 
 // set up axios to include riot api key, and export with config
@@ -53,4 +58,15 @@ export const getChampsData = async(): Promise<any> => {
     const response = await axios.get('http://ddragon.leagueoflegends.com/cdn/' + version + '/data/de_DE/champion.json');
     const data: any = response.data;
     return data.data;
+}
+// for match list id info
+export const findMatchHistoryInfo = async(puuid: string, region: string): Promise<Array<string>> => {
+    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20`);
+    return response.data as Array<string>;
+}
+
+// for match info given match id
+export const findMatchInfo = async(match_id: string, region: string): Promise<MatchDto> => {
+    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/${match_id}`);
+    return response.data as MatchDto;
 }
