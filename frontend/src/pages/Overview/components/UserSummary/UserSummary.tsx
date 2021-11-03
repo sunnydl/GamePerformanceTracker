@@ -6,7 +6,8 @@ import { useAppSelector } from '../../../../redux/hooks';
 
 import {
   ProfileWrapper,
-  ChartsWrapper
+  ChartsWrapper,
+  FavoriteChampionWrapper
 } from './style';
 
 import CircleChart from './CircleChart';
@@ -27,8 +28,9 @@ function UserSummary() {
   } = useAppSelector((state) => state.user);
 
   const winRate = (100 * winGames / ((winGames + lossGames) || 1)).toFixed();
-  // TODO: retrieve kda data from some endpoint
+  // TODO: retrieve these data values below from some endpoint
   const kills = 25, deaths = 12, assists = 31;
+  const favoriteChampion = "Champ";
 
   return (
     <Grid container spacing={2}>
@@ -39,13 +41,15 @@ function UserSummary() {
             {summonerName}
           </div>
           <div className="header-wrapper">Details</div>
-          <div>Level:<span style={{ float: "right" }}>{summonerLevel}</span></div>
-          <div>Rank:<span style={{ float: "right" }}>{rank}</span></div>
-          <div>Wins:<span style={{ float: "right" }}>{winGames}</span></div>
-          <div>Losses:<span style={{ float: "right" }}>{lossGames}</span></div>
+          <div className="body-wrapper">
+            <div>Level:<span>{summonerLevel}</span></div>
+            <div>Rank:<span>{rank}</span></div>
+            <div>Wins:<span>{winGames}</span></div>
+            <div>Losses:<span>{lossGames}</span></div>
+          </div>
         </ProfileWrapper>
       </Grid>
-      <Grid container item xs={12} lg={6}>
+      <Grid container item spacing={2} xs={12} lg={6}>
         <Grid item xs={12}>
           <ChartsWrapper>
             <CircleChart
@@ -70,6 +74,21 @@ function UserSummary() {
               ]}
             />
           </ChartsWrapper>
+        </Grid>
+        <Grid item xs={12}>
+          <FavoriteChampionWrapper>
+            <div className="title-wrapper">Favorite Champion</div>
+            <div className="body-wrapper">
+              <div className="label-wrapper">{favoriteChampion}</div>
+              <div style={{ color: "#77DD77" }}>{kills.toFixed(2)}</div>
+              <div style={{ color: "#FF6961" }}>{deaths.toFixed(2)}</div>
+              <div style={{ color: "#3880FF" }}>{assists.toFixed(2)}</div>
+            </div>
+            <div className="icon-wrapper">
+              <Avatar src={undefined/* TODO: fetch champion logo */} sx={{ width: '160px', height: '160px' }} />
+            </div>
+            
+          </FavoriteChampionWrapper>
         </Grid>
       </Grid>
     </Grid>
