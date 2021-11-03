@@ -4,14 +4,14 @@ import { Typography, Paper, Button } from '@mui/material';
 export const MatchSummaryWrapper = styled('div')(({ theme }) => ({
     // width: '100%',
     padding: '20px',
-    minHeight: '1000px',
+    minHeight: '1200px',
     height: 'fit-content',
 }));
 
 export const MatchSummaryPaper = styled('div')(() => ({
     backgroundColor: '#F2F7FD',
     borderRadius: '71px',
-    minHeight: '1000px',
+    minHeight: '1100px',
     height: 'fit-content',
 }))
 
@@ -56,7 +56,7 @@ export const GraphWrapper = styled(Paper)(() => ({
     marginRight: 'auto',
     alignContent: 'center',
     justifyContent: 'center',
-    height: '650px',
+    height: '750px',
     paddingBottom: '1rem',
     paddingTop: '2rem',
 }))
