@@ -7,14 +7,19 @@ import { useAppSelector } from '../../../../redux/hooks';
 import {
   ProfileWrapper,
   ChartsWrapper,
-  FavoriteChampionWrapper
+  FavoriteChampionsWrapper
 } from './style';
 
 import CircleChart from './CircleChart';
 
-const getProfileURL = (iconID?: number) => {
-  if (typeof iconID !== 'number') return undefined;
+const getSummonerIconURL = (iconID?: number) => {
+  if (iconID === undefined) return undefined;
   return `http://ddragon.leagueoflegends.com/cdn/11.20.1/img/profileicon/${iconID}.png`;
+}
+
+const getChampionIconURL = (championName?: string) => {
+  if (championName === undefined) return undefined;
+  return `http://ddragon.leagueoflegends.com/cdn/11.22.1/img/champion/${championName}.png`;
 }
 
 function UserSummary() {
@@ -25,19 +30,19 @@ function UserSummary() {
     rank = "N/A", 
     winGames = 0, 
     lossGames = 0, 
+    favChamps = [],
   } = useAppSelector((state) => state.user);
 
   const winRate = (100 * winGames / ((winGames + lossGames) || 1)).toFixed();
   // TODO: retrieve these data values below from some endpoint
   const kills = 25, deaths = 12, assists = 31;
-  const favoriteChampion = "Champ";
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} lg={6}>
         <ProfileWrapper>
           <div className="icon-wrapper">
-            <Avatar src={getProfileURL(summonerIcon)} sx={{ width: '256px', height: '256px' }} />
+            <Avatar src={getSummonerIconURL(summonerIcon)} />
             {summonerName}
           </div>
           <div className="header-wrapper">Details</div>
@@ -76,19 +81,21 @@ function UserSummary() {
           </ChartsWrapper>
         </Grid>
         <Grid item xs={12}>
-          <FavoriteChampionWrapper>
-            <div className="title-wrapper">Favorite Champion</div>
-            <div className="body-wrapper">
-              <div className="label-wrapper">{favoriteChampion}</div>
-              <div style={{ color: "#77DD77" }}>{kills.toFixed(2)}</div>
-              <div style={{ color: "#FF6961" }}>{deaths.toFixed(2)}</div>
-              <div style={{ color: "#3880FF" }}>{assists.toFixed(2)}</div>
-            </div>
-            <div className="icon-wrapper">
-              <Avatar src={undefined/* TODO: fetch champion logo */} sx={{ width: '160px', height: '160px' }} />
-            </div>
-            
-          </FavoriteChampionWrapper>
+          <FavoriteChampionsWrapper>
+            {favChamps.length ? (
+              <React.Fragment>
+                <div className="title-wrapper">Favorite Champions</div>
+                {favChamps.map((champ, idx) => (
+                  <div key={idx} className="icon-wrapper">
+                    <Avatar src={getChampionIconURL(champ)} />
+                    {champ}
+                  </div>
+                ))}
+              </React.Fragment>
+            ) : (
+              <div className="title-wrapper">No champions found...</div>
+            )}
+          </FavoriteChampionsWrapper>
         </Grid>
       </Grid>
     </Grid>

@@ -17,7 +17,12 @@ export const ProfileWrapper = styled(Box)(({ theme }) => ({
         alignItems: "center",
         flexDirection: "inherit",
         fontSize: "1.5rem",
-        fontWeight: "bold"
+        fontWeight: "bold",
+
+        "& .MuiAvatar-root": {
+            width: "256px",
+            height: "256px"
+        }
     },
 
     "& .header-wrapper": {
@@ -45,13 +50,13 @@ export const ChartsWrapper = styled(Box)(({ theme }) => ({
     borderRadius: '71px',
 }));
 
-export const FavoriteChampionWrapper = styled(Box)(({ theme }) => ({
+export const FavoriteChampionsWrapper = styled(Box)(({ theme }) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-evenly",
     maxWidth: '600px',
     margin: 'auto',
-    padding: '20px 20px 20px 20px',
+    padding: '40px 20px 40px 20px',
     backgroundColor: '#F2F7FD',
     borderRadius: '71px',
 
@@ -62,24 +67,16 @@ export const FavoriteChampionWrapper = styled(Box)(({ theme }) => ({
         fontSize: '1.5rem'
     },
 
-    "& .body-wrapper": {
-        marginTop: "8px",
-        textAlign: "center",
-
-        "& .label-wrapper": {
-            fontSize: "1.25rem",
-            fontWeight: "bold",
-            marginBottom: "8px"
+    "& .icon-wrapper": {
+        margin: "16px",
+        textAlign: 'center',
+        fontSize: "1.25rem",
+        fontWeight: "bold",
+        
+        "& .MuiAvatar-root": {
+            width: "128px",
+            height: "128px"
         }
-    },
-
-    "& .icon-wrapper > .MuiAvatar-root": {
-        margin: "auto"
-    },
-
-    "& > *": {
-        width: "256px",
-        marginBottom: "24px",
     }
 }));
 

@@ -8,6 +8,7 @@ interface UserState {
     rank?:          string,
     winGames?:      number,
     lossGames?:     number,
+    favChamps?:     string[],
     region?:        string,
     summonerFound?: boolean,
 }
@@ -25,6 +26,7 @@ const userSlice = createSlice({
             state.rank          = action.payload.rank           ?? undefined;
             state.winGames      = action.payload.winGames       ?? undefined;
             state.lossGames     = action.payload.lossGames      ?? undefined;
+            state.favChamps     = action.payload.favChamps      ?? undefined;
             state.region        = action.payload.region         ?? undefined;
             state.summonerFound = action.payload.summonerFound  ?? undefined;
         },
