@@ -29,7 +29,7 @@ export const ProfileWrapper = styled(Box)(({ theme }) => ({
         float: "right"
     },
 
-    "& *": {
+    "& div": {
         marginBottom: "16px",
     }
 }));
