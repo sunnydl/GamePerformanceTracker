@@ -39,8 +39,8 @@ function NavBar() {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position='sticky'> 
-        <Toolbar variant='dense'>
+      <AppBar position='sticky' elevation={0}> 
+        <Toolbar variant='regular' sx={{display: 'flex', flexWrap: 'wrap', width: '90%', padding: 'auto', margin: 'auto'}}>
           <IconButton
             size='medium'
             edge='start'
@@ -53,13 +53,12 @@ function NavBar() {
             GPT {/* TODO: add icon */}
           </IconButton>
           <Box sx={{ flexGrow: 0.05 }} />
-          <Tabs value={false} style={{ color: theme.palette.primary.contrastText }}>
+          <Tabs value={false} style={{ color: theme.palette.primary.contrastText, margin: 'auto' }}>
             <Tab style={{ color: 'inherit' }} label='overview' component={Link} to={`/overview${location.search}`} />
             <Tab style={{ color: 'inherit' }} label='Match History'/>
             <Tab style={{ color: 'inherit' }} label='Leaderboard'/>
             <Tab style={{ color: 'inherit' }} label='Champion'/>
           </Tabs> 
-          <Box sx={{ flexGrow: 0.5 }} />
           <SummonerSearchBar />
           <Box sx={{ flexGrow: 0.5 }} />
           <Button color="primary" variant="contained">
@@ -69,7 +68,6 @@ function NavBar() {
           <Button color="secondary" variant="contained">
             Register
           </Button>
-          
         </Toolbar>
       </AppBar>
     </ThemeProvider>
