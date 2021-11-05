@@ -55,7 +55,7 @@ function NavBar() {
           <Box sx={{ flexGrow: 0.05 }} />
           <Tabs value={false} style={{ color: theme.palette.primary.contrastText, margin: 'auto' }}>
             <Tab style={{ color: 'inherit' }} label='overview' component={Link} to={`/overview${location.search}`} />
-            <Tab style={{ color: 'inherit' }} label='Match History'/>
+            <Tab style={{ color: 'inherit' }} label='Match History' component={Link} to={`/match-history${location.search}`} />
             <Tab style={{ color: 'inherit' }} label='Leaderboard'/>
             <Tab style={{ color: 'inherit' }} label='Champion'/>
           </Tabs> 
