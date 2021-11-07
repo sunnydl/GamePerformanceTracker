@@ -1,53 +1,36 @@
-import { info } from 'console';
 import * as riotApis from '../riotApis/riotApis'
 import MatchDto from '../interfaces/IMatch/IMatchDto'
 import ParticipantDto from '../interfaces/IMatch/IParticipantDto';
 import currency from 'currency.js';
-const myid = "qWqZJtdh6o_UYm0qJah8app2iPXfwrqWAKfddn8ORkxaiBJ_YQax8L8k-4atejesTfftcrak4OcBOg"
-const region = `NA`
+import MatchDataDTO from '../interfaces/IMatchDataDTO';
+
+export const getMatchData = async(puuid: string, region: string, numOfMatch: number): Promise<MatchDataDTO> => {
+    const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, numOfMatch);
+    return analysisMatch(puuid, matchList);
+}
 
 //given puuid, return the last 10 match list id.
-export const getMatchListByPUUID = async(puuid: string, region: string): Promise<Array<string>> => {
+const getMatchListByPUUID = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchDto>> => {
     const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region);
     if(matchListInfo.length){
-        return matchListInfo as Array<string>;
+        const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
+        return matchList;
     } else{
-        return [] as Array<string>;
+        return [] as Array<MatchDto>;
     }
 };
-
-//return list of participant info of the match
-export const getParticipantsInfoByMatchId = async(matchId: string, region: string): Promise<Array<ParticipantDto> | undefined> => {
-    const matchInfo: MatchDto = await riotApis.findMatchInfo(matchId, region);
-    if (matchInfo){
-        const participantMatchInfoArr: ParticipantDto[] = [];
-        for (let players = 0; players <= 9; players ++){
-            participantMatchInfoArr.push(matchInfo.info.participants[players]);
-        }
-        // console.log(participantMatchInfoArr);
-        return participantMatchInfoArr;
-    } else {
-        return [] as unknown as Array<ParticipantDto>;
-    }
-};
-
-const getMatchObjByMatchId = async(matchId: string, region: string): Promise<MatchDto> => {
-    const matchObj: MatchDto = await riotApis.findMatchInfo(matchId, region);
-    // console.log(matchObj);
-    return matchObj as MatchDto;
-}
 
 export const getMatchObjListByMatchList = async (match_list: Array<string>, region: string): Promise<Array<MatchDto>> => {
     const matchDTOArr: Array<MatchDto> = [];
     for( const matchElem of match_list){
-        const match = await getMatchObjByMatchId(matchElem, region);
+        const match = await riotApis.findMatchInfo(matchElem, region);
         matchDTOArr.push(match);
     }
     // console.log(matchDTOArr);
     return matchDTOArr;
 }
 
-export const analysisMatchWinLoss = (puuid: string, matchList: Array<MatchDto>): Array<number> => {
+export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): MatchDataDTO => {
     const winlose: Array<number> = [];
     let win = 0;
     let lose = 0;
@@ -67,17 +50,26 @@ export const analysisMatchWinLoss = (puuid: string, matchList: Array<MatchDto>):
         }
     }
 
-    return winlose;
+    return {
+        winLoss: winlose,
+        kills: [],
+        deaths: [],
+        assists: [],
+        scores: [],
+    } as MatchDataDTO;
 }
 
-// given participant info array, locate info about curr player, and return
-/*const main = async() =>{
-    const temp: Array<string> = await getMatchListByPUUID(myid, region);
-    // console.log(temp);
-    await getMatchObjByMatchId(temp[0], region);
-    //const matchlist: Array<MatchDto> = await getMatchObjListByMatchList(temp, region);
-    await getParticipantsInfoByMatchId(temp[0], region);
-    //console.log(analysisMatchWinLoss(myid,matchlist));
+//return list of participant info of the match
+export const getParticipantsInfoByMatchId = async(matchId: string, region: string): Promise<Array<ParticipantDto> | undefined> => {
+    const matchInfo: MatchDto = await riotApis.findMatchInfo(matchId, region);
+    if (matchInfo){
+        const participantMatchInfoArr: ParticipantDto[] = [];
+        for (let players = 0; players <= 9; players ++){
+            participantMatchInfoArr.push(matchInfo.info.participants[players]);
+        }
+        // console.log(participantMatchInfoArr);
+        return participantMatchInfoArr;
+    } else {
+        return [] as unknown as Array<ParticipantDto>;
+    }
 };
-*/
-

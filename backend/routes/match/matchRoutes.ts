@@ -1,6 +1,7 @@
 import express, { Router } from 'express'
+import * as matchController from '../../controllers/matchController'
 const router: Router = express.Router()
 
-router.get('/');
+router.get('/', matchController.getMatchHistory);
 
 export default router;

@@ -16,3 +16,15 @@
 * winGames: number;
 * lossGames: number;
 * favChamps: Array<string>;
+
+#### GET api/matches/:summonerName/:region/:numOfMatch
+##### request input (Get request param):
+* summonerName: string;
+* region: (Optional) string;
+* numOfMatch: number;
+##### response:
+* winLoss: Array<number>;
+* kills: Array<number>;
+* deaths: Array<number>;
+* assists: Array<number>;
+* scores: Array<number>;
