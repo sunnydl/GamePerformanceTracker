@@ -47,13 +47,30 @@ export const getMatchObjListByMatchList = async (match_list: Array<string>, regi
     return matchDTOArr;
 }
 
+export const getNumOfMatchIds = async(puuid: string, region : string, num: number) => {
+    const matchListIds: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region);
+    const numOfMatchIds: Array<string> = [];
+    if(matchListIds.length >= num){
+        for (let baseNum = 0; baseNum < num; baseNum ++){
+            numOfMatchIds.push(matchListIds[baseNum]);
+        }
+        console.log(numOfMatchIds);
+        return numOfMatchIds;
+    } else if (matchListIds.length > 1){
+        return matchListIds as Array<string>;
+    } else {
+        return [] as Array<string>
+    }
+}
+
 // given participant info array, locate info about curr player, and return
 const main = async() =>{
     const temp: Array<string> = await getMatchListByPUUID(myid, region);
     // console.log(temp);
-    await getMatchObjByMatchId(temp[0], region)
-    await getMatchObjListByMatchList(temp, region);
-    await getParticipantsInfoByMatchId(temp[0], region);
+    // await getMatchObjByMatchId(temp[0], region)
+    // await getMatchObjListByMatchList(temp, region);
+    // await getParticipantsInfoByMatchId(temp[0], region);
+    await getNumOfMatchIds(myid, region, 3);
 };
 
 main() 
