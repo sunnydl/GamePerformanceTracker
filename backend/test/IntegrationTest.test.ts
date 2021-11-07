@@ -1,7 +1,7 @@
-import app, { server } from './index'
+import app, { server } from '../index'
 import request from 'supertest'
 import mongoose from 'mongoose'
-import config from './config/config'
+import config from '../config/config'
 
 describe("Testing server basic functionality", () => {
     beforeAll(async() => {

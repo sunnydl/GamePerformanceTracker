@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test::unit": "jest -c ./jest.unit.json",
-    "test::unit:coverage": "jest --coverage -c ./jest.unit.json",
+    "test::singleUnit": "jest --coverage -c ./jest.singleUnit.json",
+    "test::unit": "jest --coverage -c ./jest.unit.json",
     "test::integration": "jest -c jest.integration.json",
     "deploy": "node index.js",
     "dev": "nodemon index.ts",
