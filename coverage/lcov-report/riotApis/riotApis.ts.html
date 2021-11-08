@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.64% </span>
+                <span class="strong">64.86% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/37</span>
+                <span class='fraction'>24/37</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>4/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48% </span>
+                <span class="strong">64% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/25</span>
+                <span class='fraction'>16/25</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -191,15 +191,15 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import SummonerInfo from "../interfaces/ISummonerInfo";
 import config from "../config/config";
@@ -263,15 +263,15 @@ export const getChampsData = <span class="fstat-no" title="function not covered"
 <span class="cstat-no" title="statement not covered" >    return data.data;</span>
 }
 // for match list id info
-export const findMatchHistoryInfo = <span class="fstat-no" title="function not covered" >async(p</span>uuid: string, region: string): Promise&lt;Array&lt;string&gt;&gt; =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
-    const response: AxiosResponse = <span class="cstat-no" title="statement not covered" >await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&amp;count=20`);</span>
-<span class="cstat-no" title="statement not covered" >    return response.data as Array&lt;string&gt;;</span>
+export const findMatchHistoryInfo = async(puuid: string, region: string, count: number): Promise&lt;Array&lt;string&gt;&gt; =&gt; {
+    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&amp;count=${count}`);
+    return response.data as Array&lt;string&gt;;
 }
 &nbsp;
 // for match info given match id
-export const findMatchInfo = <span class="fstat-no" title="function not covered" >async(m</span>atch_id: string, region: string): Promise&lt;MatchDto&gt; =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
-    const response: AxiosResponse = <span class="cstat-no" title="statement not covered" >await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/${match_id}`);</span>
-<span class="cstat-no" title="statement not covered" >    return response.data as MatchDto;</span>
+export const findMatchInfo = async(match_id: string, region: string): Promise&lt;MatchDto&gt; =&gt; {
+    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/${match_id}`);
+    return response.data as MatchDto;
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -280,7 +280,7 @@ export const findMatchInfo = <span class="fstat-no" title="function not covered"
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Nov 07 2021 14:30:22 GMT-0800 (Pacific Standard Time)
+                at Sun Nov 07 2021 22:33:18 GMT-0800 (Pacific Standard Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

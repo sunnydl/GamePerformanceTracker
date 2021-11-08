@@ -3,19 +3,19 @@ import MatchDto from '../interfaces/IMatch/IMatchDto'
 import ParticipantDto from '../interfaces/IMatch/IParticipantDto';
 import currency from 'currency.js';
 import MatchDataDTO from '../interfaces/IMatchDataDTO';
-import { match } from 'assert';
 
 export const getMatchData = async(puuid: string, region: string, numOfMatch: number): Promise<MatchDataDTO> => {
     const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, numOfMatch);
     return analysisMatch(puuid, matchList);
 }
 
-const getMatchListByPUUID = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchDto>> => {
-    const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region);
+export const getMatchListByPUUID = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchDto>> => {
+    const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, numOfMatch);
     if(matchListInfo.length){
         const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
         //case where input is greater or equal to 20
         if (numOfMatch >= 20) {
+            console.log(matchList.length)
             return matchList as Array<MatchDto>;
         }
         //check if there exsists an amount of matches that matches the input
