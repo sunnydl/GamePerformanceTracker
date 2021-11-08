@@ -10,12 +10,23 @@ export const getMatchData = async(puuid: string, region: string, numOfMatch: num
     return analysisMatch(puuid, matchList);
 }
 
-//given puuid, return the last 10 match list id.
 const getMatchListByPUUID = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchDto>> => {
     const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region);
     if(matchListInfo.length){
         const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
-        return matchList;
+        //case where input is greater or equal to 20
+        if (numOfMatch >= 20) {
+            return matchList as Array<MatchDto>;
+        }
+        //check if there exsists an amount of matches that matches the input
+        else if (matchListInfo.length >= numOfMatch){
+            console.log(matchList.splice(0, numOfMatch));
+            return matchList.splice(0, numOfMatch) as Array<MatchDto>;
+        }
+        // if there does not input is larger than player match history, return whatever exists
+        else {
+            return matchList as Array<MatchDto>;
+        }
     } else{
         return [] as Array<MatchDto>;
     }
@@ -27,12 +38,14 @@ export const getMatchObjListByMatchList = async (match_list: Array<string>, regi
         const match = await riotApis.findMatchInfo(matchElem, region);
         matchDTOArr.push(match);
     }
-    // console.log(matchDTOArr);
     return matchDTOArr;
 }
 
 export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): MatchDataDTO => {
     const winlose: Array<number> = [];
+    const kill: Array<number> = [];
+    const death: Array<number> = [];
+    const assist: Array<number> = [];
     let win = 0;
     let lose = 0;
     let win_lose = 0;
@@ -46,16 +59,19 @@ export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): MatchD
                     lose += 1;
                 }
                 win_lose = currency(win).divide(currency(lose).add(win)).value;
-                winlose.push(win_lose);     
+                winlose.push(win_lose);
+                kill.push(partis[j].kills);
+                death.push(partis[j].deaths);
+                assist.push(partis[j].assists);  
             }     
         }
     }
 
     return {
         winLoss: winlose,
-        kills: [],
-        deaths: [],
-        assists: [],
+        kills: kill,
+        deaths: death,
+        assists: assist,
         scores: [],
     } as MatchDataDTO;
 }
@@ -75,20 +91,4 @@ export const getParticipantsInfoByMatchId = async(matchId: string, region: strin
     }
 };
 
-export const getNumOfMatchIds = async(puuid: string, region : string, num: number) => {
-    const matchListIds: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region);
-    const numOfMatchIds: Array<string> = [];
-    if (matchListIds.length == 10 && num > 10){
-        return matchListIds as Array<string>;
-    } else if(matchListIds.length >= num){
-        for (let baseNum = 0; baseNum < num; baseNum ++){
-            numOfMatchIds.push(matchListIds[baseNum]);
-        }
-        // console.log(numOfMatchIds);
-        return numOfMatchIds;
-    } else if (matchListIds.length > 1){
-        return matchListIds as Array<string>;
-    } else {
-        return [] as Array<string>
-    }
-}
+getMatchListByPUUID('qWqZJtdh6o_UYm0qJah8app2iPXfwrqWAKfddn8ORkxaiBJ_YQax8L8k-4atejesTfftcrak4OcBOg', 'NA', 11);
