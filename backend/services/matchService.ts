@@ -3,6 +3,7 @@ import MatchDto from '../interfaces/IMatch/IMatchDto'
 import ParticipantDto from '../interfaces/IMatch/IParticipantDto';
 import currency from 'currency.js';
 import MatchDataDTO from '../interfaces/IMatchDataDTO';
+import { match } from 'assert';
 
 export const getMatchData = async(puuid: string, region: string, numOfMatch: number): Promise<MatchDataDTO> => {
     const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, numOfMatch);
@@ -77,7 +78,9 @@ export const getParticipantsInfoByMatchId = async(matchId: string, region: strin
 export const getNumOfMatchIds = async(puuid: string, region : string, num: number) => {
     const matchListIds: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region);
     const numOfMatchIds: Array<string> = [];
-    if(matchListIds.length >= num){
+    if (matchListIds.length == 10 && num > 10){
+        return matchListIds as Array<string>;
+    } else if(matchListIds.length >= num){
         for (let baseNum = 0; baseNum < num; baseNum ++){
             numOfMatchIds.push(matchListIds[baseNum]);
         }
