@@ -20,7 +20,6 @@ const getMatchListByPUUID = async(puuid: string, region: string, numOfMatch: num
         }
         //check if there exsists an amount of matches that matches the input
         else if (matchListInfo.length >= numOfMatch){
-            console.log(matchList.splice(0, numOfMatch));
             return matchList.splice(0, numOfMatch) as Array<MatchDto>;
         }
         // if there does not input is larger than player match history, return whatever exists
@@ -90,5 +89,3 @@ export const getParticipantsInfoByMatchId = async(matchId: string, region: strin
         return [] as unknown as Array<ParticipantDto>;
     }
 };
-
-getMatchListByPUUID('qWqZJtdh6o_UYm0qJah8app2iPXfwrqWAKfddn8ORkxaiBJ_YQax8L8k-4atejesTfftcrak4OcBOg', 'NA', 11);
