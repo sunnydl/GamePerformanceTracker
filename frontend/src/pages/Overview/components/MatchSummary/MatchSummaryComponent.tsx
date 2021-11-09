@@ -18,7 +18,7 @@ import {
     Features
 } from './enums'
 
-import RandomeChart from './RandomeChart';
+import RandomeChart from './MatchChart';
 
 export default function MatchSummaryComponent() {
 
@@ -47,6 +47,19 @@ export default function MatchSummaryComponent() {
         const bState = bStates[`${feature}`];
         bStates[`${feature}`] = !bState;
         bColors[`${feature}`] = bState? '#18A0FB':'#db5f12';
+        if(feature==='WinRates' && bStates['WinRates']) {
+            bStates[`Kills`] = false;
+            bStates[`Deaths`] = false;
+            bStates[`Assists`] = false;
+            bStates[`Scores`] = false;
+            bColors[`Kills`] = '#18A0FB';
+            bColors[`Deaths`] = '#18A0FB';
+            bColors[`Assists`] = '#18A0FB';
+            bColors[`Scores`] = '#18A0FB';
+        } else {
+            bStates['WinRates'] = false;
+            bColors['WinRates'] = '#18A0FB';
+        }
         setButtonStates({...bStates});
         setButtonsColor({...bColors});
     }
@@ -61,11 +74,11 @@ export default function MatchSummaryComponent() {
                     variant="subtitle1"
                     align="center"
                 >
-                    Choose a Time Frame
+                    Recent 5 Games
                 </Paragraph>
                 <ButtonSelections>
                     {NumOfGames.map((num: number) => (
-                        <Buttons variant="contained" sx={{backgroundColor: '#18A0FB'}} key={num}>{num} Games</Buttons>
+                        <Buttons variant="contained" disabled sx={{backgroundColor: '#18A0FB'}} key={num}>{num} Games</Buttons>
                     ))}
                 </ButtonSelections>
                 <GraphWrapper>

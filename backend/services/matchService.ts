@@ -40,7 +40,29 @@ export const getMatchObjListByMatchList = async (match_list: Array<string>, regi
     }
     return matchDTOArr;
 }
-
+/* 
+    given a list of matchDto
+    It will return a list of dataObj for example
+    [
+        {
+            name: Game 1,
+            kills: 1,
+            deaths: 2,
+            assists: 2,
+            scores: 2,
+            winLoss: 0.5,
+        },
+        {
+            name: Game 2,
+            kills: ...,
+            deaths: ...,
+            assists: ...,
+            scores: ...,
+            winLoss: ...,
+        },
+        ......
+    ]
+*/
 export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): Array<MatchChartDataDTO> => {
     const matchChartDataList: Array<MatchChartDataDTO> = [];
     let win = 0;
@@ -55,7 +77,7 @@ export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): Array<
                 }else{
                     lose += 1;
                 }
-                win_lose = currency(win).divide(currency(lose).add(win)).multiply(10).value;
+                win_lose = currency(win).divide(currency(lose).add(win)).multiply(100).value;
                 const matchChartData: MatchChartDataDTO = {
                     name: `Game ${matchList.length-i}`,
                     winLoss: win_lose,

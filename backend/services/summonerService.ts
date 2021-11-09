@@ -5,6 +5,7 @@ import SummonerInfo from "../interfaces/ISummonerInfo";
 import SummonerLeague from '../interfaces/ISummonerLeague';
 import UserModel from '../models/UserModel';
 
+// given a summoner name, find the info of the summoner for overview page from riot API
 export const getSummonerByName = async(summonerName: string, region: string): Promise<SummonerDTO> => {
     const summoner: SummonerInfo = await riotApis.findSummonerInfo(summonerName, region);
     const leagueInfos: Array<SummonerLeague> = await riotApis.findSummonerLeague(summoner?.id, region);
@@ -26,7 +27,7 @@ export const getSummonerByName = async(summonerName: string, region: string): Pr
         }).save();
     }
 
-    const champions: Array<ChampionMastery> = await riotApis.findChampionMaster(summoner?.id, region);
+    const champions: Array<ChampionMastery> = await riotApis.findChampionMastery(summoner?.id, region);
     const favChampsIds: Array<number> = champions.map((champion: ChampionMastery) => champion.championId).slice(0, 3);
     const favChamps: Array<string> = await findFavChampsName(favChampsIds);
 
@@ -53,7 +54,7 @@ export const getSummonerByName = async(summonerName: string, region: string): Pr
         } as SummonerDTO;
     }
 }
-
+// find the champ name given an id
 const findFavChampsName = async(favChampsIds: Array<number>): Promise<Array<string>> => {
     const champsList: any = await riotApis.getChampsData();
     const favChamps: string[] = [];
@@ -64,7 +65,7 @@ const findFavChampsName = async(favChampsIds: Array<number>): Promise<Array<stri
     }
     return favChamps;
 }
-
+// find summoner's puuid given a summoner name
 export const findSummonerPuuid = async(summonerName: string, region: string): Promise<string> => {
     const foundSummoner = await UserModel.findOne({ summonerName });
     if(foundSummoner) {
