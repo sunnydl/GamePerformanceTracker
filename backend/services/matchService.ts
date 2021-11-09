@@ -2,9 +2,10 @@ import * as riotApis from '../riotApis/riotApis'
 import MatchDto from '../interfaces/IMatch/IMatchDto'
 import ParticipantDto from '../interfaces/IMatch/IParticipantDto';
 import currency from 'currency.js';
-import MatchDataDTO from '../interfaces/IMatchDataDTO';
+import MatchChartDataDTO from '../interfaces/IMatchChartDataDTO';
 
-export const getMatchData = async(puuid: string, region: string, numOfMatch: number): Promise<MatchDataDTO> => {
+// function used to collect match data for chart. Given a puuid, find the matches and get lists of data as matchDataChartDTO
+export const getMatchChartData = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchChartDataDTO>> => {
     const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, numOfMatch);
     return analysisMatch(puuid, matchList);
 }
@@ -30,12 +31,31 @@ export const getMatchObjListByMatchList = async (match_list: Array<string>, regi
     }
     return matchDTOArr;
 }
-
-export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): MatchDataDTO => {
-    const winlose: Array<number> = [];
-    const kill: Array<number> = [];
-    const death: Array<number> = [];
-    const assist: Array<number> = [];
+/* 
+    given a list of matchDto
+    It will return a list of dataObj for example
+    [
+        {
+            name: Game 1,
+            kills: 1,
+            deaths: 2,
+            assists: 2,
+            scores: 2,
+            winLoss: 0.5,
+        },
+        {
+            name: Game 2,
+            kills: ...,
+            deaths: ...,
+            assists: ...,
+            scores: ...,
+            winLoss: ...,
+        },
+        ......
+    ]
+*/
+export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): Array<MatchChartDataDTO> => {
+    const matchChartDataList: Array<MatchChartDataDTO> = [];
     let win = 0;
     let lose = 0;
     let win_lose = 0;
@@ -48,22 +68,22 @@ export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): MatchD
                 }else{
                     lose += 1;
                 }
-                win_lose = currency(win).divide(currency(lose).add(win)).value;
-                winlose.push(win_lose);
-                kill.push(partis[j].kills);
-                death.push(partis[j].deaths);
-                assist.push(partis[j].assists);  
+                win_lose = currency(win).divide(currency(lose).add(win)).multiply(100).value;
+                const matchChartData: MatchChartDataDTO = {
+                    name: `Game ${matchList.length-i}`,
+                    winLoss: win_lose,
+                    kills: partis[j].kills,
+                    deaths: partis[j].deaths,
+                    assists: partis[j].assists,
+                    scores: 0,
+                }
+                matchChartDataList.push(matchChartData);
+                break;
             }     
         }
     }
 
-    return {
-        winLoss: winlose,
-        kills: kill,
-        deaths: death,
-        assists: assist,
-        scores: [],
-    } as MatchDataDTO;
+    return matchChartDataList;
 }
 
 //return list of participant info of the match

@@ -2,7 +2,6 @@ import mongoose from 'mongoose'
 import config from '../../config/config'
 import { findSummonerPuuid } from "../../services/summonerService";
 import { getMatchListByPUUID, analysisMatch } from "../../services/matchService";
-import { not } from 'mathjs';
 
 describe('Match_services', () => {
     beforeAll(async() => {
@@ -50,29 +49,6 @@ describe('Match_services', () => {
         expect(puuid).not.toBeNull();
     })
 
-    test('analysisMatch check if stats match', async() => {
-        const summonerName = 'Sunny the troll';
-        const region = 'NA';
-        const puuid = await findSummonerPuuid(summonerName, region);
-        const mockMatchDTO: any = [
-            {
-                info: {
-                    participants: [
-                        {kills: 8, puuid: 'a'},
-                        {kills: 10, deaths: 7, assists: 5, puuid: puuid}
-                    ]
-                }
-            }
-        ]
-        const kills = [10];
-        const deaths = [7];
-        const assists = [5];
-        const matchStat = analysisMatch(puuid, mockMatchDTO);
-        expect(matchStat.kills).toEqual(kills);
-        expect(matchStat.deaths).toEqual(deaths);
-        expect(matchStat.assists).toEqual(assists);
-    }, 20000)
-
     test('analysisMatch check if null', async() => {
         const summonerName = 'Sunny the troll';
         const region = 'NA';
@@ -88,9 +64,34 @@ describe('Match_services', () => {
             }
         ]
         const matchStat = analysisMatch(puuid, mockMatchDTO);
-        expect(matchStat.kills).not.toBeNull();
-        expect(matchStat.deaths).not.toBeNull();
-        expect(matchStat.assists).not.toBeNull();
-    }, 20000)
+        expect(matchStat.length).toEqual(1);
+    })
 
+    test('analysisMatch check if stats match', async() => {
+        const summonerName = 'Sunny the troll';
+        const region = 'NA';
+        const puuid = await findSummonerPuuid(summonerName, region);
+        const mockMatchDTO: any = [
+            {
+                info: {
+                    participants: [
+                        {kills: 8, puuid: 'a'},
+                        {kills: 10, deaths: 7, assists: 5, puuid: puuid}
+                    ]
+                }
+            }
+        ]
+        const mockMatchChartDataDTO: any = [
+            {
+                name: 'Game 1',
+                kills: 10,
+                deaths: 7,
+                assists: 5,
+                scores: 0,
+                winLoss: 0,
+            }
+        ]
+        const matchStat = analysisMatch(puuid, mockMatchDTO);
+        expect(matchStat).toEqual(mockMatchChartDataDTO);
+    })
 })

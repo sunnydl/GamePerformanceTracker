@@ -1,6 +1,6 @@
 import React from 'react'
 import UserSummary from './components/UserSummary/UserSummary'
-import MatchSummary from './components/MatchSummary/MatchSummary'
+import MatchSummary from './components/MatchSummary'
 
 export default function Overview() {
     return (

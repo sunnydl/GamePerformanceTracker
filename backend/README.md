@@ -8,30 +8,41 @@
 * npm run test::integration -- run integration test
 * npm run test::unit -- run all Unit tests with coverage displayed
 * npm run test::singleUnit -- run the unit test of your choice
-Note: npm run test::unit will run all the unit test files. To run specific file with file name of "fileName.spec.ts", simply change the testMatch option in /backend/jest.singleUnit.json to "**/?(fileName.)+(spec).ts?(x)".
+* Note: npm run test::unit will run all the unit test files. To run specific file with file name of "fileName.spec.ts", simply change the testMatch option in /backend/jest.singleUnit.json to "**/?(fileName.)+(spec).ts?(x)".
 
 ## Endpoints
 #### GET api/summonerInfo/:summonerName/:region
 ##### request input (Get request param):
-* summonerName: string;
-* region: (Optional) string;  
+* summonerName: string
+* region: (Optional) string  
 ##### response: 
-* summonerName: string;
-* summonerLevel: number;
-* summonerIcon: number;
-* rank: string;
-* winGames: number;
-* lossGames: number;
-* favChamps: Array<string>;
-
+```
+{
+    summonerName: string
+    summonerLevel: number
+    summonerIcon: number
+    rank: string
+    winGames: number
+    lossGames: number
+    favChamps: Array<string>
+}
+```
 #### GET api/matches/:summonerName/:region/:numOfMatch
 ##### request input (Get request param):
-* summonerName: string;
-* region: (Optional) string;
-* numOfMatch: number;
+* summonerName: string
+* region: (Optional) string
+* numOfMatch: number
 ##### response:
-* winLoss: Array<number>;
-* kills: Array<number>;
-* deaths: Array<number>;
-* assists: Array<number>;
-* scores: Array<number>;
+```
+[
+    {
+        name: string,
+        winLoss: number,
+        kills: number
+        deaths: number
+        assists: number
+        scores: number
+    },
+    ...
+]
+```

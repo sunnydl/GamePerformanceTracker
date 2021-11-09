@@ -4,6 +4,7 @@ import path from 'path';
 import config from './config/config';
 import logging from './config/logging';
 import mongoose from 'mongoose';
+import morgan from 'morgan'
 
 // path
 import api from './routes/index'
@@ -41,7 +42,7 @@ mongoose
 // });
 
 app.use(express.static(path.join(__dirname, '../frontend/build')));
-
+app.use(morgan('dev'))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
