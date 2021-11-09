@@ -10,24 +10,15 @@ export const getMatchData = async(puuid: string, region: string, numOfMatch: num
 }
 
 export const getMatchListByPUUID = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchDto>> => {
-    const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, numOfMatch);
-    if(matchListInfo.length){
+    if(numOfMatch >= 20){
+        const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, 20);
         const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
-        //case where input is greater or equal to 20
-        if (numOfMatch >= 20) {
-            console.log(matchList.length)
-            return matchList as Array<MatchDto>;
-        }
-        //check if there exsists an amount of matches that matches the input
-        else if (matchListInfo.length >= numOfMatch){
-            return matchList.splice(0, numOfMatch) as Array<MatchDto>;
-        }
-        // if there does not input is larger than player match history, return whatever exists
-        else {
-            return matchList as Array<MatchDto>;
-        }
-    } else{
-        return [] as Array<MatchDto>;
+        return matchList as Array<MatchDto>;
+    }
+    else{
+        const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, numOfMatch);
+        const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
+        return matchList as Array<MatchDto>;
     }
 };
 
