@@ -11,8 +11,6 @@ interface Regions {
 
 const version = "9.3.1";
 
-const count = 20;
-
 const REGION: Regions = {
     'NA': 'na1.api.riotgames.com',
     'KR': 'kr.api.riotgames.com',
@@ -62,7 +60,7 @@ export const getChampsData = async(): Promise<any> => {
     return data.data;
 }
 // for match list id info
-export const findMatchHistoryInfo = async(puuid: string, region: string): Promise<Array<string>> => {
+export const findMatchHistoryInfo = async(puuid: string, region: string, count: number): Promise<Array<string>> => {
     const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=${count}`);
     return response.data as Array<string>;
 }

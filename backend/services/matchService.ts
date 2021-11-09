@@ -2,20 +2,21 @@ import * as riotApis from '../riotApis/riotApis'
 import MatchDto from '../interfaces/IMatch/IMatchDto'
 import ParticipantDto from '../interfaces/IMatch/IParticipantDto';
 import currency from 'currency.js';
-import MatchDataDTO from '../interfaces/IMatchDataDTO';
-import { match } from 'assert';
+import MatchChartDataDTO from '../interfaces/IMatchChartDataDTO';
 
-export const getMatchData = async(puuid: string, region: string, numOfMatch: number): Promise<MatchDataDTO> => {
+// function used to collect match data for chart. Given a puuid, find the matches and get lists of data as matchDataChartDTO
+export const getMatchChartData = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchChartDataDTO>> => {
     const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, numOfMatch);
     return analysisMatch(puuid, matchList);
 }
 
-const getMatchListByPUUID = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchDto>> => {
-    const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region);
+export const getMatchListByPUUID = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchDto>> => {
+    const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, numOfMatch);
     if(matchListInfo.length){
         const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
         //case where input is greater or equal to 20
         if (numOfMatch >= 20) {
+            console.log(matchList.length)
             return matchList as Array<MatchDto>;
         }
         //check if there exsists an amount of matches that matches the input
@@ -40,11 +41,8 @@ export const getMatchObjListByMatchList = async (match_list: Array<string>, regi
     return matchDTOArr;
 }
 
-export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): MatchDataDTO => {
-    const winlose: Array<number> = [];
-    const kill: Array<number> = [];
-    const death: Array<number> = [];
-    const assist: Array<number> = [];
+export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): Array<MatchChartDataDTO> => {
+    const matchChartDataList: Array<MatchChartDataDTO> = [];
     let win = 0;
     let lose = 0;
     let win_lose = 0;
@@ -57,22 +55,22 @@ export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): MatchD
                 }else{
                     lose += 1;
                 }
-                win_lose = currency(win).divide(currency(lose).add(win)).value;
-                winlose.push(win_lose);
-                kill.push(partis[j].kills);
-                death.push(partis[j].deaths);
-                assist.push(partis[j].assists);  
+                win_lose = currency(win).divide(currency(lose).add(win)).multiply(10).value;
+                const matchChartData: MatchChartDataDTO = {
+                    name: `Game ${matchList.length-i}`,
+                    winLoss: win_lose,
+                    kills: partis[j].kills,
+                    deaths: partis[j].deaths,
+                    assists: partis[j].assists,
+                    scores: 0,
+                }
+                matchChartDataList.push(matchChartData);
+                break;
             }     
         }
     }
 
-    return {
-        winLoss: winlose,
-        kills: kill,
-        deaths: death,
-        assists: assist,
-        scores: [],
-    } as MatchDataDTO;
+    return matchChartDataList;
 }
 
 //return list of participant info of the match
