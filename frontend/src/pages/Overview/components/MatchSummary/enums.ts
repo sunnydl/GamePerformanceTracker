@@ -4,6 +4,6 @@ export const Features: string[] = [
     'Kills',
     'Deaths',
     'Assists',
-    'GPT Score',
     'WinRates',
+    'GPT Score',
 ]

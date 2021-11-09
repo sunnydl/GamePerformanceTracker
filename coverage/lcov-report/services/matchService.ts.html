@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.77% </span>
+                <span class="strong">76.27% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>49/63</span>
+                <span class='fraction'>45/59</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78.43% </span>
+                <span class="strong">76.59% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>40/51</span>
+                <span class='fraction'>36/47</span>
             </div>
         
             
@@ -146,12 +146,11 @@
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -198,9 +197,6 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -209,20 +205,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -243,9 +239,10 @@
 import MatchDto from '../interfaces/IMatch/IMatchDto'
 import ParticipantDto from '../interfaces/IMatch/IParticipantDto';
 import currency from 'currency.js';
-import MatchDataDTO from '../interfaces/IMatchDataDTO';
+import MatchChartDataDTO from '../interfaces/IMatchChartDataDTO';
 &nbsp;
-export const getMatchData = <span class="fstat-no" title="function not covered" >async(p</span>uuid: string, region: string, numOfMatch: number): Promise&lt;MatchDataDTO&gt; =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
+// function used to collect match data for chart. Given a puuid, find the matches and get lists of data as matchDataChartDTO
+export const getMatchChartData = <span class="fstat-no" title="function not covered" >async(p</span>uuid: string, region: string, numOfMatch: number): Promise&lt;Array&lt;MatchChartDataDTO&gt;&gt; =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
     const matchList: Array&lt;MatchDto&gt; = <span class="cstat-no" title="statement not covered" >await getMatchListByPUUID(puuid, region, numOfMatch);</span>
 <span class="cstat-no" title="statement not covered" >    return analysisMatch(puuid, matchList);</span>
 }
@@ -281,11 +278,8 @@ export const getMatchObjListByMatchList = async (match_list: Array&lt;string&gt;
     return matchDTOArr;
 }
 &nbsp;
-export const analysisMatch = (puuid: string, matchList: Array&lt;MatchDto&gt;): MatchDataDTO =&gt; {
-    const winlose: Array&lt;number&gt; = [];
-    const kill: Array&lt;number&gt; = [];
-    const death: Array&lt;number&gt; = [];
-    const assist: Array&lt;number&gt; = [];
+export const analysisMatch = (puuid: string, matchList: Array&lt;MatchDto&gt;): Array&lt;MatchChartDataDTO&gt; =&gt; {
+    const matchChartDataList: Array&lt;MatchChartDataDTO&gt; = [];
     let win = 0;
     let lose = 0;
     let win_lose = 0;
@@ -299,21 +293,21 @@ export const analysisMatch = (puuid: string, matchList: Array&lt;MatchDto&gt;): 
                     lose += 1;
                 }
                 win_lose = currency(win).divide(currency(lose).add(win)).value;
-                winlose.push(win_lose);
-                kill.push(partis[j].kills);
-                death.push(partis[j].deaths);
-                assist.push(partis[j].assists);  
+                const matchChartData: MatchChartDataDTO = {
+                    name: `Game ${i+1}`,
+                    winLoss: win_lose,
+                    kills: partis[j].kills,
+                    deaths: partis[j].deaths,
+                    assists: partis[j].assists,
+                    scores: 0,
+                }
+                matchChartDataList.push(matchChartData);
+                break;
             }     
         }
     }
 &nbsp;
-    return {
-        winLoss: winlose,
-        kills: kill,
-        deaths: death,
-        assists: assist,
-        scores: [],
-    } as MatchDataDTO;
+    return matchChartDataList;
 }
 &nbsp;
 //return list of participant info of the match
@@ -337,7 +331,7 @@ export const getParticipantsInfoByMatchId = <span class="fstat-no" title="functi
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Nov 07 2021 22:33:18 GMT-0800 (Pacific Standard Time)
+                at Mon Nov 08 2021 18:05:56 GMT-0800 (Pacific Standard Time)
             </div>
         </div>
         <script src="../prettify.js"></script>
