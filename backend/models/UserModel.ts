@@ -22,6 +22,12 @@ const userSchema = new Schema(
         puuid: {
             type: String,
             required: true,
+        },
+        profileIconId: Number,
+        region: {
+            type: String,
+            required: true,
+            default: 'NA',
         }
     }
 );

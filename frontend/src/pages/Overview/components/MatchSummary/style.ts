@@ -43,7 +43,6 @@ export const Buttons = styled(Button)(() => ({
     marginLeft: '2rem',
     marginRight: '2rem',
     width: '120px',
-    backgroundColor: '#18A0FB'
 }))
 
 export const GraphWrapper = styled(Paper)(() => ({

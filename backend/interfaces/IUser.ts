@@ -7,6 +7,9 @@ export default interface User {
     summonerLeague: SummonerLeague;
     winRate: Array<WinRates>;
     matchIds: Array<string>;
+    profileIconId: number;
+    puuid: string;
+    region: string;
 }
 
 interface WinRates {

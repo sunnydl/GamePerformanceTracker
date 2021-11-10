@@ -48,20 +48,20 @@ export const findSummonerLeague = async(id: string, region: string): Promise<Arr
     const response: AxiosResponse = await axiosInstance.get(`https://${REGION[region]}/lol/league/v4/entries/by-summoner/${id}`);
     return response.data as Array<SummonerLeague>;
 }
-
-export const findChampionMaster = async(id: string, region: string): Promise<Array<ChampionMastery>> => {
+// find champions master of summoner given its id
+export const findChampionMastery = async(id: string, region: string): Promise<Array<ChampionMastery>> => {
     const response: AxiosResponse = await axiosInstance.get(`https://${REGION[region]}/lol/champion-mastery/v4/champion-masteries/by-summoner/${id}`);
     return response.data as Array<ChampionMastery>;
 }
-
+// fetch the data of champs from ddragon
 export const getChampsData = async(): Promise<any> => {
     const response = await axios.get('http://ddragon.leagueoflegends.com/cdn/' + version + '/data/de_DE/champion.json');
     const data: any = response.data;
     return data.data;
 }
 // for match list id info
-export const findMatchHistoryInfo = async(puuid: string, region: string): Promise<Array<string>> => {
-    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20`);
+export const findMatchHistoryInfo = async(puuid: string, region: string, count: number): Promise<Array<string>> => {
+    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=${count}`);
     return response.data as Array<string>;
 }
 

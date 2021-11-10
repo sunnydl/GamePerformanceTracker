@@ -1,17 +1,6 @@
 import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
+import { UserState } from '../../interfaces'
 import axios from 'axios';
-
-interface UserState {
-    summonerName?:  string,
-    summonerLevel?: number,
-    summonerIcon?:  number,
-    rank?:          string,
-    winGames?:      number,
-    lossGames?:     number,
-    favChamps?:     string[],
-    region?:        string,
-    summonerFound?: boolean,
-}
 
 const initialState: UserState = {}
 
