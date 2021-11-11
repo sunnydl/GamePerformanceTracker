@@ -101,15 +101,7 @@ export const getParticipantsInfoByMatchId = async(matchId: string, region: strin
     }
 };
 
-
-/*
-function extractValue(arr: Array<ParticipantDto>, key: string) {
-    return arr.reduce(function(accum, object) {
-        if (key in object) accum.push(object.key);
-        return accum;
-    }, []);
-}
-*/
+//get the rank point of specific field
 const rankpoint = (ranklist: Array<number>, data: number): number => {
     let rank = 10;
     let rankpt = 0;
@@ -135,6 +127,7 @@ const rankpoint = (ranklist: Array<number>, data: number): number => {
     return rankpt;
 }
 
+//calculate the jg points on large monster's kill
 const jgpoint = (jgpart: ParticipantDto): number => {
     let jg = 0;
     if(jgpart.dragonKills >=3 && jgpart.baronKills >= 1){jg = 1;}
@@ -144,15 +137,26 @@ const jgpoint = (jgpart: ParticipantDto): number => {
     else if(jgpart.dragonKills + jgpart.baronKills < 1){jg = -1;}
     return jg;
 }
+
+//Compute the KDA/GPT score on specific game and specific player.
 const kDA = (match: MatchDto, puuid: string): number => {
+    //initialized the varaiables
     let kda = 10;
     const partis: any = match.info.participants;
     const needlist: Array<string> = [];
     const KDAlist: Array<string> = [];
+    const gold: Array<number> = [];
+    const dmg: Array<number> = [];
     let ranklist: Array<number> = [];
     let win_lose = 0;
     let rankpts = 0;
     let data = 0;
+    let time = 0;
+    //get match time.
+    time = match.info.gameDuration;
+    if(time > 36000){ // if the time count in milisecond, divide by 1000
+        time = currency(time).divide(1000).value;
+    }
     //Rank: total Damage Dealt To Champions, 
     //goldEarned, 
     //Ratio of damage to gold, (not counting negative for goldearned for sup)
@@ -161,15 +165,15 @@ const kDA = (match: MatchDto, puuid: string): number => {
     //visionScore, 
     //totalTimeCCDealt
     //totalheal(sup)
-    //
-    //know: win/lose
-    //Baron Kills, Large Monster Kills (jg) (need to find the game time)
-    //parits: find puuid, get out all information.
-    //any good ways to do the comparison(rank)? good ways for make multiple in list?
+
+    //initialized the list for getting datas.
     needlist.push("totalDamageDealtToChampions", 
     "visionScore", "damageDealtToBuildings", "totalTimeCCDealt", "goldEarned");
     KDAlist.push("kills", "deaths","assists",);
-    for(let i = 0; i < needlist.length; i++){
+    let my_gold = 0;
+    let my_dmg = 0;
+    for(let i = 0; i < needlist.length; i++){ // compare items in needlist, get rank points.
+        let checkvi = 0;
         ranklist = [];
         for(let j = 0; j < partis.length; j++){
             let stats: any = partis[j][`${needlist[i]}`];
@@ -180,16 +184,43 @@ const kDA = (match: MatchDto, puuid: string): number => {
                 }else{
                     win_lose = -1;
                 }
-                if(partis[j].lane === "jg"){
+                if(partis[j].lane === "jg" && time > 1500){
                     rankpts += jgpoint(partis[j]);
+                }
+                if(i == 1 && partis[j].lane == "sup"){
+                    checkvi = 1;
                 }
             }
             ranklist.push(stats);
-            
+            if(needlist[i] == "totalDamageDealtToChampions"){
+                dmg.push(stats);
+                if(partis[j].puuid === puuid){
+                    my_dmg = stats;
+                }
+            }
+            if(needlist[i] == "goldEarned"){
+                gold.push(stats);
+                if(partis[j].puuid === puuid){
+                    my_gold = stats;
+                }
+            } 
+        }
+        if(checkvi == 1){
+            if(rankpoint(ranklist, data) <0.1){
+                rankpts -= 1;
+            }
         }
         rankpts += rankpoint(ranklist, data);
     }
-    for(let i = 0; i < partis.length; i++){
+    //compute the damage to gold ratio.
+    let my_dmGold = currency(my_dmg).divide(currency(my_gold)).value;
+    let dmGold = [];
+    for(let i = 0; i < dmg.length; ++i){
+        let ratio = currency(dmg[i]).divide(currency(gold[i])).value;
+        dmGold.push(ratio);
+    }
+    rankpts += rankpoint(dmGold, my_dmGold);
+    for(let i = 0; i < partis.length; i++){ // compute KDA ratio
         data = 0;
         let KDAs = [];
         let stat = 0;
