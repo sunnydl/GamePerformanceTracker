@@ -4,6 +4,7 @@ import SummonerDTO from '../interfaces/ISummonerDTO';
 import SummonerInfo from "../interfaces/ISummonerInfo";
 import SummonerLeague from '../interfaces/ISummonerLeague';
 import UserModel from '../models/UserModel';
+import LeagueListDTO from '../interfaces/ILeagueListDTO';
 
 // given a summoner name, find the info of the summoner for overview page from riot API
 export const getSummonerByName = async(summonerName: string, region: string): Promise<SummonerDTO> => {
@@ -32,12 +33,13 @@ export const getSummonerByName = async(summonerName: string, region: string): Pr
     const favChamps: Array<string> = await findFavChampsName(favChampsIds);
 
     if(leagueInfos.length) {
-        const leagueInfo = leagueInfos.find((element: SummonerLeague) => element.queueType==='RANKED_SOLO_5x5') as SummonerLeague;
+        const leagueInfo = leagueInfos.find((element: SummonerLeague) => element.queueType===riotApis.QUEUE_TYPE.SOLO) as SummonerLeague;
         return {
             summonerName: leagueInfo.summonerName,
             summonerLevel: summoner.summonerLevel,
             summonerIcon: summoner.profileIconId,
             rank: `${leagueInfo.tier} ${leagueInfo.rank}`,
+            leaguePoints: leagueInfo.leaguePoints,
             winGames: leagueInfo.wins,
             lossGames: leagueInfo.losses,
             favChamps: favChamps,
@@ -48,12 +50,28 @@ export const getSummonerByName = async(summonerName: string, region: string): Pr
             summonerLevel: summoner.summonerLevel,
             summonerIcon: summoner.profileIconId,
             rank: "unranked",
+            leaguePoints: 0,
             winGames: 0,
             lossGames: 0,
             favChamps: [],
         } as SummonerDTO;
     }
 }
+
+export const getLeaderBoard = async(tier: string, division: string, queueType: string, region: string): Promise<Array<SummonerDTO>> => {
+    let list: Array<SummonerLeague>;
+    if(riotApis.HIGH_TIER[tier]) {
+        const collection: LeagueListDTO = await riotApis.getLeaderBoardHighTierList(tier, queueType, region);
+        list = collection.entries;
+    } else {
+        list = await riotApis.getLeaderBoardLowTierList(tier, division, queueType, region);
+    }
+    // first sort the list based on leaguePoints
+    list = list.sort((a, b) => b.leaguePoints - a.leaguePoints).slice(0, 10); // get 10 for now
+    const leaderBoard: Array<SummonerDTO> = await Promise.all(list.map(async(summoner: SummonerLeague) => await getSummonerByName(summoner.summonerName, region)));
+    return leaderBoard;
+}
+
 // find the champ name given an id
 const findFavChampsName = async(favChampsIds: Array<number>): Promise<Array<string>> => {
     const champsList: any = await riotApis.getChampsData();

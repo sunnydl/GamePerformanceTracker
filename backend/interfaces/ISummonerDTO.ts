@@ -3,6 +3,7 @@ export default interface SummonerDTO {
     summonerLevel: number;
     summonerIcon: number;
     rank: string;
+    leaguePoints: number;
     winGames: number;
     lossGames: number;
     favChamps: Array<string>;

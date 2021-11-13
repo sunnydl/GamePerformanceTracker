@@ -4,30 +4,51 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import SummonerLeague from "../interfaces/ISummonerLeague";
 import ChampionMastery from "../interfaces/IChampionMastery";
 import MatchDto from "../interfaces/IMatch/IMatchDto";
+import LeagueListDTO from "../interfaces/ILeagueListDTO";
 
-interface Regions {
+interface Mapping {
     [key: string]: string;
 }
 
 const version = "9.3.1";
 
-const REGION: Regions = {
-    'NA': 'na1.api.riotgames.com',
-    'KR': 'kr.api.riotgames.com',
-    'JP': 'jp1.api.riotgames.com',
-    'BR': 'br1.api.riotgames.com',
-    'EUN': 'eun1.api.riotgames.com',
-    'EUW': 'euw1.api.riotgames.com',
-    'LA1': 'la1.api.riotgames.com',
-    'LA2': 'la2.api.riotgames.com',
-    'OC': 'oc1.api.riotgames.com',
-    'TR': 'tr1.api.riotgames.com',
-    'RU': 'ru.api.riotgames.com',
+const REGION: Mapping = {
+    NA: 'na1.api.riotgames.com',
+    KR: 'kr.api.riotgames.com',
+    JP: 'jp1.api.riotgames.com',
+    BR: 'br1.api.riotgames.com',
+    EUN: 'eun1.api.riotgames.com',
+    EUW: 'euw1.api.riotgames.com',
+    LA1: 'la1.api.riotgames.com',
+    LA2: 'la2.api.riotgames.com',
+    OC: 'oc1.api.riotgames.com',
+    TR: 'tr1.api.riotgames.com',
+    RU: 'ru.api.riotgames.com',
 };
-const MATCH_REGION: Regions = {
-    'NA': 'americas.api.riotgames.com',
+const MATCH_REGION: Mapping = {
+    NA: 'americas.api.riotgames.com',
     // regions will be added
 };
+
+export const HIGH_TIER: Mapping = {
+    Challenger: 'challengerleagues',
+    GrandMaster: 'grandmasterleagues',
+    Master: 'masterleagues',
+}
+
+const LOW_TIER: Mapping = {
+    Diamond: 'DIAMOND',
+    Platinum: 'PLATINUM',
+    Gold: 'GOLD',
+    Silver: 'SILVER',
+    Bronze: 'BRONZE',
+    Iron: 'IRON',
+}
+
+export const QUEUE_TYPE: Mapping = {
+    SOLO: 'RANKED_SOLO_5x5',
+    FLEX: 'RANKED_FLEX_SR',
+}
 
 // set up axios to include riot api key, and export with config
 const axiosInstance: AxiosInstance = axios.create({
@@ -69,4 +90,16 @@ export const findMatchHistoryInfo = async(puuid: string, region: string, count: 
 export const findMatchInfo = async(match_id: string, region: string): Promise<MatchDto> => {
     const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/${match_id}`);
     return response.data as MatchDto;
+}
+
+// for leaderboard for challenger/grandmaster/master tier
+export const getLeaderBoardHighTierList = async(tier: string, queueType: string, region: string): Promise<LeagueListDTO> => {
+    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/league/v4/${HIGH_TIER[tier]}/by-queue/${queueType}`);
+    return response.data as LeagueListDTO;
+}
+
+// for leaderboard for diamond and below
+export const getLeaderBoardLowTierList = async(tier: string, division: string, queueType: string, region: string): Promise<Array<SummonerLeague>> => {
+    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/league/v4/entries/${queueType}/${LOW_TIER[tier]}/${division}`);
+    return response.data as Array<SummonerLeague>;
 }
