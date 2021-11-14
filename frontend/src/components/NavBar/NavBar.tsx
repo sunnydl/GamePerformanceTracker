@@ -56,7 +56,7 @@ function NavBar() {
           <Tabs value={false} style={{ color: theme.palette.primary.contrastText, margin: 'auto' }}>
             <Tab style={{ color: 'inherit' }} label='overview' component={Link} to={`/overview${location.search}`} />
             <Tab style={{ color: 'inherit' }} label='Match History' component={Link} to={`/match-history${location.search}`} />
-            <Tab style={{ color: 'inherit' }} label='Leaderboard'/>
+            <Tab style={{ color: 'inherit' }} label='Leaderboard' component={Link} to={`/leaderBoard${location.search}`} />
             <Tab style={{ color: 'inherit' }} label='Champion'/>
           </Tabs> 
           <SummonerSearchBar />

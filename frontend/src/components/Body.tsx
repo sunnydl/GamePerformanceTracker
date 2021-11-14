@@ -5,6 +5,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from '../pages/Home';
 import Overview from '../pages/Overview/Overview';
 import MatchHistory from '../pages/MatchHistory/MatchHistory';
+import LeaderBoard from '../pages/Leaderboard/Leaderboard';
 
 import { styled } from '@mui/material/styles';
 
@@ -25,6 +26,9 @@ function Body() {
                 </Route>
                 <Route exact path='/match-history'>
                     <MatchHistory />
+                </Route>
+                <Route exact path='/leaderBoard'>
+                    <LeaderBoard/>
                 </Route>
                 <Redirect to='/' />
             </Switch>
