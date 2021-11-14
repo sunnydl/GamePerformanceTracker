@@ -47,7 +47,7 @@
     ...
 ]
 ```
-#### GET api/summonerInfo/leaderBoard/:tier/:division/:queueType/:region
+#### GET api/summonerInfo/leaderboard/:tier/:division/:queueType/:region
 ##### request input (Get request param):
 * tier: string
 * division: string
