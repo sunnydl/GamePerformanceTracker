@@ -16,6 +16,11 @@ export const MatchListing = styled(List)(({ theme }) => ({
 }));
 
 export const MatchResultsWrapper = styled('div')(({ theme }) => ({
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+
     '& > .header-wrapper': {
         marginBottom: theme.spacing(4),
         fontSize: theme.typography.h5.fontSize,
