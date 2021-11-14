@@ -3,6 +3,7 @@ import MatchDto from '../interfaces/IMatch/IMatchDto'
 import ParticipantDto from '../interfaces/IMatch/IParticipantDto';
 import currency from 'currency.js';
 import MatchChartDataDTO from '../interfaces/IMatchChartDataDTO';
+import {timeConverter} from './utility';
 
 // function used to collect match data for chart. Given a puuid, find the matches and get lists of data as matchDataChartDTO
 export const getMatchChartData = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchChartDataDTO>> => {
@@ -253,7 +254,65 @@ export const computeKda = (matchList: Array<MatchDto>, puuid: string): Array<num
     const kdaScoreList: Array<number> = [];
     // compute it with data given in the matchList
     for(let i = 0; i < matchList.length; i++){
-        kdaScoreList.push(kDA(matchList[i], puuid))
+        kdaScoreList.push(kDA(matchList[i], puuid));
     }
     return kdaScoreList;
  }
+
+const matchHistoryData = (match: MatchDto, puuid: string): Map<any,any> => {
+    const dataList = new Map();
+    dataList.set("gameMode", match.info.gameMode);
+    dataList.set("gameDate", timeConverter(match.info.gameStartTimestamp));
+    const partis: any = match.info.participants;
+    let time = match.info.gameDuration;
+    if(time > 36000){
+        time = currency(time).divide(1000).value;
+    }
+    let min = currency(time).divide(60).value;
+    let parti = partis[0];
+    for(let i = 0; i < partis.length; i++){
+        if(partis[i].puuid === puuid){
+            parti = partis[i];
+        }
+    }
+    let dmg = parti.totalDamageDealtToChampions;
+    let cs = parti.totalMinionsKilled;
+    let vision = parti.visionScore;
+    let csPerMin = currency(cs).divide(currency(min)).value;
+    let dmgPerMin = currency(dmg).divide(currency(min)).value;
+    let visionPerMin = currency(vision).divide(currency(min)).value;
+    let gptScore = kDA(match, puuid);
+
+    dataList.set("win", parti.win);
+    dataList.set("role", parti.role);
+    dataList.set("championName", parti.championName);
+    dataList.set("kills", parti.kills);
+    dataList.set("deaths", parti.deaths);
+    dataList.set("assists", parti.assists);
+    dataList.set("gptScore", gptScore);
+    dataList.set("csAmt", cs);
+    dataList.set("dmgAmt", dmg);
+    dataList.set("visionAmt", vision);
+    dataList.set("csPerMin", csPerMin);
+    dataList.set("dmgPerMin", dmgPerMin);
+    dataList.set("visionPerMin", visionPerMin);
+    return dataList;
+}
+
+export const computeMatchHistoryData = (matchList: Array<MatchDto>, puuid: string): Array<any> => {
+    const matchHistoryList = [];
+    // iterate the matchList to collect the data of the user 
+    // into a single MatchHistoryDTO obj then push the obj to matchHistoryList
+    for(let i = 0; i < matchList.length; i++){
+        matchHistoryList.push(matchHistoryData(matchList[i], puuid));
+    }
+    return matchHistoryList;
+}
+/*
+const puuid = "EC262gdC66Y23U0l_IxSyK0YHN5bezLpKDAAN9Dh0KX5-6JRoAQuYyEm6L50dtQjEaYE25EIwMPtAg"
+
+const main = async() =>{
+    const matchlist = await getMatchListByPUUID(puuid, "NA", 10);
+    console.log(computeMatchHistoryData(matchlist, puuid));
+}
+main();*/
