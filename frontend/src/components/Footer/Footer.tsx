@@ -7,7 +7,7 @@ import { FooterWrapper, ParticipantsWrapper } from './style';
 export default function Footer() {
     return (
         <FooterWrapper>
-            <Tabs centered variant="fullWidth" style={{ fontSize: "0.75rem", fontWeight: "bold" }}>
+            <Tabs centered variant="fullWidth" value={false} style={{ fontSize: "0.75rem", fontWeight: "bold" }}>
                 <Tab style={{ fontSize: "inherit", fontWeight: "inherit" }} label="github" />
                 <Tab style={{ fontSize: "inherit", fontWeight: "inherit" }} label="overview" />
                 <Tab style={{ fontSize: "inherit", fontWeight: "inherit" }} label="match history" />
