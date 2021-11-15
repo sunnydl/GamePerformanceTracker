@@ -9,10 +9,10 @@ import { getChampionIconURL } from '../../../../util';
 function ChampData({ data }: { data: ChampPerformanceSummary }) {
     return (
         <ChampDataGrid container spacing={1}>
-            <Grid item xs={12} xl={4}>
+            <Grid item xs={12} xl={6}>
                 <Avatar src={getChampionIconURL(data.championName)} />
             </Grid>
-            <Grid item xs={12} xl={8}>
+            <Grid item xs={12} xl={6}>
                 <ChampPerformanceWrapper>
                     <div className='win-rate'>
                         <span className='win-ratio'>

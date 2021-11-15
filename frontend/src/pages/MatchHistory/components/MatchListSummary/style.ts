@@ -31,6 +31,12 @@ export const ChampDataGrid = styled(Grid)(({ theme }) => ({
 }));
 
 export const ChampPerformanceWrapper = styled('div')(({ theme }) => ({
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+
     '& > div.win-rate': {
         '& > span.win-ratio': {
             color: theme.palette.success.main,
