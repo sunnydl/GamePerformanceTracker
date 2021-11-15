@@ -6,10 +6,11 @@ interface MatchResultsProps {
     win: boolean,
     kills: number,
     deaths: number,
-    assists: number
+    assists: number,
+    gptScore: number
 }
 
-function MatchResults({ win, kills, deaths, assists }: MatchResultsProps) {
+function MatchResults({ win, kills, deaths, assists, gptScore }: MatchResultsProps) {
     const result = win ? 'Victory' : 'Defeat';
 
     return (
@@ -22,7 +23,7 @@ function MatchResults({ win, kills, deaths, assists }: MatchResultsProps) {
                 &nbsp;/&nbsp;
                 <span className='assists'>{assists}</span>
             </div>
-            <div>XX KDA</div>
+            <div>{gptScore.toFixed(2)} GPT</div>
         </MatchResultsWrapper>
     );
 }
