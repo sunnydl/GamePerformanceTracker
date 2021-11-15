@@ -313,11 +313,11 @@ export const computeMatchHistoryData = (matchList: Array<MatchDto>, puuid: strin
     }
     return matchHistoryList;
 }
-
+/*
 const puuid = "SamHIzypTyi-kA08KHzF0B6mU2TdDbbVyCNhHjqHDogvd-YoKW7obAHMV8Evaz0_yv4q6xFovMWeQA";
 
 const main = async() =>{
     const matchlist = await getMatchListByPUUID(puuid, "NA", 10);
     console.log(computeMatchHistoryData(matchlist, puuid));
 }
-main();
+main();*/
