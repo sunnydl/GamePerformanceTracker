@@ -190,10 +190,10 @@ const kDA = (match: MatchDto, puuid: string): number => {
                 }else{
                     win_lose = -1;
                 }
-                if(partis[j].lane === "jg" && time > 1500){
+                if(partis[j].lane === "NONE" && time > 1500){
                     rankpts += jgpoint(partis[j]);
                 }
-                if(i == 1 && partis[j].lane == "sup"){
+                if(i == 1 && partis[j].lane == "SUPPORT"){
                     checkvi = 1;
                 }
             }
@@ -234,7 +234,7 @@ const kDA = (match: MatchDto, puuid: string): number => {
         for(let j = 0; j < KDAlist.length; j++){
             KDAs.push(partis[i][`${KDAlist[j]}`]); 
         }
-        if(partis[i].lane === "sup"){
+        if(partis[i].lane === "SUPPORT"){
             let K = currency(KDAs[0]).multiply(1).value;
             let D = currency(KDAs[1]).multiply(1.2).value;
             let A = currency(KDAs[2]).multiply(1.5).value;
@@ -313,11 +313,11 @@ export const computeMatchHistoryData = (matchList: Array<MatchDto>, puuid: strin
     }
     return matchHistoryList;
 }
-/*
-const puuid = "EC262gdC66Y23U0l_IxSyK0YHN5bezLpKDAAN9Dh0KX5-6JRoAQuYyEm6L50dtQjEaYE25EIwMPtAg"
+
+const puuid = "SamHIzypTyi-kA08KHzF0B6mU2TdDbbVyCNhHjqHDogvd-YoKW7obAHMV8Evaz0_yv4q6xFovMWeQA";
 
 const main = async() =>{
     const matchlist = await getMatchListByPUUID(puuid, "NA", 10);
     console.log(computeMatchHistoryData(matchlist, puuid));
 }
-main();*/
+main();
