@@ -25,6 +25,8 @@ export const getMatchChartData = async(puuid: string, region: string, typeOfMatc
     return analysisMatch(puuid, matchList);
 }
 
+//added typeOfMatch input, seems to still print out correctly if typeOfMatch is an empty string
+//unit test returns 403, not sure why
 export const getMatchListByPUUID = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchDto>> => {
     if(numOfMatch >= 20){
         const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, typeOfMatch, 20);
