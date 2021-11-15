@@ -10,7 +10,7 @@ export const getMatchHistory = async(req: Request, res: Response) => {
     const numOfMatch: number = parseInt(req.query.numOfMatch as string) || 5; // default as 5 if null
     try {
         const puuid: string = await summonerService.findSummonerPuuid(summonerName, region);
-        const matchData = await matchService.getMatchChartData(puuid, region, numOfMatch);
+        const matchData = await matchService.getMatchHistoryData(puuid, region, numOfMatch);
         res.status(200).json(matchData);
     } catch (err: any) {
         res.status(exceptionHandler.exceptionCodeHandler(err?.response?.status)).send({

@@ -25,6 +25,11 @@ export const getMatchChartData = async(puuid: string, region: string, numOfMatch
     return analysisMatch(puuid, matchList);
 }
 
+export const getMatchHistoryData = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchHistoryDTO>> => {
+    const matchlist = await getMatchListByPUUID(puuid, region, numOfMatch);
+    return computeMatchHistoryData(matchlist, puuid);
+}
+
 export const getMatchListByPUUID = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchDto>> => {
     if(numOfMatch >= 20){
         const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, 20);
