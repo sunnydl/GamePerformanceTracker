@@ -35,6 +35,7 @@ function MatchList({ size }: { size: number }) {
                                 kills={match.kills}
                                 deaths={match.deaths}
                                 assists={match.assists}
+                                gptScore={match.gptScore}
                             />
                         </Grid>
                         <Grid item xs={8}>
