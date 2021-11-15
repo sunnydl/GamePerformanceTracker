@@ -20,24 +20,26 @@ const rankmap: any = {
  }
 
 // function used to collect match data for chart. Given a puuid, find the matches and get lists of data as matchDataChartDTO
-export const getMatchChartData = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchChartDataDTO>> => {
-    const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, numOfMatch);
+export const getMatchChartData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchChartDataDTO>> => {
+    const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
     return analysisMatch(puuid, matchList);
 }
 
-export const getMatchHistoryData = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchHistoryDTO>> => {
-    const matchlist = await getMatchListByPUUID(puuid, region, numOfMatch);
-    return computeMatchHistoryData(matchlist, puuid);
+export const getMatchHistoryData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchHistoryDTO>> => {
+    const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
+    return computeMatchHistoryData(matchList, puuid);
 }
 
-export const getMatchListByPUUID = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchDto>> => {
+//added typeOfMatch input, seems to still print out correctly if typeOfMatch is an empty string
+//unit test returns 403, not sure why
+export const getMatchListByPUUID = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchDto>> => {
     if(numOfMatch >= 20){
-        const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, 20);
+        const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, typeOfMatch, 20);
         const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
         return matchList as Array<MatchDto>;
     }
     else{
-        const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, numOfMatch);
+        const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, typeOfMatch, numOfMatch);
         const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
         return matchList as Array<MatchDto>;
     }
@@ -318,11 +320,3 @@ export const computeMatchHistoryData = (matchList: Array<MatchDto>, puuid: strin
     }
     return matchHistoryList;
 }
-/*
-const puuid = "SamHIzypTyi-kA08KHzF0B6mU2TdDbbVyCNhHjqHDogvd-YoKW7obAHMV8Evaz0_yv4q6xFovMWeQA";
-
-const main = async() =>{
-    const matchlist = await getMatchListByPUUID(puuid, "NA", 10);
-    console.log(computeMatchHistoryData(matchlist, puuid));
-}
-main();*/

@@ -59,9 +59,10 @@ export const getChampsData = async(): Promise<any> => {
     const data: any = response.data;
     return data.data;
 }
-// for match list id info
-export const findMatchHistoryInfo = async(puuid: string, region: string, count: number): Promise<Array<string>> => {
-    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=${count}`);
+
+// for match list id info for any type
+export const findMatchHistoryInfo = async(puuid: string, region: string, typeOfMatch: string, count: number): Promise<Array<string>> => {
+    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/by-puuid/${puuid}/ids?type=${typeOfMatch}&start=0&count=${count}`);
     return response.data as Array<string>;
 }
 
