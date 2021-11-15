@@ -62,7 +62,13 @@ export const getChampsData = async(): Promise<any> => {
 
 // for match list id info for any type
 export const findMatchHistoryInfo = async(puuid: string, region: string, typeOfMatch: string, count: number): Promise<Array<string>> => {
-    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/by-puuid/${puuid}/ids?type=${typeOfMatch}&start=0&count=${count}`);
+    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/match/v5/matches/by-puuid/${puuid}/ids`, {
+        params: {
+            type: typeOfMatch,
+            count: count,
+            start: 0,
+        }
+    });
     return response.data as Array<string>;
 }
 
