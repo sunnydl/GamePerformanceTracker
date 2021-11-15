@@ -5,11 +5,16 @@ import { ChampDataGrid, ChampPerformanceWrapper } from './style';
 
 import { ChampPerformanceSummary } from './MatchChamps';
 
+const getChampionIconURL = (championName?: string) => {
+    if (championName === undefined) return undefined;
+    return `http://ddragon.leagueoflegends.com/cdn/11.22.1/img/champion/${championName}.png`;
+}
+
 function ChampData({ data }: { data: ChampPerformanceSummary }) {
     return (
         <ChampDataGrid container spacing={1}>
             <Grid item xs={12} xl={4}>
-                <Avatar src={undefined} />
+                <Avatar src={getChampionIconURL(data.championName)} />
             </Grid>
             <Grid item xs={12} xl={8}>
                 <ChampPerformanceWrapper>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Avatar, Grid, ListItem, ListItemAvatar, Typography } from '@mui/material';
+import { Avatar, Grid, ListItem, ListItemAvatar } from '@mui/material';
 import { MatchListing } from './style';
 
 import MatchResults from './MatchResults';
@@ -9,8 +9,13 @@ import MatchSummary from './MatchSummary';
 
 import { useAppSelector } from '../../../../redux/hooks';
 
+const getChampionIconURL = (championName?: string) => {
+    if (championName === undefined) return undefined;
+    return `http://ddragon.leagueoflegends.com/cdn/11.22.1/img/champion/${championName}.png`;
+}
+
 function MatchList({ size }: { size: number }) {
-    const matches = useAppSelector((state) => state.chart);
+    const matches = useAppSelector((state) => state.matches);
 
     return (
         <MatchListing>
@@ -18,19 +23,19 @@ function MatchList({ size }: { size: number }) {
                 <ListItem key={idx}>
                     <MatchSummary
                         rank={1}
-                        lane='XXXXXX' // {match.role}
-                        gameMode='XXXXXX' // {match.gameMode}
-                        date='XX/XX/XXXX' // {match.gameDate}
+                        lane={match.role}
+                        gameMode={match.gameMode || 'Placeholder'}
+                        date={match.gameDate}
                     />
                     <Grid container spacing={2}>
                         <Grid item xs={2}>
                             <ListItemAvatar>
-                                <Avatar src={undefined/* match.championName */} />
+                                <Avatar src={getChampionIconURL(match.championName)} />
                             </ListItemAvatar>
                         </Grid>
                         <Grid item xs={2}>
                             <MatchResults
-                                win={true} // {match.win}
+                                win={match.win}
                                 kills={match.kills}
                                 deaths={match.deaths}
                                 assists={match.assists}
@@ -38,12 +43,12 @@ function MatchList({ size }: { size: number }) {
                         </Grid>
                         <Grid item xs={8}>
                             <MatchStatistics
-                                visionAmount={0} // {match.visionAmt}
-                                visionRate={0} // {match.visionPerMin}
-                                csAmount={0} // {match.csAmt}
-                                csRate={0} // {match.csPerMin}
-                                dmgAmount={0} // {match.dmgAmt}
-                                dmgRate={0} // {match.dmgPerMin}
+                                visionAmount={match.visionAmt}
+                                visionRate={match.visionPerMin}
+                                csAmount={match.csAmt}
+                                csRate={match.csPerMin}
+                                dmgAmount={match.dmgAmt}
+                                dmgRate={match.dmgPerMin}
                             />
                         </Grid>
                     </Grid>

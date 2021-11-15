@@ -6,11 +6,11 @@ import { MatchChampsGrid } from './style';
 import OverallData from './OverallData';
 import ChampData from './ChampData';
 
-import { ChartState } from '../../../../interfaces';
+import { MatchState } from '../../../../interfaces';
 import { useAppSelector } from '../../../../redux/hooks';
 
 export interface ChampPerformanceSummary {
-    name: string,
+    championName: string,
     matches: number,
     wins: number,
     kills: number,
@@ -18,25 +18,25 @@ export interface ChampPerformanceSummary {
     assists: number
 }
 
-function getTopChamps(matches: ChartState[]) {
+function getTopChamps(matches: MatchState[]) {
     const champs: { [key: string]: ChampPerformanceSummary } = {};
 
     for (const key in matches) {
         const match = matches[key];
-        const champ = champs[match.name];
+        const champ = champs[match.championName];
 
         if (champ) {
             champ.matches++;
-            champ.wins += true/*match.win*/ ? 1 : 0;
+            champ.wins += match.win ? 1 : 0;
             champ.kills += match.kills;
             champ.deaths += match.deaths;
             champ.assists += match.assists;
         }
         else {
-            champs[match.name] = {
-                name: match.name,
+            champs[match.championName] = {
+                championName: match.championName,
                 matches: 1,
-                wins: true/*match.win*/ ? 1 : 0,
+                wins: match.win ? 1 : 0,
                 kills: match.kills,
                 deaths: match.deaths,
                 assists: match.assists
@@ -50,16 +50,16 @@ function getTopChamps(matches: ChartState[]) {
     return topChamps.slice(0, 3);
 }
 
-function getWinLossValues(matches: ChartState[]) {
-    const wins = matches.filter((match) => true/*match.win*/).length;
+function getWinLossValues(matches: MatchState[]) {
+    const wins = matches.filter((match) => match.win).length;
     const losses = matches.length - wins;
     const ratio = (wins / matches.length) || 0;
 
     return { wins, losses, ratio };
 }
 
-function MatchChamps() {
-    const matches = useAppSelector((state) => state.chart);
+function MatchChamps({ size }: { size: number }) {
+    const matches = useAppSelector((state) => state.matches.slice(0, size));
     const champs = getTopChamps(matches);
 
     return (
@@ -70,7 +70,7 @@ function MatchChamps() {
             <Grid item container xs={12}>
                 {champs.map((champ) => (
                     <Grid item xs={12} className='outlined'>
-                        <ChampData key={champ.name} data={champ} />
+                        <ChampData key={champ.championName} data={champ} />
                     </Grid>
                 ))}
             </Grid>

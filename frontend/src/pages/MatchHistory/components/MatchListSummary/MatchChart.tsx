@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MatchChart() {
+function MatchChart({ size }: { size: number }) {
     return (
         <div>placeholder</div>
     );
