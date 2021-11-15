@@ -4,11 +4,7 @@ import { Avatar, Grid } from '@mui/material';
 import { ChampDataGrid, ChampPerformanceWrapper } from './style';
 
 import { ChampPerformanceSummary } from './MatchChamps';
-
-const getChampionIconURL = (championName?: string) => {
-    if (championName === undefined) return undefined;
-    return `http://ddragon.leagueoflegends.com/cdn/11.22.1/img/champion/${championName}.png`;
-}
+import { getChampionIconURL } from '../../../../util';
 
 function ChampData({ data }: { data: ChampPerformanceSummary }) {
     return (

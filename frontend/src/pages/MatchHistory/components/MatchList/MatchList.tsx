@@ -8,11 +8,7 @@ import MatchStatistics from './MatchStatistics';
 import MatchSummary from './MatchSummary';
 
 import { useAppSelector } from '../../../../redux/hooks';
-
-const getChampionIconURL = (championName?: string) => {
-    if (championName === undefined) return undefined;
-    return `http://ddragon.leagueoflegends.com/cdn/11.22.1/img/champion/${championName}.png`;
-}
+import { getChampionIconURL } from '../../../../util';
 
 function MatchList({ size }: { size: number }) {
     const matches = useAppSelector((state) => state.matches);

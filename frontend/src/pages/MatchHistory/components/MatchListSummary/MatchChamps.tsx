@@ -50,27 +50,27 @@ function getTopChamps(matches: MatchState[]) {
     return topChamps.slice(0, 3);
 }
 
-function getWinLossValues(matches: MatchState[]) {
-    const wins = matches.filter((match) => match.win).length;
-    const losses = matches.length - wins;
-    const ratio = (wins / matches.length) || 0;
-
-    return { wins, losses, ratio };
-}
-
 function MatchChamps({ size }: { size: number }) {
     const matches = useAppSelector((state) => state.matches.slice(0, size));
     const champs = getTopChamps(matches);
 
+    const wins = matches.filter((match) => match.win).length;
+    const losses = matches.length - wins;
+    const ratio = (wins / matches.length) || 0;
+
     return (
         <MatchChampsGrid container>
             <Grid item xs={12} className='outlined'>
-                <OverallData {...getWinLossValues(matches)} />
+                <OverallData
+                    wins={wins}
+                    losses={losses}
+                    ratio={ratio}
+                />
             </Grid>
             <Grid item container xs={12}>
                 {champs.map((champ) => (
-                    <Grid item xs={12} className='outlined'>
-                        <ChampData key={champ.championName} data={champ} />
+                    <Grid key={champ.championName} item xs={12} className='outlined'>
+                        <ChampData data={champ} />
                     </Grid>
                 ))}
             </Grid>

@@ -1,26 +1,14 @@
 import React from 'react';
-
 import { Grid, Avatar } from '@mui/material';
-
-import { useAppSelector } from '../../../../redux/hooks';
-
+import CircleChart from './CircleChart';
 import {
   ProfileWrapper,
   ChartsWrapper,
   FavoriteChampionsWrapper
 } from './style';
 
-import CircleChart from './CircleChart';
-
-const getSummonerIconURL = (iconID?: number) => {
-  if (iconID === undefined) return undefined;
-  return `http://ddragon.leagueoflegends.com/cdn/11.20.1/img/profileicon/${iconID}.png`;
-}
-
-const getChampionIconURL = (championName?: string) => {
-  if (championName === undefined) return undefined;
-  return `http://ddragon.leagueoflegends.com/cdn/11.22.1/img/champion/${championName}.png`;
-}
+import { useAppSelector } from '../../../../redux/hooks';
+import { getSummonerIconURL, getChampionIconURL } from '../../../../util';
 
 function UserSummary() {
   const {
