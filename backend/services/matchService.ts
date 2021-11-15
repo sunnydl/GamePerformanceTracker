@@ -4,6 +4,20 @@ import ParticipantDto from '../interfaces/IMatch/IParticipantDto';
 import currency from 'currency.js';
 import MatchChartDataDTO from '../interfaces/IMatchChartDataDTO';
 import {timeConverter} from './utility';
+import MatchHistoryDTO from '../interfaces/IMatchHistoryDTO';
+
+const rankmap: any = {
+    '1': 1,
+    '2': 0.5,
+    '3': 0.2,
+    '4': 0.1,
+    '5': 0,
+    '6': 0,
+    '7': -0.1,
+    '8': -0.2,
+    '9':-0.5,
+    '10': -1,
+ }
 
 // function used to collect match data for chart. Given a puuid, find the matches and get lists of data as matchDataChartDTO
 export const getMatchChartData = async(puuid: string, region: string, numOfMatch: number): Promise<Array<MatchChartDataDTO>> => {
@@ -112,19 +126,10 @@ const rankpoint = (ranklist: Array<number>, data: number): number => {
             rank -= 1;
         }
     }
-    const rankmap = new Map();
+    
     //1: + 1, 2: + 0.5, 3: + 0.2, 4: + 0.1, 5: +0, 6: - 0, 7: -0.1, 8: -0.2, 9: -0.5, 10: -1 
-    rankmap.set(1,1);
-    rankmap.set(2,0.5);
-    rankmap.set(3,0.2);
-    rankmap.set(4,0.1);
-    rankmap.set(5,0);
-    rankmap.set(6,0);
-    rankmap.set(7,-0.1);
-    rankmap.set(8,-0.2);
-    rankmap.set(9,-0.5);
-    rankmap.set(10,-1);
-    rankpt = rankmap.get(rank);
+    
+    rankpt = rankmap[rank.toString()];
     return rankpt;
 }
 
@@ -260,9 +265,9 @@ export const computeKda = (matchList: Array<MatchDto>, puuid: string): Array<num
  }
 
 const matchHistoryData = (match: MatchDto, puuid: string): Map<any,any> => {
-    const dataList = new Map();
-    dataList.set("gameMode", match.info.gameMode);
-    dataList.set("gameDate", timeConverter(match.info.gameStartTimestamp));
+    const dataList: any = {};
+    dataList.gameMode = match.info.gameMode;
+    dataList.gameDate = timeConverter(match.info.gameStartTimestamp);
     const partis: any = match.info.participants;
     let time = match.info.gameDuration;
     if(time > 36000){
@@ -283,19 +288,19 @@ const matchHistoryData = (match: MatchDto, puuid: string): Map<any,any> => {
     let visionPerMin = currency(vision).divide(currency(min)).value;
     let gptScore = kDA(match, puuid);
 
-    dataList.set("win", parti.win);
-    dataList.set("role", parti.role);
-    dataList.set("championName", parti.championName);
-    dataList.set("kills", parti.kills);
-    dataList.set("deaths", parti.deaths);
-    dataList.set("assists", parti.assists);
-    dataList.set("gptScore", gptScore);
-    dataList.set("csAmt", cs);
-    dataList.set("dmgAmt", dmg);
-    dataList.set("visionAmt", vision);
-    dataList.set("csPerMin", csPerMin);
-    dataList.set("dmgPerMin", dmgPerMin);
-    dataList.set("visionPerMin", visionPerMin);
+    dataList.win = parti.win;
+    dataList.role = parti.role;
+    dataList.championName = parti.championName;
+    dataList.kills = parti.kills;
+    dataList.deaths = parti.deaths;
+    dataList.assists = parti.assists;
+    dataList.gptScore = gptScore;
+    dataList.csAmt = cs;
+    dataList.dmgAmt = dmg;
+    dataList.visionAmt = vision;
+    dataList.csPerMin = csPerMin;
+    dataList.dmgPerMim = dmgPerMin;
+    dataList.visionPerMin = visionPerMin;
     return dataList;
 }
 
