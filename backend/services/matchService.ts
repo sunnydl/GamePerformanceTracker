@@ -306,7 +306,7 @@ const matchHistoryData = (match: MatchDto, puuid: string): Map<any,any> => {
     dataList.dmgAmt = dmg;
     dataList.visionAmt = vision;
     dataList.csPerMin = csPerMin;
-    dataList.dmgPerMim = dmgPerMin;
+    dataList.dmgPerMin = dmgPerMin;
     dataList.visionPerMin = visionPerMin;
     return dataList;
 }
