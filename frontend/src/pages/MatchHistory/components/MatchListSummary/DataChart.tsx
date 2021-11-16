@@ -23,7 +23,7 @@ export default function DataChart({ size }: { size: number }) {
     };
 
     return (
-        <ResponsiveContainer>
+        <ResponsiveContainer width='99%' height='99%'>
             <LineChart
                 width={512}
                 height={512}
@@ -49,6 +49,6 @@ export default function DataChart({ size }: { size: number }) {
                 <Line type="monotone" dataKey="assists" stroke="#3880FF" activeDot={{ r: 8 }} /> */}
                 <Line type="monotone" dataKey="gptScore" stroke="#82ca9d" activeDot={{ r: 8 }} />
             </LineChart>
-      </ResponsiveContainer>
+        </ResponsiveContainer>
     );
 }
