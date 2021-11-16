@@ -3,7 +3,7 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 
 import MatchChamps from './MatchChamps';
-import MatchChart from './MatchChart';
+import DataChart from './DataChart';
 
 function MatchListSummary({ size }: { size: number }) {
     return (
@@ -12,7 +12,7 @@ function MatchListSummary({ size }: { size: number }) {
                 <MatchChamps size={size} />
             </Grid>
             <Grid item xs={9}>
-                <MatchChart size={size} />
+                <DataChart size={size} />
             </Grid>
         </Grid>
     );
