@@ -10,7 +10,7 @@ export default function DataChart({ size }: { size: number }) {
         if (active && payload && payload.length) {
             return (
                 <Paper>
-                    <b>{`${label}`}</b>
+                    {/* <b>{`${label}`}</b> */}
                     {/* <p>{`Kills: ${payload[0]?.payload?.kills}`}</p>
                     <p>{`Deaths: ${payload[0]?.payload?.deaths}`}</p>
                     <p>{`Assists: ${payload[0]?.payload?.assists}`}</p> */}
