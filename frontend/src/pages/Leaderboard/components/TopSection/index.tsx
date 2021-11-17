@@ -5,6 +5,7 @@ import Selectors from './Selectors';
 
 import {
     Header,
+    TopSectionWrapper
 } from './style'
 
 export default function TopSection() {
@@ -15,11 +16,11 @@ export default function TopSection() {
     const queueType = leaderboardState.queueType;
 
     return (
-        <React.Fragment>
+        <TopSectionWrapper>
             <Header align="left">
                 Top {queueType} Players in {['Challenger', 'GrandMaster', 'Master'].includes(tier)? tier:`${tier} ${division}`}
             </Header>
             <Selectors/>
-        </React.Fragment>
+        </TopSectionWrapper>
     )
 }

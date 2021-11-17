@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useAppSelector } from '../../../../redux/hooks';
 
-import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { Select, MenuItem, FormControl, InputLabel, Button } from '@mui/material';
 
 import { tiers, divisions, queueTypes } from '../enums';
 
@@ -18,7 +18,12 @@ export default function Selectors() {
     const [queueType, setQueueType] = useState(leaderBoardState.queueType);
 
     return (
-        <SelectorsWrapper>
+        <SelectorsWrapper sx={{
+            bgcolor: 'background.paper',
+            borderColor: 'text.primary',
+            m: 1,
+            border: 1,
+        }}>
             <FormControl
                 variant="standard"
             >
@@ -68,6 +73,11 @@ export default function Selectors() {
                             <MenuItem value={option} key={option}>{option}</MenuItem>
                         ))}
                     </Select>
+                </SelectWrapper>
+            </FormControl>
+            <FormControl>
+                <SelectWrapper>
+                    <Button size="large" variant="contained">Search</Button>
                 </SelectWrapper>
             </FormControl>
         </SelectorsWrapper>

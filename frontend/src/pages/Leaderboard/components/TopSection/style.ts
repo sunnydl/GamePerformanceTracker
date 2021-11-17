@@ -1,5 +1,9 @@
 import { styled } from '@mui/material/styles';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
+
+export const TopSectionWrapper = styled(Box)(() => ({
+    padding: '4rem',
+}))
 
 export const Header = styled(Typography)(() => ({
     padding: '2rem 2rem 0 2rem',
@@ -9,8 +13,10 @@ export const Header = styled(Typography)(() => ({
     overflowWrap: "break-word"
 }));
 
-export const SelectorsWrapper = styled('div')(() => ({
-    padding: '2rem 2rem 0 2rem',
+export const SelectorsWrapper = styled(Box)(() => ({
+    padding: '2rem',
+    margin: 'auto',
+    textAlign: 'center',
 }))
 
 export const SelectWrapper = styled('div')(() => ({
