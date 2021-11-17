@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import config from '../../config/config'
 import { findSummonerPuuid } from "../../services/summonerService";
-import { getMatchListByPUUID, analysisMatch, getMatchObjListByMatchList } from "../../services/matchService";
+import { getMatchListByPUUID, analysisMatch, getMatchObjListByMatchList, computeKda } from "../../services/matchService";
 
 describe('Match_services', () => {
     beforeAll(async() => {
@@ -100,4 +100,31 @@ describe('Match_services', () => {
         const matchStat = analysisMatch(puuid, mockMatchDTO);
         expect(matchStat).toEqual(mockMatchChartDataDTO);
     })
+
+    test('computeKda check if stats match', async() => {
+        const summonerName = 'Sunny the troll';
+        const region = 'NA';
+        const numberOfMatch = 10;
+        const typeOfMatch = "ranked";
+        const puuid = await findSummonerPuuid(summonerName, region);
+        const matchList = await getMatchListByPUUID(puuid, region, typeOfMatch ,numberOfMatch);
+        const kda = computeKda(matchList, puuid);
+        expect(kda.length).toEqual(matchList.length);
+    })
+
+    test('computeKda check if general stat match with lowest score', async() => {
+        const puuid = "a";
+        const mockMatchDTO: any = {
+            info: {
+                participants: [{kills: 10, deaths: 7, assists: 5, puuid: puuid}]
+            }
+        }
+        const matchList:any = [];
+        matchList.push(mockMatchDTO);
+        console.log(matchList);
+        const kda = computeKda(matchList, puuid);
+        expect(kda).toEqual([2]);
+    })
+
+
 })

@@ -5,6 +5,7 @@ import currency from 'currency.js';
 import MatchChartDataDTO from '../interfaces/IMatchChartDataDTO';
 import {timeConverter} from './utility';
 import MatchHistoryDTO from '../interfaces/IMatchHistoryDTO';
+import { findSummonerPuuid } from "./summonerService";
 
 const rankmap: any = {
     '1': 1,
