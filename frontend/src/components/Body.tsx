@@ -17,7 +17,7 @@ function Body() {
     return (
         <Container>
             <Switch>
-                <Route data-testid="home" exact path='/'>
+                <Route exact path='/'>
                     <Home />
                 </Route>
                 <Route exact path='/overview'>

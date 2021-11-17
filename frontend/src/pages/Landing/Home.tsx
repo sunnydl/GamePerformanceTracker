@@ -31,7 +31,7 @@ function Home() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <main>
+      <main data-testid="home" >
         <Box
           sx={{
             bgcolor: 'background.paper',
