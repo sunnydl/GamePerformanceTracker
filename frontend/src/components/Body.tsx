@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Home from '../pages/Home';
+import Home from '../pages/Landing/Home';
 import Overview from '../pages/Overview/Overview';
 import MatchHistory from '../pages/MatchHistory/MatchHistory';
 
