@@ -59,10 +59,10 @@ function Home() {
               spacing={2}
               justifyContent="center"
             >
-              <Button color="primary" variant="contained">
+              <Button data-testid="login-button" color="primary" variant="contained">
                 Log in
               </Button>
-              <Button color="secondary" variant="contained">
+              <Button data-testid="register-button" color="secondary" variant="contained">
                 Register
               </Button>
             </Stack>
