@@ -7,7 +7,7 @@ import DataChart from './DataChart';
 
 function MatchListSummary({ size }: { size: number }) {
     return (
-        <Grid container>
+        <Grid container data-testid='match-summaries'>
             <Grid item xs={3}>
                 <MatchChamps size={size} />
             </Grid>
