@@ -35,6 +35,7 @@ Inside scrum_resource folder
 |- backend/                  # -> Back end
     |- index.ts                     # main file/server
     |- config/                      # config files
+    |- riotApis/                    # functions that used to call riotApis
     |- interfaces/                  # typescript interfaces
     |- models/                      # mongoDB models
     |- routes/                      # Rest endpoint Routes
@@ -43,7 +44,8 @@ Inside scrum_resource folder
 |- frontend/                 # -> Front end
     |- public/
     |- src/
-        |- pages/               # pages
+        |- components/          # components: navbar, body, footer...
+        |- pages/               # pages: overview, match...
         |- redux/
             |- ...states/reducers folders
             |- ...

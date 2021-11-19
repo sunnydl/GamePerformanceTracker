@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from './slices/counter';
 import userReducer from './slices/user';
+import chartReducer from './slices/chart';
+import matchesReducer from './slices/matches';
 
 export const store = configureStore({
     reducer: {
-        counter: counterReducer,
         user: userReducer,
+        chart: chartReducer,
+        matches: matchesReducer,
     },
     
 })

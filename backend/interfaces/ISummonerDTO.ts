@@ -5,4 +5,5 @@ export default interface SummonerDTO {
     rank: string;
     winGames: number;
     lossGames: number;
+    favChamps: Array<string>;
 }
