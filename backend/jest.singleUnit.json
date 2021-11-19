@@ -2,7 +2,7 @@
     "preset": "ts-jest",
     "coverageDirectory": "../coverage",
     "testMatch": [
-        "**/?(matchService.)+(spec).ts?(x)"
+        "**/?(matchController.)+(spec).ts?(x)"
     ],
     "resetMocks": true,
     "clearMocks": true
