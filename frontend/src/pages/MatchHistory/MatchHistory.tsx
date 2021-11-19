@@ -43,7 +43,7 @@ export default function MatchHistory() {
     }, [location, dispatch])
 
     return (
-        <MatchHistoryWrapper>
+        <MatchHistoryWrapper data-testid='match-history'>
             <MatchOptions options={options} setOption={setOption} />
             <MatchHeading>Recent Matches</MatchHeading>
             <MatchListSummary size={option} />
