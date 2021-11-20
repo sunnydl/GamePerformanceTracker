@@ -1,8 +1,5 @@
 
-import React, { useEffect } from 'react';
-
-import { useAppDispatch } from '../../redux/hooks';
-import { handleSearchParams } from '../../redux/slices/user';
+import React from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
 
@@ -31,11 +28,6 @@ const theme = createTheme({
 
 function NavBar() {
   const location = useLocation();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(handleSearchParams(location.search));
-  }, [dispatch, location.search]);
 
   return (
     <ThemeProvider theme={theme}>
