@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-import TopSection from './TopSection'
+import TopSection from './TopSection';
+import PlayerList from './PlayerList';
 
 import {
     LeaderboardPaper
@@ -9,7 +10,8 @@ import {
 export default function Content() {
     return (
         <LeaderboardPaper>
-            <TopSection/>
+            <TopSection />
+            <PlayerList />
         </LeaderboardPaper>
     )
 }

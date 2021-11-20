@@ -8,7 +8,41 @@ const initialState: LeaderboardState = {
     tier: 'Challenger',
     division: 'I',
     queueType: 'SOLO',
-    leaderboard: [],
+    leaderboard: [
+        {
+            summonerName: 'sunny1',
+            summonerLevel: 42,
+            summonerIcon: 2,
+            rank: 'PLATINUM',
+            leaguePoints: 281,
+            winGames: 4,
+            lossGames: 4,
+            favChamps: ['Irelia', 'Leona', 'Lulu'],
+            region: 'NA',
+        },
+        {
+            summonerName: 'sunny2',
+            summonerLevel: 42,
+            summonerIcon: 2,
+            rank: 'PLATINUM',
+            leaguePoints: 281,
+            winGames: 4,
+            lossGames: 4,
+            favChamps: ['Irelia', 'Leona', 'Lulu'],
+            region: 'NA',
+        },
+        {
+            summonerName: 'sunny3',
+            summonerLevel: 42,
+            summonerIcon: 2,
+            rank: 'PLATINUM',
+            leaguePoints: 281,
+            winGames: 4,
+            lossGames: 4,
+            favChamps: ['Irelia', 'Leona', 'Lulu'],
+            region: 'NA',
+        }
+    ],
 };
 
 const leaderboardSlice = createSlice({
