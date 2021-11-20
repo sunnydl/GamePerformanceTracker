@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
-
-import Home from '../pages/Landing/Home';
-import Overview from '../pages/Overview/Overview';
-import MatchHistory from '../pages/MatchHistory/MatchHistory';
-
 import { styled } from '@mui/material/styles';
+import PageLoading from './PageLoading';
+
+const Home = lazy(() => import('../pages/Landing/Home'));
+const Overview = lazy(() => import('../pages/Overview/Overview'));
+const MatchHistory = lazy(() => import('../pages/MatchHistory/MatchHistory'));
 
 function Body() {
 
@@ -16,18 +16,20 @@ function Body() {
 
     return (
         <Container>
-            <Switch>
-                <Route exact path='/'>
-                    <Home />
-                </Route>
-                <Route exact path='/overview'>
-                    <Overview />
-                </Route>
-                <Route exact path='/match-history'>
-                    <MatchHistory />
-                </Route>
-                <Redirect to='/' />
-            </Switch>
+            <Suspense fallback={<PageLoading/>}>
+                <Switch>
+                    <Route exact path='/'>
+                        <Home />
+                    </Route>
+                    <Route exact path='/overview'>
+                        <Overview />
+                    </Route>
+                    <Route exact path='/match-history'>
+                        <MatchHistory />
+                    </Route>
+                    <Redirect to='/' />
+                </Switch>
+            </Suspense>
         </Container>
     );
 }
