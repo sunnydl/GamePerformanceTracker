@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { fetchUserData } from '../redux/slices/user';
@@ -12,6 +12,11 @@ import Overview from '../pages/Overview/Overview';
 import MatchHistory from '../pages/MatchHistory/MatchHistory';
 
 import { styled } from '@mui/material/styles';
+import PageLoading from './PageLoading';
+
+const Home = lazy(() => import('../pages/Landing/Home'));
+const Overview = lazy(() => import('../pages/Overview/Overview'));
+const MatchHistory = lazy(() => import('../pages/MatchHistory/MatchHistory'));
 
 const Container = styled('div')(() => ({
     padding: '8vh 2vw 8vh 2vw',
@@ -37,18 +42,20 @@ function Body() {
 
     return (
         <Container>
-            <Switch>
-                <Route exact path='/'>
-                    <Home />
-                </Route>
-                <Route exact path='/overview'>
-                    <Overview />
-                </Route>
-                <Route exact path='/match-history'>
-                    <MatchHistory />
-                </Route>
-                <Redirect to='/' />
-            </Switch>
+            <Suspense fallback={<PageLoading/>}>
+                <Switch>
+                    <Route exact path='/'>
+                        <Home />
+                    </Route>
+                    <Route exact path='/overview'>
+                        <Overview />
+                    </Route>
+                    <Route exact path='/match-history'>
+                        <MatchHistory />
+                    </Route>
+                    <Redirect to='/' />
+                </Switch>
+            </Suspense>
         </Container>
     );
 }
