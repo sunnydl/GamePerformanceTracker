@@ -16,10 +16,7 @@ const LeaderboardWrapper = styled('div')(() => ({
 export default function LeaderBoard() {
 
     const dispatch = useAppDispatch();
-    const leaderBoardState = useAppSelector((state) => state.leaderboard);
-    const tier = leaderBoardState.tier;
-    const division = leaderBoardState.division;
-    const queueType = leaderBoardState.queueType;
+    const { tier, division, queueType } = useAppSelector((state) => state.leaderboard);
 
     useEffect(() => {
         dispatch(fetchLeaderboardData(tier, division, queueType))

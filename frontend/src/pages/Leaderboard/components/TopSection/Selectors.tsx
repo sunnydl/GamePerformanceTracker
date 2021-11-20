@@ -13,10 +13,10 @@ import {
 
 export default function Selectors() {
 
-    const leaderBoardState = useAppSelector((state) => state.leaderboard);
-    const [tier, setTier] = useState(leaderBoardState.tier);
-    const [division, setDivision] = useState(leaderBoardState.division);
-    const [queueType, setQueueType] = useState(leaderBoardState.queueType);
+    const { tier: t, division: d, queueType: q } = useAppSelector((state) => state.leaderboard);
+    const [tier, setTier] = useState(t);
+    const [division, setDivision] = useState(d);
+    const [queueType, setQueueType] = useState(q);
 
     const dispatch = useAppDispatch();
     const updateFilter = () => {

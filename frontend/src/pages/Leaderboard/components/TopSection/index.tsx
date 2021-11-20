@@ -10,10 +10,7 @@ import {
 
 export default function TopSection() {
 
-    const leaderboardState = useAppSelector((state) => state.leaderboard);
-    const tier = leaderboardState.tier;
-    const division = leaderboardState.division;
-    const queueType = leaderboardState.queueType;
+    const { tier, division, queueType } = useAppSelector((state) => state.leaderboard);
 
     return (
         <TopSectionWrapper>
