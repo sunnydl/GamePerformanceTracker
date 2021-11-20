@@ -7,10 +7,6 @@ import { fetchMatchesData } from '../redux/slices/matches';
 
 import { useLocation, Switch, Route, Redirect } from 'react-router-dom';
 
-import Home from '../pages/Landing/Home';
-import Overview from '../pages/Overview/Overview';
-import MatchHistory from '../pages/MatchHistory/MatchHistory';
-
 import { styled } from '@mui/material/styles';
 import PageLoading from './PageLoading';
 
