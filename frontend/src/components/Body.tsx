@@ -1,37 +1,61 @@
-import React from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { fetchUserData } from '../redux/slices/user';
+import { fetchChartData } from '../redux/slices/chart';
+import { fetchMatchesData } from '../redux/slices/matches';
 
-import Home from '../pages/Home';
-import Overview from '../pages/Overview/Overview';
-import MatchHistory from '../pages/MatchHistory/MatchHistory';
-import LeaderBoard from '../pages/Leaderboard/Leaderboard';
+import { useLocation, Switch, Route, Redirect } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
+import PageLoading from './PageLoading';
+
+const Home = lazy(() => import('../pages/Landing/Home'));
+const Overview = lazy(() => import('../pages/Overview/Overview'));
+const MatchHistory = lazy(() => import('../pages/MatchHistory/MatchHistory'));
+const Leaderboard = lazy(() => import('../pages/Leaderboard/Leaderboard'));
+
+const Container = styled('div')(() => ({
+    padding: '8vh 2vw 8vh 2vw',
+}))
 
 function Body() {
+    const prevSearch = useAppSelector((state) => {
+        const { summonerName, region } = state.user;
+        return `?summonerName=${summonerName}&region=${region}`;
+    });
+    const location = useLocation();
+    const dispatch = useAppDispatch();
 
-    const Container = styled('div')(() => ({
-        padding: '8vh 2vw 8vh 2vw',
-    }))
+    useEffect(() => {
+        const search = location.search;
+        
+        if (search !== prevSearch) {
+            dispatch(fetchUserData(search));
+            dispatch(fetchChartData(search, 5));
+            dispatch(fetchMatchesData(search, 10));
+        }   
+    }, [dispatch, prevSearch, location.search]);
 
     return (
         <Container>
-            <Switch>
-                <Route exact path='/'>
-                    <Home />
-                </Route>
-                <Route exact path='/overview'>
-                    <Overview />
-                </Route>
-                <Route exact path='/match-history'>
-                    <MatchHistory />
-                </Route>
-                <Route exact path='/leaderBoard'>
-                    <LeaderBoard/>
-                </Route>
-                <Redirect to='/' />
-            </Switch>
+            <Suspense fallback={<PageLoading/>}>
+                <Switch>
+                    <Route exact path='/'>
+                        <Home />
+                    </Route>
+                    <Route exact path='/overview'>
+                        <Overview />
+                    </Route>
+                    <Route exact path='/match-history'>
+                        <MatchHistory />
+                    </Route>
+                    <Route exact path='/leaderboard'>
+                        <Leaderboard/>
+                    </Route>
+                    <Redirect to='/' />
+                </Switch>
+            </Suspense>
         </Container>
     );
 }

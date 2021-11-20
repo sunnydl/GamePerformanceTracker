@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import config from '../../config/config'
 import { findSummonerPuuid } from "../../services/summonerService";
-import { getMatchListByPUUID, analysisMatch } from "../../services/matchService";
+import { getMatchListByPUUID, analysisMatch, getMatchObjListByMatchList, computeKda } from "../../services/matchService";
 
 describe('Match_services', () => {
     beforeAll(async() => {
@@ -16,7 +16,7 @@ describe('Match_services', () => {
         const summonerName = 'Sunny the troll';
         const region = 'NA';
         const puuid = await findSummonerPuuid(summonerName, region);
-        const matchListViaPUUID = await getMatchListByPUUID(puuid, region, 3);
+        const matchListViaPUUID = await getMatchListByPUUID(puuid, region, ``, 3);
         expect(matchListViaPUUID.length).toEqual(3)
         expect(puuid).not.toBeNull();
     })
@@ -25,7 +25,7 @@ describe('Match_services', () => {
         const summonerName = 'Sunny the troll';
         const region = 'NA';
         const puuid = await findSummonerPuuid(summonerName, region);
-        const matchListViaPUUID = await getMatchListByPUUID(puuid, region, 0);
+        const matchListViaPUUID = await getMatchListByPUUID(puuid, region, ``, 0);
         expect(matchListViaPUUID.length).toEqual(0)
         expect(puuid).not.toBeNull();
     })
@@ -34,20 +34,26 @@ describe('Match_services', () => {
         const summonerName = 'Sunny the troll';
         const region = 'NA';
         const puuid = await findSummonerPuuid(summonerName, region);
-        const matchListViaPUUID = await getMatchListByPUUID(puuid, region, 20);
-        console.log(matchListViaPUUID.length);
+        const matchListViaPUUID = await getMatchListByPUUID(puuid, region, ``, 20);
         expect(matchListViaPUUID.length).toEqual(20);
         expect(puuid).not.toBeNull();
     }, 20000)
 
-    test('getMatchListByPUUID with limit of 0', async() => {
-        const summonerName = 'Sunny the troll';
-        const region = 'NA';
-        const puuid = await findSummonerPuuid(summonerName, region);
-        const matchListViaPUUID = await getMatchListByPUUID(puuid, region, 0);
-        expect(matchListViaPUUID.length).toEqual(0)
-        expect(puuid).not.toBeNull();
-    })
+    // test('getMatchListByPUUID test for normal or ranked match', async() => {
+    //     const summonerName = 'Sunny the troll';
+    //     const region = 'NA';
+    //     const puuid = await findSummonerPuuid(summonerName, region);
+    //     const mockMatchDTOList: any = [
+    //         {
+    //             info: {
+    //                 gameType: `ranked`
+    //             }
+    //         }
+    //     ]
+    //     const matchList = await getMatchObjListByMatchList(mockMatchDTOList, region);
+    //     expect(matchList).not.toBeNull();
+    //     expect(puuid).not.toBeNull();
+    // })
 
     test('analysisMatch check if null', async() => {
         const summonerName = 'Sunny the troll';
@@ -94,4 +100,30 @@ describe('Match_services', () => {
         const matchStat = analysisMatch(puuid, mockMatchDTO);
         expect(matchStat).toEqual(mockMatchChartDataDTO);
     })
+
+    test('computeKda check if stats match', async() => {
+        const summonerName = 'Sunny the troll';
+        const region = 'NA';
+        const numberOfMatch = 10;
+        const typeOfMatch = "ranked";
+        const puuid = await findSummonerPuuid(summonerName, region);
+        const matchList = await getMatchListByPUUID(puuid, region, typeOfMatch ,numberOfMatch);
+        const kda = computeKda(matchList, puuid);
+        expect(kda.length).toEqual(matchList.length);
+    })
+
+    test('computeKda check if general stat match with lowest score', async() => {
+        const puuid = "a";
+        const mockMatchDTO: any = {
+            info: {
+                participants: [{kills: 10, deaths: 7, assists: 5, puuid: puuid}]
+            }
+        }
+        const matchList:any = [];
+        matchList.push(mockMatchDTO);
+        const kda = computeKda(matchList, puuid);
+        expect(kda).toEqual([2]);
+    })
+
+
 })

@@ -3,12 +3,19 @@ import React from 'react';
 import { Grid } from '@mui/material';
 import { MatchSummaryGrid } from './style';
 
-function MatchSummary({ position, lane, gamemode, date }: { position: number, lane: string, gamemode: string, date: string }) {
+interface MatchSummaryProps {
+    rank: number,
+    lane: string,
+    gameMode: string,
+    date: string
+}
+
+function MatchSummary({ rank, lane, gameMode, date }: MatchSummaryProps) {
     return (
         <MatchSummaryGrid container>
-            <Grid xs={1} item>{position}</Grid>
+            <Grid xs={1} item>{rank}</Grid>
             <Grid xs={3} item>{lane}</Grid>
-            <Grid xs={4} item>{gamemode}</Grid>
+            <Grid xs={4} item>{gameMode}</Grid>
             <Grid xs={4} item>{date}</Grid>
         </MatchSummaryGrid>
     );

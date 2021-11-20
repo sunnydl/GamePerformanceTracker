@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 
 import MatchOptions from './components/MatchOptions/MatchOptions';
+import MatchListSummary from './components/MatchListSummary/MatchListSummary';
 import MatchList from './components/MatchList/MatchList';
 
-export const MatchHistoryWrapper = styled('div')(({ theme }) => ({
+const MatchHistoryWrapper = styled('div')(({ theme }) => ({
     width: '90%',
     margin: 'auto',
     marginBottom: theme.spacing(16),
@@ -19,14 +20,22 @@ export const MatchHistoryWrapper = styled('div')(({ theme }) => ({
     }
 }));
 
+const MatchHeading = styled('div')(({ theme }) => ({
+    ...theme.typography.h3,
+    marginBottom: theme.spacing(4),
+    textAlign: 'left'
+}));
+
 const options = [3, 5, 10];
 
 export default function MatchHistory() {
     const [option, setOption] = useState(options[0]);
 
     return (
-        <MatchHistoryWrapper>
+        <MatchHistoryWrapper data-testid='match-history'>
             <MatchOptions options={options} setOption={setOption} />
+            <MatchHeading>Recent Matches</MatchHeading>
+            <MatchListSummary size={option} />
             <MatchList size={option} />
         </MatchHistoryWrapper>
     );

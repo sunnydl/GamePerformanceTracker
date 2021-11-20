@@ -6,7 +6,14 @@ export const MatchListing = styled(List)(({ theme }) => ({
         paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(2),
         flexDirection: 'column',
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
+        borderTop:'1px solid black',
+        borderLeft: '1px solid black',
+        borderRight: '1px solid black',
+
+        '&:last-child': {
+            borderBottom: '1px solid black'
+        }
     },
 
     "& .MuiAvatar-root": {
@@ -16,6 +23,11 @@ export const MatchListing = styled(List)(({ theme }) => ({
 }));
 
 export const MatchResultsWrapper = styled('div')(({ theme }) => ({
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+
     '& > .header-wrapper': {
         marginBottom: theme.spacing(4),
         fontSize: theme.typography.h5.fontSize,

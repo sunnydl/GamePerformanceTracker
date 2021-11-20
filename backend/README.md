@@ -28,10 +28,11 @@
     favChamps: Array<string>
 }
 ```
-#### GET api/matches/:summonerName/:region/:numOfMatch
+#### GET api/matches/:summonerName/:region/:matchType/:numOfMatch
 ##### request input (Get request param):
 * summonerName: string
 * region: (Optional) string
+* matchType: string
 * numOfMatch: number
 ##### response:
 ```
