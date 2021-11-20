@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { styled } from '@mui/material/styles';
 
 import MatchOptions from './components/MatchOptions/MatchOptions';
 import MatchListSummary from './components/MatchListSummary/MatchListSummary';
 import MatchList from './components/MatchList/MatchList';
-
-import { useLocation } from 'react-router-dom';
-import { useAppDispatch } from '../../redux/hooks';
-import { fetchMatchesData } from '../../redux/slices/matches';
 
 const MatchHistoryWrapper = styled('div')(({ theme }) => ({
     width: '90%',
@@ -33,14 +29,7 @@ const MatchHeading = styled('div')(({ theme }) => ({
 const options = [3, 5, 10];
 
 export default function MatchHistory() {
-    const location = useLocation();
-    const dispatch = useAppDispatch();
     const [option, setOption] = useState(options[0]);
-
-    // NOTE: temporary api call for testing
-    useEffect(() => {
-        dispatch(fetchMatchesData(location.search, 10));
-    }, [location, dispatch])
 
     return (
         <MatchHistoryWrapper data-testid='match-history'>
