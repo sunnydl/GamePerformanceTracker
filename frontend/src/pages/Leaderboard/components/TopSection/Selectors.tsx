@@ -33,7 +33,6 @@ export default function Selectors() {
         <SelectorsWrapper sx={{
             bgcolor: 'background.paper',
             borderColor: 'text.primary',
-            m: 1,
             border: 1,
         }}>
             <FormControl
