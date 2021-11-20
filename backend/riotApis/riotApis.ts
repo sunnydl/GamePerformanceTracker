@@ -94,12 +94,12 @@ export const findMatchInfo = async(match_id: string, region: string): Promise<Ma
 
 // for leaderboard for challenger/grandmaster/master tier
 export const getLeaderBoardHighTierList = async(tier: string, queueType: string, region: string): Promise<LeagueListDTO> => {
-    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/league/v4/${HIGH_TIER[tier]}/by-queue/${queueType}`);
+    const response: AxiosResponse = await axiosInstance.get(`https://${REGION[region]}/lol/league/v4/${HIGH_TIER[tier]}/by-queue/${QUEUE_TYPE[queueType]}`);
     return response.data as LeagueListDTO;
 }
 
 // for leaderboard for diamond and below
 export const getLeaderBoardLowTierList = async(tier: string, division: string, queueType: string, region: string): Promise<Array<SummonerLeague>> => {
-    const response: AxiosResponse = await axiosInstance.get(`https://${MATCH_REGION[region]}/lol/league/v4/entries/${queueType}/${LOW_TIER[tier]}/${division}`);
+    const response: AxiosResponse = await axiosInstance.get(`https://${REGION[region]}/lol/league/v4/entries/${QUEUE_TYPE[queueType]}/${LOW_TIER[tier]}/${division}`);
     return response.data as Array<SummonerLeague>;
 }

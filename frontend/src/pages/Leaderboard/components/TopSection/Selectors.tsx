@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { useAppSelector } from '../../../../redux/hooks';
+import { useAppSelector, useAppDispatch } from '../../../../redux/hooks';
+import { setLeaderboardFilter  } from '../../../../redux/slices/leaderboard';
 
 import { Select, MenuItem, FormControl, InputLabel, Button } from '@mui/material';
 
-import { tiers, divisions, queueTypes } from '../enums';
+import { tiers, divisions, queueTypes, high_tiers } from '../enums';
 
 import {
     SelectorsWrapper,
@@ -16,6 +17,17 @@ export default function Selectors() {
     const [tier, setTier] = useState(leaderBoardState.tier);
     const [division, setDivision] = useState(leaderBoardState.division);
     const [queueType, setQueueType] = useState(leaderBoardState.queueType);
+
+    const dispatch = useAppDispatch();
+    const updateFilter = () => {
+        dispatch(setLeaderboardFilter({
+            tier,
+            division,
+            queueType,
+            leaderboard: [],
+        }))
+    }
+
 
     return (
         <SelectorsWrapper sx={{
@@ -53,7 +65,7 @@ export default function Selectors() {
                         label="Division"
                     >
                         {divisions.map((option: string) => (
-                            <MenuItem value={option} key={option}>{option}</MenuItem>
+                            <MenuItem value={option} key={option} disabled={high_tiers.includes(tier)}>{option}</MenuItem>
                         ))}
                     </Select>
                 </SelectWrapper>
@@ -77,7 +89,7 @@ export default function Selectors() {
             </FormControl>
             <FormControl>
                 <SelectWrapper>
-                    <Button size="large" variant="contained">Search</Button>
+                    <Button size="large" variant="contained" onClick={updateFilter}>Search</Button>
                 </SelectWrapper>
             </FormControl>
         </SelectorsWrapper>

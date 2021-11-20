@@ -10,6 +10,12 @@ export const tiers: Array<string> = [
     'Iron',
 ]
 
+export const high_tiers: Array<string> = [
+    'Challenger',
+    'GrandMaster',
+    'Master',
+]
+
 export const divisions: Array<string> = [
     'I',
     'II',

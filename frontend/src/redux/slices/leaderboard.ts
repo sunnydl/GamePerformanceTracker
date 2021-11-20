@@ -19,7 +19,13 @@ const leaderboardSlice = createSlice({
             state.tier          =       action.payload.tier ?? 'Challenger';
             state.division      =       action.payload.division ?? 'I';
             state.queueType     =       action.payload.queueType ?? 'SOLO';
-            state.leaderboard   =       [...state.leaderboard, ...action.payload.leaderboard];
+            state.leaderboard   =       [...action.payload.leaderboard];
+            return state;
+        },
+        setLeaderboardFilter: (state, action: PayloadAction<LeaderboardState>) => {
+            state.tier          =       action.payload.tier ?? 'Challenger';
+            state.division      =       action.payload.division ?? 'I';
+            state.queueType     =       action.payload.queueType ?? 'SOLO';
             return state;
         },
     },
@@ -36,6 +42,7 @@ function fetchLeaderboardData(tier: string, division: string, queueType: string)
                         queueType: queueType,
                     }
                 });
+                console.log('leaderboard data found:', data);
                 dispatch(setLeaderboardData({
                     tier: tier,
                     division: division,
@@ -49,7 +56,7 @@ function fetchLeaderboardData(tier: string, division: string, queueType: string)
     }
 }
 
-export const { setLeaderboardData } = leaderboardSlice.actions
+export const { setLeaderboardData, setLeaderboardFilter } = leaderboardSlice.actions
 
 export default leaderboardSlice.reducer
 
