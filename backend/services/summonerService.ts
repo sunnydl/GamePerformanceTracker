@@ -80,12 +80,12 @@ export const getLeaderBoard = async(tier: string, division: string, queueType: s
         const champions: Array<ChampionMastery> = await riotApis.findChampionMastery(playerInfo?.id, region);
         const favChampsIds: Array<number> = champions.map((champion: ChampionMastery) => champion.championId).slice(0, 3);
         const favChamps: Array<string> = await findFavChampsName(champsList, favChampsIds);
-
+        
         leaderBoard.push({
             summonerName: player.summonerName,
             summonerLevel: playerInfo.summonerLevel,
             summonerIcon: playerInfo.profileIconId,
-            rank: `${player.tier} ${player.rank}`,
+            rank: `${tier} ${division}`,
             leaguePoints: player.leaguePoints,
             winGames: player.wins,
             lossGames: player.losses,
