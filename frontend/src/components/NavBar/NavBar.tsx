@@ -37,6 +37,10 @@ function NavBar() {
     dispatch(handleSearchParams(location.search));
   }, [dispatch, location.search]);
 
+  if (location.pathname === '/') {
+    return null;
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar position='sticky' elevation={0}> 

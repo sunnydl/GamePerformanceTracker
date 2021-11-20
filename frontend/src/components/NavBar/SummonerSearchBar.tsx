@@ -81,7 +81,7 @@ function SummonerSearchBar() {
           <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
-          placeholder="Search…"
+          placeholder="Search player…"
           inputProps={{ 'aria-label': 'search' }}
           onKeyPress={handleSummonerSearchByName}
         />

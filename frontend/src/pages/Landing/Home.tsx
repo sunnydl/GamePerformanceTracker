@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
@@ -9,6 +8,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import FeaturePanel from './components/FeaturePanel';
+import SummonerSearchBar from '../../components/NavBar/SummonerSearchBar';
 
 function Home() {
   const theme = createTheme({
@@ -38,7 +38,7 @@ function Home() {
             pb: 2,
           }}
         >
-          <Container maxWidth="sm">
+          <Container maxWidth="md">
             <Typography
               component="h1"
               variant="h2"
@@ -59,50 +59,34 @@ function Home() {
               spacing={2}
               justifyContent="center"
             >
-              <Button data-testid="login-button" color="primary" variant="contained">
-                Log in
-              </Button>
-              <Button data-testid="register-button" color="secondary" variant="contained">
-                Register
-              </Button>
+              <SummonerSearchBar />
             </Stack>
           </Container>
         </Box>
-        <Container sx={{ pt: 5, pb: 20 }} maxWidth="md">
-          <Grid container rowSpacing={4} columnSpacing={24}>
-            <Grid item xs={6}>
+        <Container sx={{ pt: 5, pb: 20 }} maxWidth="lg">
+          <Grid container columnSpacing={10}>
+            <Grid item xs={3}>
               <FeaturePanel
                 image="https://i.imgur.com/iU6pl6h.png"
                 name="Track Performance"
-                desc="See how any player has performed both recently and 
-                all-time in different categories, including 
-                but not limited to wins, losses, kills, deaths, and assists."
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={3}>
               <FeaturePanel
                 image="https://i.imgur.com/SbcxL3u.png"
                 name="Analyze Matches"
-                desc="Identify recent match trends to help
-                you determine not just why you're winning but how
-                to continue doing so."
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={3}>
               <FeaturePanel
                 image="https://i.imgur.com/DS6YskR.png"
                 name="Leaderboarding"
-                desc="Compare your performance against other players worldwide
-                using both well-known statistics and our own proprietary GPT score."
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={3}>
               <FeaturePanel
                 image="https://i.imgur.com/qXXlOg2.png"
                 name="Evaluate Champions"
-                desc="Examine advanced statistics for different champions and
-                analyze per champion-performance to find out where and when
-                to use each."
               />
             </Grid>
           </Grid>
