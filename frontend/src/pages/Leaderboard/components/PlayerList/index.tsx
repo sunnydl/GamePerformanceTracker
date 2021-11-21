@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../../../../redux/hooks';
 
-import Box from '@mui/material/Box';
 import { PlayerListing } from './style';
 
 import PlayerData from './PlayerData';

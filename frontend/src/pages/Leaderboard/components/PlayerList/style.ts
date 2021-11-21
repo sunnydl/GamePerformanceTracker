@@ -7,8 +7,8 @@ export const PlayerListing = styled(List)(({ theme }) => ({
     paddingRight: '4rem',
 
     '& > .MuiListItem-root': {
-        paddingTop: theme.spacing(0.5),
-        paddingBottom: theme.spacing(0.5),
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
         flexDirection: 'column',
         alignItems: 'flex-end',
         borderTop:'1px solid black',

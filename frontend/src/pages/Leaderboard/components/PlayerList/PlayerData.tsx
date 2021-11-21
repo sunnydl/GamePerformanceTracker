@@ -2,23 +2,24 @@ import React from 'react'
 
 import { Avatar, Grid, ListItem } from '@mui/material'
 import { PlayerGrid } from './style';
-import currency from 'currency.js'
+
+import { getSummonerIconURL, calculateWinRate } from '../../../../util';
 
 export default function PlayerData({ player, idx }: { player: any, idx: number }) {
     return (
         <ListItem>
-            <PlayerGrid container xs={12}>
+            <PlayerGrid container>
                 <Grid item xs={1}>
                     {idx + 1}
                 </Grid>
-                <Grid item xs={2}>
-                    <Avatar src={undefined} /> {/* TODO: display summonerIcon */}
+                <Grid item xs={1}>
+                    <Avatar src={getSummonerIconURL(player.summonerIcon)} />
                 </Grid>
                 <Grid item xs={3}>
                     {player.summonerName}
                 </Grid>
-                <Grid item xs={2}>
-                    {currency(player.winGames).divide(currency(player.winGames).add(player.lossGames)).value || 0}
+                <Grid item xs={3}>
+                    {calculateWinRate(player.winGames, player.lossGames, true)}
                 </Grid>
                 <Grid item container xs={4}>
                     <Grid item xs={4}>
