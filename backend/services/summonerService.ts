@@ -72,11 +72,11 @@ export const getLeaderBoard = async(tier: string, division: string, queueType: s
     
     // first sort the list based on leaguePoints and cut the amount
     list = list.sort((a, b) => b.leaguePoints - a.leaguePoints).slice(0, 10); // get 10 for now
-
+    
     const leaderBoard: Array<SummonerDTO> = [];
     const champsList: any = await riotApis.getChampsData();
     for(const player of list) {
-        const playerInfo = await riotApis.findSummonerInfo(encodeURI(player.summonerName), region);
+        const playerInfo = await riotApis.findSummonerInfoBySummonerId(player.summonerId, region);
         const champions: Array<ChampionMastery> = await riotApis.findChampionMastery(playerInfo?.id, region);
         const favChampsIds: Array<number> = champions.map((champion: ChampionMastery) => champion.championId).slice(0, 3);
         const favChamps: Array<string> = await findFavChampsName(champsList, favChampsIds);

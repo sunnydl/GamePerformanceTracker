@@ -64,6 +64,11 @@ export const findSummonerInfo = async(summonerName: string, region: string): Pro
     return response.data as SummonerInfo;
 }
 
+export const findSummonerInfoBySummonerId = async(summonerId: string, region: string): Promise<SummonerInfo> => {
+    const response: AxiosResponse = await axiosInstance.get(`https://${REGION[region]}/lol/summoner/v4/summoners/${summonerId}`);
+    return response.data as SummonerInfo;
+}
+
 // for info related to winrate, rank, and stuff
 export const findSummonerLeague = async(id: string, region: string): Promise<Array<SummonerLeague>> => {
     const response: AxiosResponse = await axiosInstance.get(`https://${REGION[region]}/lol/league/v4/entries/by-summoner/${id}`);

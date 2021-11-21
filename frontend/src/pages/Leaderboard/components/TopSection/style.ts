@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import { Typography, Box } from '@mui/material';
 
 export const TopSectionWrapper = styled(Box)(() => ({
-    padding: '4rem',
+    padding: '4rem 4rem 0 4rem',
 }))
 
 export const Header = styled(Typography)(() => ({
