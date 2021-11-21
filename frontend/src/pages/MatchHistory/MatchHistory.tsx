@@ -24,13 +24,13 @@ const MatchHistoryWrapper = styled('div')(({ theme }) => ({
 const MatchHeading = styled('div')(({ theme }) => ({
     ...theme.typography.h3,
     marginBottom: theme.spacing(4),
-    textAlign: 'left'
+    textAlign: 'center'
 }));
 
-const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const options = [3, 4, 5, 6, 7, 8, 9, 10];
 
 export default function MatchHistory() {
-    const [option, setOption] = useState(options[2]);
+    const [option, setOption] = useState(options[0]);
 
     return (
         <Grow in>

@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Slider, Box } from '@mui/material';
+import { Slider, Box, Typography } from '@mui/material';
 
 function MatchOptions({ options, setOption }: { options: number[], setOption: React.Dispatch<React.SetStateAction<number>> }) {
 
     const marks = options.map((option: number) => {
         return {
             value: option,
-            label: option===1? `${option} game`:`${option} games`,
+            label: `${option}`,
         }
     })
 
@@ -21,16 +21,19 @@ function MatchOptions({ options, setOption }: { options: number[], setOption: Re
         <Box 
             data-testid='match-slider'
             sx={{
-            width: '70%'
+            width: '100%'
         }}>
+            <Typography id="input-slider" gutterBottom align="left">
+                Number of games to display
+            </Typography>
             <Slider
-                aria-label="Number of games"
+                aria-labelledby="input-slider"
                 defaultValue={3}
                 getAriaValueText={(value: number) => `${value}`}
                 valueLabelDisplay="auto"
                 marks={marks}
                 max={10}
-                min={1}
+                min={3}
                 onChangeCommitted={handleChange}
             />
         </Box>
