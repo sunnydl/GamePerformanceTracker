@@ -18,7 +18,9 @@ function MatchOptions({ options, setOption }: { options: number[], setOption: Re
     }
 
     return (
-        <Box sx={{
+        <Box 
+            data-testid='match-slider'
+            sx={{
             width: '70%'
         }}>
             <Slider
