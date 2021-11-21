@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppSelector } from '../../../../redux/hooks';
 import { useTheme, Avatar, Box, TableBody, TableRow, TableCell } from '@mui/material';
+import { PlayerLink } from './style';
 import RatioBar from '../../../../components/RatioBar';
 
 import { getSummonerIconURL, displayWinRate } from '../../../../util';
@@ -17,7 +18,9 @@ export default function PlayerTableBody() {
                     <TableCell>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Avatar src={getSummonerIconURL(player.summonerIcon)} />
-                            {player.summonerName}
+                            <PlayerLink to={`/overview?summonerName=${player.summonerName}&region=${player.region}`}>
+                                {player.summonerName}
+                            </PlayerLink>
                         </Box>
                     </TableCell>
                     <TableCell>

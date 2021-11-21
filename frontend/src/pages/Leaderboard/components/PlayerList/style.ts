@@ -1,5 +1,6 @@
 
 import { TableContainer } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 
 export const PlayerTableContainer = styled(TableContainer)(({ theme }) => ({
@@ -21,4 +22,10 @@ export const PlayerTableContainer = styled(TableContainer)(({ theme }) => ({
             }
         }
     }
+}));
+
+export const PlayerLink = styled(Link)(({ theme }) => ({
+    color: theme.palette.text.primary,
+    textDecoration: 'none', 
+    fontWeight: 'bold'
 }));
