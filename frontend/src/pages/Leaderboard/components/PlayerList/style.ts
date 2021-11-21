@@ -1,32 +1,24 @@
 
-import { List, Grid } from '@mui/material';
+import { TableContainer } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const PlayerListing = styled(List)(({ theme }) => ({
-    paddingLeft: '4rem',
-    paddingRight: '4rem',
+export const PlayerTableContainer = styled(TableContainer)(({ theme }) => ({
+    width: 'auto',
+    margin: '4rem',
+    borderLeft: '1px solid',
+    borderRight: '1px solid',
+    borderTop: '1px solid',
+    borderColor: theme.palette.grey[600],
 
-    '& > .MuiListItem-root': {
-        paddingTop: theme.spacing(1),
-        paddingBottom: theme.spacing(1),
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-        borderTop:'1px solid black',
-        borderLeft: '1px solid black',
-        borderRight: '1px solid black',
-        backgroundColor: theme.palette.background.paper,
+    '& > .MuiTable-root': {
+        '& .MuiTableCell-root': {
+            borderColor: theme.palette.grey[600],
 
-        '&:last-child': {
-            borderBottom: '1px solid black'
+            '& .MuiAvatar-root': {
+                width: "48px",
+                height: "48px",
+                marginRight: theme.spacing(2)
+            }
         }
-    },
-
-    "& .MuiAvatar-root": {
-        width: "48px",
-        height: "48px"
     }
-}));
-
-export const PlayerGrid = styled(Grid)(({ theme }) => ({
-    alignItems: 'center'
 }));

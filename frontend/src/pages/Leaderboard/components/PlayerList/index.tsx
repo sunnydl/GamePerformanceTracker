@@ -1,22 +1,14 @@
 import React from 'react';
-import { useAppSelector } from '../../../../redux/hooks';
 
-import { PlayerListing } from './style';
-
-import PlayerData from './PlayerData';
+import PlayerTable from './PlayerTable';
+import PlayerTableHead from './PlayerTableHead';
+import PlayerTableBody from './PlayerTableBody';
 
 export default function PlayerList() {
-    const leaderboard = useAppSelector((state) => state.leaderboard.leaderboard);
-
     return (
-        <PlayerListing>
-            {leaderboard.map((player, idx) => (
-                <PlayerData 
-                    key={`${player.summonerName}#${player.region}`}
-                    player={player}
-                    idx={idx}
-                />
-            ))}
-        </PlayerListing>
+        <PlayerTable>
+            <PlayerTableHead />
+            <PlayerTableBody />
+        </PlayerTable>
     );
 }
