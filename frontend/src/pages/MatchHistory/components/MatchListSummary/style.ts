@@ -8,12 +8,12 @@ export const MatchChampsGrid = styled(Grid)(({ theme }) => ({
         borderTop:'1px solid black',
         borderLeft: '1px solid black',
         borderRight: '1px solid black',
-        padding: theme.spacing(2)
-    },
+        padding: theme.spacing(2),
 
-    '&:last-child': {
-        borderBottom: '1px solid black'
-    }
+        '&:last-child': {
+            borderBottom: '1px solid black'
+        }
+    },
 }));
 
 export const OverallDataWrapper = styled('div')(({ theme }) => ({
@@ -59,6 +59,32 @@ export const ChampPerformanceWrapper = styled('div')(({ theme }) => ({
         },
         '& > span.assists': {
             color: theme.palette.info.main
+        }
+    }
+}));
+
+export const LeftButtonsWrapper = styled('div')(({ theme }) => ({
+    float: 'left',
+    paddingLeft: theme.spacing(10),
+
+    '& > button': {
+        marginBottom: theme.spacing(1),
+
+        '&:not(:last-of-type)': {
+            marginRight: theme.spacing(1)
+        }
+    }
+}));
+
+export const RightButtonsWrapper = styled('div')(({ theme }) => ({
+    float: 'right',
+    paddingRight: `calc(1% + ${theme.spacing(2)})`,
+
+    '& > button': {
+        marginBottom: theme.spacing(1),
+
+        '&:not(:last-of-type)': {
+            marginRight: theme.spacing(1)
         }
     }
 }));

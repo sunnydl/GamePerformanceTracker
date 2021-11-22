@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useAppSelector } from '../../../../redux/hooks';
+import { Grow } from '@mui/material';
 
 // styles components
 import {
@@ -65,45 +66,47 @@ export default function MatchSummaryComponent() {
     }
 
     return (
-        <MatchSummaryWrapper>
-            <MatchSummaryPaper>
-                <Header align="center">
-                    {summonerName? summonerName:"Player"}'s Statistics
-                </Header>
-                <Paragraph 
-                    variant="subtitle1"
-                    align="center"
-                >
-                    Recent 5 Games
-                </Paragraph>
-                <ButtonSelections>
-                    {NumOfGames.map((num: number) => (
-                        <Buttons variant="contained" disabled sx={{backgroundColor: '#18A0FB'}} key={num}>{num} Games</Buttons>
-                    ))}
-                </ButtonSelections>
-                <GraphWrapper>
-                    <RandomeChart
-                        buttonStates={buttonStates}
-                    />
+        <Grow in>
+            <MatchSummaryWrapper>
+                <MatchSummaryPaper>
+                    <Header align="center">
+                        {summonerName? summonerName:"Player"}'s Statistics
+                    </Header>
+                    <Paragraph 
+                        variant="subtitle1"
+                        align="center"
+                    >
+                        Recent 5 Games
+                    </Paragraph>
                     <ButtonSelections>
-                        {Features.map((feature: string) => (
-                            <Buttons 
-                                variant="contained" 
-                                sx={{ 
-                                    backgroundColor: `${buttonsColor[`${feature}`]}`,
-                                    "&:hover": {
-                                        backgroundColor: `${buttonsColor[`${feature}`]}`
-                                    }
-                                }} 
-                                key={feature}
-                                onClick={() => onSelect(feature)}
-                            >
-                                {feature}
-                            </Buttons>
+                        {NumOfGames.map((num: number) => (
+                            <Buttons variant="contained" disabled sx={{backgroundColor: '#18A0FB'}} key={num}>{num} Games</Buttons>
                         ))}
                     </ButtonSelections>
-                </GraphWrapper>
-            </MatchSummaryPaper>
-        </MatchSummaryWrapper>
+                    <GraphWrapper>
+                        <RandomeChart
+                            buttonStates={buttonStates}
+                        />
+                        <ButtonSelections>
+                            {Features.map((feature: string) => (
+                                <Buttons 
+                                    variant="contained" 
+                                    sx={{ 
+                                        backgroundColor: `${buttonsColor[`${feature}`]}`,
+                                        "&:hover": {
+                                            backgroundColor: `${buttonsColor[`${feature}`]}`
+                                        }
+                                    }} 
+                                    key={feature}
+                                    onClick={() => onSelect(feature)}
+                                >
+                                    {feature}
+                                </Buttons>
+                            ))}
+                        </ButtonSelections>
+                    </GraphWrapper>
+                </MatchSummaryPaper>
+            </MatchSummaryWrapper>
+        </Grow>
     )
 }

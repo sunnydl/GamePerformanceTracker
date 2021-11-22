@@ -14,7 +14,7 @@ function MatchList({ size }: { size: number }) {
     const matches = useAppSelector((state) => state.matches);
 
     return (
-        <MatchListing>
+        <MatchListing data-testid='match-list'>
             {matches.slice(0, size).map((match, idx) => (
                 <ListItem key={idx}>
                     <MatchSummary

@@ -121,7 +121,6 @@ describe('Match_services', () => {
         }
         const matchList:any = [];
         matchList.push(mockMatchDTO);
-        console.log(matchList);
         const kda = computeKda(matchList, puuid);
         expect(kda).toEqual([2]);
     })
