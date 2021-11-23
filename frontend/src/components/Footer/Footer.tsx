@@ -13,7 +13,7 @@ export default function Footer() {
                 <Tab style={{ fontSize: "inherit", fontWeight: "inherit" }} label="overview" component={Link} to={`/overview${location.search}`}/>
                 <Tab style={{ fontSize: "inherit", fontWeight: "inherit" }} label="match history" component={Link} to={`/match-history${location.search}`}/>
                 <Tab style={{ fontSize: "1.5rem" }} label="GPT" component={Link} to={`/landing${location.search}`}/>
-                <Tab style={{ fontSize: "inherit", fontWeight: "inherit" }} label="leaderboard" />
+                <Tab style={{ fontSize: "inherit", fontWeight: "inherit" }} label="leaderboard" component={Link} to={`/leaderboard${location.search}`}/>
                 <Tab style={{ fontSize: "inherit", fontWeight: "inherit" }} label="champions" component={Link} to={{ pathname: "https://www.leagueoflegends.com/en-us/champions/" }} target="_blank"/>
                 <Tab style={{ fontSize: "inherit", fontWeight: "inherit" }} label="riot api" component={Link} to={{ pathname: "https://developer.riotgames.com/" }} target="_blank"/>
             </Tabs>
