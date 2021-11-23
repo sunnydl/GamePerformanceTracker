@@ -6,6 +6,12 @@ import RatioBar from '../../../../components/RatioBar';
 
 import { getSummonerIconURL, displayWinRate } from '../../../../util';
 
+/**
+ * Returns a functional component of the leaderboard page that displays the
+ * leaderboard information.
+ * 
+ * @returns {JSX.Element} A functional component.
+ */
 export default function PlayerTableBody() {
     const theme = useTheme();
     const leaderboard = useAppSelector((state) => state.leaderboard.leaderboard);

@@ -11,6 +11,13 @@ import {
     SelectWrapper,
 } from './style'
 
+/**
+ * Returns a functional component of the leaderboard page that displays 
+ * three different options that the end user can sort the leaderboard
+ * information by.
+ * 
+ * @returns {JSX.Element} A functional component.
+ */
 export default function Selectors() {
 
     const { tier: t, division: d, queueType: q } = useAppSelector((state) => state.leaderboard);

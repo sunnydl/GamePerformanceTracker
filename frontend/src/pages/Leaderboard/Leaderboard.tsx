@@ -13,8 +13,13 @@ const LeaderboardWrapper = styled('div')(() => ({
     height: 'fit-content',
 }))
 
+/**
+ * Returns a functional component of the leaderboard page that wraps
+ * the leaderboard content inside a stylized container.
+ * 
+ * @returns {JSX.Element} The functional component.
+ */
 export default function LeaderBoard() {
-
     const dispatch = useAppDispatch();
     const { tier, division, queueType } = useAppSelector((state) => state.leaderboard);
 
@@ -24,7 +29,7 @@ export default function LeaderBoard() {
 
     return (
         <LeaderboardWrapper>
-            <Content/>
+            <Content />
         </LeaderboardWrapper>
     )
 }
