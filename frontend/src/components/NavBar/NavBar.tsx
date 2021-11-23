@@ -1,8 +1,5 @@
 
-import React, { useEffect } from 'react';
-
-import { useAppDispatch } from '../../redux/hooks';
-import { handleSearchParams } from '../../redux/slices/user';
+import React from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
 
@@ -31,11 +28,6 @@ const theme = createTheme({
 
 function NavBar() {
   const location = useLocation();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(handleSearchParams(location.search));
-  }, [dispatch, location.search]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -56,8 +48,8 @@ function NavBar() {
           <Tabs value={false} style={{ color: theme.palette.primary.contrastText, margin: 'auto' }}>
             <Tab style={{ color: 'inherit' }} label='overview' component={Link} to={`/overview${location.search}`} />
             <Tab style={{ color: 'inherit' }} label='Match History' component={Link} to={`/match-history${location.search}`} />
-            <Tab style={{ color: 'inherit' }} label='Leaderboard'/>
-            <Tab style={{ color: 'inherit' }} label='Champion' component={Link} to={{ pathname: "https://www.leagueoflegends.com/en-us/champions/" }} target="_blank"/>
+            <Tab style={{ color: 'inherit' }} label='Leaderboard' component={Link} to={`/leaderboard${location.search}`} />
+            <Tab style={{ color: 'inherit' }} label='Champion'/>
           </Tabs> 
           <SummonerSearchBar />
           <Box sx={{ flexGrow: 0.5 }} />

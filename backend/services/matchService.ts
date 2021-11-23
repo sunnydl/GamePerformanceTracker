@@ -123,6 +123,12 @@ export const getParticipantsInfoByMatchId = async(matchId: string, region: strin
     }
 };
 
+/**
+ * Returns the jg score on large monster's kill for the jg player.
+ * @param {Array<number>} ranklist: the jg player's datas.
+ * @param {ParticipantDto} jgpart: the jg player's datas.
+ * @return {number} jg: the jg score for the large monster's kill.
+ */
 //get the rank point of specific field
 const rankpoint = (ranklist: Array<number>, data: number): number => {
     let rank = 10;
@@ -133,14 +139,16 @@ const rankpoint = (ranklist: Array<number>, data: number): number => {
             rank -= 1;
         }
     }
-    
     //1: + 1, 2: + 0.5, 3: + 0.2, 4: + 0.1, 5: +0, 6: - 0, 7: -0.1, 8: -0.2, 9: -0.5, 10: -1 
-    
     rankpt = rankmap[rank.toString()];
     return rankpt;
 }
 
-//calculate the jg points on large monster's kill
+/**
+ * Returns the jg score on large monster's kill for the jg player.
+ * @param {ParticipantDto} jgpart: the jg player's datas.
+ * @return {number} jg: the jg score for the large monster's kill.
+ */
 const jgpoint = (jgpart: ParticipantDto): number => {
     let jg = 0;
     if(jgpart.dragonKills >=3 && jgpart.baronKills >= 1){jg = 1;}
@@ -151,7 +159,12 @@ const jgpoint = (jgpart: ParticipantDto): number => {
     return jg;
 }
 
-//Compute the KDA/GPT score on specific game and specific player.
+/**
+ * Returns the kda score for the specific player in the given match.
+ * @param {MatchDto} match: The match that contains players in that match with all datas.
+ * @param {string} puuid: each player has a unique puuid.
+ * @return {number} kda: the kda score of the specific player in the given match after computation.
+ */
 const kDA = (match: MatchDto, puuid: string): number => {
     //initialized the varaiables
     let kda = 10;
@@ -170,15 +183,6 @@ const kDA = (match: MatchDto, puuid: string): number => {
     if(time > 36000){ // if the time count in milisecond, divide by 1000
         time = currency(time).divide(1000).value;
     }
-    //Rank: total Damage Dealt To Champions, 
-    //goldEarned, 
-    //Ratio of damage to gold, (not counting negative for goldearned for sup)
-    //KDA(Kill(1.5)+assist)/death(1.2), (different for sup)
-    //damageDealtToBuildings,
-    //visionScore, 
-    //totalTimeCCDealt
-    //totalheal(sup)
-
     //initialized the list for getting datas.
     needlist.push("totalDamageDealtToChampions", 
     "visionScore", "damageDealtToBuildings", "totalTimeCCDealt", "goldEarned");
@@ -257,25 +261,38 @@ const kDA = (match: MatchDto, puuid: string): number => {
         }
         ranklist.push(stat);
     }
+    //compute the kda at the end.
     rankpts = currency(rankpts).add(currency(rankpoint(ranklist, data))).value;
     kda += win_lose + rankpts; 
     return kda;
 }
 
+/**
+ * Returns the number array that contain the kda score in given matchlist for specific player.
+ * @param {Array<MatchDto>} matchList: The list of the match that each contains all datas.
+ * @param {string} puuid: each player has a unique puuid.
+ * @return {Array<number>} kdaScoreList: the list of the kda score after computation.
+ */
 export const computeKda = (matchList: Array<MatchDto>, puuid: string): Array<number> => {
     const kdaScoreList: Array<number> = [];
-    // compute it with data given in the matchList
+    // compute the kda for specific player with data given in the matchList
     for(let i = 0; i < matchList.length; i++){
         kdaScoreList.push(kDA(matchList[i], puuid));
     }
     return kdaScoreList;
  }
 
-const matchHistoryData = (match: MatchDto, puuid: string): Map<any,any> => {
+/**
+ * Returns the MatchHistoryDTO which contain the datas that needed for match history page.
+ * @param {MatchDto} match: contain all particiates in the game and all the datas needed.
+ * @param {string} puuid: each player has a unique puuid.
+ * @return {MatchHistoryDTO} dataList: contain the datas that needed for match history page.
+ */
+const matchHistoryData = (match: MatchDto, puuid: string): MatchHistoryDTO => {
+    // initialize the variables
     const dataList: any = {};
-    dataList.gameMode = match.info.gameMode;
-    dataList.gameDate = timeConverter(match.info.gameStartTimestamp);
     const partis: any = match.info.participants;
+    //get all datas needed.
     let time = match.info.gameDuration;
     if(time > 36000){
         time = currency(time).divide(1000).value;
@@ -294,7 +311,9 @@ const matchHistoryData = (match: MatchDto, puuid: string): Map<any,any> => {
     let dmgPerMin = currency(dmg).divide(currency(min)).value;
     let visionPerMin = currency(vision).divide(currency(min)).value;
     let gptScore = kDA(match, puuid);
-
+    // get all datas in the datalist
+    dataList.gameMode = match.info.gameMode;
+    dataList.gameDate = timeConverter(match.info.gameStartTimestamp);
     dataList.win = parti.win;
     dataList.role = parti.role;
     dataList.championName = parti.championName;
@@ -311,7 +330,13 @@ const matchHistoryData = (match: MatchDto, puuid: string): Map<any,any> => {
     return dataList;
 }
 
-export const computeMatchHistoryData = (matchList: Array<MatchDto>, puuid: string): Array<any> => {
+/**
+ * Returns the array of MatchHistoryDTO that contain all datas needed for the match history page.
+ * @param {Array<MatchDto>} matchList: The list of the match that each contains all datas.
+ * @param {string} puuid: each player has a unique puuid.
+ * @return {Array<MatchHistoryDTO>} matchHistoryList: the list of MatchHistoryDTO which contain the datas that needed for match history page.
+ */
+export const computeMatchHistoryData = (matchList: Array<MatchDto>, puuid: string): Array<MatchHistoryDTO> => {
     const matchHistoryList = [];
     // iterate the matchList to collect the data of the user 
     // into a single MatchHistoryDTO obj then push the obj to matchHistoryList

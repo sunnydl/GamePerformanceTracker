@@ -22,7 +22,7 @@ const userSlice = createSlice({
     },
 })
 
-function handleSearchParams(query: string) {
+function fetchUserData(query: string) {
     return async (dispatch: Dispatch) => {
         if (query) {
             const params = new URLSearchParams(query);
@@ -54,4 +54,4 @@ export const { setUserData } = userSlice.actions
 
 export default userSlice.reducer
 
-export { handleSearchParams }
+export { fetchUserData }
