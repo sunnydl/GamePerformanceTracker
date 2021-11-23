@@ -24,7 +24,7 @@ export default function PlayerTableBody() {
                     <TableCell>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Avatar src={getSummonerIconURL(player.summonerIcon)} />
-                            <PlayerLink to={`/overview?summonerName=${player.summonerName}&region=${player.region}`}>
+                            <PlayerLink to={`/overview?summonerName=${player.summonerName}&region=NA`}>
                                 {player.summonerName}
                             </PlayerLink>
                         </Box>
