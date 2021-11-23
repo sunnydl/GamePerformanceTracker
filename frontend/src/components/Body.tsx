@@ -13,6 +13,7 @@ import PageLoading from './PageLoading';
 const Home = lazy(() => import('../pages/Landing/Home'));
 const Overview = lazy(() => import('../pages/Overview/Overview'));
 const MatchHistory = lazy(() => import('../pages/MatchHistory/MatchHistory'));
+const Leaderboard = lazy(() => import('../pages/Leaderboard/Leaderboard'));
 
 const Container = styled('div')(() => ({
     padding: '8vh 2vw 8vh 2vw',
@@ -48,6 +49,9 @@ function Body() {
                     </Route>
                     <Route exact path='/match-history'>
                         <MatchHistory />
+                    </Route>
+                    <Route exact path='/leaderboard'>
+                        <Leaderboard/>
                     </Route>
                     <Redirect to='/' />
                 </Switch>

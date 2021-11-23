@@ -44,7 +44,7 @@ mongoose
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 app.use(morgan('dev'))
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 // define rules of api, aka what is allowed
 app.use((req, res, next) => {
