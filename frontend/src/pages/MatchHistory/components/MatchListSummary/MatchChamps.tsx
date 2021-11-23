@@ -9,7 +9,7 @@ import ChampData from './ChampData';
 import { MatchState, ChampPerformanceSummary } from '../../../../interfaces';
 import { useAppSelector } from '../../../../redux/hooks';
 
-function getTopChamps(matches: MatchState[]) {
+export function getTopChamps(matches: MatchState[]) {
     const champs: { [key: string]: ChampPerformanceSummary } = {};
 
     for (const key in matches) {
