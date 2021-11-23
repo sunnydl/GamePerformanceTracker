@@ -15,7 +15,7 @@ import {
  */
 export default function Content() {
     return (
-        <LeaderboardPaper>
+        <LeaderboardPaper data-testid="leaderboard content">
             <TopSection />
             <PlayerList />
         </LeaderboardPaper>

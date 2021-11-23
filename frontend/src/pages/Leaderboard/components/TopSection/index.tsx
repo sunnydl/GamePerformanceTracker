@@ -20,7 +20,7 @@ export default function TopSection() {
 
     return (
         <TopSectionWrapper>
-            <Header align="left">
+            <Header align="left" data-testid="leaderboard heading">
                 Top {queueType} Players in {['Challenger', 'GrandMaster', 'Master'].includes(tier)? tier:`${tier} ${division}`}
             </Header>
             <Selectors/>
