@@ -6,17 +6,8 @@ import { MatchChampsGrid } from './style';
 import OverallData from './OverallData';
 import ChampData from './ChampData';
 
-import { MatchState } from '../../../../interfaces';
+import { MatchState, ChampPerformanceSummary } from '../../../../interfaces';
 import { useAppSelector } from '../../../../redux/hooks';
-
-export interface ChampPerformanceSummary {
-    championName: string,
-    matches: number,
-    wins: number,
-    kills: number,
-    deaths: number,
-    assists: number
-}
 
 function getTopChamps(matches: MatchState[]) {
     const champs: { [key: string]: ChampPerformanceSummary } = {};
