@@ -15,7 +15,7 @@ export default function Footer() {
                 <Tab style={{ fontSize: "1.5rem" }} label="GPT" component={Link} to={`/landing${location.search}`}/>
                 <Tab style={{ fontSize: "inherit", fontWeight: "inherit" }} label="leaderboard" component={Link} to={`/leaderboard${location.search}`}/>
                 <Tab style={{ fontSize: "inherit", fontWeight: "inherit" }} label="champions" component={Link} to={{ pathname: "https://www.leagueoflegends.com/en-us/champions/" }} target="_blank"/>
-                <Tab style={{ fontSize: "inherit", fontWeight: "inherit" }} label="riot api" component={Link} to={{ pathname: "https://developer.riotgames.com/" }} target="_blank"/>
+                <Tab style={{ fontSize: "inherit", fontWeight: "inherit" }} label="riot api" component={Link} to={{ pathname: "https://developer.riotgames.com/apis" }} target="_blank"/>
             </Tabs>
             <hr style={{ backgroundColor: "black", border: "none", height: "1px", width: "90%" }} />
             <ParticipantsWrapper>
