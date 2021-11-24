@@ -19,7 +19,7 @@ export const ProfileWrapper = styled(Box)(({ theme }) => ({
         fontSize: "1.5rem",
         fontWeight: "bold",
 
-        "& .MuiAvatar-root": {
+        "& .profile": {
             width: "256px",
             height: "256px"
         }
@@ -30,7 +30,7 @@ export const ProfileWrapper = styled(Box)(({ theme }) => ({
         paddingBottom: "16px"
     },
 
-    "& .body-wrapper > div > span": {
+    "& .body-wrapper > div > span.data-value": {
         float: "right"
     },
 
