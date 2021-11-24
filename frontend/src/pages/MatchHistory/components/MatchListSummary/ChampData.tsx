@@ -3,7 +3,7 @@ import React from 'react';
 import { Avatar, Grid } from '@mui/material';
 import { ChampDataGrid, ChampPerformanceWrapper } from './style';
 
-import { ChampPerformanceSummary } from './MatchChamps';
+import { ChampPerformanceSummary } from '../../../../interfaces';
 import { getChampionIconURL } from '../../../../util';
 
 function ChampData({ data }: { data: ChampPerformanceSummary }) {

@@ -30,8 +30,10 @@ function Body() {
 
     useEffect(() => {
         const search = location.search;
+        const params = new URLSearchParams(search);
+        const searchParams = `?summonerName=${params.get('summonerName')}&region=${params.get('region')}`
         
-        if (search !== prevSearch) {
+        if (searchParams !== prevSearch) {
             dispatch(fetchUserData(search));
             dispatch(fetchChartData(search, 5));
             dispatch(fetchMatchesData(search, 10));

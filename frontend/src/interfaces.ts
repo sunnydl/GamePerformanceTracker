@@ -1,3 +1,4 @@
+// Redux state interfaces
 export interface UserState {
     summonerName?:  string;
     summonerLevel?: number;
@@ -43,4 +44,26 @@ export interface LeaderboardState {
     division: string;
     queueType: string;
     leaderboard: Array<UserState>;
+}
+
+
+
+// Helper interfaces
+export interface MatchData {
+    kills: number;
+    deaths: number;
+    assists: number;
+    gptScore: number;
+    visionPerMin: number;
+    csPerMin: number;
+    dmgPerMin: number;
+}
+
+export interface ChampPerformanceSummary {
+    championName: string,
+    matches: number,
+    wins: number,
+    kills: number,
+    deaths: number,
+    assists: number
 }
