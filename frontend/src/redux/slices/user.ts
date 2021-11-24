@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
 import { UserState } from '../../interfaces'
 import axios from 'axios';
-
 const initialState: UserState = {}
 
 const userSlice = createSlice({
@@ -22,7 +21,7 @@ const userSlice = createSlice({
     },
 })
 
-function fetchUserData(query: string) {
+function fetchUserData(query: string, history: any) {
     return async (dispatch: Dispatch) => {
         if (query) {
             const params = new URLSearchParams(query);
@@ -44,6 +43,13 @@ function fetchUserData(query: string) {
                 .catch((err) => {
                     console.log('user not found:\n', err.response || err);
                     dispatch(setUserData({summonerFound: false, region: region, summonerName: summonerName}));
+                    history.push({
+                        pathname: '/usernotfound',
+                        search: new URLSearchParams({
+                          summonerName: summonerName,
+                          region: region,
+                        }).toString(),
+                    });
                 });
             }
         }

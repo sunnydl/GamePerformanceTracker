@@ -1,13 +1,14 @@
 import React from 'react';
-import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
 
-function Unfound() {
+function TopSection() {
     const theme = createTheme({
       palette: {
         primary: {
@@ -47,21 +48,22 @@ function Unfound() {
                 We can't find that user!
               </Typography>
             </Container>
-            
-            <Container maxWidth="sm">
-                <Typography variant="h3" align="center" color="text.primary" paragraph>
-                    Search Again?
-                </Typography>
-                <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                    We couldn’t find a match for user x in region y. Please verify that user 
-                    x belongs to the specified region. For more information on regions, 
-                    please follow the link below.
-                </Typography>
-            </Container>
+            <Stack
+              sx={{ pt: 0 }}
+              direction="row"
+              spacing={2}
+              justifyContent="center"
+            >
+              <Avatar 
+                src={`${process.env.PUBLIC_URL}/UserNotFound.jpg`} 
+                sx={{ width: 150, height: 150 }} 
+                style={{alignSelf: 'center'}}/>
+            </Stack>
           </Box>
         </main>
+        
     </ThemeProvider>
   );
 }
 
-export default Unfound;
+export default TopSection;

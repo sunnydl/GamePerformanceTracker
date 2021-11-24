@@ -1,11 +1,11 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { useAppDispatch, useAppSelector} from '../redux/hooks';
 import { fetchUserData } from '../redux/slices/user';
 import { fetchChartData } from '../redux/slices/chart';
 import { fetchMatchesData } from '../redux/slices/matches';
 
-import { useLocation, Switch, Route, Redirect } from 'react-router-dom';
+import { useLocation, Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 import PageLoading from './PageLoading';
@@ -14,7 +14,7 @@ const Home = lazy(() => import('../pages/Landing/Home'));
 const Overview = lazy(() => import('../pages/Overview/Overview'));
 const MatchHistory = lazy(() => import('../pages/MatchHistory/MatchHistory'));
 const Leaderboard = lazy(() => import('../pages/Leaderboard/Leaderboard'));
-const Unfound = lazy(() => import('../pages/404_error/404_error'));
+const UserNotFound = lazy(() => import('../pages/UserNotFound/UserNotFound'));
 
 const Container = styled('div')(() => ({
     padding: '8vh 2vw 8vh 2vw',
@@ -27,19 +27,19 @@ function Body() {
     });
     const location = useLocation();
     const dispatch = useAppDispatch();
-
+    const history = useHistory();
     useEffect(() => {
         const search = location.search;
         const params = new URLSearchParams(search);
         const searchParams = `?summonerName=${params.get('summonerName')}&region=${params.get('region')}`
-        
+
         if (searchParams !== prevSearch) {
-            dispatch(fetchUserData(search));
+            dispatch(fetchUserData(search, history));
             dispatch(fetchChartData(search, 5));
             dispatch(fetchMatchesData(search, 10));
         }   
-    }, [dispatch, prevSearch, location.search]);
-
+    }, [dispatch, prevSearch, location.search, history]);
+    
     return (
         <Container>
             <Suspense fallback={<PageLoading/>}>
@@ -50,8 +50,8 @@ function Body() {
                     <Route exact path='/overview'>
                         <Overview />
                     </Route>
-                    <Route exact path='/404_error'>
-                        <Unfound />
+                    <Route exact path='/usernotfound'>
+                        <UserNotFound />
                     </Route>
                     <Route exact path='/match-history'>
                         <MatchHistory />

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-
+import { useAppSelector} from '../../redux/hooks';
 import { useHistory } from 'react-router-dom';
-
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
@@ -55,23 +54,13 @@ const regions = ['NA','KR','JP','BR','EUN','EUW','LA1','LA2','OC','TR','RU'];
 function SummonerSearchBar() {
   const [regionIndex, setRegionIndex] = useState(0);
   const history = useHistory();
-
+  const { summonerName = "", region= ""} = useAppSelector((state) => state.user);
   const handleSummonerSearchByName = (e: React.KeyboardEvent) => {
     if (e.code === 'Enter') {
       const element = e.target as HTMLInputElement;
       const searchName = element.value;
-
-      if (searchName === "sb") {
-        console.log('searching for:', searchName);
-        history.push({
-          pathname: '/404_error',
-          search: new URLSearchParams({
-            summonerName: searchName,
-            region: regions[regionIndex],
-          }).toString(),
-        });
-      }
-      else if (searchName) {
+    
+      if (searchName && (searchName !== summonerName || regions[regionIndex] !== region)) {
         console.log('searching for:', searchName);
         history.push({
           pathname: '/overview',
