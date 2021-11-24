@@ -14,6 +14,7 @@ const Home = lazy(() => import('../pages/Landing/Home'));
 const Overview = lazy(() => import('../pages/Overview/Overview'));
 const MatchHistory = lazy(() => import('../pages/MatchHistory/MatchHistory'));
 const Leaderboard = lazy(() => import('../pages/Leaderboard/Leaderboard'));
+const Unfound = lazy(() => import('../pages/404_error/404_error'));
 
 const Container = styled('div')(() => ({
     padding: '8vh 2vw 8vh 2vw',
@@ -46,6 +47,9 @@ function Body() {
                     </Route>
                     <Route exact path='/overview'>
                         <Overview />
+                    </Route>
+                    <Route exact path='/404_error'>
+                        <Unfound />
                     </Route>
                     <Route exact path='/match-history'>
                         <MatchHistory />

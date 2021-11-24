@@ -61,7 +61,17 @@ function SummonerSearchBar() {
       const element = e.target as HTMLInputElement;
       const searchName = element.value;
 
-      if (searchName) {
+      if (searchName === "sb") {
+        console.log('searching for:', searchName);
+        history.push({
+          pathname: '/404_error',
+          search: new URLSearchParams({
+            summonerName: searchName,
+            region: regions[regionIndex],
+          }).toString(),
+        });
+      }
+      else if (searchName) {
         console.log('searching for:', searchName);
         history.push({
           pathname: '/overview',
