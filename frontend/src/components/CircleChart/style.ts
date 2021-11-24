@@ -5,7 +5,17 @@ export const CircleChartWrapper = styled('div')(({ theme }) => ({
     width: "fit-content"
 }));
 
-// Do we want to create our own title using div, similar to labels?
+export const TitleWrapper = styled('div')(({ theme }) => ({
+    position: "absolute",
+    bottom: '90%',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    fontSize: theme.typography.h5.fontSize,
+    fontWeight: 'bold'
+}));
 
 export const LabelWrapper = styled('div')(({ theme }) => ({
     position: "absolute",
