@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { fetchLeaderboardData } from '../../redux/slices/leaderboard';
 
+import { Grow } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import TopSection from './components/TopSection';
@@ -48,7 +49,11 @@ export default function LeaderBoard() {
                 {loading ? (
                     <PageLoading />
                 ) : (
-                    <PlayerList />
+                    <Grow in={!loading}>
+                        <div>
+                            <PlayerList />
+                        </div>
+                    </Grow>
                 )}
             </LeaderboardPaper>
         </LeaderboardWrapper>
