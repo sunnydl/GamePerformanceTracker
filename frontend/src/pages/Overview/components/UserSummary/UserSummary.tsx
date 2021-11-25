@@ -4,6 +4,12 @@ import UserProfile from './UserProfile';
 import UserCharts from './UserCharts';
 import UserChamps from './UserChamps';
 
+/**
+ * Returns a functional component of the overview page that displays a
+ * summary of the summoner's overall statistics.
+ * 
+ * @returns {JSX.Element} A functional component.
+ */
 export default function UserSummary() {
     return (
         <Grow in>

@@ -6,6 +6,12 @@ import { ProfileWrapper } from './style';
 import { getSummonerIconURL } from '../../../../util';
 import { useAppSelector } from '../../../../redux/hooks';
 
+/**
+ * Returns a functional component of the overview page that displays a
+ * summoner's ranking data.
+ * 
+ * @returns {JSX.Element} A functional component.
+ */
 export default function UserProfile() {
     const {
         summonerName,

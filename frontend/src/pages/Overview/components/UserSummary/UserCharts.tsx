@@ -5,6 +5,12 @@ import CircleChart from '../../../../components/CircleChart/CircleChart';
 import { displayWinRate } from '../../../../util';
 import { useAppSelector } from '../../../../redux/hooks';
 
+/**
+ * Returns a functional component of the overview page that displays 
+ * two charts of the summoner's win rate and kills/deaths/assists values.
+ * 
+ * @returns {JSX.Element} A functional component.
+ */
 export default function UserCharts() {
     const { wins, losses, kills, deaths, assists } = useAppSelector((state) => {
         const wins = state.user.winGames ?? 0;

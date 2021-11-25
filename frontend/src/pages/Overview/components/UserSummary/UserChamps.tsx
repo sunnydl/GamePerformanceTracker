@@ -5,6 +5,12 @@ import { FavoriteChampionsWrapper } from './style';
 import { getChampionIconURL } from '../../../../util';
 import { useAppSelector } from '../../../../redux/hooks';
 
+/**
+ * Returns a functional component of the overview page that displays a
+ * summoner's most played champions.
+ * 
+ * @returns {JSX.Element} A functional component.
+ */
 export default function UserChamps() {
     const favChamps = useAppSelector((state) => state.user.favChamps) ?? [];
 
