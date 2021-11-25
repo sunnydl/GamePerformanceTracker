@@ -31,9 +31,8 @@ function fetchUserData(query: string) {
             const params = new URLSearchParams(query);
             const summonerName = params.get('summonerName');
             const region = params.get('region') ?? 'NA'; // Defaults to NA region
-            console.log(region);
             if (summonerName) {
-                axios.get('/api/summonerInfo', {
+                return axios.get('/api/summonerInfo', {
                     params: {
                     summonerName: summonerName,
                     region: region,
