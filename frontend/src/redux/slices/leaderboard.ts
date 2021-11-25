@@ -8,7 +8,6 @@ const initialState: LeaderboardState = {
     tier: 'Challenger',
     division: 'I',
     queueType: 'SOLO',
-    loading: false,
     leaderboard: [
         {
             summonerName: 'sunny1',
@@ -55,7 +54,6 @@ const leaderboardSlice = createSlice({
             state.division      =       action.payload.division ?? 'I';
             state.queueType     =       action.payload.queueType ?? 'SOLO';
             state.leaderboard   =       [...action.payload.leaderboard];
-            state.loading       =       action.payload.loading  ??  false;
             return state;
         },
         setLeaderboardFilter: (state, action: PayloadAction<LeaderboardState>) => {
@@ -64,43 +62,37 @@ const leaderboardSlice = createSlice({
             state.queueType     =       action.payload.queueType ?? 'SOLO';
             return state;
         },
-        setLoading: (state, action: PayloadAction<any>) => {
-            state.loading       =       action.payload.loading  ??  true;
-            return state;
-        },
     },
 })
 
 function fetchLeaderboardData(tier: string, division: string, queueType: string) {
     return async (dispatch: Dispatch) => {
-        if(tiers.includes(tier) && divisions.includes(division) && queueTypes.includes(queueType)) {
-            dispatch(setLoading({
-                loading: true,
-            }));
-            try {
-                const { data } = await axios.get('/api/summonerInfo/leaderboard', {
-                    params: {
-                        tier: tier,
-                        division: division,
-                        queueType: queueType,
-                    }
-                });
-                console.log('leaderboard data found:', data);
+        if (tiers.includes(tier) && divisions.includes(division) && queueTypes.includes(queueType)) {
+            return axios.get('/api/summonerInfo/leaderboard', {
+                params: {
+                    tier: tier,
+                    division: division,
+                    queueType: queueType,
+                }
+            })
+            .then((res) => {
+                const leaderboardData = res.data;
+                console.log('leaderboard data found:', leaderboardData);
                 dispatch(setLeaderboardData({
                     tier: tier,
                     division: division,
                     queueType: queueType,
-                    loading: false,
-                    leaderboard: data,
+                    leaderboard: leaderboardData,
                 }));
-            } catch (err: any) {
+            })
+            .catch((err) => {
                 console.log("cannot load leaderboard data:\n", err.response || err);
-            }
+            });
         }
     }
 }
 
-export const { setLeaderboardData, setLeaderboardFilter, setLoading } = leaderboardSlice.actions
+export const { setLeaderboardData, setLeaderboardFilter } = leaderboardSlice.actions
 
 export default leaderboardSlice.reducer
 

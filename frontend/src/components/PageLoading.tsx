@@ -5,7 +5,7 @@ export default function PageLoading() {
     return (
         <Box sx={{
             display: 'flex',
-            position: 'fixed',
+            position: 'absolute',
             bottom: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)'
