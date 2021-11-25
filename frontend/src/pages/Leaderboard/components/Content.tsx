@@ -1,7 +1,9 @@
 import React from 'react';
+import { useAppSelector } from '../../../redux/hooks';
 
 import TopSection from './TopSection';
 import PlayerList from './PlayerList';
+import PageLoading from '../../../components/PageLoading';
 
 import {
     LeaderboardPaper
@@ -14,10 +16,11 @@ import {
  * @returns {JSX.Element} A functional component.
  */
 export default function Content() {
+    const { loading } = useAppSelector(state => state.leaderboard);
     return (
         <LeaderboardPaper data-testid="leaderboard content">
             <TopSection />
-            <PlayerList />
+            {loading? <PageLoading/>:<PlayerList />}
         </LeaderboardPaper>
     )
 }

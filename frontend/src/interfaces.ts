@@ -43,6 +43,7 @@ export interface LeaderboardState {
     tier: string;
     division: string;
     queueType: string;
+    loading: boolean;
     leaderboard: Array<UserState>;
 }
 

@@ -31,6 +31,7 @@ export default function Selectors() {
             tier,
             division,
             queueType,
+            loading: true,
             leaderboard: [],
         }))
     }
