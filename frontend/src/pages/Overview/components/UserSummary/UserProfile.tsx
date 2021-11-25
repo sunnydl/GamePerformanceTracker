@@ -3,7 +3,7 @@ import RankEmblemIcon from '../../../../components/RankEmblemIcon';
 import { Avatar, Badge } from '@mui/material';
 import { ProfileWrapper } from './style';
 
-import { getSummonerIconURL, displayWinRate } from '../../../../util';
+import { getSummonerIconURL } from '../../../../util';
 import { useAppSelector } from '../../../../redux/hooks';
 
 export default function UserProfile() {
@@ -43,10 +43,8 @@ export default function UserProfile() {
                     <span className='data-value'>{summonerLevel}</span>
                 </div>
                 <div>
-                    <span className='data-name'>Win Rate:</span>
-                    <span className='data-value'>
-                        {displayWinRate(winGames, lossGames, true)}
-                    </span>
+                    <span className='data-name'>Wins | Losses:</span>
+                    <span className='data-value'>{winGames} | {lossGames}</span>
                 </div>
             </div>
         </ProfileWrapper>
