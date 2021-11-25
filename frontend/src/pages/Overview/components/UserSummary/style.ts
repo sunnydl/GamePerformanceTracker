@@ -19,7 +19,7 @@ export const ProfileWrapper = styled(Box)(({ theme }) => ({
         fontSize: "1.5rem",
         fontWeight: "bold",
 
-        "& .MuiAvatar-root": {
+        "& .profile": {
             width: "256px",
             height: "256px"
         }
@@ -30,7 +30,7 @@ export const ProfileWrapper = styled(Box)(({ theme }) => ({
         paddingBottom: "16px"
     },
 
-    "& .body-wrapper > div > span": {
+    "& .body-wrapper > div > span.data-value": {
         float: "right"
     },
 
@@ -78,22 +78,4 @@ export const FavoriteChampionsWrapper = styled(Box)(({ theme }) => ({
             height: "128px"
         }
     }
-}));
-
-export const CircleChartWrapper = styled('div')(({ theme }) => ({
-    position: "relative",
-    width: "fit-content"
-}));
-
-// Do we want to create our own title using div, similar to labels?
-
-export const LabelWrapper = styled('div')(({ theme }) => ({
-    position: "absolute",
-    bottom: 0,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    height: '100%',
-    width: "100%",
 }));

@@ -13,6 +13,7 @@ import PageLoading from './PageLoading';
 const Home = lazy(() => import('../pages/Landing/Home'));
 const Overview = lazy(() => import('../pages/Overview/Overview'));
 const MatchHistory = lazy(() => import('../pages/MatchHistory/MatchHistory'));
+const Leaderboard = lazy(() => import('../pages/Leaderboard/Leaderboard'));
 
 const Container = styled('div')(() => ({
     padding: '8vh 2vw 8vh 2vw',
@@ -28,8 +29,10 @@ function Body() {
 
     useEffect(() => {
         const search = location.search;
+        const params = new URLSearchParams(search);
+        const searchParams = `?summonerName=${params.get('summonerName')}&region=${params.get('region')}`
         
-        if (search !== prevSearch) {
+        if (searchParams !== prevSearch) {
             dispatch(fetchUserData(search));
             dispatch(fetchChartData(search, 5));
             dispatch(fetchMatchesData(search, 10));
@@ -48,6 +51,9 @@ function Body() {
                     </Route>
                     <Route exact path='/match-history'>
                         <MatchHistory />
+                    </Route>
+                    <Route exact path='/leaderboard'>
+                        <Leaderboard/>
                     </Route>
                     <Redirect to='/' />
                 </Switch>

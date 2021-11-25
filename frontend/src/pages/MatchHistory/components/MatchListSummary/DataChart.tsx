@@ -12,17 +12,8 @@ import { useAppSelector } from '../../../../redux/hooks';
 import { Button, Grid, Paper } from '@mui/material';
 import { LeftButtonsWrapper, RightButtonsWrapper } from './style';
 
+import { MatchData } from '../../../../interfaces';
 import OptionSelectButton from './OptionSelectButton';
-
-interface MatchData {
-    kills: number;
-    deaths: number;
-    assists: number;
-    gptScore: number;
-    visionPerMin: number;
-    csPerMin: number;
-    dmgPerMin: number;
-}
 
 // TODO: figure out if an interface's properties can be extracted,
 //       similar to running `Object.keys(obj)`

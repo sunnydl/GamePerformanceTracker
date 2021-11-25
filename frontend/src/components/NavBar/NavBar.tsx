@@ -48,8 +48,8 @@ function NavBar() {
           <Tabs value={false} style={{ color: theme.palette.primary.contrastText, margin: 'auto' }}>
             <Tab style={{ color: 'inherit' }} label='overview' component={Link} to={`/overview${location.search}`} />
             <Tab style={{ color: 'inherit' }} label='Match History' component={Link} to={`/match-history${location.search}`} />
-            <Tab style={{ color: 'inherit' }} label='Leaderboard'/>
-            <Tab style={{ color: 'inherit' }} label='Champion'/>
+            <Tab style={{ color: 'inherit' }} label='Leaderboard' component={Link} to={`/leaderboard${location.search}`} />
+            <Tab style={{ color: 'inherit' }} label='Champion' component={Link} to={{ pathname: "https://www.leagueoflegends.com/en-us/champions/" }} target="_blank"/>
           </Tabs> 
           <SummonerSearchBar />
           <Box sx={{ flexGrow: 0.5 }} />

@@ -22,6 +22,7 @@
     summonerLevel: number
     summonerIcon: number
     rank: string
+    leaguePoints: number,
     winGames: number
     lossGames: number
     favChamps: Array<string>
@@ -43,6 +44,28 @@
         deaths: number
         assists: number
         scores: number
+    },
+    ...
+]
+```
+#### GET api/summonerInfo/leaderboard/:tier/:division/:queueType/:region
+##### request input (Get request param):
+* tier: string
+* division: string
+* queueType: string
+* region: string
+##### response:
+```
+[
+    {
+        summonerName: string
+        summonerLevel: number
+        summonerIcon: number
+        rank: string
+        leaguePoints: number,
+        winGames: number
+        lossGames: number
+        favChamps: Array<string>
     },
     ...
 ]
