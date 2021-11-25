@@ -4,7 +4,7 @@ import UserProfile from './UserProfile';
 import UserCharts from './UserCharts';
 import UserChamps from './UserChamps';
 
-function UserSummary() {
+export default function UserSummary() {
     return (
         <Grow in>
             <Grid container spacing={2}>
@@ -23,7 +23,3 @@ function UserSummary() {
         </Grow>
     );
 }
-
-    
-
-export default UserSummary;
