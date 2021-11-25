@@ -24,7 +24,7 @@ export default function UserProfile() {
     } = useAppSelector((state) => state.user);
 
     return (
-        <ProfileWrapper>
+        <ProfileWrapper data-testid='user-profile'>
             <div className='icon-wrapper'>
                 <Badge
                     overlap='circular'

@@ -15,7 +15,7 @@ export default function UserChamps() {
     const favChamps = useAppSelector((state) => state.user.favChamps) ?? [];
 
     return (
-        <FavoriteChampionsWrapper>
+        <FavoriteChampionsWrapper data-testid='user-champs'>
             {favChamps.length ? (
                 <React.Fragment>
                     <div className="title-wrapper">Favorite Champions</div>

@@ -10,9 +10,9 @@ import MatchSummary from './components/MatchSummary'
  */
 export default function Overview() {
     return (
-        <React.Fragment>
+        <div data-testid='overview'>
             <UserSummary />
             <MatchSummary />
-        </React.Fragment>
+        </div>
     )
 }

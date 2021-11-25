@@ -73,7 +73,7 @@ export default function MatchSummaryComponent() {
 
     return (
         <Grow in>
-            <MatchSummaryWrapper>
+            <MatchSummaryWrapper data-testid='match-chart'>
                 <MatchSummaryPaper>
                     <Header align="center">
                         {summonerName? summonerName:"Player"}'s Statistics

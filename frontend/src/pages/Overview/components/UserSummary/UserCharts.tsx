@@ -20,7 +20,7 @@ export default function UserCharts() {
     });
 
     return (
-        <ChartsWrapper>
+        <ChartsWrapper data-testid='circle-charts'>
             <CircleChart
                 title="Win Rate"
                 data={[
