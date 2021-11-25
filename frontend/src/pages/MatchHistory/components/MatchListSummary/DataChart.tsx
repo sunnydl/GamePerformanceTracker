@@ -32,7 +32,7 @@ const matchDataColors = {
     kills: 'green',
     deaths: 'pink',
     assists: 'aqua',
-    gptScore: 'yellow',
+    gptScore: '#F5CBA7',
     visionPerMin: 'gray',
     csPerMin: 'lime',
     dmgPerMin: 'red',
