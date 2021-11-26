@@ -8,6 +8,13 @@ import Avatar from '@mui/material/Avatar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 
+/**
+ * Returns a functional component of the top part of UserNotFound page that 
+ * tell the error message with an error image.
+ * 
+ * @returns {JSX.Element} The functional component.
+ */
+
 function TopSection() {
     const theme = createTheme({
       palette: {

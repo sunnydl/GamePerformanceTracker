@@ -6,7 +6,16 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useLocation } from 'react-router-dom';
+
+/**
+ * Returns a functional component of the UserNotFound page that provide
+ * the description about the user not found.
+ * 
+ * @returns {JSX.Element} The functional component.
+ */
+
 function SummonerNotFound() {
+
     const theme = createTheme({
       palette: {
         primary: {
@@ -29,6 +38,7 @@ function SummonerNotFound() {
     const params = new URLSearchParams(search);
     const summonerName = params.get('summonerName');
     const region = params.get('region') ?? "NA"; // Defaults to NA region
+
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
