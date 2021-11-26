@@ -45,6 +45,7 @@ Inside scrum_resource folder
     |- public/
         |- emblems/                 # rank icon images
         |- controller.ico           # website icon
+        |- UserNotFound.jpg         # error image
         |- ...
     |- src/
         |- components/          # components: navbar, body, footer...
@@ -57,6 +58,7 @@ Inside scrum_resource folder
         |- App.tsx              # frontend app start point
         |- interfaces.ts        # typescript interfaces
         |- util.ts              # utility functions
+        |- ...
     |- ...
 ```
 
