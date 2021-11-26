@@ -1,4 +1,5 @@
 import currency from 'currency.js';
+import { ChartState, KDA } from './interfaces';
 
 /**
  * Returns a URL for the given summoner's icon id.
@@ -47,4 +48,26 @@ export const calculateWinRate = (wins: number=0, losses: number=0) => {
 export const displayWinRate = (wins: number=0, losses: number=0, asPercent?: boolean) => {
     const winRate = calculateWinRate(wins, losses);
     return asPercent ? `${winRate.intValue}%` : (winRate.value).toFixed(2);
+}
+
+/**
+ * Returns the average kills, deaths, and assists in the range of 5 games
+ * 
+ * @param {Array<ChartState>} [chartData] data of recent 5 games for chart
+ * @returns {KDA} Average kills, deaths, and assists in 5 games
+ */
+export const computeAvgKDA = (chartData: Array<ChartState>) => {
+    let totalKills = 0;
+    let totalDeaths = 0;
+    let totalAssists = 0;
+    for(const game of chartData) {
+        totalKills += game.kills;
+        totalDeaths += game.deaths;
+        totalAssists += game.assists;
+    }
+    return { 
+        kills: currency(totalKills).divide(5).value,
+        deaths: currency(totalDeaths).divide(5).value,
+        assists: currency(totalAssists).divide(5).value,
+    } as KDA;
 }

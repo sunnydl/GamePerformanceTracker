@@ -5,6 +5,8 @@ import CircleChart from '../../../../components/CircleChart/CircleChart';
 import { displayWinRate } from '../../../../util';
 import { useAppSelector } from '../../../../redux/hooks';
 
+import { computeAvgKDA } from '../../../../util';
+
 /**
  * Returns a functional component of the overview page that displays 
  * two charts of the summoner's win rate and kills/deaths/assists values.
@@ -15,8 +17,8 @@ export default function UserCharts() {
     const { wins, losses, kills, deaths, assists } = useAppSelector((state) => {
         const wins = state.user.winGames ?? 0;
         const losses = state.user.lossGames ?? 0;
-        // TODO: retrieve average kda from backend
-        return { wins, losses, kills: 26, deaths: 12, assists: 31 };
+        const { kills, deaths, assists } = computeAvgKDA(state.chart);
+        return { wins, losses, kills, deaths, assists };
     });
 
     return (
