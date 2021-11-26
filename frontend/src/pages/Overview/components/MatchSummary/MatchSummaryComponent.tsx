@@ -15,7 +15,6 @@ import {
 
 // enums
 import {
-    NumOfGames,
     Features
 } from './enums'
 
@@ -84,11 +83,6 @@ export default function MatchSummaryComponent() {
                     >
                         Recent 5 Games
                     </Paragraph>
-                    <ButtonSelections>
-                        {NumOfGames.map((num: number) => (
-                            <Buttons variant="contained" disabled sx={{backgroundColor: '#18A0FB'}} key={num}>{num} Games</Buttons>
-                        ))}
-                    </ButtonSelections>
                     <GraphWrapper>
                         <RandomeChart
                             buttonStates={buttonStates}
