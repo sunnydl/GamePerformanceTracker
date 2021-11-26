@@ -5,7 +5,7 @@ import { Grow } from '@mui/material';
 
 import MatchOptions from './components/MatchOptions/MatchOptions';
 import MatchListSummary from './components/MatchListSummary/MatchListSummary';
-import MatchList from './components/MatchList/MatchList';
+import MatchList from './components/MatchList';
 
 const MatchHistoryWrapper = styled('div')(({ theme }) => ({
     width: '90%',
