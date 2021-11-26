@@ -2,7 +2,15 @@ import React from 'react';
 
 import { Slider, Box, Typography } from '@mui/material';
 
-function MatchOptions({ options, setOption }: { options: number[], setOption: React.Dispatch<React.SetStateAction<number>> }) {
+/**
+ * Returns a functional component of the match history page that creates
+ * options for the user to select.
+ * 
+ * @param {number[]} options Choices for the number of matches a user can select.
+ * @param {React.Dispatch<React.SetStateAction<number>>} setOption A setState call to change the selected option.
+ * @returns {JSX.Element} A functional component.
+ */
+export default function MatchOptions({ options, setOption }: { options: number[], setOption: React.Dispatch<React.SetStateAction<number>> }) {
 
     const marks = options.map((option: number) => {
         return {
@@ -39,5 +47,3 @@ function MatchOptions({ options, setOption }: { options: number[], setOption: Re
         </Box>
     );
 }
-
-export default MatchOptions;

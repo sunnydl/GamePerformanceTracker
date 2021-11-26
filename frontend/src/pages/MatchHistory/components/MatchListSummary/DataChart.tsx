@@ -38,6 +38,13 @@ const matchDataColors = {
     dmgPerMin: 'red',
 };
 
+/**
+ * Returns a functional component of the match history page that displays
+ * a chart of data on the summoner's most recently played champions.
+ * 
+ * @param {number} size The number of matches being displayed.
+ * @returns {JSX.Element} A functional component.
+ */
 export default function DataChart({ size }: { size: number }) {
     const matches = useAppSelector((state) =>
         state.matches.slice(0, size).reverse()

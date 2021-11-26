@@ -10,7 +10,17 @@ interface MatchSummaryProps {
     date: string
 }
 
-function MatchSummary({ rank, lane, gameMode, date }: MatchSummaryProps) {
+/**
+ * Returns a functional component of the match history page that displays
+ * the overall summary of a match.
+ * 
+ * @param {number} rank How well the summoner did relative to other summoners in the match.
+ * @param {string} lane The position the summoner played in the match.
+ * @param {string} gameMode The match's game mode.
+ * @param {string} data The date that the match took place.
+ * @returns {JSX.Element} A functional component.
+ */
+export default function MatchSummary({ rank, lane, gameMode, date }: MatchSummaryProps) {
     return (
         <MatchSummaryCell className='summary'>
             <Grid container>
@@ -23,5 +33,3 @@ function MatchSummary({ rank, lane, gameMode, date }: MatchSummaryProps) {
     );
             
 }
-
-export default MatchSummary;

@@ -7,6 +7,13 @@ import MatchStatistics from './MatchStatistics';
 import { MatchState } from '../../../../interfaces';
 import { getChampionIconURL } from '../../../../util';
 
+/**
+ * Returns a functional component of the match history page that displays
+ * a match's data.
+ * 
+ * @param {MatchState} match The match's data.
+ * @returns {JSX.Element} A functional component.
+ */
 export default function MatchTableElement({ match }: { match: MatchState }) {
     return (
         <MatchTableRow>
