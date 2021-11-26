@@ -32,7 +32,7 @@ function SummonerNotFound() {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <main data-testid="home" >
+        <main data-testid="NotFound" >
           <Box
             sx={{
               bgcolor: 'background.paper',

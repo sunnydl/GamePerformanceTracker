@@ -29,7 +29,7 @@ function TopSection() {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <main data-testid="home" >
+        <main data-testid="topSection" >
           <Box
             sx={{
               bgcolor: 'background.paper',
