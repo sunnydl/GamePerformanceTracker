@@ -97,7 +97,7 @@ export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): Array<
                     kills: partis[j].kills,
                     deaths: partis[j].deaths,
                     assists: partis[j].assists,
-                    scores: 0,
+                    scores: kDA(matchList[i], puuid),
                 }
                 matchChartDataList.push(matchChartData);
                 break;
