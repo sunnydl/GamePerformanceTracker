@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 
 import { useAppDispatch, useAppSelector} from '../redux/hooks';
 import { fetchUserData } from '../redux/slices/user';
@@ -21,47 +21,58 @@ const Container = styled('div')(() => ({
 }))
 
 function Body() {
-    const prevSearch = useAppSelector((state) => {
-        const { summonerName, region } = state.user;
-        return `?summonerName=${summonerName}&region=${region}`;
-    });
     const location = useLocation();
+    const [loading, setLoading] = useState(true);
+    const { summonerName, region } = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
     const history = useHistory();
     useEffect(() => {
         const search = location.search;
         const params = new URLSearchParams(search);
-        const searchParams = `?summonerName=${params.get('summonerName')}&region=${params.get('region')}`
-
-        if (searchParams !== prevSearch) {
-            dispatch(fetchUserData(search, history));
-            dispatch(fetchChartData(search, 5));
-            dispatch(fetchMatchesData(search, 10));
+        
+        const isDifferentSummoner =
+            summonerName !== params.get('summonerName') ||
+            region !== params.get('region');
+        if (isDifferentSummoner) {
+            setLoading(true);
+            Promise.all([
+                dispatch(fetchUserData(search, history)),
+                dispatch(fetchChartData(search, 5)),
+                dispatch(fetchMatchesData(search, 10)),
+            ])
+            .then(() => {
+                console.log('finished loading data');
+                setLoading(false);
+            });
         }   
-    }, [dispatch, prevSearch, location.search, history]);
-    
+    }, [dispatch, region, summonerName, location.search, history]);
+
     return (
         <Container>
-            <Suspense fallback={<PageLoading/>}>
-                <Switch>
-                    <Route exact path='/'>
-                        <Home />
-                    </Route>
-                    <Route exact path='/overview'>
-                        <Overview />
-                    </Route>
-                    <Route exact path='/usernotfound'>
-                        <UserNotFound />
-                    </Route>
-                    <Route exact path='/match-history'>
-                        <MatchHistory />
-                    </Route>
-                    <Route exact path='/leaderboard'>
-                        <Leaderboard/>
-                    </Route>
-                    <Redirect to='/' />
-                </Switch>
-            </Suspense>
+            {loading ? (
+                <PageLoading />
+            ) : (
+                <Suspense fallback={<PageLoading/>}>
+                    <Switch>
+                        <Route exact path='/'>
+                            <Home />
+                        </Route>
+                        <Route exact path='/overview'>
+                            <Overview />
+                        </Route>
+                        <Route exact path='/usernotfound'>
+                            <UserNotFound />
+                        </Route>
+                        <Route exact path='/match-history'>
+                            <MatchHistory />
+                        </Route>
+                        <Route exact path='/leaderboard'>
+                            <Leaderboard/>
+                        </Route>
+                        <Redirect to='/' />
+                    </Switch>
+                </Suspense>
+            )}
         </Container>
     );
 }

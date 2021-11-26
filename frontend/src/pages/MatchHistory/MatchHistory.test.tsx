@@ -24,8 +24,8 @@ test('match history', () => {
     // Test header
     expect(matchHistoryComponent).toHaveTextContent('Recent Matches'); 
 
-    // Test options buttons
-    expect(screen.getByTestId('size-buttons')).toBeInTheDocument();
+    // Test options sliders
+    expect(screen.getByTestId('match-slider')).toBeInTheDocument();
 
     // Test summaries
     expect(screen.getByTestId('match-summaries')).toBeInTheDocument();
