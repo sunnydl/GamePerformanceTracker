@@ -58,6 +58,6 @@ Inside scrum_resource folder
 
 ### Credit
 Icon: <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Image by Ann H from Pexels<a href="https://www.pexels.com/" title="Pexels">www.pexels.com</a></div>
+<div>Image by Ann H from Pexels <a href="https://www.pexels.com/" title="Pexels"> www.pexels.com</a></div>
 
 ### Disclaimer
