@@ -58,6 +58,6 @@ Inside scrum_resource folder
 
 ### Credit
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Image by <a href=https://www.pexels.com/@ann-h-45017?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels>Ann H</a> from Pexels<a href="https://www.pexels.com/" title="Pexels"> www.pexels.com</a></div>
+<div>Image by <a href=https://www.pexels.com/@ann-h-45017?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels>Ann H</a> from <a href="https://www.pexels.com/" title="Pexels"> www.pexels.com</a></div>
 
 ### Disclaimer
