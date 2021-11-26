@@ -1,10 +1,22 @@
 import currency from 'currency.js';
 
+/**
+ * Returns a URL for the given summoner's icon id.
+ * 
+ * @param {number} [iconID] The icon id.
+ * @returns {string} A string representation of the summoner's icon URL.
+ */
 export const getSummonerIconURL = (iconID?: number) => {
     if (iconID === undefined) return undefined;
     return `http://ddragon.leagueoflegends.com/cdn/11.20.1/img/profileicon/${iconID}.png`;
 }
 
+/**
+ * Returns a URL for the given champion's icon.
+ * 
+ * @param {string} [championName] The champion's name (case sensitive).
+ * @returns {string} A string representation of the champion's icon URL.
+ */
 export const getChampionIconURL = (championName?: string) => {
     if (championName === undefined) return undefined;
     return `http://ddragon.leagueoflegends.com/cdn/11.22.1/img/champion/${championName}.png`;

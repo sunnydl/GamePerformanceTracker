@@ -1,16 +1,42 @@
 import React from 'react';
 
-import { Button, ButtonGroup } from '@mui/material';
+import { Slider, Box, Typography } from '@mui/material';
 
 function MatchOptions({ options, setOption }: { options: number[], setOption: React.Dispatch<React.SetStateAction<number>> }) {
+
+    const marks = options.map((option: number) => {
+        return {
+            value: option,
+            label: `${option}`,
+        }
+    })
+
+    const handleChange = (
+        event: React.SyntheticEvent | Event, value: any
+    ) => {
+        setOption(value);
+    }
+
     return (
-        <ButtonGroup data-testid='size-buttons'>
-            {options.map((choice, idx) => (
-                <Button key={idx} onClick={() => setOption(choice)}>
-                    {choice} Games
-                </Button>
-            ))}
-        </ButtonGroup>
+        <Box 
+            data-testid='match-slider'
+            sx={{
+            width: '100%'
+        }}>
+            <Typography id="input-slider" gutterBottom align="left">
+                Number of games to display
+            </Typography>
+            <Slider
+                aria-labelledby="input-slider"
+                defaultValue={3}
+                getAriaValueText={(value: number) => `${value}`}
+                valueLabelDisplay="auto"
+                marks={marks}
+                max={10}
+                min={3}
+                onChangeCommitted={handleChange}
+            />
+        </Box>
     );
 }
 

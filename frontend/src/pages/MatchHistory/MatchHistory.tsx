@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { styled } from '@mui/material/styles';
+import { Grow } from '@mui/material';
 
 import MatchOptions from './components/MatchOptions/MatchOptions';
 import MatchListSummary from './components/MatchListSummary/MatchListSummary';
@@ -23,20 +24,24 @@ const MatchHistoryWrapper = styled('div')(({ theme }) => ({
 const MatchHeading = styled('div')(({ theme }) => ({
     ...theme.typography.h3,
     marginBottom: theme.spacing(4),
-    textAlign: 'left'
+    textAlign: 'center'
 }));
 
-const options = [3, 5, 10];
+const options = [3, 4, 5, 6, 7, 8, 9, 10];
 
 export default function MatchHistory() {
     const [option, setOption] = useState(options[0]);
 
     return (
-        <MatchHistoryWrapper data-testid='match-history'>
-            <MatchOptions options={options} setOption={setOption} />
-            <MatchHeading>Recent Matches</MatchHeading>
-            <MatchListSummary size={option} />
-            <MatchList size={option} />
-        </MatchHistoryWrapper>
+        <Grow in>
+            <div>
+                <MatchHistoryWrapper data-testid='match-history'>
+                    <MatchHeading>Recent Matches</MatchHeading>
+                    <MatchOptions options={options} setOption={setOption} />
+                    <MatchListSummary size={option} />
+                    <MatchList size={option} />
+                </MatchHistoryWrapper>
+            </div>
+        </Grow>
     );
 }

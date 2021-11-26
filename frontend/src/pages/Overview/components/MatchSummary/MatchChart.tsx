@@ -4,6 +4,12 @@ import { ChartState } from '../../../../interfaces';
 import { useAppSelector } from '../../../../redux/hooks';
 import { Paper } from '@mui/material';
 
+/**
+ * Returns a functional component of the overview page that displays a
+ * simplified chart for a summoner's recent match data.
+ * 
+ * @returns {JSX.Element} A functional component.
+ */
 export default function RandomeChart({buttonStates}: {buttonStates: any}) {
     const data: Array<ChartState> = useAppSelector((state) => state.chart);
 

@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { PieChart, Pie, Label, Cell } from 'recharts';
+import { PieChart, Pie, Cell } from 'recharts';
 
 import {
     CircleChartWrapper,
+    TitleWrapper,
     LabelWrapper
   } from './style';
 
@@ -17,6 +18,9 @@ function CircleChart({ title, data, labels }: { title: string, data: { name: str
 
     return (
         <CircleChartWrapper>
+            <TitleWrapper>
+                {title}
+            </TitleWrapper>
             <PieChart width={256} height={256}>
                 <Pie
                     data={total ? data : createEmptyChart(data)}
@@ -29,14 +33,6 @@ function CircleChart({ title, data, labels }: { title: string, data: { name: str
                     innerRadius={60}
                     outerRadius={80}
                 >
-                    <Label
-                        style={{
-                            fontSize: "1.5rem",
-                            fontWeight: "bold",
-                            transform: "translate(0, -70%)"
-                        }}
-                        value={title}
-                    />
                     {data.map((val, idx) => (
                         <Cell key={idx} fill={val.color} />
                     ))}
