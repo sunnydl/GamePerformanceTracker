@@ -32,27 +32,31 @@ Inside scrum_resource folder
 ```
 ./                        
 |- ...
-|- backend/                  # -> Back end
-    |- index.ts                     # main file/server
-    |- config/                      # config files
-    |- riotApis/                    # functions that used to call riotApis
-    |- interfaces/                  # typescript interfaces
-    |- models/                      # mongoDB models
-    |- routes/                      # Rest endpoint Routes
-    |- controllers/                 # Rest endpoint controllers
-    |- services/                    # functions folder for handling business logic
-|- frontend/                 # -> Front end
+|- backend/                 # -> Back end
+    |- index.ts                 # main file/server
+    |- config/                  # config files
+    |- riotApis/                # functions that used to call riotApis
+    |- interfaces/              # typescript interfaces
+    |- models/                  # mongoDB models
+    |- routes/                  # Rest endpoint Routes
+    |- controllers/             # Rest endpoint controllers
+    |- services/                # functions folder for handling business logic
+|- frontend/                # -> Front end
     |- public/
+        |- emblems/                 # rank icon images
+        |- controller.ico           # website icon
+        |- ...
     |- src/
         |- components/          # components: navbar, body, footer...
         |- pages/               # pages: overview, match...
         |- redux/
-            |- ...states/reducers folders
-            |- ...
-            |- hooks.ts                 # redux selector and dispatch simplified for ts
-            |- store.ts                 # redux store
-        |- App.css                   # place to put css if needed
-        |- App.tsx                   # frontend app start point
+            |- slices/              # redux slices
+            |- hooks.ts             # redux selector and dispatch simplified for ts
+            |- store.ts             # redux store
+        |- App.css              # place to put css if needed
+        |- App.tsx              # frontend app start point
+        |- interfaces.ts        # typescript interfaces
+        |- util.ts              # utility functions
     |- ...
 ```
 
