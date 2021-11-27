@@ -4,6 +4,13 @@ import * as matchService from '../services/matchService'
 import * as summonerService from '../services/summonerService'
 import MatchChartDataDTO from "../interfaces/IMatchChartDataDTO";
 
+/**
+ * Controller for fetching the recent match data for match history display
+ *
+ * @param {Request} req HTTP request
+ * @param {Response} res HTTP response
+ * @return {Promise<void>}
+ */
 export const getMatchHistory = async(req: Request, res: Response) => {
     const summonerName: string = req.query.summonerName as string;
     const region: string = req.query.region as string || 'NA'; // default as NA if no region input
@@ -21,6 +28,13 @@ export const getMatchHistory = async(req: Request, res: Response) => {
     }
 }
 
+/**
+ * Controller for fetching the recent match data for match chart display
+ *
+ * @param {Request} req HTTP request
+ * @param {Response} res HTTP response
+ * @return {Promise<void>}
+ */
 export const getMatchChartData = async(req: Request, res: Response) => {
     const summonerName: string = req.query.summonerName as string;
     const region: string = req.query.region as string || 'NA'; // default as NA if no region input

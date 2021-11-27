@@ -19,19 +19,43 @@ const rankmap: any = {
     '10': -1,
  }
 
-// function used to collect match data for chart. Given a puuid, find the matches and get lists of data as matchDataChartDTO
+/**
+ * Service used to collect match data for chart.
+ *
+ * @param {string} puuid The puuid of the player
+ * @param {string} region The region that the player is located in
+ * @param {string} typeOfMatch The type of match to be fetched
+ * @param {number} numOfMatch The number of matches to fetch
+ * @return {Promise<Array<MatchChartDataDTO>>} The List of match data for chart
+ */
 export const getMatchChartData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchChartDataDTO>> => {
     const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
     return analysisMatch(puuid, matchList);
 }
 
+/**
+ * Service used to collect match data for match history.
+ *
+ * @param {string} puuid The puuid of the player
+ * @param {string} region The region that the player is located in
+ * @param {string} typeOfMatch The type of match to be fetched
+ * @param {number} numOfMatch The number of matches to fetch
+ * @return {Promise<Array<MatchHistoryDTO>>} The List of match data for match history
+ */
 export const getMatchHistoryData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchHistoryDTO>> => {
     const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
     return computeMatchHistoryData(matchList, puuid);
 }
 
-//added typeOfMatch input, seems to still print out correctly if typeOfMatch is an empty string
-//unit test returns 403, not sure why
+/**
+ * Service used to collect numbers of match data
+ *
+ * @param {string} puuid The puuid of the player
+ * @param {string} region The region that the player is located in
+ * @param {string} typeOfMatch The type of match to be fetched
+ * @param {number} numOfMatch The number of matches to fetch
+ * @return {Promise<Array<MatchDto>>} The List of the match
+ */
 export const getMatchListByPUUID = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchDto>> => {
     if(numOfMatch >= 20){
         const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, typeOfMatch, 20);
@@ -45,6 +69,13 @@ export const getMatchListByPUUID = async(puuid: string, region: string, typeOfMa
     }
 };
 
+/**
+ * Service used to collect numbers of match data given match ids
+ *
+ * @param {Array<string>} match_list The list of match ids
+ * @param {string} region The region that the player is located in
+ * @return {Promise<Array<MatchDto>>} The List of the match fetched
+ */
 export const getMatchObjListByMatchList = async (match_list: Array<string>, region: string): Promise<Array<MatchDto>> => {
     const matchDTOArr: Array<MatchDto> = [];
     for( const matchElem of match_list){
@@ -53,29 +84,14 @@ export const getMatchObjListByMatchList = async (match_list: Array<string>, regi
     }
     return matchDTOArr;
 }
-/* 
-    given a list of matchDto
-    It will return a list of dataObj for example
-    [
-        {
-            name: Game 1,
-            kills: 1,
-            deaths: 2,
-            assists: 2,
-            scores: 2,
-            winLoss: 0.5,
-        },
-        {
-            name: Game 2,
-            kills: ...,
-            deaths: ...,
-            assists: ...,
-            scores: ...,
-            winLoss: ...,
-        },
-        ......
-    ]
-*/
+
+/**
+ * Service used to compute the data of given match list
+ *
+ * @param {string} puuid The puuid of the player
+ * @param {Array<MatchDto>} matchList The collection of match
+ * @return {Promise<Array<MatchDto>>} The list of computed match data
+ */
 export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): Array<MatchChartDataDTO> => {
     const matchChartDataList: Array<MatchChartDataDTO> = [];
     let win = 0;

@@ -6,7 +6,13 @@ import SummonerLeague from '../interfaces/ISummonerLeague';
 import UserModel from '../models/UserModel';
 import LeagueListDTO from '../interfaces/ILeagueListDTO';
 
-// given a summoner name, find the info of the summoner for overview page from riot API
+/**
+ * Service used to fetch the information of a player given its name
+ *
+ * @param {string} summonerName The name of the player
+ * @param {string} region The region that the player is located in
+ * @return {Promise<SummonerDTO>} The information of the player's account
+ */
 export const getSummonerByName = async(summonerName: string, region: string): Promise<SummonerDTO> => {
     const summoner: SummonerInfo = await riotApis.findSummonerInfo(encodeURI(summonerName), region);
     const leagueInfos: Array<SummonerLeague> = await riotApis.findSummonerLeague(summoner?.id, region);
@@ -60,7 +66,15 @@ export const getSummonerByName = async(summonerName: string, region: string): Pr
     }
 }
 
-// get leaderboard of 10 players given tier divison, region and queueType
+/**
+ * Service for finding the top players data
+ *
+ * @param {string} tier The tier of the players
+ * @param {string} division The division of the players
+ * @param {string} queueType The type of the queue
+ * @param {string} region The region that the player is located in
+ * @return {Promise<Array<SummonerDTO>>} The List of the top players
+ */
 export const getLeaderBoard = async(tier: string, division: string, queueType: string, region: string): Promise<Array<SummonerDTO>> => {
     let list: Array<SummonerLeague>;
     if(riotApis.HIGH_TIER[tier]) {
@@ -95,7 +109,13 @@ export const getLeaderBoard = async(tier: string, division: string, queueType: s
     return leaderBoard;
 }
 
-// find the champ name given an id
+/**
+ * Service for finding the list of the player's favorite champion names given a list of ids
+ *
+ * @param {any} champsList The champion data from riot
+ * @param {Array<number>} favChampsIds The champion ids
+ * @return {Promise<Array<string>>} The name of the champions
+ */
 const findFavChampsName = async(champsList: any, favChampsIds: Array<number>): Promise<Array<string>> => {
     const favChamps: string[] = [];
     for(const i in champsList) {
@@ -105,7 +125,14 @@ const findFavChampsName = async(champsList: any, favChampsIds: Array<number>): P
     }
     return favChamps;
 }
-// find summoner's puuid given a summoner name
+
+/**
+ * Service for finding puuid of the player given a name
+ *
+ * @param {string} summonerName The name of the player
+ * @param {string} region The region that the player is located in
+ * @return {Promise<string>} The puuid of the player
+ */
 export const findSummonerPuuid = async(summonerName: string, region: string): Promise<string> => {
     const foundSummoner = await UserModel.findOne({ summonerName });
     if(foundSummoner) {
