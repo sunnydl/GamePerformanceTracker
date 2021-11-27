@@ -1,5 +1,5 @@
 import React from 'react'
-import UserSummary from './components/UserSummary/UserSummary'
+import UserSummary from './components/UserSummary'
 import MatchSummary from './components/MatchSummary'
 
 /**

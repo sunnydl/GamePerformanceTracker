@@ -1,6 +1,7 @@
 import React from 'react';
+import { useTheme } from '@mui/material';
 import { ChartsWrapper } from './style';
-import CircleChart from '../../../../components/CircleChart/CircleChart';
+import CircleChart from '../../../../components/CircleChart';
 
 import { displayWinRate } from '../../../../util';
 import { useAppSelector } from '../../../../redux/hooks';
@@ -14,6 +15,7 @@ import { computeAvgKDA } from '../../../../util';
  * @returns {JSX.Element} A functional component.
  */
 export default function UserCharts() {
+    const theme = useTheme();
     const { wins, losses, kills, deaths, assists } = useAppSelector((state) => {
         const wins = state.user.winGames ?? 0;
         const losses = state.user.lossGames ?? 0;
@@ -26,22 +28,34 @@ export default function UserCharts() {
             <CircleChart
                 title="Win Rate"
                 data={[
-                    { name: "wins", value: wins, color: "#3880FF" },
-                    { name: "losses", value: losses, color: "#DFDFDF" },
+                    { name: "wins", value: wins, color: theme.palette.info.main },
+                    { name: "losses", value: losses, color: theme.palette.grey[600] },
                 ]}
-                labels={[{ style: { fontSize: "1.5rem" }, value: displayWinRate(wins, losses, true) }]}
+                labels={[
+                    { style: { fontSize: theme.typography.h5.fontSize },
+                    value: displayWinRate(wins, losses, true) }
+                ]}
             />
             <CircleChart
                 title="Average KDA"
                 data={[
-                    { name: "kills", value: kills, color: "#77DD77" },
-                    { name: "deaths", value: deaths, color: "#FF6961" },
-                    { name: "assists", value: assists, color: "#3880FF" },
+                    { name: "kills", value: kills, color: theme.palette.success.light },
+                    { name: "deaths", value: deaths, color: theme.palette.error.light },
+                    { name: "assists", value: assists, color: theme.palette.info.light },
                 ]}
                 labels={[
-                    { style: { fontSize: "0.875rem", color: "#77DD77" }, value: `Kills: ${kills.toFixed(2)}` },
-                    { style: { fontSize: "0.875rem", color: "#FF6961" }, value: `Deaths: ${deaths.toFixed(2)}` },
-                    { style: { fontSize: "0.875rem", color: "#3880FF" }, value: `Assists: ${assists.toFixed(2)}` },
+                    {
+                        style: { fontSize: theme.typography.body2.fontSize, color: theme.palette.success.main },
+                        value: `Kills: ${kills.toFixed(2)}`
+                    },
+                    {
+                        style: { fontSize: theme.typography.body2.fontSize, color: theme.palette.error.main },
+                        value: `Deaths: ${deaths.toFixed(2)}`
+                    },
+                    {
+                        style: { fontSize: theme.typography.body2.fontSize, color: theme.palette.info.main },
+                        value: `Assists: ${assists.toFixed(2)}`
+                    },
                 ]}
             />
         </ChartsWrapper>

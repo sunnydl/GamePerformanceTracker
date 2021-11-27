@@ -1,4 +1,11 @@
 import { alpha, createTheme } from '@mui/material/styles';
+declare module '@mui/material/styles/createPalette' {
+    interface TypeBackground {
+        default: string,
+        alternate: string,
+        paper: string,
+    }
+}
 
 // TODO: implement custom colors for other palettes (if necessary)
 let themeLight = createTheme({
@@ -6,7 +13,6 @@ let themeLight = createTheme({
         mode: 'light',
         primary: {
             main: '#18a0fb',
-            light: '#e1f1fe',
             contrastText: '#fff',
         },
         secondary: {
@@ -28,7 +34,12 @@ let themeLight = createTheme({
         // success: {
         //     main: '#2e7d32',
         //     contrastText: '#fff',
-        // }
+        // },
+        background: {
+            default: '#fff',
+            alternate: '#f2f7fd',
+            paper: '#fff'
+        }
     },
 });
 

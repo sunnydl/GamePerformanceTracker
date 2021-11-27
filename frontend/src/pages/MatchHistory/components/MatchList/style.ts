@@ -69,7 +69,7 @@ export const MatchStatisticsWrapper = styled('div')(({ theme }) => ({
     width: '128px',
     margin: 'auto',
     border: '1px solid',
-    borderColor: theme.palette.info.main,
+    borderColor: theme.palette.primary.main,
     borderRadius: '50%',
 }));
 

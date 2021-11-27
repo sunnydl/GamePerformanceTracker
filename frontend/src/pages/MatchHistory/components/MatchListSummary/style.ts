@@ -5,13 +5,14 @@ export const MatchChampsGrid = styled(Grid)(({ theme }) => ({
     justifyContent: 'center',
 
     '& .outlined': {
-        borderTop:'1px solid black',
-        borderLeft: '1px solid black',
-        borderRight: '1px solid black',
+        borderTop:'1px solid',
+        borderLeft: '1px solid',
+        borderRight: '1px solid',
+        borderColor: theme.palette.grey[600],
         padding: theme.spacing(2),
 
         '&:last-child': {
-            borderBottom: '1px solid black'
+            borderBottom: `1px solid ${theme.palette.grey[600]}`
         }
     },
 }));

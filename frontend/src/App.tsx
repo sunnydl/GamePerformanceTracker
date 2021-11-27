@@ -3,9 +3,9 @@ import './App.css';
 import { ThemeProvider } from '@mui/material/styles';
 import { themeLight } from './themes';
 
-import NavBar from './components/NavBar/NavBar';
+import NavBar from './components/NavBar';
 import Body from './components/Body';
-import Footer from './components/Footer/Footer';
+import Footer from './components/Footer';
 
 function App() {
   return (
