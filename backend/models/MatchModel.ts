@@ -10,7 +10,7 @@ import TeamDto from '../interfaces/IMatch/ITeamDto';
 import BanDto from '../interfaces/IMatch/IBanDto';
 import ObjectivesDto from '../interfaces/IMatch/IObjectivesDto';
 import ObjectiveDto from '../interfaces/IMatch/IObjectiveDto';
-//include match here!
+
 
 const objectiveDtoSchema = new Schema<ObjectiveDto>({
     first: Boolean,
