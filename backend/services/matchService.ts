@@ -3,7 +3,7 @@ import MatchDto from '../interfaces/IMatch/IMatchDto'
 import ParticipantDto from '../interfaces/IMatch/IParticipantDto';
 import currency from 'currency.js';
 import MatchChartDataDTO from '../interfaces/IMatchChartDataDTO';
-import {timeConverter} from './utility';
+import { timeConverter } from './utility';
 import MatchHistoryDTO from '../interfaces/IMatchHistoryDTO';
 
 const rankmap: any = {
@@ -17,7 +17,7 @@ const rankmap: any = {
     '8': -0.2,
     '9':-0.5,
     '10': -1,
- }
+}
 
 // function used to collect match data for chart. Given a puuid, find the matches and get lists of data as matchDataChartDTO
 export const getMatchChartData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchChartDataDTO>> => {
@@ -31,23 +31,16 @@ export const getMatchHistoryData = async(puuid: string, region: string, typeOfMa
 }
 
 //added typeOfMatch input, seems to still print out correctly if typeOfMatch is an empty string
-//unit test returns 403, not sure why
 export const getMatchListByPUUID = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchDto>> => {
-    if(numOfMatch >= 20){
-        const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, typeOfMatch, 20);
-        const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
-        return matchList as Array<MatchDto>;
-    }
-    else{
-        const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, typeOfMatch, numOfMatch);
-        const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
-        return matchList as Array<MatchDto>;
-    }
+    numOfMatch = (numOfMatch >= 20)? 20:numOfMatch;
+    const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, typeOfMatch, numOfMatch);
+    const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
+    return matchList as Array<MatchDto>;
 };
 
 export const getMatchObjListByMatchList = async (match_list: Array<string>, region: string): Promise<Array<MatchDto>> => {
     const matchDTOArr: Array<MatchDto> = [];
-    for( const matchElem of match_list){
+    for(const matchElem of match_list){
         const match = await riotApis.findMatchInfo(matchElem, region);
         matchDTOArr.push(match);
     }
@@ -107,21 +100,6 @@ export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): Array<
 
     return matchChartDataList;
 }
-
-//return list of participant info of the match
-export const getParticipantsInfoByMatchId = async(matchId: string, region: string): Promise<Array<ParticipantDto> | undefined> => {
-    const matchInfo: MatchDto = await riotApis.findMatchInfo(matchId, region);
-    if (matchInfo){
-        const participantMatchInfoArr: ParticipantDto[] = [];
-        for (let players = 0; players <= 9; players ++){
-            participantMatchInfoArr.push(matchInfo.info.participants[players]);
-        }
-        // console.log(participantMatchInfoArr);
-        return participantMatchInfoArr;
-    } else {
-        return [] as unknown as Array<ParticipantDto>;
-    }
-};
 
 /**
  * Returns the jg score on large monster's kill for the jg player.
