@@ -75,7 +75,7 @@ function SummonerSearchBar() {
 
   return (
     <React.Fragment>
-      <Search>
+      <Search data-testid ='searchBarBox'>
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>

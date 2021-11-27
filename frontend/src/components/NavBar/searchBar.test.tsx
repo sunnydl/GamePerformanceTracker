@@ -1,6 +1,27 @@
 import { render, screen } from '@testing-library/react';
 import SummonerSearchBar from './SummonerSearchBar';
+import { useHistory } from 'react-router-dom';
 
-test("renders summoner search bar", () => {
+test("searchBar test", () => {
     render(<SummonerSearchBar></SummonerSearchBar>)
+
+    //see if search bar box
+    const searchBarBox = screen.getByTestId('searchBarBox');
+    expect(searchBarBox).toBeInTheDocument
 })
+
+test("searchBar mock test", () =>{
+    const mockSummonerInput = "!@#cae@#";
+
+    const history = useHistory();
+    const check = history.push({
+        pathname: '/overview',
+        search: new URLSearchParams({
+            summonerName: mockSummonerInput,
+            region: 'NA',
+        }).toString(),
+    })
+
+    expect(check).toBeValid
+})
+
