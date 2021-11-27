@@ -6,6 +6,7 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 
 import RegionDropDown from './RegionDropDown';
+import { compareIgnoreCase } from '../../util';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -58,9 +59,15 @@ function SummonerSearchBar() {
   const handleSummonerSearchByName = (e: React.KeyboardEvent) => {
     if (e.code === 'Enter') {
       const element = e.target as HTMLInputElement;
-      const searchName = element.value;
+      const searchName = element.value.trim();
     
-      if (searchName && (searchName !== summonerName || regions[regionIndex] !== region)) {
+      if (!searchName) return;
+
+      const isDifferentSummoner = !(
+        compareIgnoreCase(summonerName, searchName) &&
+        compareIgnoreCase(region, regions[regionIndex])
+      );
+      if (isDifferentSummoner) {
         console.log('searching for:', searchName);
         history.push({
           pathname: '/overview',

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector} from '../redux/hooks';
 import { fetchUserData } from '../redux/slices/user';
 import { fetchChartData } from '../redux/slices/chart';
 import { fetchMatchesData } from '../redux/slices/matches';
+import { compareIgnoreCase } from '../util';
 
 import { useLocation, Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
@@ -23,16 +24,17 @@ const Container = styled('div')(() => ({
 function Body() {
     const location = useLocation();
     const [loading, setLoading] = useState(true);
-    const { summonerName, region } = useAppSelector((state) => state.user);
+    const { summonerName='', region='' } = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
     const history = useHistory();
     useEffect(() => {
         const search = location.search;
         const params = new URLSearchParams(search);
         
-        const isDifferentSummoner =
-            summonerName !== params.get('summonerName') ||
-            region !== params.get('region');
+        const isDifferentSummoner = !(
+            compareIgnoreCase(summonerName, params.get('summonerName') ?? '') &&
+            compareIgnoreCase(region, params.get('region') ?? '')
+        );
         if (isDifferentSummoner) {
             setLoading(true);
             Promise.all([
