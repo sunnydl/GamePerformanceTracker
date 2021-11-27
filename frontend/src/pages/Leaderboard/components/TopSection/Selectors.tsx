@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../../../../redux/hooks';
-import { setLeaderboardFilter  } from '../../../../redux/slices/leaderboard';
+import { setLeaderboardFilter } from '../../../../redux/slices/leaderboard';
 
 import { Select, MenuItem, FormControl, InputLabel, Button } from '@mui/material';
 

@@ -6,6 +6,7 @@ import { Grow } from '@mui/material';
 import MatchOptions from './components/MatchOptions/MatchOptions';
 import MatchListSummary from './components/MatchListSummary/MatchListSummary';
 import MatchList from './components/MatchList';
+import MatchUpdateButton from './components/MatchUpdateButton';
 
 const MatchHistoryWrapper = styled('div')(({ theme }) => ({
     width: '90%',
@@ -43,6 +44,7 @@ export default function MatchHistory() {
             <div>
                 <MatchHistoryWrapper data-testid='match-history'>
                     <MatchHeading>Recent Matches</MatchHeading>
+                    <MatchUpdateButton/>
                     <MatchOptions options={options} setOption={setOption} />
                     <MatchListSummary size={option} />
                     <MatchList size={option} />

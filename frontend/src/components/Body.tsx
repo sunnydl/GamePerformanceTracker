@@ -1,14 +1,16 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 
 import { useAppDispatch, useAppSelector} from '../redux/hooks';
 import { fetchUserData } from '../redux/slices/user';
 import { fetchChartData } from '../redux/slices/chart';
 import { fetchMatchesData } from '../redux/slices/matches';
+import { setLoading } from '../redux/slices/loading';
 
 import { useLocation, Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 import PageLoading from './PageLoading';
+import { FetchOperations } from '../enums';
 
 const Home = lazy(() => import('../pages/Landing/Home'));
 const Overview = lazy(() => import('../pages/Overview/Overview'));
@@ -22,8 +24,8 @@ const Container = styled('div')(() => ({
 
 function Body() {
     const location = useLocation();
-    const [loading, setLoading] = useState(true);
     const { summonerName, region } = useAppSelector((state) => state.user);
+    const loading = useAppSelector((state) => state.loading);
     const dispatch = useAppDispatch();
     const history = useHistory();
     useEffect(() => {
@@ -34,15 +36,15 @@ function Body() {
             summonerName !== params.get('summonerName') ||
             region !== params.get('region');
         if (isDifferentSummoner) {
-            setLoading(true);
+            dispatch(setLoading(true));
             Promise.all([
                 dispatch(fetchUserData(search, history)),
                 dispatch(fetchChartData(search, 5)),
-                dispatch(fetchMatchesData(search, 10)),
+                dispatch(fetchMatchesData(search, 10, FetchOperations.FETCH)),
             ])
             .then(() => {
                 console.log('finished loading data');
-                setLoading(false);
+                dispatch(setLoading(false));
             });
         }   
     }, [dispatch, region, summonerName, location.search, history]);

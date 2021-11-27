@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { fetchLeaderboardData } from '../../redux/slices/leaderboard';
+import { setLoading } from '../../redux/slices/loading';
 
 import { Grow } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -32,13 +33,12 @@ const LeaderboardPaper = styled('div')(() => ({
 export default function LeaderBoard() {
     const dispatch = useAppDispatch();
     const { tier, division, queueType } = useAppSelector((state) => state.leaderboard);
-    const [loading, setLoading] = useState(true);
-
+    const loading = useAppSelector((state) => state.loading);
     useEffect(() => {
-        setLoading(true);
+        dispatch(setLoading(true));
         dispatch(fetchLeaderboardData(tier, division, queueType))
         .then(() => {
-            setLoading(false);
+            dispatch(setLoading(false));
         });
     }, [tier, division, queueType, dispatch])
 
