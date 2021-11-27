@@ -15,8 +15,7 @@ Web App
 
 ### Release plan
 ![releasePlan](https://user-images.githubusercontent.com/56567343/138219123-cfc4f4bd-83d3-4657-9b93-6a1cf0d44d93.png)
-![updatedReleasePlan](<img width="652" alt="Release Plan" src="https://user-images.githubusercontent.com/46057691/143723028-a8086ec2-4f83-4e8a-b23b-e276f0c913e6.png">
-)
+![updatedReleasePlan](<img width="652" alt="Release Plan" src="https://user-images.githubusercontent.com/46057691/143723028-a8086ec2-4f83-4e8a-b23b-e276f0c913e6.png">)
 
 ### Sprint plans
 Inside scrum_resource folder
