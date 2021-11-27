@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import { ThemeProvider } from '@mui/material/styles';
+import { themeLight } from './themes';
 
 import NavBar from './components/NavBar/NavBar';
 import Body from './components/Body';
@@ -7,11 +9,11 @@ import Footer from './components/Footer/Footer';
 
 function App() {
   return (
-    <React.Fragment>
+    <ThemeProvider theme={themeLight}>
       <NavBar />
       <Body />
       <Footer/>
-    </React.Fragment>
+    </ThemeProvider>
   );
 }
 

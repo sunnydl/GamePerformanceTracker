@@ -7,36 +7,17 @@ import { Box, AppBar, Toolbar, IconButton, Tabs, Tab } from '@mui/material';
 import Button from '@mui/material/Button';
 
 import SummonerSearchBar from './SummonerSearchBar';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#fff',
-      contrastText: '#18A0FB',
-    },
-    secondary: {
-      main: '#18A0FB',
-      contrastText: '#fff',
-    },
-    error:{
-      main: '#000',
-      contrastText: '#000',
-    },
-  },
-});
 
 function NavBar() {
   const location = useLocation();
 
   return (
-    <ThemeProvider theme={theme}>
-      <AppBar position='sticky' elevation={0}> 
+      <AppBar position='sticky' color='secondary' elevation={0}> 
         <Toolbar variant='regular' sx={{display: 'flex', flexWrap: 'wrap', width: '90%', padding: 'auto', margin: 'auto'}}>
           <IconButton
             size='medium'
             edge='start'
-            color='error'
+            color='default'
             aria-label='menu'
             sx={{ mr: 5 }}
             component={Link}
@@ -45,7 +26,7 @@ function NavBar() {
             GPT {/* TODO: add icon */}
           </IconButton>
           <Box sx={{ flexGrow: 0.05 }} />
-          <Tabs value={false} style={{ color: theme.palette.primary.contrastText, margin: 'auto' }}>
+          <Tabs value={false} style={{ margin: 'auto' }}>
             <Tab style={{ color: 'inherit' }} label='overview' component={Link} to={`/overview${location.search}`} />
             <Tab style={{ color: 'inherit' }} label='Match History' component={Link} to={`/match-history${location.search}`} />
             <Tab style={{ color: 'inherit' }} label='Leaderboard' component={Link} to={`/leaderboard${location.search}`} />
@@ -53,16 +34,15 @@ function NavBar() {
           </Tabs> 
           <SummonerSearchBar />
           <Box sx={{ flexGrow: 0.5 }} />
-          <Button color="primary" variant="contained">
+          <Button color="secondary" variant="contained">
             Log in
           </Button>
           <Box sx={{ flexGrow: 0.02 }} />
-          <Button color="secondary" variant="contained">
+          <Button color="primary" variant="contained">
             Register
           </Button>
         </Toolbar>
       </AppBar>
-    </ThemeProvider>
   );
 }
 
