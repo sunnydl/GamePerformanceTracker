@@ -67,3 +67,9 @@ export interface ChampPerformanceSummary {
     deaths: number,
     assists: number
 }
+
+export interface KDA {
+    kills: number;
+    deaths: number;
+    assists: number;
+}

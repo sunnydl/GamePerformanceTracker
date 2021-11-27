@@ -18,7 +18,18 @@ interface OptionsSelectButtonProps {
     multiple?: boolean;
 }
 
-function OptionSelectButton({
+/**
+ * Returns a functional component of the match history page that creates a
+ * dropdown of a given amount of options.
+ * 
+ * @param {string} label The label for the dropdown button.
+ * @param {string[]} options The list of options for the dropdown.
+ * @param {string | string[]} selectedOptions The option(s) selected by the user.
+ * @param {Function} onOptionsChange A function that runs after an option is selected.
+ * @param {boolean} [multiple] Determines whether the user can select multiple options.
+ * @returns {JSX.Element} A functional component.
+ */
+export default function OptionSelectButton({
     label,
     options,
     selectedOptions,
@@ -100,5 +111,3 @@ function OptionSelectButton({
         </React.Fragment>
     );
 }
-
-export default OptionSelectButton;

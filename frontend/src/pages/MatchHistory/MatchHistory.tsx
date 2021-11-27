@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
 import { styled } from '@mui/material/styles';
+import { Grow } from '@mui/material';
 
 import MatchOptions from './components/MatchOptions/MatchOptions';
 import MatchListSummary from './components/MatchListSummary/MatchListSummary';
-import MatchList from './components/MatchList/MatchList';
+import MatchList from './components/MatchList';
 
 const MatchHistoryWrapper = styled('div')(({ theme }) => ({
     width: '90%',
@@ -23,20 +24,30 @@ const MatchHistoryWrapper = styled('div')(({ theme }) => ({
 const MatchHeading = styled('div')(({ theme }) => ({
     ...theme.typography.h3,
     marginBottom: theme.spacing(4),
-    textAlign: 'left'
+    textAlign: 'center'
 }));
 
-const options = [3, 5, 10];
+const options = [3, 4, 5, 6, 7, 8, 9, 10];
 
+/**
+ * Returns a functional component of the match history page that displays
+ * the components for a summoner's recent match history data.
+ * 
+ * @returns {JSX.Element} A functional component.
+ */
 export default function MatchHistory() {
     const [option, setOption] = useState(options[0]);
 
     return (
-        <MatchHistoryWrapper data-testid='match-history'>
-            <MatchOptions options={options} setOption={setOption} />
-            <MatchHeading>Recent Matches</MatchHeading>
-            <MatchListSummary size={option} />
-            <MatchList size={option} />
-        </MatchHistoryWrapper>
+        <Grow in>
+            <div>
+                <MatchHistoryWrapper data-testid='match-history'>
+                    <MatchHeading>Recent Matches</MatchHeading>
+                    <MatchOptions options={options} setOption={setOption} />
+                    <MatchListSummary size={option} />
+                    <MatchList size={option} />
+                </MatchHistoryWrapper>
+            </div>
+        </Grow>
     );
 }
