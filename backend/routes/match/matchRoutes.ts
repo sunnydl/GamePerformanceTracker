@@ -4,5 +4,7 @@ const router: Router = express.Router()
 
 router.get('/', matchController.getMatchHistory);
 router.get('/chart', matchController.getMatchChartData);
+router.get('/updated-history', matchController.getUpdatedMatchHistoryData);
+router.get('/updated-chart', matchController.getUpdatedChartData);
 
 export default router;

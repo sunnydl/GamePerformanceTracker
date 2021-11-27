@@ -5,6 +5,10 @@ import currency from 'currency.js';
 import MatchChartDataDTO from '../interfaces/IMatchChartDataDTO';
 import { timeConverter } from './utility';
 import MatchHistoryDTO from '../interfaces/IMatchHistoryDTO';
+import MatchChartMongo from '../interfaces/IMatchChartMongo';
+import MatchChartModel from '../models/MatchChartModel';
+import MatchHistoryModel from '../models/MatchHistoryModel';
+import MatchHistoryMongo from '../interfaces/IMatchHistoryMongo';
 
 const rankmap: any = {
     '1': 1,
@@ -21,13 +25,51 @@ const rankmap: any = {
 
 // function used to collect match data for chart. Given a puuid, find the matches and get lists of data as matchDataChartDTO
 export const getMatchChartData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchChartDataDTO>> => {
-    const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
-    return analysisMatch(puuid, matchList);
+    const chartDataDB = await MatchChartModel.findOne({ puuid }) as MatchChartMongo;
+    if(!chartDataDB) {
+        // if db has no data of current user
+        const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
+        const chartData: Array<MatchChartDataDTO> = analysisMatch(puuid, matchList);
+        await new MatchChartModel({
+            puuid: puuid,
+            matches: chartData,
+        }).save();
+        return chartData;
+    }
+    return chartDataDB.matches;
 }
 
 export const getMatchHistoryData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchHistoryDTO>> => {
+    const matchHistoryDB = await MatchHistoryModel.findOne({ puuid }) as MatchHistoryMongo;
+    if(!matchHistoryDB) {
+        // if db has no data of current user
+        const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
+        const matchHistoryData: Array<MatchHistoryDTO> = computeMatchHistoryData(matchList, puuid);
+        await new MatchHistoryModel({
+            puuid: puuid,
+            matches: matchHistoryData
+        }).save();
+        return matchHistoryData;
+    }
+    return matchHistoryDB.matches;
+}
+
+export const updateDBChartData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchChartDataDTO>> => {
     const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
-    return computeMatchHistoryData(matchList, puuid);
+    const chartData: Array<MatchChartDataDTO> = analysisMatch(puuid, matchList);
+    await MatchChartModel.updateOne({ puuid }, {
+        matches: chartData
+    })
+    return chartData;
+}
+
+export const updateDBMatchHistoryData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchHistoryDTO>> => {
+    const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
+    const matchHistoryData: Array<MatchHistoryDTO> = computeMatchHistoryData(matchList, puuid);
+    await MatchHistoryModel.updateOne({ puuid }, {
+        matches: matchHistoryData
+    })
+    return matchHistoryData;
 }
 
 //added typeOfMatch input, seems to still print out correctly if typeOfMatch is an empty string

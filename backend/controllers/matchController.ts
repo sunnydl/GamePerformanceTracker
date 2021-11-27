@@ -37,3 +37,37 @@ export const getMatchChartData = async(req: Request, res: Response) => {
         })
     }
 }
+
+export const getUpdatedMatchHistoryData = async(req: Request, res: Response) => {
+    const summonerName: string = req.query.summonerName as string;
+    const region: string = req.query.region as string || 'NA'; // default as NA if no region input
+    const numOfMatch: number = parseInt(req.query.numOfMatch as string) || 5; // default as 5 if null
+    const matchType: string = req.query.matchType as string || '';
+    try {
+        const puuid: string = await summonerService.findSummonerPuuid(summonerName, region);
+        const matchData = await matchService.updateDBMatchHistoryData(puuid, region, matchType, numOfMatch);
+        res.status(200).json(matchData);
+    } catch (err: any) {
+        res.status(exceptionHandler.exceptionCodeHandler(err?.response?.status)).send({
+            message: err.message,
+            error: err.toString(),
+        })
+    }
+}
+
+export const getUpdatedChartData = async(req: Request, res: Response) => {
+    const summonerName: string = req.query.summonerName as string;
+    const region: string = req.query.region as string || 'NA'; // default as NA if no region input
+    const numOfMatch: number = parseInt(req.query.numOfMatch as string) || 5; // default as 5 if null
+    const matchType: string = req.query.matchType as string || '';
+    try {
+        const puuid: string = await summonerService.findSummonerPuuid(summonerName, region);
+        const matchChartData: Array<MatchChartDataDTO> = await matchService.updateDBChartData(puuid, region, matchType, numOfMatch);
+        res.status(200).json(matchChartData);
+    } catch (err: any) {
+        res.status(exceptionHandler.exceptionCodeHandler(err?.response?.status)).send({
+            message: err.message,
+            error: err.toString(),
+        })
+    }
+}
