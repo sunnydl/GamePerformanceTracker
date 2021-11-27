@@ -15,12 +15,17 @@ import {
 
 // enums
 import {
-    NumOfGames,
     Features
 } from './enums'
 
 import RandomeChart from './MatchChart';
 
+/**
+ * Returns a functional component of the overview page that wraps around
+ * the summoner's match chart component.
+ * 
+ * @returns {JSX.Element} A functional component.
+ */
 export default function MatchSummaryComponent() {
 
     const {
@@ -67,7 +72,7 @@ export default function MatchSummaryComponent() {
 
     return (
         <Grow in>
-            <MatchSummaryWrapper>
+            <MatchSummaryWrapper data-testid='match-chart'>
                 <MatchSummaryPaper>
                     <Header align="center">
                         {summonerName? summonerName:"Player"}'s Statistics
@@ -78,11 +83,6 @@ export default function MatchSummaryComponent() {
                     >
                         Recent 5 Games
                     </Paragraph>
-                    <ButtonSelections>
-                        {NumOfGames.map((num: number) => (
-                            <Buttons variant="contained" disabled sx={{backgroundColor: '#18A0FB'}} key={num}>{num} Games</Buttons>
-                        ))}
-                    </ButtonSelections>
                     <GraphWrapper>
                         <RandomeChart
                             buttonStates={buttonStates}

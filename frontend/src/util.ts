@@ -1,10 +1,23 @@
 import currency from 'currency.js';
+import { ChartState, KDA } from './interfaces';
 
+/**
+ * Returns a URL for the given summoner's icon id.
+ * 
+ * @param {number} [iconID] The icon id.
+ * @returns {string} A string representation of the summoner's icon URL.
+ */
 export const getSummonerIconURL = (iconID?: number) => {
     if (iconID === undefined) return undefined;
     return `http://ddragon.leagueoflegends.com/cdn/11.20.1/img/profileicon/${iconID}.png`;
 }
 
+/**
+ * Returns a URL for the given champion's icon.
+ * 
+ * @param {string} [championName] The champion's name (case sensitive).
+ * @returns {string} A string representation of the champion's icon URL.
+ */
 export const getChampionIconURL = (championName?: string) => {
     if (championName === undefined) return undefined;
     return `http://ddragon.leagueoflegends.com/cdn/11.22.1/img/champion/${championName}.png`;
@@ -35,4 +48,26 @@ export const calculateWinRate = (wins: number=0, losses: number=0) => {
 export const displayWinRate = (wins: number=0, losses: number=0, asPercent?: boolean) => {
     const winRate = calculateWinRate(wins, losses);
     return asPercent ? `${winRate.intValue}%` : (winRate.value).toFixed(2);
+}
+
+/**
+ * Returns the average kills, deaths, and assists in the range of 5 games
+ * 
+ * @param {Array<ChartState>} [chartData] data of recent 5 games for chart
+ * @returns {KDA} Average kills, deaths, and assists in 5 games
+ */
+export const computeAvgKDA = (chartData: Array<ChartState>) => {
+    let totalKills = 0;
+    let totalDeaths = 0;
+    let totalAssists = 0;
+    for(const game of chartData) {
+        totalKills += game.kills;
+        totalDeaths += game.deaths;
+        totalAssists += game.assists;
+    }
+    return { 
+        kills: currency(totalKills).divide(5).value,
+        deaths: currency(totalDeaths).divide(5).value,
+        assists: currency(totalAssists).divide(5).value,
+    } as KDA;
 }

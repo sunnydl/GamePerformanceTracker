@@ -32,32 +32,38 @@ Inside scrum_resource folder
 ```
 ./                        
 |- ...
-|- backend/                  # -> Back end
-    |- index.ts                     # main file/server
-    |- config/                      # config files
-    |- riotApis/                    # functions that used to call riotApis
-    |- interfaces/                  # typescript interfaces
-    |- models/                      # mongoDB models
-    |- routes/                      # Rest endpoint Routes
-    |- controllers/                 # Rest endpoint controllers
-    |- services/                    # functions folder for handling business logic
-|- frontend/                 # -> Front end
+|- backend/                 # -> Back end
+    |- index.ts                 # main file/server
+    |- config/                  # config files
+    |- riotApis/                # functions that used to call riotApis
+    |- interfaces/              # typescript interfaces
+    |- models/                  # mongoDB models
+    |- routes/                  # Rest endpoint Routes
+    |- controllers/             # Rest endpoint controllers
+    |- services/                # functions folder for handling business logic
+|- frontend/                # -> Front end
     |- public/
+        |- emblems/                 # rank icon images
+        |- controller.ico           # website icon
+        |- UserNotFound.jpg         # error image
+        |- ...
     |- src/
         |- components/          # components: navbar, body, footer...
         |- pages/               # pages: overview, match...
         |- redux/
-            |- ...states/reducers folders
-            |- ...
-            |- hooks.ts                 # redux selector and dispatch simplified for ts
-            |- store.ts                 # redux store
-        |- App.css                   # place to put css if needed
-        |- App.tsx                   # frontend app start point
+            |- slices/              # redux slices
+            |- hooks.ts             # redux selector and dispatch simplified for ts
+            |- store.ts             # redux store
+        |- App.css              # place to put css if needed
+        |- App.tsx              # frontend app start point
+        |- interfaces.ts        # typescript interfaces
+        |- util.ts              # utility functions
+        |- ...
     |- ...
 ```
 
 ### Credit
-Icon: <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-
+<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+<div>Image by <a href=https://www.pexels.com/@ann-h-45017?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels>Ann H</a> from <a href="https://www.pexels.com/" title="Pexels"> www.pexels.com</a></div>
 
 ### Disclaimer

@@ -46,7 +46,7 @@ function fetchChartData(query: string, numOfMatch: number) {
             const summonerName = params.get('summonerName');
             const region = params.get('region') ?? "NA"; // Defaults to NA region
             if (summonerName) {
-                axios.get('/api/matches/chart', {
+                return axios.get('/api/matches/chart', {
                     params: {
                         summonerName: summonerName,
                         region: region,

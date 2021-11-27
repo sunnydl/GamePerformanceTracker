@@ -125,7 +125,7 @@ function fetchMatchesData(query: string, numOfMatch: number) {
             const summonerName = params.get('summonerName');
             const region = params.get('region') ?? "NA"; // Defaults to NA region
             if (summonerName) {
-                axios.get('/api/matches/', {
+                return axios.get('/api/matches/', {
                     params: {
                         summonerName: summonerName,
                         region: region,
