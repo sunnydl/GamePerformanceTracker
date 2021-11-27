@@ -67,3 +67,4 @@ Inside scrum_resource folder
 <div>Image by <a href=https://www.pexels.com/@ann-h-45017?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels>Ann H</a> from <a href="https://www.pexels.com/" title="Pexels"> www.pexels.com</a></div>
 
 ### Disclaimer
+Every aspect of this project was used and created for educational purposes.
