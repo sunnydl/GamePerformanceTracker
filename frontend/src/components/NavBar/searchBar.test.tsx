@@ -15,5 +15,9 @@ test("searchBar test", () => {
 
     //check for search Icon Wrapper
     expect(screen.getByTestId('SearchIconWrapper')).toBeInTheDocument();
+    expect(screen.getByTestId('StyledInputBase')).toBeInTheDocument();
+
+    const regionDropDown = screen.getByTestId('regionDropDown');
+    expect(regionDropDown).toBeInTheDocument();
 });
 

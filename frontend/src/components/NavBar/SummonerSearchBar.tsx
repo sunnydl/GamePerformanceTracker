@@ -75,26 +75,26 @@ function SummonerSearchBar() {
 
   return (
     <React.Fragment>
-
       <Search data-testid ='Search'>
         <SearchIconWrapper data-testid ='SearchIconWrapper'>
           <SearchIcon />
         </SearchIconWrapper>
+       <div data-testid ='StyledInputBase'>
         <StyledInputBase
-          data-testid ='SyledInputBase'
           placeholder="Search…"
           inputProps={{ 'aria-label': 'search' }}
           onKeyPress={handleSummonerSearchByName}
         />
+       </div>
       </Search>
-
-      <RegionDropDown
-        data-testid='regionDropDown'
-        options={regions}
-        selectedIndex={regionIndex}
-        onSelect={setRegionIndex}
-      />
-
+    
+      <div data-testid='regionDropDown'>
+        <RegionDropDown
+          options={regions}
+          selectedIndex={regionIndex}
+          onSelect={setRegionIndex}
+        />
+      </div>
     </React.Fragment>
   );
 }
