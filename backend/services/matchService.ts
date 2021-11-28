@@ -3,8 +3,12 @@ import MatchDto from '../interfaces/IMatch/IMatchDto'
 import ParticipantDto from '../interfaces/IMatch/IParticipantDto';
 import currency from 'currency.js';
 import MatchChartDataDTO from '../interfaces/IMatchChartDataDTO';
-import {timeConverter} from './utility';
+import { timeConverter } from './utility';
 import MatchHistoryDTO from '../interfaces/IMatchHistoryDTO';
+import MatchChartMongo from '../interfaces/IMatchChartMongo';
+import MatchChartModel from '../models/MatchChartModel';
+import MatchHistoryModel from '../models/MatchHistoryModel';
+import MatchHistoryMongo from '../interfaces/IMatchHistoryMongo';
 
 const rankmap: any = {
     '1': 1,
@@ -17,7 +21,7 @@ const rankmap: any = {
     '8': -0.2,
     '9':-0.5,
     '10': -1,
- }
+}
 
 /**
  * Service used to collect match data for chart.
@@ -30,11 +34,12 @@ const rankmap: any = {
  */
 export const getMatchChartData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchChartDataDTO>> => {
     const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
-    return analysisMatch(puuid, matchList);
+    const chartData: Array<MatchChartDataDTO> = analysisMatch(puuid, matchList);
+    return chartData;
 }
 
 /**
- * Service used to collect match data for match history.
+ * Service used to collect match data for match history. If data is in db, then return db data, else fetch from Riot API
  *
  * @param {string} puuid The puuid of the player
  * @param {string} region The region that the player is located in
@@ -43,8 +48,54 @@ export const getMatchChartData = async(puuid: string, region: string, typeOfMatc
  * @return {Promise<Array<MatchHistoryDTO>>} The List of match data for match history
  */
 export const getMatchHistoryData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchHistoryDTO>> => {
+    const matchHistoryDB = await MatchHistoryModel.findOne({ puuid }) as MatchHistoryMongo;
+    if(!matchHistoryDB) {
+        // if db has no data of current user
+        const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
+        const matchHistoryData: Array<MatchHistoryDTO> = computeMatchHistoryData(matchList, puuid);
+        await new MatchHistoryModel({
+            puuid: puuid,
+            matches: matchHistoryData
+        }).save();
+        return matchHistoryData;
+    }
+    return matchHistoryDB.matches;
+}
+
+/**
+ * Service for updating the data of chart in db
+ *
+ * @param {string} puuid The puuid of the player
+ * @param {string} region The region that the player is located in
+ * @param {string} typeOfMatch The type of match to be fetched
+ * @param {number} numOfMatch The number of matches to fetch
+ * @return {Promise<Array<MatchChartDataDTO>>} The List of match data for chart
+ */
+export const updateDBChartData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchChartDataDTO>> => {
     const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
-    return computeMatchHistoryData(matchList, puuid);
+    const chartData: Array<MatchChartDataDTO> = analysisMatch(puuid, matchList);
+    await MatchChartModel.updateOne({ puuid }, {
+        matches: chartData
+    })
+    return chartData;
+}
+
+/**
+ * Service for updating the match history data in db
+ *
+ * @param {string} puuid The puuid of the player
+ * @param {string} region The region that the player is located in
+ * @param {string} typeOfMatch The type of match to be fetched
+ * @param {number} numOfMatch The number of matches to fetch
+ * @return {Promise<Array<MatchHistoryDTO>>} The List of match data for match history
+ */
+export const updateDBMatchHistoryData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchHistoryDTO>> => {
+    const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
+    const matchHistoryData: Array<MatchHistoryDTO> = computeMatchHistoryData(matchList, puuid);
+    await MatchHistoryModel.updateOne({ puuid }, {
+        matches: matchHistoryData
+    })
+    return matchHistoryData;
 }
 
 /**
@@ -57,16 +108,10 @@ export const getMatchHistoryData = async(puuid: string, region: string, typeOfMa
  * @return {Promise<Array<MatchDto>>} The List of the match
  */
 export const getMatchListByPUUID = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchDto>> => {
-    if(numOfMatch >= 20){
-        const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, typeOfMatch, 20);
-        const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
-        return matchList as Array<MatchDto>;
-    }
-    else{
-        const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, typeOfMatch, numOfMatch);
-        const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
-        return matchList as Array<MatchDto>;
-    }
+    numOfMatch = (numOfMatch >= 20)? 20:numOfMatch;
+    const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, typeOfMatch, numOfMatch);
+    const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
+    return matchList as Array<MatchDto>;
 };
 
 /**
@@ -78,7 +123,7 @@ export const getMatchListByPUUID = async(puuid: string, region: string, typeOfMa
  */
 export const getMatchObjListByMatchList = async (match_list: Array<string>, region: string): Promise<Array<MatchDto>> => {
     const matchDTOArr: Array<MatchDto> = [];
-    for( const matchElem of match_list){
+    for(const matchElem of match_list){
         const match = await riotApis.findMatchInfo(matchElem, region);
         matchDTOArr.push(match);
     }
@@ -123,21 +168,6 @@ export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): Array<
 
     return matchChartDataList;
 }
-
-//return list of participant info of the match
-export const getParticipantsInfoByMatchId = async(matchId: string, region: string): Promise<Array<ParticipantDto> | undefined> => {
-    const matchInfo: MatchDto = await riotApis.findMatchInfo(matchId, region);
-    if (matchInfo){
-        const participantMatchInfoArr: ParticipantDto[] = [];
-        for (let players = 0; players <= 9; players ++){
-            participantMatchInfoArr.push(matchInfo.info.participants[players]);
-        }
-        // console.log(participantMatchInfoArr);
-        return participantMatchInfoArr;
-    } else {
-        return [] as unknown as Array<ParticipantDto>;
-    }
-};
 
 /**
  * Returns the jg score on large monster's kill for the jg player.
