@@ -1,17 +1,14 @@
 import React from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
-
 import { useAppSelector } from '../../redux/hooks';
-
-import { Box, AppBar, Toolbar, IconButton, Tabs, Tab } from '@mui/material';
-import Button from '@mui/material/Button';
-
+import { Box, Button, AppBar, Toolbar, IconButton, Tab } from '@mui/material';
+import { NavBarTabs } from './style';
 import SummonerSearchBar from './SummonerSearchBar';
 
 function NavBar() {
   const location = useLocation();
-  const { summonerLevel=0 } = useAppSelector((state) => state.user);
+  const summonerFound = useAppSelector((state) => state.user.summonerFound);
 
   return (
       <AppBar position='sticky' color='secondary' elevation={0}> 
@@ -28,12 +25,12 @@ function NavBar() {
             GPT {/* TODO: add icon */}
           </IconButton>
           <Box sx={{ flexGrow: 0.05 }} />
-          <Tabs value={false} style={{ margin: 'auto' }}>
-            <Tab style={{ color: 'inherit' }} label='overview' component={Link} to={`/overview${location.search}`} disabled={summonerLevel===0} />
-            <Tab style={{ color: 'inherit' }} label='Match History' component={Link} to={`/match-history${location.search}`} disabled={summonerLevel===0} />
-            <Tab style={{ color: 'inherit' }} label='Leaderboard' component={Link} to={`/leaderboard${location.search}`} />
-            <Tab style={{ color: 'inherit' }} label='Champion' component={Link} to={{ pathname: "https://www.leagueoflegends.com/en-us/champions/" }} target="_blank"/>
-          </Tabs> 
+          <NavBarTabs value={false}>
+            <Tab label='overview' component={Link} to={`/overview${location.search}`} disabled={!summonerFound} />
+            <Tab label='Match History' component={Link} to={`/match-history${location.search}`} disabled={!summonerFound} />
+            <Tab label='Leaderboard' component={Link} to={`/leaderboard${location.search}`} />
+            <Tab label='Champion' component={Link} to={{ pathname: "https://www.leagueoflegends.com/en-us/champions/" }} target="_blank"/>
+          </NavBarTabs> 
           <SummonerSearchBar />
           <Box sx={{ flexGrow: 0.5 }} />
           <Button color="secondary" variant="contained">

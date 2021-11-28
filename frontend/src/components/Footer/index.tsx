@@ -3,15 +3,17 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { Tabs, Tab, Avatar } from '@mui/material';
 import { FooterBreak, FooterWrapper, ParticipantsWrapper } from './style';
+import { useAppSelector } from '../../redux/hooks';
 
 export default function Footer() {
     const location = useLocation();
+    const summonerFound = useAppSelector((state) => state.user.summonerFound);
     return (
         <FooterWrapper>
             <Tabs centered variant="fullWidth" value={false}>
                 <Tab label="github" component={Link} to={{ pathname: "https://github.com/sunnydl/GamePerformanceTracker" }} target="_blank"/>
-                <Tab label="overview" component={Link} to={`/overview${location.search}`}/>
-                <Tab label="match history" component={Link} to={`/match-history${location.search}`}/>
+                <Tab label="overview" component={Link} to={`/overview${location.search}`} disabled={!summonerFound} />
+                <Tab label="match history" component={Link} to={`/match-history${location.search}`} disabled={!summonerFound} />
                 <Tab className='gpt' label="GPT" component={Link} to={`/landing${location.search}`}/>
                 <Tab label="leaderboard" component={Link} to={`/leaderboard${location.search}`}/>
                 <Tab label="champions" component={Link} to={{ pathname: "https://www.leagueoflegends.com/en-us/champions/" }} target="_blank"/>

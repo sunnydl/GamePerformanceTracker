@@ -1,5 +1,18 @@
 import { alpha, styled } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
+import { InputBase, Tabs } from '@mui/material';
+
+export const NavBarTabs = styled(Tabs)(({ theme }) => ({
+    margin: 'auto',
+
+    '& .MuiTab-root': {
+        color: theme.palette.secondary.contrastText,
+
+        '&.Mui-disabled': {
+            color: theme.palette.secondary.contrastText,
+            opacity: theme.palette.action.disabledOpacity
+        }
+    }
+}));
 
 export const Search = styled('div')(({ theme }) => ({
     position: 'relative',
