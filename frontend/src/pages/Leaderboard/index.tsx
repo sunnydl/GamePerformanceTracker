@@ -49,7 +49,9 @@ export default function LeaderBoard() {
             <LeaderboardPaper data-testid="leaderboard content">
                 <TopSection />
                 {loading ? (
-                    <PageLoading />
+                    <div style={{ position: 'relative', height: '500px' }}>
+                        <PageLoading />
+                    </div>
                 ) : (
                     <Grow in={!loading}>
                         <div>
