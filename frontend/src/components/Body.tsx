@@ -18,6 +18,7 @@ const Overview = lazy(() => import('../pages/Overview'));
 const MatchHistory = lazy(() => import('../pages/MatchHistory'));
 const Leaderboard = lazy(() => import('../pages/Leaderboard'));
 const UserNotFound = lazy(() => import('../pages/UserNotFound'));
+const Search = lazy(() => import('../pages/Search'));
 
 const Container = styled('div')(({ theme }) => ({
     paddingTop: theme.spacing(10),
@@ -75,6 +76,9 @@ function Body() {
                         </Route>
                         <Route exact path='/leaderboard'>
                             <Leaderboard/>
+                        </Route>
+                        <Route exact path='/search'>
+                            <Search/>
                         </Route>
                         <Redirect to='/' />
                     </Switch>

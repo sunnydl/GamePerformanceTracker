@@ -1,4 +1,6 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom';
+import { useAppSelector } from '../../redux/hooks';
 import UserSummary from './components/UserSummary'
 import MatchSummary from './components/MatchSummary'
 
@@ -9,6 +11,12 @@ import MatchSummary from './components/MatchSummary'
  * @returns {JSX.Element} A functional component.
  */
 export default function Overview() {
+    const summonerFound = useAppSelector((state) => state.user.summonerFound);
+    if (!summonerFound)
+    {
+        return <Redirect to='/search' />
+    }
+
     return (
         <div data-testid='overview'>
             <UserSummary />
