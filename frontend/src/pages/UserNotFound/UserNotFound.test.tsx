@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import UserNotFound from './UserNotFound';
+import UserNotFound from '.';
 import { Provider } from 'react-redux';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';

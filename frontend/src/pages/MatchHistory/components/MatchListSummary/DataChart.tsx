@@ -28,6 +28,7 @@ const matchDataKeys = [
 ];
 
 // Temporary colors to distinguish each data type
+// TODO (hao): figure out how to connect these values to the theme cleanly
 const matchDataColors = {
     kills: 'green',
     deaths: 'pink',

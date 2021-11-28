@@ -14,7 +14,7 @@ Web App
 * ...More to come
 
 ### Release plan
-![releasePlan](https://user-images.githubusercontent.com/56567343/138219123-cfc4f4bd-83d3-4657-9b93-6a1cf0d44d93.png)
+![releasePlan](https://user-images.githubusercontent.com/46057691/143723217-5073910a-300c-449c-8de7-b4ebd24e4a43.png)
 
 ### Sprint plans
 Inside scrum_resource folder
@@ -67,3 +67,4 @@ Inside scrum_resource folder
 <div>Image by <a href=https://www.pexels.com/@ann-h-45017?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels>Ann H</a> from <a href="https://www.pexels.com/" title="Pexels"> www.pexels.com</a></div>
 
 ### Disclaimer
+Every aspect of this project was used and created for educational purposes.

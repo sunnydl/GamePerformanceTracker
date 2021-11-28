@@ -11,16 +11,17 @@ import TopSection from './components/TopSection';
 import PlayerList from './components/PlayerList';
 import PageLoading from '../../components/PageLoading';
 
-const LeaderboardWrapper = styled('div')(() => ({
-    padding: '20px',
-    minHeight: '1200px',
+const LeaderboardWrapper = styled('div')(({ theme }) => ({
+    padding: theme.spacing(2),
+    // minHeight: '1200px',
     height: 'fit-content',
 }))
 
-const LeaderboardPaper = styled('div')(() => ({
-    backgroundColor: '#F2F7FD',
-    borderRadius: '71px',
-    minHeight: '1100px',
+const LeaderboardPaper = styled('div')(({ theme }) => ({
+    paddingBottom: theme.spacing(8),
+    backgroundColor: theme.palette.background.alternate,
+    borderRadius: theme.spacing(8),
+    minHeight: '1000px',
     height: 'fit-content',
 }))
 

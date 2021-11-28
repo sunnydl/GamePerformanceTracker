@@ -2,6 +2,22 @@ import currency from 'currency.js';
 import { ChartState, KDA } from './interfaces';
 
 /**
+ * Compares the two given strings and returns whether they are equivalent
+ * when casing is ignored.
+ * 
+ * @param {string} first The first string to compare.
+ * @param {second} second The second string to compare.
+ * @returns {boolean} Whether the two strings match when ignoring casing.
+ */
+export const compareIgnoreCase = (first: string, second: string) => {
+    return first.localeCompare(
+        second,
+        undefined,
+        { sensitivity: 'accent' }
+    ) === 0;
+}
+
+/**
  * Returns a URL for the given summoner's icon id.
  * 
  * @param {number} [iconID] The icon id.

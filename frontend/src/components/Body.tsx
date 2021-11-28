@@ -5,6 +5,7 @@ import { fetchUserData } from '../redux/slices/user';
 import { fetchChartData } from '../redux/slices/chart';
 import { fetchMatchesData } from '../redux/slices/matches';
 import { setLoading } from '../redux/slices/loading';
+import { compareIgnoreCase } from '../util';
 
 import { useLocation, Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
@@ -12,29 +13,33 @@ import { styled } from '@mui/material/styles';
 import PageLoading from './PageLoading';
 import { FetchOperations } from '../enums';
 
-const Home = lazy(() => import('../pages/Landing/Home'));
-const Overview = lazy(() => import('../pages/Overview/Overview'));
-const MatchHistory = lazy(() => import('../pages/MatchHistory/MatchHistory'));
-const Leaderboard = lazy(() => import('../pages/Leaderboard/Leaderboard'));
-const UserNotFound = lazy(() => import('../pages/UserNotFound/UserNotFound'));
+const Home = lazy(() => import('../pages/Landing'));
+const Overview = lazy(() => import('../pages/Overview'));
+const MatchHistory = lazy(() => import('../pages/MatchHistory'));
+const Leaderboard = lazy(() => import('../pages/Leaderboard'));
+const UserNotFound = lazy(() => import('../pages/UserNotFound'));
 
-const Container = styled('div')(() => ({
-    padding: '8vh 2vw 8vh 2vw',
+const Container = styled('div')(({ theme }) => ({
+    paddingTop: theme.spacing(10),
+    paddingBottom: theme.spacing(25),
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
 }))
 
 function Body() {
     const location = useLocation();
-    const { summonerName, region } = useAppSelector((state) => state.user);
     const loading = useAppSelector((state) => state.loading);
+    const { summonerName='', region='' } = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
     const history = useHistory();
     useEffect(() => {
         const search = location.search;
         const params = new URLSearchParams(search);
         
-        const isDifferentSummoner =
-            summonerName !== params.get('summonerName') ||
-            region !== params.get('region');
+        const isDifferentSummoner = !(
+            compareIgnoreCase(summonerName, params.get('summonerName') ?? '') &&
+            compareIgnoreCase(region, params.get('region') ?? '')
+        );
         if (isDifferentSummoner) {
             dispatch(setLoading(true));
             Promise.all([

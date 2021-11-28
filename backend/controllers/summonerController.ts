@@ -3,6 +3,13 @@ import SummonerDTO from "../interfaces/ISummonerDTO";
 import * as summonerService from "../services/summonerService"
 import * as exceptionHandler from "./exceptionHandler"
 
+/**
+ * Controller for fetching the user's most recent status and information given a player name
+ *
+ * @param {Request} req HTTP request
+ * @param {Response} res HTTP response
+ * @return {Promise<void>}
+ */
 export const getSummonerInfoByName = async (req: Request, res: Response) => {
     const summonerName: string = req.query.summonerName as string;
     const region: string = req.query.region as string || 'NA'; // default as NA if no region input
@@ -17,6 +24,13 @@ export const getSummonerInfoByName = async (req: Request, res: Response) => {
     }
 }
 
+/**
+ * Controller for fetching the information of the top players of the game
+ *
+ * @param {Request} req HTTP request
+ * @param {Response} res HTTP response
+ * @return {Promise<void>}
+ */
 export const getLeaderBoard = async (req: Request, res: Response) => {
     const tier: string = req.query.tier as string || 'Challenger' // default challenger queue;
     const division: string = req.query.division as string || 'I'; // default as I

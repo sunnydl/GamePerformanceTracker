@@ -6,30 +6,12 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import FeaturePanel from './components/FeaturePanel';
 
-function Home() {
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#fff',
-        contrastText: '#18A0FB',
-      },
-      secondary: {
-        main: '#18A0FB',
-        contrastText: '#fff',
-      },
-      error:{
-        main: '#000',
-        contrastText: '#000',
-      },
-    },
-  });
-
+export default function Home() {
   return (
-    <ThemeProvider theme={theme}>
+    <React.Fragment>
       <CssBaseline />
       <main data-testid="home" >
         <Box
@@ -59,10 +41,10 @@ function Home() {
               spacing={2}
               justifyContent="center"
             >
-              <Button data-testid="login-button" color="primary" variant="contained">
+              <Button data-testid="login-button" color="secondary" variant="contained">
                 Log in
               </Button>
-              <Button data-testid="register-button" color="secondary" variant="contained">
+              <Button data-testid="register-button" color="primary" variant="contained">
                 Register
               </Button>
             </Stack>
@@ -108,8 +90,6 @@ function Home() {
           </Grid>
         </Container>
       </main>
-    </ThemeProvider>
+    </React.Fragment>
   );
 }
-
-export default Home;
