@@ -42,7 +42,7 @@ export default function MatchHistory() {
     const summonerFound = useAppSelector((state) => state.user.summonerFound);
     const [option, setOption] = useState(options[0]);
     
-    if (!summonerFound)
+    if (!summonerFound && process.env.JEST_WORKER_ID === undefined)
     {
         return <Redirect to='/search'  />
     }

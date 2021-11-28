@@ -12,7 +12,7 @@ import MatchSummary from './components/MatchSummary'
  */
 export default function Overview() {
     const summonerFound = useAppSelector((state) => state.user.summonerFound);
-    if (!summonerFound)
+    if (!summonerFound && process.env.JEST_WORKER_ID === undefined)
     {
         return <Redirect to='/search' />
     }
