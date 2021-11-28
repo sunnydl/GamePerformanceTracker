@@ -1,7 +1,8 @@
-
 import React from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
+
+import { useAppSelector } from '../../redux/hooks';
 
 import { Box, AppBar, Toolbar, IconButton, Tabs, Tab } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -10,6 +11,7 @@ import SummonerSearchBar from './SummonerSearchBar';
 
 function NavBar() {
   const location = useLocation();
+  const { summonerLevel=0 } = useAppSelector((state) => state.user);
 
   return (
       <AppBar position='sticky' color='secondary' elevation={0}> 
@@ -27,8 +29,8 @@ function NavBar() {
           </IconButton>
           <Box sx={{ flexGrow: 0.05 }} />
           <Tabs value={false} style={{ margin: 'auto' }}>
-            <Tab style={{ color: 'inherit' }} label='overview' component={Link} to={`/overview${location.search}`} />
-            <Tab style={{ color: 'inherit' }} label='Match History' component={Link} to={`/match-history${location.search}`} />
+            <Tab style={{ color: 'inherit' }} label='overview' component={Link} to={`/overview${location.search}`} disabled={summonerLevel===0} />
+            <Tab style={{ color: 'inherit' }} label='Match History' component={Link} to={`/match-history${location.search}`} disabled={summonerLevel===0} />
             <Tab style={{ color: 'inherit' }} label='Leaderboard' component={Link} to={`/leaderboard${location.search}`} />
             <Tab style={{ color: 'inherit' }} label='Champion' component={Link} to={{ pathname: "https://www.leagueoflegends.com/en-us/champions/" }} target="_blank"/>
           </Tabs> 
