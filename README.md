@@ -4,13 +4,13 @@ This project is to improve the gamer's experience on reviewing their games, and 
 ### Project type 
 Web App  
 ### Tech Stack (Preferably) 
-* React.js 
-* Node.js 
-* Express.js 
-* MongoDB
-* Material UI
+* [React.js](https://reactjs.org/) 
+* [Node.js](https://nodejs.org/en/)
+* [Express.js](https://expressjs.com/)
+* [MongoDB](https://www.mongodb.com/)
+* [Material UI](https://mui.com/)
 ### Covered games 
-* League of Legends 
+* [League of Legends](https://www.leagueoflegends.com/en-us/)
 * ...More to come
 
 ### Release plan
