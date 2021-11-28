@@ -17,7 +17,7 @@ Web App
 ![releasePlan](https://user-images.githubusercontent.com/46057691/143723217-5073910a-300c-449c-8de7-b4ebd24e4a43.png)
 
 ### Sprint plans
-Inside scrum_resource folder
+Please navigate to the [scrum_resources](https://github.com/sunnydl/GamePerformanceTracker/tree/master/scrum_resource) folder.
 
 ### Wireframe Drafts
 [Available via Figma](https://www.figma.com/file/LUBg4mluBsOVX0mYmEDoPT/GPT-Wireframe?node-id=0%3A1)
