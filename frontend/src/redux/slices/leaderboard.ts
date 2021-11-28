@@ -3,6 +3,7 @@ import { LeaderboardState } from "../../interfaces";
 import axios from 'axios';
 
 import { tiers, divisions, queueTypes } from "../../pages/Leaderboard/components/enums";
+import { FetchOperations } from "../../enums";
 
 const initialState: LeaderboardState = {
     tier: 'Challenger',
@@ -65,10 +66,21 @@ const leaderboardSlice = createSlice({
     },
 })
 
-function fetchLeaderboardData(tier: string, division: string, queueType: string) {
+function fetchLeaderboardData(tier: string, division: string, queueType: string, operation: string) {
+    let fetchUrl: string;
+    switch(operation) {
+        case FetchOperations.FETCH:
+            fetchUrl = '/api/summonerInfo/leaderboard';
+            break;
+        case FetchOperations.UPDATE:
+            fetchUrl = '/api/summonerInfo/update-leaderboard';
+            break;
+        default:
+            fetchUrl = '/api/summonerInfo/leaderboard';
+    }
     return async (dispatch: Dispatch) => {
         if (tiers.includes(tier) && divisions.includes(division) && queueTypes.includes(queueType)) {
-            return axios.get('/api/summonerInfo/leaderboard', {
+            return axios.get(fetchUrl, {
                 params: {
                     tier: tier,
                     division: division,

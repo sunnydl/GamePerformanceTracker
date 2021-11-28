@@ -46,6 +46,11 @@ export interface LeaderboardState {
     leaderboard: Array<UserState>;
 }
 
+export interface LoadingState {
+    overall: boolean;
+    leaderboard: boolean;
+}
+
 
 
 // Helper interfaces

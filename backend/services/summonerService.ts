@@ -5,6 +5,8 @@ import SummonerInfo from "../interfaces/ISummonerInfo";
 import SummonerLeague from '../interfaces/ISummonerLeague';
 import UserModel from '../models/UserModel';
 import LeagueListDTO from '../interfaces/ILeagueListDTO';
+import LeaderboardModel from '../models/LeaderboardModel';
+import LeaderboardMongo from '../interfaces/ILeaderboardMongo';
 
 /**
  * Service used to fetch the information of a player given its name
@@ -67,7 +69,7 @@ export const getSummonerByName = async(summonerName: string, region: string): Pr
 }
 
 /**
- * Service for finding the top players data
+ * Service for finding the top players data, if data is found in db, then return db data, if not then fetch from Riot API
  *
  * @param {string} tier The tier of the players
  * @param {string} division The division of the players
@@ -76,6 +78,60 @@ export const getSummonerByName = async(summonerName: string, region: string): Pr
  * @return {Promise<Array<SummonerDTO>>} The List of the top players
  */
 export const getLeaderBoard = async(tier: string, division: string, queueType: string, region: string): Promise<Array<SummonerDTO>> => {
+    const leaderboardDB = await LeaderboardModel.findOne({ tier, division }) as LeaderboardMongo;
+    if(!leaderboardDB) {
+        let list: Array<SummonerLeague>;
+        if(riotApis.HIGH_TIER[tier]) {
+            const collection: LeagueListDTO = await riotApis.getLeaderBoardHighTierList(tier, queueType, region);
+            list = collection.entries;
+        } else {
+            list = await riotApis.getLeaderBoardLowTierList(tier, division, queueType, region);
+        }
+        
+        // first sort the list based on leaguePoints and cut the amount
+        list = list.sort((a, b) => b.leaguePoints - a.leaguePoints).slice(0, 10); // get 10 for now
+        
+        const leaderBoard: Array<SummonerDTO> = [];
+        const champsList: any = await riotApis.getChampsData();
+        for(const player of list) {
+            const playerInfo = await riotApis.findSummonerInfoBySummonerId(player.summonerId, region);
+            const champions: Array<ChampionMastery> = await riotApis.findChampionMastery(playerInfo?.id, region);
+            const favChampsIds: Array<number> = champions.map((champion: ChampionMastery) => champion.championId).slice(0, 3);
+            const favChamps: Array<string> = await findFavChampsName(champsList, favChampsIds);
+            
+            leaderBoard.push({
+                summonerName: player.summonerName,
+                summonerLevel: playerInfo.summonerLevel,
+                summonerIcon: playerInfo.profileIconId,
+                rank: `${tier} ${division}`,
+                leaguePoints: player.leaguePoints,
+                winGames: player.wins,
+                lossGames: player.losses,
+                favChamps: favChamps,
+            });
+        }
+
+        // add the list to db
+        await new LeaderboardModel({
+            tier: tier,
+            division: division,
+            players: leaderBoard
+        }).save();
+
+        return leaderBoard;
+    }
+    return leaderboardDB.players;
+}
+/**
+ * Service for updating the data of leaderboard in db
+ *
+ * @param {string} tier The tier of the players
+ * @param {string} division The division of the players
+ * @param {string} queueType The type of the queue
+ * @param {string} region The region that the player is located in
+ * @return {Promise<Array<SummonerDTO>>} The List of the top players
+ */
+export const updateDBLeaderboard = async(tier: string, division: string, queueType: string, region: string): Promise<Array<SummonerDTO>> => {
     let list: Array<SummonerLeague>;
     if(riotApis.HIGH_TIER[tier]) {
         const collection: LeagueListDTO = await riotApis.getLeaderBoardHighTierList(tier, queueType, region);
@@ -106,6 +162,12 @@ export const getLeaderBoard = async(tier: string, division: string, queueType: s
             favChamps: favChamps,
         });
     }
+
+    // update db
+    await LeaderboardModel.updateOne({ tier, division }, {
+        players: leaderBoard
+    });
+
     return leaderBoard;
 }
 

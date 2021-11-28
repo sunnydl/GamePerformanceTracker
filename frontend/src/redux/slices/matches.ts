@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
 import { MatchState } from "../../interfaces";
+import { FetchOperations } from "../../enums";
 import axios from 'axios';
 
 // NOTE: Temporary -- Sample Data
@@ -118,14 +119,26 @@ export const matchesSlice = createSlice({
     },
 })
 
-function fetchMatchesData(query: string, numOfMatch: number) {
+function fetchMatchesData(query: string, numOfMatch: number, operation: string) {
+    let fetchUrl: string;
+    switch(operation) {
+        case FetchOperations.FETCH:
+            fetchUrl = '/api/matches/';
+            break;
+        case FetchOperations.UPDATE:
+            fetchUrl = '/api/matches/updated-history';
+            break;
+        default:
+            fetchUrl = '/api/matches/';
+            break;
+    }
     return async (dispatch: Dispatch) => {
         if (query) {
             const params = new URLSearchParams(query);
             const summonerName = params.get('summonerName');
             const region = params.get('region') ?? "NA"; // Defaults to NA region
             if (summonerName) {
-                return axios.get('/api/matches/', {
+                return axios.get(fetchUrl, {
                     params: {
                         summonerName: summonerName,
                         region: region,
