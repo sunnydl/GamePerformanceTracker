@@ -52,6 +52,13 @@ export const getMatchChartData = async(req: Request, res: Response) => {
     }
 }
 
+/**
+ * Controller for updating and returning the match history data from DB
+ *
+ * @param {Request} req HTTP request
+ * @param {Response} res HTTP response
+ * @return {Promise<void>}
+ */
 export const getUpdatedMatchHistoryData = async(req: Request, res: Response) => {
     const summonerName: string = req.query.summonerName as string;
     const region: string = req.query.region as string || 'NA'; // default as NA if no region input
@@ -69,6 +76,13 @@ export const getUpdatedMatchHistoryData = async(req: Request, res: Response) => 
     }
 }
 
+/**
+ * Controller for updating and returning the match chart data from DB
+ *
+ * @param {Request} req HTTP request
+ * @param {Response} res HTTP response
+ * @return {Promise<void>}
+ */
 export const getUpdatedChartData = async(req: Request, res: Response) => {
     const summonerName: string = req.query.summonerName as string;
     const region: string = req.query.region as string || 'NA'; // default as NA if no region input

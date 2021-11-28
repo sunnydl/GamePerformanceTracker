@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector} from '../redux/hooks';
 import { fetchUserData } from '../redux/slices/user';
 import { fetchChartData } from '../redux/slices/chart';
 import { fetchMatchesData } from '../redux/slices/matches';
-import { setLoading } from '../redux/slices/loading';
+import { setOverallLoading } from '../redux/slices/loading';
 import { compareIgnoreCase } from '../util';
 
 import { useLocation, Switch, Route, Redirect, useHistory } from 'react-router-dom';
@@ -28,7 +28,7 @@ const Container = styled('div')(({ theme }) => ({
 
 function Body() {
     const location = useLocation();
-    const loading = useAppSelector((state) => state.loading);
+    const loading = useAppSelector((state) => state.loading.overall);
     const { summonerName='', region='' } = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
     const history = useHistory();
@@ -41,7 +41,7 @@ function Body() {
             compareIgnoreCase(region, params.get('region') ?? '')
         );
         if (isDifferentSummoner) {
-            dispatch(setLoading(true));
+            dispatch(setOverallLoading(true));
             Promise.all([
                 dispatch(fetchUserData(search, history)),
                 dispatch(fetchChartData(search, 5)),
@@ -49,7 +49,7 @@ function Body() {
             ])
             .then(() => {
                 console.log('finished loading data');
-                dispatch(setLoading(false));
+                dispatch(setOverallLoading(false));
             });
         }   
     }, [dispatch, region, summonerName, location.search, history]);

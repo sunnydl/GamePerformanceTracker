@@ -126,7 +126,7 @@ function fetchMatchesData(query: string, numOfMatch: number, operation: string) 
             fetchUrl = '/api/matches/';
             break;
         case FetchOperations.UPDATE:
-            fetchUrl = '/api/matches/';
+            fetchUrl = '/api/matches/updated-history';
             break;
         default:
             fetchUrl = '/api/matches/';

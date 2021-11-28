@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from '../../../../redux/hooks';
 import { setLeaderboardFilter } from '../../../../redux/slices/leaderboard';
 
 import { Select, MenuItem, FormControl, InputLabel, Button } from '@mui/material';
+import LeaderboardUpdateButton from '../LeaderboardUpdateButton';
 
 import { tiers, divisions, queueTypes, high_tiers } from '../enums';
 
@@ -96,6 +97,11 @@ export default function Selectors() {
             <FormControl>
                 <SelectWrapper>
                     <Button size="large" variant="contained" onClick={updateFilter}>Search</Button>
+                </SelectWrapper>
+            </FormControl>
+            <FormControl>
+                <SelectWrapper>
+                    <LeaderboardUpdateButton/>
                 </SelectWrapper>
             </FormControl>
         </SelectorsWrapper>
