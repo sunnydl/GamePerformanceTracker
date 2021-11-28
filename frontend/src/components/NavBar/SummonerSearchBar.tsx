@@ -38,8 +38,8 @@ function SummonerSearchBar() {
   }
 
   return (
-    <React.Fragment data-testid="search-bar" >
-      <Search>
+    <React.Fragment>
+      <Search data-testid="search-bar">
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
