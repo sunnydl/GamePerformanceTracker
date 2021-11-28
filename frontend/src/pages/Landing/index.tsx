@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -11,8 +10,6 @@ import FeaturePanel from './components/FeaturePanel';
 
 export default function Home() {
   return (
-    <React.Fragment>
-      <CssBaseline />
       <main data-testid="home" >
         <Box
           sx={{
@@ -90,6 +87,5 @@ export default function Home() {
           </Grid>
         </Container>
       </main>
-    </React.Fragment>
   );
 }
