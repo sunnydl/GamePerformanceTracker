@@ -22,7 +22,7 @@
     summonerLevel: number
     summonerIcon: number
     rank: string
-    leaguePoints: number,
+    leaguePoints: number
     winGames: number
     lossGames: number
     favChamps: Array<string>
@@ -39,7 +39,7 @@
 [
     {
         name: string,
-        winLoss: number,
+        winLoss: number
         kills: number
         deaths: number
         assists: number
@@ -62,10 +62,130 @@
         summonerLevel: number
         summonerIcon: number
         rank: string
-        leaguePoints: number,
+        leaguePoints: number
         winGames: number
         lossGames: number
         favChamps: Array<string>
+    },
+    ...
+]
+```
+#### GET api/summonerInfo/update-leaderboard/:tier/:division/:queueType/:region
+##### request input (Get request param):
+* tier: string
+* division: string
+* queueType: string
+* region: string
+##### response:
+```
+[
+    {
+        summonerName: string
+        summonerLevel: number
+        summonerIcon: number
+        rank: string
+        leaguePoints: number
+        winGames: number
+        lossGames: number
+        favChamps: Array<string>
+    },
+    ...
+]
+```
+#### GET api/matches/chart/:summonerName/:region/:matchType/:numOfMatch
+##### request input (Get request param):
+* summonerName: string
+* region: (Optional) string
+* matchType: string
+* numOfMatch: number
+##### response:
+```
+[
+    {
+        name: string
+        winLoss: number
+        kills: number
+        deaths: number
+        assists: number
+        scores: number
+    },
+    ...
+]
+```
+#### GET api/matches/updated-chart/:summonerName/:region/:matchType/:numOfMatch
+##### request input (Get request param):
+* summonerName: string
+* region: (Optional) string
+* matchType: string
+* numOfMatch: number
+##### response:
+```
+[
+    {
+        name: string
+        winLoss: number
+        kills: number
+        deaths: number
+        assists: number
+        scores: number
+    },
+    ...
+]
+```
+#### GET api/matches/:summonerName/:region/:matchType/:numOfMatch
+##### request input (Get request param):
+* summonerName: string
+* region: (Optional) string
+* matchType: string
+* numOfMatch: number
+##### response:
+```
+[
+    {
+        gameMode: string
+        gameDate: string
+        win: boolean
+        role: string
+        championName: string
+        kills: number
+        deaths: number
+        assists: number
+        gptScore: number
+        visionPerMin: number
+        csPerMin: number
+        dmgPerMin: number
+        visionAmt: number
+        csAmt: number
+        dmgAmt: number
+    },
+    ...
+]
+```
+#### GET api/matches/updated-history/:summonerName/:region/:matchType/:numOfMatch
+##### request input (Get request param):
+* summonerName: string
+* region: (Optional) string
+* matchType: string
+* numOfMatch: number
+##### response:
+```
+[
+    {
+        gameMode: string
+        gameDate: string
+        win: boolean
+        role: string
+        championName: string
+        kills: number
+        deaths: number
+        assists: number
+        gptScore: number
+        visionPerMin: number
+        csPerMin: number
+        dmgPerMin: number
+        visionAmt: number
+        csAmt: number
+        dmgAmt: number
     },
     ...
 ]
