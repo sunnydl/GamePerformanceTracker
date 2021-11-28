@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from '@mui/material/Avatar';
+import { EmblemAvatar } from './style';
 
 interface RankEmblemIconProps {
     rank: string;
@@ -8,9 +8,9 @@ interface RankEmblemIconProps {
 
 export default function RankEmblemIcon({ rank, size }: RankEmblemIconProps) {
     return (
-        <Avatar
+        <EmblemAvatar
             src={`${process.env.PUBLIC_URL}/emblems/${rank.toLowerCase()}.png`}
-            sx={{ width: size, height: size, backgroundColor: '#F2F7FD', border: '4px solid #F2F7FD' }}
+            sx={{ width: size, height: size }}
         />
     );
 }

@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { Grow } from '@mui/material';
 
-import MatchOptions from './components/MatchOptions/MatchOptions';
-import MatchListSummary from './components/MatchListSummary/MatchListSummary';
+import MatchOptions from './components/MatchOptions';
+import MatchListSummary from './components/MatchListSummary';
 import MatchList from './components/MatchList';
 
 const MatchHistoryWrapper = styled('div')(({ theme }) => ({
     width: '90%',
     margin: 'auto',
-    marginBottom: theme.spacing(16),
+    marginBottom: theme.spacing(8),
 
     '& > *': {
         marginBottom: theme.spacing(4)

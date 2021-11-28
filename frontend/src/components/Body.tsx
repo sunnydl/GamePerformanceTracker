@@ -10,14 +10,17 @@ import { useLocation, Switch, Route, Redirect, useHistory } from 'react-router-d
 import { styled } from '@mui/material/styles';
 import PageLoading from './PageLoading';
 
-const Home = lazy(() => import('../pages/Landing/Home'));
-const Overview = lazy(() => import('../pages/Overview/Overview'));
-const MatchHistory = lazy(() => import('../pages/MatchHistory/MatchHistory'));
-const Leaderboard = lazy(() => import('../pages/Leaderboard/Leaderboard'));
-const UserNotFound = lazy(() => import('../pages/UserNotFound/UserNotFound'));
+const Home = lazy(() => import('../pages/Landing'));
+const Overview = lazy(() => import('../pages/Overview'));
+const MatchHistory = lazy(() => import('../pages/MatchHistory'));
+const Leaderboard = lazy(() => import('../pages/Leaderboard'));
+const UserNotFound = lazy(() => import('../pages/UserNotFound'));
 
-const Container = styled('div')(() => ({
-    padding: '8vh 2vw 8vh 2vw',
+const Container = styled('div')(({ theme }) => ({
+    paddingTop: theme.spacing(10),
+    paddingBottom: theme.spacing(25),
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
 }))
 
 function Body() {

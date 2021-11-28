@@ -6,17 +6,17 @@ export const ProfileWrapper = styled(Box)(({ theme }) => ({
     flexDirection: "column",
     maxWidth: '600px',
     margin: 'auto',
-    padding: '40px 20px 40px 20px',
-    backgroundColor: '#F2F7FD',
-    borderRadius: '71px',
-    fontSize: '1.25rem',
+    padding: `${theme.spacing(4)} ${theme.spacing(3)}`,
+    backgroundColor: theme.palette.background.alternate,
+    borderRadius: theme.spacing(8),
+    fontSize: theme.typography.h6.fontSize,
 
     "& .icon-wrapper": {
         display: "inherit",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "inherit",
-        fontSize: "1.5rem",
+        fontSize: theme.typography.h5.fontSize,
         fontWeight: "bold",
 
         "& .profile": {
@@ -27,7 +27,7 @@ export const ProfileWrapper = styled(Box)(({ theme }) => ({
 
     "& .header-wrapper": {
         borderBottom: "1px solid",
-        paddingBottom: "16px"
+        paddingBottom: theme.spacing(2)
     },
 
     "& .body-wrapper > div > span.data-value": {
@@ -35,7 +35,7 @@ export const ProfileWrapper = styled(Box)(({ theme }) => ({
     },
 
     "& div": {
-        marginBottom: "16px",
+        marginBottom: theme.spacing(2),
     }
 }));
 
@@ -45,9 +45,10 @@ export const ChartsWrapper = styled(Box)(({ theme }) => ({
     justifyContent: "space-evenly",
     maxWidth: '600px',
     margin: 'auto',
-    padding: '40px 20px 20px 20px',
-    backgroundColor: '#F2F7FD',
-    borderRadius: '71px',
+    padding: theme.spacing(2),
+    paddingTop: theme.spacing(5),
+    backgroundColor: theme.palette.background.alternate,
+    borderRadius: theme.spacing(8),
 }));
 
 export const FavoriteChampionsWrapper = styled(Box)(({ theme }) => ({
@@ -56,21 +57,21 @@ export const FavoriteChampionsWrapper = styled(Box)(({ theme }) => ({
     justifyContent: "space-evenly",
     maxWidth: '600px',
     margin: 'auto',
-    padding: '40px 20px 40px 20px',
-    backgroundColor: '#F2F7FD',
-    borderRadius: '71px',
+    padding: `${theme.spacing(4)} ${theme.spacing(3)}`,
+    backgroundColor: theme.palette.background.alternate,
+    borderRadius: theme.spacing(8),
 
     "& .title-wrapper": {
         width: '100%',
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: '1.5rem'
+        fontSize: theme.typography.h5.fontSize,
     },
 
     "& .icon-wrapper": {
-        margin: "16px",
+        margin: theme.spacing(2),
         textAlign: 'center',
-        fontSize: "1.25rem",
+        fontSize: theme.typography.h6.fontSize,
         fontWeight: "bold",
         
         "& .MuiAvatar-root": {

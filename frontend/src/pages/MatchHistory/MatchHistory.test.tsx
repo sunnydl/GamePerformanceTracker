@@ -2,7 +2,7 @@ import React from 'react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import MatchHistory from './MatchHistory';
+import MatchHistory from '.';
 import { store } from '../../redux/store';
 import { Provider } from 'react-redux';
 

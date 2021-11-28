@@ -39,8 +39,8 @@ export default function Selectors() {
     return (
         <SelectorsWrapper data-testid="leaderboard selectors" sx={{
             bgcolor: 'background.paper',
-            borderColor: 'text.primary',
             border: 1,
+            borderColor: 'grey.600',
         }}>
             <FormControl
                 variant="standard"
