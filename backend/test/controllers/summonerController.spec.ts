@@ -37,3 +37,52 @@ describe('Summoner information request', () => {
         expect(status).toEqual(expectedResStatus);
     })
 })
+
+describe('Leaderboard request', () => {
+    beforeAll(async() => {
+        await mongoose.connect(config.mongo.url, config.mongo.options);
+    })
+
+    afterAll(async() => {
+        await mongoose.connection.close();
+        server.close();
+    })
+
+    test('high ranking leaderboard', async() => {
+        const tier = 'Challenger';
+        const division = 'I';
+        const queueType = 'SOLO';
+        const region = 'NA';
+
+        const { status, text } = await request(app)
+        .get('/api/summonerInfo/leaderboard')
+        .query({
+            tier, division, queueType, region
+        });
+        const expectedSize = 10;
+        const expectedResStatus = 200;
+        const expectedRank = 'Challenger I'
+        expect(status).toEqual(expectedResStatus);
+        expect(JSON.parse(text).length).toEqual(expectedSize);
+        expect(JSON.parse(text)[0].rank).toEqual(expectedRank);
+    })
+
+    test('low ranking leaderboard', async() => {
+        const tier = 'Gold';
+        const division = 'II';
+        const queueType = 'SOLO';
+        const region = 'NA';
+
+        const { status, text } = await request(app)
+        .get('/api/summonerInfo/leaderboard')
+        .query({
+            tier, division, queueType, region
+        });
+        const expectedSize = 10;
+        const expectedResStatus = 200;
+        const expectedRank = 'Gold II'
+        expect(status).toEqual(expectedResStatus);
+        expect(JSON.parse(text).length).toEqual(expectedSize);
+        expect(JSON.parse(text)[0].rank).toEqual(expectedRank);
+    }, 10000)
+})

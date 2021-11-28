@@ -6,19 +6,11 @@ import { MatchChampsGrid } from './style';
 import OverallData from './OverallData';
 import ChampData from './ChampData';
 
-import { MatchState } from '../../../../interfaces';
+import { MatchState, ChampPerformanceSummary } from '../../../../interfaces';
+import { calculateWinRate } from '../../../../util';
 import { useAppSelector } from '../../../../redux/hooks';
 
-export interface ChampPerformanceSummary {
-    championName: string,
-    matches: number,
-    wins: number,
-    kills: number,
-    deaths: number,
-    assists: number
-}
-
-function getTopChamps(matches: MatchState[]) {
+export function getTopChamps(matches: MatchState[]) {
     const champs: { [key: string]: ChampPerformanceSummary } = {};
 
     for (const key in matches) {
@@ -50,13 +42,20 @@ function getTopChamps(matches: MatchState[]) {
     return topChamps.slice(0, 3);
 }
 
-function MatchChamps({ size }: { size: number }) {
+/**
+ * Returns a functional component of the match history page that displays
+ * a list of data on the summoner's most recently played champions.
+ * 
+ * @param {number} size The number of matches being displayed.
+ * @returns {JSX.Element} A functional component.
+ */
+export default function MatchChamps({ size }: { size: number }) {
     const matches = useAppSelector((state) => state.matches.slice(0, size));
     const champs = getTopChamps(matches);
 
     const wins = matches.filter((match) => match.win).length;
     const losses = matches.length - wins;
-    const ratio = (wins / matches.length) || 0;
+    const ratio = calculateWinRate(wins, losses);
 
     return (
         <MatchChampsGrid container>
@@ -64,7 +63,7 @@ function MatchChamps({ size }: { size: number }) {
                 <OverallData
                     wins={wins}
                     losses={losses}
-                    ratio={ratio}
+                    ratio={ratio.value}
                 />
             </Grid>
             <Grid item container xs={12}>
@@ -77,5 +76,3 @@ function MatchChamps({ size }: { size: number }) {
         </MatchChampsGrid>
     );
 }
-
-export default MatchChamps;

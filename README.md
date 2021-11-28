@@ -4,20 +4,20 @@ This project is to improve the gamer's experience on reviewing their games, and 
 ### Project type 
 Web App  
 ### Tech Stack (Preferably) 
-* React.js 
-* Node.js 
-* Express.js 
-* MongoDB
-* Material UI
+* [React.js](https://reactjs.org/) 
+* [Node.js](https://nodejs.org/en/)
+* [Express.js](https://expressjs.com/)
+* [MongoDB](https://www.mongodb.com/)
+* [Material UI](https://mui.com/)
 ### Covered games 
-* League of Legends 
+* [League of Legends](https://www.leagueoflegends.com/en-us/)
 * ...More to come
 
 ### Release plan
-![releasePlan](https://user-images.githubusercontent.com/56567343/138219123-cfc4f4bd-83d3-4657-9b93-6a1cf0d44d93.png)
+![releasePlan](https://user-images.githubusercontent.com/46057691/143723217-5073910a-300c-449c-8de7-b4ebd24e4a43.png)
 
 ### Sprint plans
-Inside scrum_resource folder
+Please navigate to the [scrum_resources](https://github.com/sunnydl/GamePerformanceTracker/tree/master/scrum_resource) folder.
 
 ### Wireframe Drafts
 [Available via Figma](https://www.figma.com/file/LUBg4mluBsOVX0mYmEDoPT/GPT-Wireframe?node-id=0%3A1)
@@ -32,32 +32,39 @@ Inside scrum_resource folder
 ```
 ./                        
 |- ...
-|- backend/                  # -> Back end
-    |- index.ts                     # main file/server
-    |- config/                      # config files
-    |- riotApis/                    # functions that used to call riotApis
-    |- interfaces/                  # typescript interfaces
-    |- models/                      # mongoDB models
-    |- routes/                      # Rest endpoint Routes
-    |- controllers/                 # Rest endpoint controllers
-    |- services/                    # functions folder for handling business logic
-|- frontend/                 # -> Front end
+|- backend/                 # -> Back end
+    |- index.ts                 # main file/server
+    |- config/                  # config files
+    |- riotApis/                # functions that used to call riotApis
+    |- interfaces/              # typescript interfaces
+    |- models/                  # mongoDB models
+    |- routes/                  # Rest endpoint Routes
+    |- controllers/             # Rest endpoint controllers
+    |- services/                # functions folder for handling business logic
+|- frontend/                # -> Front end
     |- public/
+        |- emblems/                 # rank icon images
+        |- controller.ico           # website icon
+        |- UserNotFound.jpg         # error image
+        |- ...
     |- src/
         |- components/          # components: navbar, body, footer...
         |- pages/               # pages: overview, match...
         |- redux/
-            |- ...states/reducers folders
-            |- ...
-            |- hooks.ts                 # redux selector and dispatch simplified for ts
-            |- store.ts                 # redux store
-        |- App.css                   # place to put css if needed
-        |- App.tsx                   # frontend app start point
+            |- slices/              # redux slices
+            |- hooks.ts             # redux selector and dispatch simplified for ts
+            |- store.ts             # redux store
+        |- App.css              # place to put css if needed
+        |- App.tsx              # frontend app start point
+        |- interfaces.ts        # typescript interfaces
+        |- util.ts              # utility functions
+        |- ...
     |- ...
 ```
 
 ### Credit
-Icon: <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-
+<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+<div>Image by <a href=https://www.pexels.com/@ann-h-45017?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels>Ann H</a> from <a href="https://www.pexels.com/" title="Pexels"> www.pexels.com</a></div>
 
 ### Disclaimer
+Every aspect of this project was used and created for educational purposes.

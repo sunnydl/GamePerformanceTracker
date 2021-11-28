@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useAppSelector } from '../../../../redux/hooks';
+import { Grow } from '@mui/material';
 
 // styles components
 import {
@@ -14,12 +15,17 @@ import {
 
 // enums
 import {
-    NumOfGames,
     Features
 } from './enums'
 
 import RandomeChart from './MatchChart';
 
+/**
+ * Returns a functional component of the overview page that wraps around
+ * the summoner's match chart component.
+ * 
+ * @returns {JSX.Element} A functional component.
+ */
 export default function MatchSummaryComponent() {
 
     const {
@@ -65,45 +71,42 @@ export default function MatchSummaryComponent() {
     }
 
     return (
-        <MatchSummaryWrapper>
-            <MatchSummaryPaper>
-                <Header align="center">
-                    {summonerName? summonerName:"Player"}'s Statistics
-                </Header>
-                <Paragraph 
-                    variant="subtitle1"
-                    align="center"
-                >
-                    Recent 5 Games
-                </Paragraph>
-                <ButtonSelections>
-                    {NumOfGames.map((num: number) => (
-                        <Buttons variant="contained" disabled sx={{backgroundColor: '#18A0FB'}} key={num}>{num} Games</Buttons>
-                    ))}
-                </ButtonSelections>
-                <GraphWrapper>
-                    <RandomeChart
-                        buttonStates={buttonStates}
-                    />
-                    <ButtonSelections>
-                        {Features.map((feature: string) => (
-                            <Buttons 
-                                variant="contained" 
-                                sx={{ 
-                                    backgroundColor: `${buttonsColor[`${feature}`]}`,
-                                    "&:hover": {
-                                        backgroundColor: `${buttonsColor[`${feature}`]}`
-                                    }
-                                }} 
-                                key={feature}
-                                onClick={() => onSelect(feature)}
-                            >
-                                {feature}
-                            </Buttons>
-                        ))}
-                    </ButtonSelections>
-                </GraphWrapper>
-            </MatchSummaryPaper>
-        </MatchSummaryWrapper>
+        <Grow in>
+            <MatchSummaryWrapper data-testid='match-chart'>
+                <MatchSummaryPaper>
+                    <Header align="center">
+                        {summonerName? summonerName:"Player"}'s Statistics
+                    </Header>
+                    <Paragraph 
+                        variant="subtitle1"
+                        align="center"
+                    >
+                        Recent 5 Games
+                    </Paragraph>
+                    <GraphWrapper>
+                        <RandomeChart
+                            buttonStates={buttonStates}
+                        />
+                        <ButtonSelections>
+                            {Features.map((feature: string) => (
+                                <Buttons 
+                                    variant="contained" 
+                                    sx={{ 
+                                        backgroundColor: `${buttonsColor[`${feature}`]}`,
+                                        "&:hover": {
+                                            backgroundColor: `${buttonsColor[`${feature}`]}`
+                                        }
+                                    }} 
+                                    key={feature}
+                                    onClick={() => onSelect(feature)}
+                                >
+                                    {feature}
+                                </Buttons>
+                            ))}
+                        </ButtonSelections>
+                    </GraphWrapper>
+                </MatchSummaryPaper>
+            </MatchSummaryWrapper>
+        </Grow>
     )
 }

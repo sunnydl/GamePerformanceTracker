@@ -10,7 +10,7 @@ interface FeaturePanelProps {
     name: string
 }
 
-function FeaturePanel({ image, name }: FeaturePanelProps) {
+export default function FeaturePanel({ image, name }: FeaturePanelProps) {
     return (
         <Card
             sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
@@ -27,5 +27,3 @@ function FeaturePanel({ image, name }: FeaturePanelProps) {
         </Card>
     );
 }
-
-export default FeaturePanel;

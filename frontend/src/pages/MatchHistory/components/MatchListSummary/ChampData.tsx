@@ -3,10 +3,18 @@ import React from 'react';
 import { Avatar, Grid } from '@mui/material';
 import { ChampDataGrid, ChampPerformanceWrapper } from './style';
 
-import { ChampPerformanceSummary } from './MatchChamps';
+import { displayWinRate } from '../../../../util';
+import { ChampPerformanceSummary } from '../../../../interfaces';
 import { getChampionIconURL } from '../../../../util';
 
-function ChampData({ data }: { data: ChampPerformanceSummary }) {
+/**
+ * Returns a functional component of the match history page that displays
+ * a summoner's recent performance on a specific champion.
+ * 
+ * @param {ChampPerformanceSummary} data An object containing the summoner's recent performance data on the champion.
+ * @returns {JSX.Element} A functional component.
+ */
+export default function ChampData({ data }: { data: ChampPerformanceSummary }) {
     return (
         <ChampDataGrid container spacing={1}>
             <Grid item xs={12} xl={6}>
@@ -16,7 +24,7 @@ function ChampData({ data }: { data: ChampPerformanceSummary }) {
                 <ChampPerformanceWrapper>
                     <div className='win-rate'>
                         <span className='win-ratio'>
-                            {((data.wins / data.matches) || 0).toFixed(2)}
+                            {displayWinRate(data.wins, data.matches - data.wins)}
                         </span>
                         &nbsp;
                         <span className='win-loss'>
@@ -41,5 +49,3 @@ function ChampData({ data }: { data: ChampPerformanceSummary }) {
         </ChampDataGrid>
     );
 }
-
-export default ChampData;

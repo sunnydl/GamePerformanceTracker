@@ -36,7 +36,7 @@ function RegionDropDown({ options, selectedIndex, onSelect }: { options: string[
 
   return (
     <React.Fragment>
-      <ButtonGroup variant="contained" ref={anchorRef} aria-label="select region" color = "secondary">
+      <ButtonGroup variant="contained" ref={anchorRef} aria-label="select region">
         <Button onClick={handleClick}>{options[selectedIndex]}</Button>
         <Button
           size="small"
