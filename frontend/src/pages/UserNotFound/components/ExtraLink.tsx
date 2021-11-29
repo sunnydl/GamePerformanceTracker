@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom';
-import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 
 /**
@@ -14,8 +13,6 @@ import Container from '@mui/material/Container';
 
 export default function ExtraLink(){
     return (
-        <React.Fragment>
-        <CssBaseline />
         <main data-testid="ExtraLink" >
             <Container sx={{ pt: 5, pb: 20 }} maxWidth="md">
                 <Stack
@@ -34,6 +31,5 @@ export default function ExtraLink(){
                 </Stack>
             </Container>
         </main>
-        </React.Fragment>
     );
 }

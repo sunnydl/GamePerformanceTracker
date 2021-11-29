@@ -1,11 +1,17 @@
 import React from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
-import { Box, Button, AppBar, Toolbar, IconButton, Tab } from '@mui/material';
+import { useAppSelector } from '../../redux/hooks';
+import { Box, AppBar, Toolbar, IconButton, Tab, FormControlLabel, Switch } from '@mui/material';
 import { NavBarTabs } from './style';
 import SummonerSearchBar from './SummonerSearchBar';
 
-function NavBar() {
+interface NavBarProps {
+  mode: boolean;
+  onModeChange: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+}
+
+function NavBar({ mode, onModeChange }: NavBarProps) {
   const location = useLocation();
 
   return (
@@ -31,13 +37,10 @@ function NavBar() {
           </NavBarTabs> 
           <SummonerSearchBar />
           <Box sx={{ flexGrow: 0.5 }} />
-          <Button color="secondary" variant="contained">
-            Log in
-          </Button>
-          <Box sx={{ flexGrow: 0.02 }} />
-          <Button color="primary" variant="contained">
-            Register
-          </Button>
+          <FormControlLabel
+            label='Dark Mode'
+            control={<Switch checked={mode} onChange={onModeChange} />}
+          />
         </Toolbar>
       </AppBar>
   );

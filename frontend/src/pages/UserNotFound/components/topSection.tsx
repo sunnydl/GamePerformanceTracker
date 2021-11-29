@@ -1,5 +1,4 @@
 import React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -16,40 +15,37 @@ import Stack from '@mui/material/Stack';
 
 export default function TopSection() {
     return (
-        <React.Fragment>
-            <CssBaseline />
-            <main data-testid="topSection" >
-                <Box
-                    sx={{
-                        bgcolor: 'background.paper',
-                        pb: 2,
-                    }}
-                >
-                    <Container maxWidth="sm">
-                        <Typography
-                            component="h1"
-                            variant="h2"
-                            align="center"
-                            color="text.primary"
-                            gutterBottom
-                        >
-                            Oh no!
-                            We can't find that user!
-                        </Typography>
-                    </Container>
-                    <Stack
-                        sx={{ pt: 0 }}
-                        direction="row"
-                        spacing={2}
-                        justifyContent="center"
+        <main data-testid="topSection" >
+            <Box
+                sx={{
+                    bgcolor: 'background.paper',
+                    pb: 2,
+                }}
+            >
+                <Container maxWidth="sm">
+                    <Typography
+                        component="h1"
+                        variant="h2"
+                        align="center"
+                        color="text.primary"
+                        gutterBottom
                     >
-                        <Avatar 
-                            src={`${process.env.PUBLIC_URL}/UserNotFound.jpg`} 
-                            sx={{ width: 150, height: 150 }} 
-                            style={{alignSelf: 'center'}}/>
-                    </Stack>
-                </Box>
-            </main>
-        </React.Fragment>
+                        Oh no!
+                        We can't find that user!
+                    </Typography>
+                </Container>
+                <Stack
+                    sx={{ pt: 0 }}
+                    direction="row"
+                    spacing={2}
+                    justifyContent="center"
+                >
+                    <Avatar 
+                        src={`${process.env.PUBLIC_URL}/UserNotFound.jpg`} 
+                        sx={{ width: 150, height: 150 }} 
+                        style={{alignSelf: 'center'}}/>
+                </Stack>
+            </Box>
+        </main>
     );
 }
