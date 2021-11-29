@@ -61,7 +61,7 @@ describe("Testing server overall functionality", () => {
         expect(JSON.parse(matchChartResponse.text).length).toEqual(expectedChartSize);
         expect(matchHistoryResponse.status).toEqual(expectedMatchResStatus);
         expect(JSON.parse(matchHistoryResponse.text).length).toEqual(expectedMatchSize);
-    })
+    }, 10000)
 
     test("check leaderboard", async() => {
         const tier = 'Challenger';
@@ -100,7 +100,7 @@ describe("Testing server overall functionality", () => {
         const expectedResStatus = 200;
         expect(status).toEqual(expectedResStatus);
         expect(JSON.parse(text).length).toEqual(expectedSize);
-    })
+    }, 10000)
 
     test('update leaderboard', async() => {
         const tier = 'Challenger';
