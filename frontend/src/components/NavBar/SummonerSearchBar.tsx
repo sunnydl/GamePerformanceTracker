@@ -13,11 +13,14 @@ function SummonerSearchBar() {
   const [regionIndex, setRegionIndex] = useState(0);
   const history = useHistory();
   const { summonerName = "", region= ""} = useAppSelector((state) => state.user);
+  const [inputName, setInputName] = useState("");
+
   const handleSummonerSearchByName = (e: React.KeyboardEvent) => {
     if (e.code === 'Enter') {
       const element = e.target as HTMLInputElement;
       const searchName = element.value.trim();
-    
+      setInputName('');
+      
       if (!searchName) return;
 
       const isDifferentSummoner = !(
@@ -39,21 +42,27 @@ function SummonerSearchBar() {
 
   return (
     <React.Fragment>
-      <Search data-testid="search-bar">
-        <SearchIconWrapper>
-          <SearchIcon />
+      <Search data-testid='Search'>
+        <SearchIconWrapper data-testid='SearchIconWrapper'>
+          <SearchIcon data-testid='SearchIcon'/>
         </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ 'aria-label': 'search' }}
-          onKeyPress={handleSummonerSearchByName}
-        />
+        <div data-testid='StyledInputBase'>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ 'aria-label': 'search' }}
+            onKeyPress={handleSummonerSearchByName}
+            value={inputName}
+            onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => setInputName(event.target.value)}
+          />
+        </div>
       </Search>
-      <RegionDropDown
-        options={regions}
-        selectedIndex={regionIndex}
-        onSelect={setRegionIndex}
-      />
+      <div data-testid='RegionDropDown'>
+        <RegionDropDown
+          options={regions}
+          selectedIndex={regionIndex}
+          onSelect={setRegionIndex}
+        />
+      </div>
     </React.Fragment>
   );
 }

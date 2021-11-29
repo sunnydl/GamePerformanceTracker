@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import config from '../../config/config'
 import { findSummonerPuuid } from "../../services/summonerService";
-import { getMatchListByPUUID, analysisMatch, getMatchObjListByMatchList, computeKda } from "../../services/matchService";
+import { getMatchListByPUUID, analysisMatch, computeKda } from "../../services/matchService";
 
 describe('Match_services', () => {
     beforeAll(async() => {
@@ -10,6 +10,10 @@ describe('Match_services', () => {
 
     afterAll(async() => {
         await mongoose.connection.close();
+    })
+
+    afterEach(async() => {
+        await new Promise((r) => setTimeout(r, 1000)); // give 1 seconds gap between tests
     })
 
     test('getMatchListByPUUID with limit of 3', async() => {
@@ -38,22 +42,6 @@ describe('Match_services', () => {
         expect(matchListViaPUUID.length).toEqual(20);
         expect(puuid).not.toBeNull();
     }, 20000)
-
-    // test('getMatchListByPUUID test for normal or ranked match', async() => {
-    //     const summonerName = 'Sunny the troll';
-    //     const region = 'NA';
-    //     const puuid = await findSummonerPuuid(summonerName, region);
-    //     const mockMatchDTOList: any = [
-    //         {
-    //             info: {
-    //                 gameType: `ranked`
-    //             }
-    //         }
-    //     ]
-    //     const matchList = await getMatchObjListByMatchList(mockMatchDTOList, region);
-    //     expect(matchList).not.toBeNull();
-    //     expect(puuid).not.toBeNull();
-    // })
 
     test('analysisMatch check if null', async() => {
         const summonerName = 'Sunny the troll';
@@ -93,7 +81,7 @@ describe('Match_services', () => {
                 kills: 10,
                 deaths: 7,
                 assists: 5,
-                scores: 0,
+                scores: 2,
                 winLoss: 0,
             }
         ]
@@ -124,6 +112,4 @@ describe('Match_services', () => {
         const kda = computeKda(matchList, puuid);
         expect(kda).toEqual([2]);
     })
-
-
 })
