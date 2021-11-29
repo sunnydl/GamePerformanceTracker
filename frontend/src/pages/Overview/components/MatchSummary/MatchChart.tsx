@@ -12,7 +12,7 @@ import { Paper } from '@mui/material';
  */
 export default function RandomeChart({buttonStates}: {buttonStates: any}) {
     const data: Array<ChartState> = useAppSelector((state) => state.chart);
-
+    
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
         return (
@@ -56,7 +56,7 @@ export default function RandomeChart({buttonStates}: {buttonStates: any}) {
           {buttonStates.Kills && <Line type="monotone" dataKey="kills" stroke="#77DD77" activeDot={{ r: 8 }} />}
           {buttonStates.Deaths && <Line type="monotone" dataKey="deaths" stroke="#FF6961" activeDot={{ r: 8 }} />}
           {buttonStates.Assists && <Line type="monotone" dataKey="assists" stroke="#3880FF" activeDot={{ r: 8 }} />}
-          {buttonStates.Scores && <Line type="monotone" dataKey="scores" stroke="#82ca9d" activeDot={{ r: 8 }} />}
+          {buttonStates['GPT Score'] && <Line type="monotone" dataKey="scores" stroke="#82ca9d" activeDot={{ r: 8 }} />}
           </LineChart>
       </ResponsiveContainer>
   )
