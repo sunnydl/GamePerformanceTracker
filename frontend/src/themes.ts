@@ -66,28 +66,59 @@ themeLight = createTheme(themeLight, {
     }
 });
 
-// export const themeDark = createTheme({
-//     palette: {
-//         mode: 'dark',
-//         primary: {
+let themeDark = createTheme({
+    palette: {
+        mode: 'dark',
+        primary: {
+            main: '#0372bd',
+            contrastText: '#fff'
+        },
+        secondary: {
+            main: '#1b1b1b',
+            contrastText: '#0372bd'
+        },
+    //     error: {
 
-//         },
-//         secondary: {
+    //     },
+    //     warning: {
 
-//         },
-//         error: {
+    //     },
+    //     info: {
 
-//         },
-//         warning: {
-
-//         },
-//         info: {
-
-//         },
-//         success: {
+    //     },
+    //     success: {
             
-//         }
-//     }
-// });
+    //     }
+        background: {
+            default: '#1b1b1b',
+            alternate: '#212121',
+            paper: '#1b1b1b'
+        }
+    },
+});
 
-export { themeLight };
+themeDark = createTheme(themeDark, {
+    components: {
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    '&.Mui-selected': {
+                        backgroundColor: alpha(
+                            themeDark.palette.primary.main,
+                            themeDark.palette.action.selectedOpacity * 4
+                        ),
+                        '&:hover': {
+                            backgroundColor: alpha(
+                                themeDark.palette.primary.main,
+                                themeDark.palette.action.focusOpacity + themeDark.palette.action.selectedOpacity * 4
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
+
+
+export { themeLight, themeDark };
