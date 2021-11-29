@@ -6,7 +6,12 @@ import { Box, AppBar, Toolbar, IconButton, Tab, FormControlLabel, Switch } from 
 import { NavBarTabs } from './style';
 import SummonerSearchBar from './SummonerSearchBar';
 
-function NavBar({ mode, setMode }: { mode: boolean, setMode: React.Dispatch<React.SetStateAction<boolean>> }) {
+interface NavBarProps {
+  mode: boolean;
+  onModeChange: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+}
+
+function NavBar({ mode, onModeChange }: NavBarProps) {
   const location = useLocation();
   const summonerFound = useAppSelector((state) => state.user.summonerFound);
 
@@ -35,7 +40,7 @@ function NavBar({ mode, setMode }: { mode: boolean, setMode: React.Dispatch<Reac
           <Box sx={{ flexGrow: 0.5 }} />
           <FormControlLabel
             label='Dark Mode'
-            control={<Switch checked={mode} onChange={() => setMode((prevMode) => !prevMode)} />}
+            control={<Switch checked={mode} onChange={onModeChange} />}
           />
         </Toolbar>
       </AppBar>

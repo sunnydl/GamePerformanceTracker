@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { ThemeProvider } from '@mui/material/styles';
 import { themeLight, themeDark } from './themes';
@@ -9,11 +9,20 @@ import Footer from './components/Footer';
 import { CssBaseline } from '@mui/material';
 
 function App() {
-  const [mode, setMode] = React.useState(false);
+  const [mode, setMode] = useState(localStorage.getItem('gptTheme') === 'true');
+
+  const handleModeChange = () => {
+    setMode((prevMode) => {
+      const newMode = !prevMode;
+      localStorage.setItem('gptTheme', newMode.toString());
+      return newMode;
+    });
+  }
+
   return (
     <ThemeProvider theme={mode ? themeDark : themeLight}>
       <CssBaseline />
-      <NavBar mode={mode} setMode={setMode} />
+      <NavBar mode={mode} onModeChange={handleModeChange} />
       <Body />
       <Footer/>
     </ThemeProvider>
