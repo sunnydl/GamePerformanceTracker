@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../../redux/hooks';
 import { Box, AppBar, Toolbar, IconButton, Tab, FormControlLabel, Switch } from '@mui/material';
 import { NavBarTabs } from './style';
 import SummonerSearchBar from './SummonerSearchBar';
