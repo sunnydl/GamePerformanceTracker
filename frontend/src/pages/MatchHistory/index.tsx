@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 
-import { useAppSelector } from '../../redux/hooks';
 import { styled } from '@mui/material/styles';
 import { Grow } from '@mui/material';
-import { Redirect } from 'react-router-dom';
 
 import MatchOptions from './components/MatchOptions';
 import MatchListSummary from './components/MatchListSummary';
@@ -39,14 +37,7 @@ const options = [3, 4, 5, 6, 7, 8, 9, 10];
  * @returns {JSX.Element} A functional component.
  */
 export default function MatchHistory() {
-    const summonerFound = useAppSelector((state) => state.user.summonerFound);
     const [option, setOption] = useState(options[0]);
-    
-    if (!summonerFound && process.env.JEST_WORKER_ID === undefined)
-    {
-        return <Redirect to='/search'  />
-    }
-
     return (
         <Grow in>
             <div>
