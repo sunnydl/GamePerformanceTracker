@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../../redux/hooks';
 import { Box, AppBar, Toolbar, IconButton, Tab, FormControlLabel, Switch } from '@mui/material';
 import { NavBarTabs } from './style';
 import SummonerSearchBar from './SummonerSearchBar';
@@ -13,7 +12,6 @@ interface NavBarProps {
 
 function NavBar({ mode, onModeChange }: NavBarProps) {
   const location = useLocation();
-  const summonerFound = useAppSelector((state) => state.user.summonerFound);
 
   return (
       <AppBar position='sticky' color='secondary' elevation={0}> 
@@ -31,8 +29,8 @@ function NavBar({ mode, onModeChange }: NavBarProps) {
           </IconButton>
           <Box sx={{ flexGrow: 0.05 }} />
           <NavBarTabs value={false}>
-            <Tab label='overview' component={Link} to={`/overview${location.search}`} disabled={!summonerFound} />
-            <Tab label='Match History' component={Link} to={`/match-history${location.search}`} disabled={!summonerFound} />
+            <Tab label='overview' component={Link} to={`/overview${location.search}`} />
+            <Tab label='Match History' component={Link} to={`/match-history${location.search}`} />
             <Tab label='Leaderboard' component={Link} to={`/leaderboard${location.search}`} />
             <Tab label='Champion' component={Link} to={{ pathname: "https://www.leagueoflegends.com/en-us/champions/" }} target="_blank"/>
           </NavBarTabs> 
