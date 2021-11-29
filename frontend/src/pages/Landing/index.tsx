@@ -1,5 +1,4 @@
 import React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -11,8 +10,6 @@ import SummonerSearchBar from '../../components/NavBar/SummonerSearchBar';
 
 export default function Home() {
   return (
-    <React.Fragment>
-      <CssBaseline />
       <main data-testid="home" >
         <Box
           sx={{
@@ -74,6 +71,5 @@ export default function Home() {
           </Grid>
         </Container>
       </main>
-    </React.Fragment>
   );
 }

@@ -5,8 +5,8 @@ export const FooterWrapper = styled('div')(({ theme }) => ({
     bottom: '0',
     width: '100%',
     height: theme.spacing(20),
-    backgroundColor: 'white',
-    color: 'black',
+    backgroundColor: theme.palette.background.default,
+    color: theme.palette.text.secondary,
     textAlign: 'center',
 
     '& .MuiTab-root': {

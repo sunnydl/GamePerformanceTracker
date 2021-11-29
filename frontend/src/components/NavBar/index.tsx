@@ -1,16 +1,18 @@
 import React from 'react';
-
 import { Link, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../../redux/hooks';
-import { AppBar, Select, Toolbar, IconButton, Tab } from '@mui/material';
+import { Box, AppBar, Toolbar, IconButton, Tab, FormControlLabel, Switch } from '@mui/material';
 import { NavBarTabs } from './style';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import SummonerSearchBar from './SummonerSearchBar';
 
-function NavBar() {
+interface NavBarProps {
+  mode: boolean;
+  onModeChange: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+}
+
+function NavBar({ mode, onModeChange }: NavBarProps) {
   const location = useLocation();
-  const summonerFound = useAppSelector((state) => state.user.summonerFound);
   const useDropdown = useMediaQuery(useTheme().breakpoints.up('lg'));
 
   let selection;
@@ -18,19 +20,19 @@ function NavBar() {
   {
     selection = 
       <NavBarTabs value={false}>
-        <Tab label='overview' component={Link} to={`/overview${location.search}`} disabled={!summonerFound} />
-        <Tab label='Match History' component={Link} to={`/match-history${location.search}`} disabled={!summonerFound} />
+        <Tab label='overview' component={Link} to={`/overview${location.search}`} />
+        <Tab label='Match History' component={Link} to={`/match-history${location.search}`} />
         <Tab label='Leaderboard' component={Link} to={`/leaderboard${location.search}`} />
         <Tab label='Champion' component={Link} to={{ pathname: "https://www.leagueoflegends.com/en-us/champions/" }} target="_blank"/>
-      </NavBarTabs>;
+      </NavBarTabs> 
   } else {
     selection = 
       <Select
         labelId="page-selector"
         sx={{ flexGrow: 0.5 }}
       >
-        <Tab label='overview' component={Link} to={`/overview${location.search}`} disabled={!summonerFound} />
-        <Tab label='Match History' component={Link} to={`/match-history${location.search}`} disabled={!summonerFound} />
+        <Tab label='overview' component={Link} to={`/overview${location.search}`} />
+        <Tab label='Match History' component={Link} to={`/match-history${location.search}`} />
         <Tab label='Leaderboard' component={Link} to={`/leaderboard${location.search}`} />
         <Tab label='Champion' component={Link} to={{ pathname: "https://www.leagueoflegends.com/en-us/champions/" }} target="_blank"/>
       </Select>;
@@ -56,6 +58,11 @@ function NavBar() {
           </IconButton>
           {selection}
           <SummonerSearchBar />
+          <Box sx={{ flexGrow: 0.5 }} />
+          <FormControlLabel
+            label='Dark Mode'
+            control={<Switch checked={mode} onChange={onModeChange} />}
+          />
         </Toolbar>
       </AppBar>
   );

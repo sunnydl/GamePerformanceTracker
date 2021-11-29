@@ -18,6 +18,7 @@ const Overview = lazy(() => import('../pages/Overview'));
 const MatchHistory = lazy(() => import('../pages/MatchHistory'));
 const Leaderboard = lazy(() => import('../pages/Leaderboard'));
 const UserNotFound = lazy(() => import('../pages/UserNotFound'));
+const Search = lazy(() => import('../pages/Search'));
 
 const Container = styled('div')(({ theme }) => ({
     paddingTop: theme.spacing(10),
@@ -29,7 +30,7 @@ const Container = styled('div')(({ theme }) => ({
 function Body() {
     const location = useLocation();
     const loading = useAppSelector((state) => state.loading.overall);
-    const { summonerName='', region='' } = useAppSelector((state) => state.user);
+    const { summonerFound, summonerName='', region='' } = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
     const history = useHistory();
     useEffect(() => {
@@ -51,7 +52,7 @@ function Body() {
                 console.log('finished loading data');
                 dispatch(setOverallLoading(false));
             });
-        }   
+        }
     }, [dispatch, region, summonerName, location.search, history]);
 
     return (
@@ -65,16 +66,16 @@ function Body() {
                             <Home />
                         </Route>
                         <Route exact path='/overview'>
-                            <Overview />
-                        </Route>
-                        <Route exact path='/usernotfound'>
-                            <UserNotFound />
+                            {summonerFound ? (<Overview />) : (<Search/>)}
                         </Route>
                         <Route exact path='/match-history'>
-                            <MatchHistory />
+                            {summonerFound ? (<MatchHistory />) : (<Search/>)}
                         </Route>
                         <Route exact path='/leaderboard'>
                             <Leaderboard/>
+                        </Route>
+                        <Route exact path='/usernotfound'>
+                            <UserNotFound />
                         </Route>
                         <Redirect to='/' />
                     </Switch>
