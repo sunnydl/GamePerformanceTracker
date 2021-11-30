@@ -6,6 +6,12 @@ import Container from '@mui/material/Container';
 
 import SummonerSearchBar from '../../components/SummonerSearchBar';
 
+/**
+ * Returns a functional component that displays a page for the user to
+ * search for a summoner.
+ *
+ * @returns {JSX.Element} The functional component.
+ */
 export default function Search() {
     return (
         <main data-testid='search'>
