@@ -39,7 +39,7 @@ export default function RandomeChart({ buttonStates }: { buttonStates: any }) {
                     {buttonStates.Assists && (
                         <p>{`Assists: ${payload[0]?.payload?.assists}`}</p>
                     )}
-                    {buttonStates.Scores && (
+                    {buttonStates['GPT Score'] && (
                         <p>{`Scores: ${payload[0]?.payload?.scores}`}</p>
                     )}
                 </Paper>
