@@ -67,7 +67,7 @@ describe('Testing server overall functionality', () => {
         expect(JSON.parse(matchHistoryResponse.text).length).toEqual(
             expectedMatchSize
         );
-    }, 10000);
+    }, 40000);
 
     test('check leaderboard', async () => {
         const tier = 'Challenger';
@@ -89,7 +89,7 @@ describe('Testing server overall functionality', () => {
         expect(status).toEqual(expectedResStatus);
         expect(JSON.parse(text).length).toEqual(expectedSize);
         expect(JSON.parse(text)[0].rank).toEqual(expectedRank);
-    });
+    }, 40000);
 
     test('update match history', async () => {
         const summonerName = 'Sunny the troll';
@@ -109,7 +109,7 @@ describe('Testing server overall functionality', () => {
         const expectedResStatus = 200;
         expect(status).toEqual(expectedResStatus);
         expect(JSON.parse(text).length).toEqual(expectedSize);
-    }, 10000);
+    }, 40000);
 
     test('update leaderboard', async () => {
         const tier = 'Challenger';
@@ -131,5 +131,5 @@ describe('Testing server overall functionality', () => {
         expect(status).toEqual(expectedResStatus);
         expect(JSON.parse(text).length).toEqual(expectedSize);
         expect(JSON.parse(text)[0].rank).toEqual(expectedRank);
-    }, 10000);
+    }, 40000);
 });
