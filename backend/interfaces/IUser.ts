@@ -1,5 +1,5 @@
-import SummonerInfo from "./ISummonerInfo";
-import SummonerLeague from "./ISummonerLeague";
+import SummonerInfo from './ISummonerInfo';
+import SummonerLeague from './ISummonerLeague';
 
 export default interface User {
     email?: string;

@@ -1,4 +1,4 @@
-import PerksDto from "./PerksDto";
+import PerksDto from './PerksDto';
 
 export default interface ParticipantDto {
     assists: number;

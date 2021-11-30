@@ -1,5 +1,5 @@
-import * as riotApis from '../riotApis/riotApis'
-import MatchDto from '../interfaces/IMatch/IMatchDto'
+import * as riotApis from '../riotApis/riotApis';
+import MatchDto from '../interfaces/IMatch/IMatchDto';
 import ParticipantDto from '../interfaces/IMatch/IParticipantDto';
 import currency from 'currency.js';
 import MatchChartDataDTO from '../interfaces/IMatchChartDataDTO';
@@ -19,9 +19,9 @@ const rankmap: any = {
     '6': 0,
     '7': -0.1,
     '8': -0.2,
-    '9':-0.5,
+    '9': -0.5,
     '10': -1,
-}
+};
 
 /**
  * Service used to collect match data for chart.
@@ -32,11 +32,21 @@ const rankmap: any = {
  * @param {number} numOfMatch The number of matches to fetch
  * @return {Promise<Array<MatchChartDataDTO>>} The List of match data for chart
  */
-export const getMatchChartData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchChartDataDTO>> => {
-    const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
+export const getMatchChartData = async (
+    puuid: string,
+    region: string,
+    typeOfMatch: string,
+    numOfMatch: number
+): Promise<Array<MatchChartDataDTO>> => {
+    const matchList: Array<MatchDto> = await getMatchListByPUUID(
+        puuid,
+        region,
+        typeOfMatch,
+        numOfMatch
+    );
     const chartData: Array<MatchChartDataDTO> = analysisMatch(puuid, matchList);
     return chartData;
-}
+};
 
 /**
  * Service used to collect match data for match history. If data is in db, then return db data, else fetch from Riot API
@@ -47,20 +57,33 @@ export const getMatchChartData = async(puuid: string, region: string, typeOfMatc
  * @param {number} numOfMatch The number of matches to fetch
  * @return {Promise<Array<MatchHistoryDTO>>} The List of match data for match history
  */
-export const getMatchHistoryData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchHistoryDTO>> => {
-    const matchHistoryDB = await MatchHistoryModel.findOne({ puuid }) as MatchHistoryMongo;
-    if(!matchHistoryDB) {
+export const getMatchHistoryData = async (
+    puuid: string,
+    region: string,
+    typeOfMatch: string,
+    numOfMatch: number
+): Promise<Array<MatchHistoryDTO>> => {
+    const matchHistoryDB = (await MatchHistoryModel.findOne({
+        puuid,
+    })) as MatchHistoryMongo;
+    if (!matchHistoryDB) {
         // if db has no data of current user
-        const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
-        const matchHistoryData: Array<MatchHistoryDTO> = computeMatchHistoryData(matchList, puuid);
+        const matchList: Array<MatchDto> = await getMatchListByPUUID(
+            puuid,
+            region,
+            typeOfMatch,
+            numOfMatch
+        );
+        const matchHistoryData: Array<MatchHistoryDTO> =
+            computeMatchHistoryData(matchList, puuid);
         await new MatchHistoryModel({
             puuid: puuid,
-            matches: matchHistoryData
+            matches: matchHistoryData,
         }).save();
         return matchHistoryData;
     }
     return matchHistoryDB.matches;
-}
+};
 
 /**
  * Service for updating the match history data in db
@@ -71,14 +94,30 @@ export const getMatchHistoryData = async(puuid: string, region: string, typeOfMa
  * @param {number} numOfMatch The number of matches to fetch
  * @return {Promise<Array<MatchHistoryDTO>>} The List of match data for match history
  */
-export const updateDBMatchHistoryData = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchHistoryDTO>> => {
-    const matchList: Array<MatchDto> = await getMatchListByPUUID(puuid, region, typeOfMatch, numOfMatch);
-    const matchHistoryData: Array<MatchHistoryDTO> = computeMatchHistoryData(matchList, puuid);
-    await MatchHistoryModel.updateOne({ puuid }, {
-        matches: matchHistoryData
-    })
+export const updateDBMatchHistoryData = async (
+    puuid: string,
+    region: string,
+    typeOfMatch: string,
+    numOfMatch: number
+): Promise<Array<MatchHistoryDTO>> => {
+    const matchList: Array<MatchDto> = await getMatchListByPUUID(
+        puuid,
+        region,
+        typeOfMatch,
+        numOfMatch
+    );
+    const matchHistoryData: Array<MatchHistoryDTO> = computeMatchHistoryData(
+        matchList,
+        puuid
+    );
+    await MatchHistoryModel.updateOne(
+        { puuid },
+        {
+            matches: matchHistoryData,
+        }
+    );
     return matchHistoryData;
-}
+};
 
 /**
  * Service used to collect numbers of match data
@@ -89,10 +128,23 @@ export const updateDBMatchHistoryData = async(puuid: string, region: string, typ
  * @param {number} numOfMatch The number of matches to fetch
  * @return {Promise<Array<MatchDto>>} The List of the match
  */
-export const getMatchListByPUUID = async(puuid: string, region: string, typeOfMatch: string, numOfMatch: number): Promise<Array<MatchDto>> => {
-    numOfMatch = (numOfMatch >= 20)? 20:numOfMatch;
-    const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(puuid, region, typeOfMatch, numOfMatch);
-    const matchList: Array<MatchDto> = await getMatchObjListByMatchList(matchListInfo, region);
+export const getMatchListByPUUID = async (
+    puuid: string,
+    region: string,
+    typeOfMatch: string,
+    numOfMatch: number
+): Promise<Array<MatchDto>> => {
+    numOfMatch = numOfMatch >= 20 ? 20 : numOfMatch;
+    const matchListInfo: Array<string> = await riotApis.findMatchHistoryInfo(
+        puuid,
+        region,
+        typeOfMatch,
+        numOfMatch
+    );
+    const matchList: Array<MatchDto> = await getMatchObjListByMatchList(
+        matchListInfo,
+        region
+    );
     return matchList as Array<MatchDto>;
 };
 
@@ -103,14 +155,17 @@ export const getMatchListByPUUID = async(puuid: string, region: string, typeOfMa
  * @param {string} region The region that the player is located in
  * @return {Promise<Array<MatchDto>>} The List of the match fetched
  */
-export const getMatchObjListByMatchList = async (match_list: Array<string>, region: string): Promise<Array<MatchDto>> => {
+export const getMatchObjListByMatchList = async (
+    match_list: Array<string>,
+    region: string
+): Promise<Array<MatchDto>> => {
     const matchDTOArr: Array<MatchDto> = [];
-    for(const matchElem of match_list){
+    for (const matchElem of match_list) {
         const match = await riotApis.findMatchInfo(matchElem, region);
         matchDTOArr.push(match);
     }
     return matchDTOArr;
-}
+};
 
 /**
  * Service used to compute the data of given match list
@@ -119,37 +174,42 @@ export const getMatchObjListByMatchList = async (match_list: Array<string>, regi
  * @param {Array<MatchDto>} matchList The collection of match
  * @return {Promise<Array<MatchDto>>} The list of computed match data
  */
-export const analysisMatch = (puuid: string, matchList: Array<MatchDto>): Array<MatchChartDataDTO> => {
+export const analysisMatch = (
+    puuid: string,
+    matchList: Array<MatchDto>
+): Array<MatchChartDataDTO> => {
     const matchChartDataList: Array<MatchChartDataDTO> = [];
     let win = 0;
     let lose = 0;
     let win_lose = 0;
-    for(let i = matchList.length-1; i >= 0; i --){
+    for (let i = matchList.length - 1; i >= 0; i--) {
         const partis: Array<ParticipantDto> = matchList[i].info.participants;
-        for(let j = 0; j < partis.length; j++){
-            if(partis[j].puuid === puuid){
-                if(partis[j].win){
+        for (let j = 0; j < partis.length; j++) {
+            if (partis[j].puuid === puuid) {
+                if (partis[j].win) {
                     win += 1;
-                }else{
+                } else {
                     lose += 1;
                 }
-                win_lose = currency(win).divide(currency(lose).add(win)).multiply(100).value;
+                win_lose = currency(win)
+                    .divide(currency(lose).add(win))
+                    .multiply(100).value;
                 const matchChartData: MatchChartDataDTO = {
-                    name: `Game ${matchList.length-i}`,
+                    name: `Game ${matchList.length - i}`,
                     winLoss: win_lose,
                     kills: partis[j].kills,
                     deaths: partis[j].deaths,
                     assists: partis[j].assists,
                     scores: kDA(matchList[i], puuid),
-                }
+                };
                 matchChartDataList.push(matchChartData);
                 break;
-            }     
+            }
         }
     }
 
     return matchChartDataList;
-}
+};
 
 /**
  * Returns the jg score on large monster's kill for the jg player.
@@ -162,15 +222,15 @@ const rankpoint = (ranklist: Array<number>, data: number): number => {
     let rank = 10;
     let rankpt = 0;
     // rank the data with given list.
-    for(let i = 0; i < ranklist.length; i++){
-        if(data > ranklist[i]){
+    for (let i = 0; i < ranklist.length; i++) {
+        if (data > ranklist[i]) {
             rank -= 1;
         }
     }
-    //1: + 1, 2: + 0.5, 3: + 0.2, 4: + 0.1, 5: +0, 6: - 0, 7: -0.1, 8: -0.2, 9: -0.5, 10: -1 
+    //1: + 1, 2: + 0.5, 3: + 0.2, 4: + 0.1, 5: +0, 6: - 0, 7: -0.1, 8: -0.2, 9: -0.5, 10: -1
     rankpt = rankmap[rank.toString()];
     return rankpt;
-}
+};
 
 /**
  * Returns the jg score on large monster's kill for the jg player.
@@ -179,13 +239,19 @@ const rankpoint = (ranklist: Array<number>, data: number): number => {
  */
 const jgpoint = (jgpart: ParticipantDto): number => {
     let jg = 0;
-    if(jgpart.dragonKills >=3 && jgpart.baronKills >= 1){jg = 1;}
-    else if(jgpart.dragonKills + jgpart.baronKills >= 4){jg = 0.5;}
-    else if(jgpart.dragonKills + jgpart.baronKills < 4){jg = 0;}
-    else if(jgpart.dragonKills + jgpart.baronKills < 2){jg = -0.5;}
-    else if(jgpart.dragonKills + jgpart.baronKills < 1){jg = -1;}
+    if (jgpart.dragonKills >= 3 && jgpart.baronKills >= 1) {
+        jg = 1;
+    } else if (jgpart.dragonKills + jgpart.baronKills >= 4) {
+        jg = 0.5;
+    } else if (jgpart.dragonKills + jgpart.baronKills < 4) {
+        jg = 0;
+    } else if (jgpart.dragonKills + jgpart.baronKills < 2) {
+        jg = -0.5;
+    } else if (jgpart.dragonKills + jgpart.baronKills < 1) {
+        jg = -1;
+    }
     return jg;
-}
+};
 
 /**
  * Returns the kda score for the specific player in the given match.
@@ -208,50 +274,57 @@ const kDA = (match: MatchDto, puuid: string): number => {
     let time = 0;
     //get match time.
     time = match.info.gameDuration;
-    if(time > 36000){ // if the time count in milisecond, divide by 1000
+    if (time > 36000) {
+        // if the time count in milisecond, divide by 1000
         time = currency(time).divide(1000).value;
     }
     //initialized the list for getting datas.
-    needlist.push("totalDamageDealtToChampions", 
-    "visionScore", "damageDealtToBuildings", "totalTimeCCDealt", "goldEarned");
-    KDAlist.push("kills", "deaths","assists",);
+    needlist.push(
+        'totalDamageDealtToChampions',
+        'visionScore',
+        'damageDealtToBuildings',
+        'totalTimeCCDealt',
+        'goldEarned'
+    );
+    KDAlist.push('kills', 'deaths', 'assists');
     let my_gold = 0;
     let my_dmg = 0;
-    for(let i = 0; i < needlist.length; i++){ // compare items in needlist, get rank points.
+    for (let i = 0; i < needlist.length; i++) {
+        // compare items in needlist, get rank points.
         let checkvi = 0;
         ranklist = [];
-        for(let j = 0; j < partis.length; j++){
+        for (let j = 0; j < partis.length; j++) {
             let stats: any = partis[j][`${needlist[i]}`];
-            if(partis[j].puuid === puuid){
+            if (partis[j].puuid === puuid) {
                 data = stats;
-                if(partis[j].win){
+                if (partis[j].win) {
                     win_lose = 1;
-                }else{
+                } else {
                     win_lose = -1;
                 }
-                if(partis[j].lane === "NONE" && time > 1500){
+                if (partis[j].lane === 'NONE' && time > 1500) {
                     rankpts += jgpoint(partis[j]);
                 }
-                if(i == 1 && partis[j].lane == "SUPPORT"){
+                if (i == 1 && partis[j].lane == 'SUPPORT') {
                     checkvi = 1;
                 }
             }
             ranklist.push(stats);
-            if(needlist[i] == "totalDamageDealtToChampions"){
+            if (needlist[i] == 'totalDamageDealtToChampions') {
                 dmg.push(stats);
-                if(partis[j].puuid === puuid){
+                if (partis[j].puuid === puuid) {
                     my_dmg = stats;
                 }
             }
-            if(needlist[i] == "goldEarned"){
+            if (needlist[i] == 'goldEarned') {
                 gold.push(stats);
-                if(partis[j].puuid === puuid){
+                if (partis[j].puuid === puuid) {
                     my_gold = stats;
                 }
-            } 
+            }
         }
-        if(checkvi == 1){
-            if(rankpoint(ranklist, data) <0.1){
+        if (checkvi == 1) {
+            if (rankpoint(ranklist, data) < 0.1) {
                 rankpts -= 1;
             }
         }
@@ -260,40 +333,41 @@ const kDA = (match: MatchDto, puuid: string): number => {
     //compute the damage to gold ratio.
     let my_dmGold = currency(my_dmg).divide(currency(my_gold)).value;
     let dmGold = [];
-    for(let i = 0; i < dmg.length; ++i){
+    for (let i = 0; i < dmg.length; ++i) {
         let ratio = currency(dmg[i]).divide(currency(gold[i])).value;
         dmGold.push(ratio);
     }
     rankpts += rankpoint(dmGold, my_dmGold);
-    for(let i = 0; i < partis.length; i++){ // compute KDA ratio
+    for (let i = 0; i < partis.length; i++) {
+        // compute KDA ratio
         data = 0;
         let KDAs = [];
         let stat = 0;
         ranklist = [];
-        for(let j = 0; j < KDAlist.length; j++){
-            KDAs.push(partis[i][`${KDAlist[j]}`]); 
+        for (let j = 0; j < KDAlist.length; j++) {
+            KDAs.push(partis[i][`${KDAlist[j]}`]);
         }
-        if(partis[i].lane === "SUPPORT"){
+        if (partis[i].lane === 'SUPPORT') {
             let K = currency(KDAs[0]).multiply(1).value;
             let D = currency(KDAs[1]).multiply(1.2).value;
             let A = currency(KDAs[2]).multiply(1.5).value;
-            stat = (currency(K).add(currency(D))).divide(currency(A)).value;
-        }else{
+            stat = currency(K).add(currency(D)).divide(currency(A)).value;
+        } else {
             let K = currency(KDAs[0]).multiply(1.5).value;
             let D = currency(KDAs[1]).multiply(1.2).value;
             let A = currency(KDAs[2]).multiply(1).value;
-            stat = (currency(K).add(currency(D))).divide(currency(A)).value;
+            stat = currency(K).add(currency(D)).divide(currency(A)).value;
         }
-        if(partis[i].puuid === puuid){
+        if (partis[i].puuid === puuid) {
             data = stat;
         }
         ranklist.push(stat);
     }
     //compute the kda at the end.
     rankpts = currency(rankpts).add(currency(rankpoint(ranklist, data))).value;
-    kda += win_lose + rankpts; 
+    kda += win_lose + rankpts;
     return kda;
-}
+};
 
 /**
  * Returns the number array that contain the kda score in given matchlist for specific player.
@@ -301,14 +375,17 @@ const kDA = (match: MatchDto, puuid: string): number => {
  * @param {string} puuid: each player has a unique puuid.
  * @return {Array<number>} kdaScoreList: the list of the kda score after computation.
  */
-export const computeKda = (matchList: Array<MatchDto>, puuid: string): Array<number> => {
+export const computeKda = (
+    matchList: Array<MatchDto>,
+    puuid: string
+): Array<number> => {
     const kdaScoreList: Array<number> = [];
     // compute the kda for specific player with data given in the matchList
-    for(let i = 0; i < matchList.length; i++){
+    for (let i = 0; i < matchList.length; i++) {
         kdaScoreList.push(kDA(matchList[i], puuid));
     }
     return kdaScoreList;
- }
+};
 
 /**
  * Returns the MatchHistoryDTO which contain the datas that needed for match history page.
@@ -322,13 +399,13 @@ const matchHistoryData = (match: MatchDto, puuid: string): MatchHistoryDTO => {
     const partis: any = match.info.participants;
     //get all datas needed.
     let time = match.info.gameDuration;
-    if(time > 36000){
+    if (time > 36000) {
         time = currency(time).divide(1000).value;
     }
     let min = currency(time).divide(60).value;
     let parti = partis[0];
-    for(let i = 0; i < partis.length; i++){
-        if(partis[i].puuid === puuid){
+    for (let i = 0; i < partis.length; i++) {
+        if (partis[i].puuid === puuid) {
             parti = partis[i];
         }
     }
@@ -356,7 +433,7 @@ const matchHistoryData = (match: MatchDto, puuid: string): MatchHistoryDTO => {
     dataList.dmgPerMin = dmgPerMin;
     dataList.visionPerMin = visionPerMin;
     return dataList;
-}
+};
 
 /**
  * Returns the array of MatchHistoryDTO that contain all datas needed for the match history page.
@@ -364,12 +441,15 @@ const matchHistoryData = (match: MatchDto, puuid: string): MatchHistoryDTO => {
  * @param {string} puuid: each player has a unique puuid.
  * @return {Array<MatchHistoryDTO>} matchHistoryList: the list of MatchHistoryDTO which contain the datas that needed for match history page.
  */
-export const computeMatchHistoryData = (matchList: Array<MatchDto>, puuid: string): Array<MatchHistoryDTO> => {
+export const computeMatchHistoryData = (
+    matchList: Array<MatchDto>,
+    puuid: string
+): Array<MatchHistoryDTO> => {
     const matchHistoryList = [];
-    // iterate the matchList to collect the data of the user 
+    // iterate the matchList to collect the data of the user
     // into a single MatchHistoryDTO obj then push the obj to matchHistoryList
-    for(let i = 0; i < matchList.length; i++){
+    for (let i = 0; i < matchList.length; i++) {
         matchHistoryList.push(matchHistoryData(matchList[i], puuid));
     }
     return matchHistoryList;
-}
+};

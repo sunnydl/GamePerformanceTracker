@@ -1,4 +1,4 @@
-import ObjectiveDto from "./IObjectiveDto";
+import ObjectiveDto from './IObjectiveDto';
 
 export default interface ObjectivesDto {
     baron: ObjectiveDto;

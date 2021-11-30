@@ -9,7 +9,7 @@ const MONGO_OPTIONS = {
     socketTimeoutMS: 30000,
     keepAlive: true,
     autoIndex: false,
-    retryWrites: false
+    retryWrites: false,
 };
 
 const SERVER_HOSTNAME = process.env.SERVER_HOSTNAME || 'localhost';
@@ -17,11 +17,11 @@ const SERVER_PORT = process.env.SERVER_PORT || 5000;
 
 const MONGO = {
     options: MONGO_OPTIONS,
-    url: `mongodb+srv://cse115a:0vWk0HnItDysKOyl@riot-api-database.fpqow.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+    url: `mongodb+srv://cse115a:0vWk0HnItDysKOyl@riot-api-database.fpqow.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
 };
 const SERVER = {
     hostname: SERVER_HOSTNAME,
-    port: SERVER_PORT
+    port: SERVER_PORT,
 };
 
 const RIOTAPIKEY = `RGAPI-b8bb52e2-1c60-4ae3-8547-400169d6414d`;

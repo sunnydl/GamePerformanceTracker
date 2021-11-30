@@ -1,7 +1,7 @@
 export default interface SummonerLeague {
     leagueId: string;
-    summonerId: string,
-    summonerName: string,
+    summonerId: string;
+    summonerName: string;
     queueType: string;
     tier: string;
     rank: string;

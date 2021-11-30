@@ -5,7 +5,7 @@
  * @return {number} The HTTP error code
  */
 export const exceptionCodeHandler = (err_code: number): number => {
-    switch(err_code) {
+    switch (err_code) {
         case 404:
             return 404;
         case 500:
@@ -15,4 +15,4 @@ export const exceptionCodeHandler = (err_code: number): number => {
         default:
             return 500;
     }
-}
+};

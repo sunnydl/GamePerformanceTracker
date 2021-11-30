@@ -17,15 +17,18 @@ const matchDataSchema = new Schema({
     visionAmt: Number,
     csAmt: Number,
     dmgAmt: Number,
-})
+});
 
 const matchHistorySchema = new Schema({
     puuid: {
-        type: String
+        type: String,
     },
     matches: {
-        type: [matchDataSchema]
-    }
-})
+        type: [matchDataSchema],
+    },
+});
 
-export default mongoose.model<MatchHistoryMongo>('MatchHistory', matchHistorySchema);
+export default mongoose.model<MatchHistoryMongo>(
+    'MatchHistory',
+    matchHistorySchema
+);

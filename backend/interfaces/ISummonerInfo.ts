@@ -1,4 +1,4 @@
-export default interface SummonerInfo{
+export default interface SummonerInfo {
     accountID?: string;
     profileIconId: number;
     revisionDate?: number;
@@ -6,4 +6,4 @@ export default interface SummonerInfo{
     id: string;
     puuid: string;
     summonerLevel: number;
-};
+}

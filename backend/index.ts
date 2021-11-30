@@ -1,13 +1,13 @@
 import express, { Request, Response } from 'express';
-import http from 'http'
+import http from 'http';
 import path from 'path';
 import config from './config/config';
 import logging from './config/logging';
 import mongoose from 'mongoose';
-import morgan from 'morgan'
+import morgan from 'morgan';
 
 // path
-import api from './routes/index'
+import api from './routes/index';
 
 // where the log is coming from
 const NAMESPACE = 'Server';
@@ -20,29 +20,15 @@ mongoose
     .connect(config.mongo.url, config.mongo.options)
     .then((result) => {
         logging.info(NAMESPACE, 'connected to mongoDB');
-        console.log("connected");
-        
+        console.log('connected');
     })
     .catch((error) => {
         logging.info(NAMESPACE, error.message, error);
-        console.log("error happened");
-        
+        console.log('error happened');
     });
 
-// app.use((req, res, next) => {
-//     /** Log the req */
-//     logging.info(NAMESPACE, `METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
-
-//     res.on('finish', () => {
-//         /** Log the res */
-//         logging.info(NAMESPACE, `METHOD: [${req.method}] - URL: [${req.url}] - STATUS: [${res.statusCode}] - IP: [${req.socket.remoteAddress}]`);
-//     });
-
-//     next();
-// });
-
 app.use(express.static(path.join(__dirname, '../frontend/build')));
-app.use(morgan('dev'))
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -50,10 +36,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
     // allows request from anywhere via *, but IPS and Routes should be predefined in future projects
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    );
 
     if (req.method == 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+        res.header(
+            'Access-Control-Allow-Methods',
+            'PUT, POST, PATCH, DELETE, GET'
+        );
         return res.status(200).json({});
     }
 
@@ -62,8 +54,8 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req: Request, res: Response) => {
-    res.status(200).send("app is running fine");
-})
+    res.status(200).send('app is running fine');
+});
 app.use('/api', api);
 
 const PORT = process.env.PORT || 5000;

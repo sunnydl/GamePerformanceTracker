@@ -1,5 +1,5 @@
-import ParticipantDto from "./IParticipantDto";
-import TeamDto from "./ITeamDto";
+import ParticipantDto from './IParticipantDto';
+import TeamDto from './ITeamDto';
 
 export default interface InfoDto {
     gameCreation: number;

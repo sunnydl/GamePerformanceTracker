@@ -8,15 +8,15 @@ const matchChartDataSchema = new Schema({
     deaths: Number,
     assists: Number,
     scores: Number,
-})
+});
 
 const matchChartSchema = new Schema({
     puuid: {
-        type: String
+        type: String,
     },
     matches: {
-        type: [matchChartDataSchema]
-    }
-})
+        type: [matchChartDataSchema],
+    },
+});
 
 export default mongoose.model<MatchChartMongo>('MatchChart', matchChartSchema);

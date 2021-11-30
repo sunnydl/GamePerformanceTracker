@@ -1,4 +1,4 @@
-import SummonerLeague from "./ISummonerLeague";
+import SummonerLeague from './ISummonerLeague';
 
 export default interface LeagueListDTO {
     leagueId: string;

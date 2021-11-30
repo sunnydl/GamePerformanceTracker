@@ -6,4 +6,3 @@ export default interface MatchChartDataDTO {
     assists: number;
     scores: number;
 }
-

@@ -1,4 +1,4 @@
-import SummonerDTO from "./ISummonerDTO";
+import SummonerDTO from './ISummonerDTO';
 
 export default interface LeaderboardMongo {
     tier: string;

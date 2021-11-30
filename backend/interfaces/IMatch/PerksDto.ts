@@ -1,5 +1,5 @@
-import PerkStatsDto from "./IPerkStatsDto";
-import PerkStyleDto from "./IPerkStyleDto";
+import PerkStatsDto from './IPerkStatsDto';
+import PerkStyleDto from './IPerkStyleDto';
 
 export default interface PerksDto {
     statPerks: PerkStatsDto;

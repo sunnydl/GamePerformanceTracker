@@ -1,7 +1,10 @@
 //depending on the request info, program will return accordingly
 const info = (namespace: string, message: string, object?: any) => {
     if (object) {
-        console.info(`[${getTimeStamp()}] [INFO] [${namespace}] ${message}`, object);
+        console.info(
+            `[${getTimeStamp()}] [INFO] [${namespace}] ${message}`,
+            object
+        );
     } else {
         console.info(`[${getTimeStamp()}] [INFO] [${namespace}] ${message}`);
     }
@@ -10,7 +13,10 @@ const info = (namespace: string, message: string, object?: any) => {
 //depending on the request info, program will return accordingly
 const warn = (namespace: string, message: string, object?: any) => {
     if (object) {
-        console.info(`[${getTimeStamp()}] [WARN] [${namespace}] ${message}`, object);
+        console.info(
+            `[${getTimeStamp()}] [WARN] [${namespace}] ${message}`,
+            object
+        );
     } else {
         console.info(`[${getTimeStamp()}] [WARN] [${namespace}] ${message}`);
     }
@@ -18,7 +24,10 @@ const warn = (namespace: string, message: string, object?: any) => {
 
 const error = (namespace: string, message: string, object?: any) => {
     if (object) {
-        console.error(`[${getTimeStamp()}] [ERROR] [${namespace}] ${message}`, object);
+        console.error(
+            `[${getTimeStamp()}] [ERROR] [${namespace}] ${message}`,
+            object
+        );
     } else {
         console.error(`[${getTimeStamp()}] [ERROR] [${namespace}] ${message}`);
     }
@@ -27,7 +36,10 @@ const error = (namespace: string, message: string, object?: any) => {
 //depending on the request info, program will return accordingly
 const debug = (namespace: string, message: string, object?: any) => {
     if (object) {
-        console.info(`[${getTimeStamp()}] [DEBUG] [${namespace}] ${message}`, object);
+        console.info(
+            `[${getTimeStamp()}] [DEBUG] [${namespace}] ${message}`,
+            object
+        );
     } else {
         console.info(`[${getTimeStamp()}] [DEBUG] [${namespace}] ${message}`);
     }
@@ -42,5 +54,5 @@ export default {
     info,
     warn,
     error,
-    debug
+    debug,
 };

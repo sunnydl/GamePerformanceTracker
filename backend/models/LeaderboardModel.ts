@@ -10,18 +10,21 @@ const playerSchema = new Schema({
     winGames: Number,
     lossGames: Number,
     favChamps: [String],
-})
+});
 
 const leaderboardSchema = new Schema({
     tier: {
-        type: String
+        type: String,
     },
     division: {
-        type: String
+        type: String,
     },
     players: {
-        type: [playerSchema]
-    }
-})
+        type: [playerSchema],
+    },
+});
 
-export default mongoose.model<LeaderboardMongo>('Leaderboard', leaderboardSchema);
+export default mongoose.model<LeaderboardMongo>(
+    'Leaderboard',
+    leaderboardSchema
+);
