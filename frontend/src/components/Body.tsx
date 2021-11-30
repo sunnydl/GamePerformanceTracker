@@ -33,6 +33,11 @@ const Container = styled('div')(({ theme }) => ({
     paddingRight: theme.spacing(4),
 }));
 
+/**
+ * Returns a functional component of the body with route switching and data fetching logic
+ *
+ * @returns {JSX.Element} The functional component.
+ */
 function Body() {
     const location = useLocation();
     const loading = useAppSelector((state) => state.loading.overall);

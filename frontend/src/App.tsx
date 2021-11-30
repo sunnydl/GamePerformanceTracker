@@ -8,6 +8,11 @@ import Body from './components/Body';
 import Footer from './components/Footer';
 import { CssBaseline } from '@mui/material';
 
+/**
+ * Returns a functional component of the Entry point of our application
+ *
+ * @returns {JSX.Element} The functional component.
+ */
 function App() {
     const [mode, setMode] = useState(
         localStorage.getItem('gptTheme') === 'true'

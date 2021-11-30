@@ -21,6 +21,11 @@ const regions = [
     'RU',
 ];
 
+/**
+ * Returns a functional component of the search bar
+ *
+ * @returns {JSX.Element} The functional component.
+ */
 function SummonerSearchBar() {
     const [regionIndex, setRegionIndex] = useState(0);
     const history = useHistory();

@@ -1,6 +1,11 @@
 import React from 'react';
 import { CircularProgress, Box } from '@mui/material';
 
+/**
+ * Returns a functional component of the loading animation
+ *
+ * @returns {JSX.Element} The functional component.
+ */
 export default function PageLoading() {
     return (
         <Box

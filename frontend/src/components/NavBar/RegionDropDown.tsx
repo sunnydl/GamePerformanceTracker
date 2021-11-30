@@ -12,6 +12,11 @@ import {
 } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
+/**
+ * Returns a functional component of the region drop down next to search bar for user to select region
+ *
+ * @returns {JSX.Element} The functional component.
+ */
 function RegionDropDown({
     options,
     selectedIndex,
