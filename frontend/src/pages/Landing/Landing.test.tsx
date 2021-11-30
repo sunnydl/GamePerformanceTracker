@@ -18,7 +18,7 @@ test('renders learn react link', () => {
   expect(homeComponent).toHaveTextContent('Game Performance Tracker');
 
   // Test search bar
-  const searchBarComponent = screen.getByTestId('search-bar');
+  const searchBarComponent = screen.getByTestId('Search');
   expect(searchBarComponent).toBeInTheDocument();
 
   // Test Headers

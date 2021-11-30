@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Box, AppBar, Toolbar, IconButton, Tab, FormControlLabel, Switch } from '@mui/material';
+import { Box, AppBar, Toolbar, IconButton, Tab, FormControlLabel, Switch, Select } from '@mui/material';
 import { NavBarTabs } from './style';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
