@@ -33,7 +33,7 @@ const Container = styled('div')(({ theme }) => ({
     paddingRight: theme.spacing(4),
 }));
 
-function Body() {
+export default function Body() {
     const location = useLocation();
     const loading = useAppSelector((state) => state.loading.overall);
     const {
@@ -93,5 +93,3 @@ function Body() {
         </Container>
     );
 }
-
-export default Body;

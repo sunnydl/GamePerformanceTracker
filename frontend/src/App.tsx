@@ -8,7 +8,7 @@ import Body from './components/Body';
 import Footer from './components/Footer';
 import { CssBaseline } from '@mui/material';
 
-function App() {
+export default function App() {
     const [mode, setMode] = useState(
         localStorage.getItem('gptTheme') === 'true'
     );
@@ -30,5 +30,3 @@ function App() {
         </ThemeProvider>
     );
 }
-
-export default App;

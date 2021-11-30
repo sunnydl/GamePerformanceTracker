@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-function RegionDropDown({
+export default function RegionDropDown({
     options,
     selectedIndex,
     onSelect,
@@ -114,5 +114,3 @@ function RegionDropDown({
         </React.Fragment>
     );
 }
-
-export default RegionDropDown;

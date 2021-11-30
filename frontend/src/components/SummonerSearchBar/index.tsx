@@ -21,7 +21,7 @@ const regions = [
     'RU',
 ];
 
-function SummonerSearchBar() {
+export default function SummonerSearchBar() {
     const [regionIndex, setRegionIndex] = useState(0);
     const history = useHistory();
     const { summonerName = '', region = '' } = useAppSelector(
@@ -84,5 +84,3 @@ function SummonerSearchBar() {
         </React.Fragment>
     );
 }
-
-export default SummonerSearchBar;
