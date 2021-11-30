@@ -57,6 +57,7 @@ Please navigate to the [scrum_resources](https://github.com/sunnydl/GamePerforma
         |- App.css              # place to put css if needed
         |- App.tsx              # frontend app start point
         |- interfaces.ts        # typescript interfaces
+        |- themes.ts            # app color palettes
         |- util.ts              # utility functions
         |- ...
     |- ...
