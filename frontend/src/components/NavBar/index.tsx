@@ -13,7 +13,7 @@ import {
 import { NavBarTabs } from './style';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import SummonerSearchBar from './SummonerSearchBar';
+import SummonerSearchBar from '../SummonerSearchBar';
 
 interface NavBarProps {
     mode: boolean;

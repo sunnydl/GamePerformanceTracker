@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
 import FeaturePanel from './components/FeaturePanel';
-import SummonerSearchBar from '../../components/NavBar/SummonerSearchBar';
+import SummonerSearchBar from '../../components/SummonerSearchBar';
 
 export default function Home() {
     return (

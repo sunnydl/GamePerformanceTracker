@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import { Search, SearchIconWrapper, StyledInputBase } from './style';
 
-import RegionDropDown from './RegionDropDown';
+import RegionDropDown from '../NavBar/RegionDropDown';
 import { compareIgnoreCase } from '../../util';
 
 const regions = [

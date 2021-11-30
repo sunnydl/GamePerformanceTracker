@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
-import SummonerSearchBar from '../../components/NavBar/SummonerSearchBar';
+import SummonerSearchBar from '../../components/SummonerSearchBar';
 
 export default function Search() {
     return (
