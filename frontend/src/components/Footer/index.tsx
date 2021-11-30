@@ -4,6 +4,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { Tabs, Tab, Avatar } from '@mui/material';
 import { FooterBreak, FooterWrapper, ParticipantsWrapper } from './style';
 
+/**
+ * Returns a functional component of the footer that
+ * displays the tabs such as Overview, Match history, Leaderboard and so on.
+ * It also displays the github photos of the contributors
+ *
+ * @returns {JSX.Element} The functional component.
+ */
 export default function Footer() {
     const location = useLocation();
     return (

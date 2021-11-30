@@ -23,6 +23,11 @@ interface NavBarProps {
     ) => void;
 }
 
+/**
+ * Returns a functional component of the Navbar implementation with tabs and search bar in it
+ *
+ * @returns {JSX.Element} The functional component.
+ */
 export default function NavBar({ mode, onModeChange }: NavBarProps) {
     const location = useLocation();
     const useDropdown = useMediaQuery(useTheme().breakpoints.up('lg'));

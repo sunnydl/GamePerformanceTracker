@@ -45,6 +45,11 @@ const Ratio = styled(Box)(({ theme }) => ({
     },
 }));
 
+/**
+ * Returns a functional component of the ratio bar for win rate displaying
+ *
+ * @returns {JSX.Element} The functional component.
+ */
 export default function RatioBar({
     title,
     firstValue,

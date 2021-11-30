@@ -4,6 +4,12 @@ import { PieChart, Pie, Cell } from 'recharts';
 
 import { CircleChartWrapper, TitleWrapper, LabelWrapper } from './style';
 
+/**
+ * Returns empty data for the chart to display.
+ * @param { name: string; value: number; color: string }[] data The data to be displayed
+ * @param {string} color set the color of the graph
+ * @return { name: string; value: number; color: string }[] x raised to the n-th power.
+ */
 const createEmptyChart = (
     data: { name: string; value: number; color: string }[],
     color: string
@@ -12,6 +18,11 @@ const createEmptyChart = (
     return data;
 };
 
+/**
+ * Returns a functional component of the circle chart to display user data
+ *
+ * @returns {JSX.Element} The functional component.
+ */
 export default function CircleChart({
     title,
     data,
