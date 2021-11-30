@@ -10,6 +10,12 @@ interface FeaturePanelProps {
     name: string;
 }
 
+/**
+ * Returns a functional component that displays a summary of a
+ * feature offered by this webpage.
+ *
+ * @returns {JSX.Element} The functional component.
+ */
 export default function FeaturePanel({ image, name }: FeaturePanelProps) {
     return (
         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>

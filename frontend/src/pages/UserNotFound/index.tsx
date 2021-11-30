@@ -5,7 +5,7 @@ import ExtraLink from './components/ExtraLink';
 
 /**
  * Returns a functional component of the UserNotFound page that
- * displays the three leaderboard content components.
+ * indicates that the summoner could not be found.
  *
  * @returns {JSX.Element} The functional component.
  */

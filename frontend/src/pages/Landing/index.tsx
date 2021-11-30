@@ -8,6 +8,11 @@ import Container from '@mui/material/Container';
 import FeaturePanel from './components/FeaturePanel';
 import SummonerSearchBar from '../../components/SummonerSearchBar';
 
+/**
+ * Returns a functional component that displays the home page.
+ *
+ * @returns {JSX.Element} The functional component.
+ */
 export default function Home() {
     return (
         <main data-testid='home'>

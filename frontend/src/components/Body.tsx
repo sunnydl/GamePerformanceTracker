@@ -38,7 +38,7 @@ const Container = styled('div')(({ theme }) => ({
  *
  * @returns {JSX.Element} The functional component.
  */
-function Body() {
+export default function Body() {
     const location = useLocation();
     const loading = useAppSelector((state) => state.loading.overall);
     const {
@@ -98,5 +98,3 @@ function Body() {
         </Container>
     );
 }
-
-export default Body;

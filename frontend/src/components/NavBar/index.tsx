@@ -28,7 +28,7 @@ interface NavBarProps {
  *
  * @returns {JSX.Element} The functional component.
  */
-function NavBar({ mode, onModeChange }: NavBarProps) {
+export default function NavBar({ mode, onModeChange }: NavBarProps) {
     const location = useLocation();
     const useDropdown = useMediaQuery(useTheme().breakpoints.up('lg'));
 
@@ -131,5 +131,3 @@ function NavBar({ mode, onModeChange }: NavBarProps) {
         </AppBar>
     );
 }
-
-export default NavBar;

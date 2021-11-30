@@ -13,7 +13,7 @@ import { CssBaseline } from '@mui/material';
  *
  * @returns {JSX.Element} The functional component.
  */
-function App() {
+export default function App() {
     const [mode, setMode] = useState(
         localStorage.getItem('gptTheme') === 'true'
     );
@@ -35,5 +35,3 @@ function App() {
         </ThemeProvider>
     );
 }
-
-export default App;

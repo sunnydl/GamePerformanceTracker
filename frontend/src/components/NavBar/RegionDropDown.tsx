@@ -17,7 +17,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
  *
  * @returns {JSX.Element} The functional component.
  */
-function RegionDropDown({
+export default function RegionDropDown({
     options,
     selectedIndex,
     onSelect,
@@ -119,5 +119,3 @@ function RegionDropDown({
         </React.Fragment>
     );
 }
-
-export default RegionDropDown;
