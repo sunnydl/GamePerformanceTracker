@@ -7,11 +7,10 @@ import Typography from '@mui/material/Typography';
 
 interface FeaturePanelProps {
     image: string,
-    name: string,
-    desc: string
+    name: string
 }
 
-export default function FeaturePanel({ image, name, desc }: FeaturePanelProps) {
+export default function FeaturePanel({ image, name }: FeaturePanelProps) {
     return (
         <Card
             sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
@@ -21,11 +20,8 @@ export default function FeaturePanel({ image, name, desc }: FeaturePanelProps) {
                 image={image}
             />
             <CardContent sx={{ flexGrow: 1 }}>
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography align="center" gutterBottom variant="h6" component="h2">
                     {name}
-                </Typography>
-                <Typography>
-                    {desc}
                 </Typography>
             </CardContent>
         </Card>
