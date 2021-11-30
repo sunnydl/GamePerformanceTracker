@@ -52,11 +52,11 @@ export default function MatchSummaryComponent() {
             bStates[`Kills`] = false;
             bStates[`Deaths`] = false;
             bStates[`Assists`] = false;
-            bStates[`Scores`] = false;
+            bStates['GPT Score'] = false;
             bColors[`Kills`] = '#18A0FB';
             bColors[`Deaths`] = '#18A0FB';
             bColors[`Assists`] = '#18A0FB';
-            bColors[`Scores`] = '#18A0FB';
+            bColors['GPT Score'] = '#18A0FB';
         } else {
             bStates['WinRates'] = false;
             bColors['WinRates'] = '#18A0FB';
