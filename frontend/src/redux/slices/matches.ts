@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
-import { MatchState } from "../../interfaces";
-import { FetchOperations } from "../../enums";
+import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit';
+import { MatchState } from '../../interfaces';
+import { FetchOperations } from '../../enums';
 import axios from 'axios';
 
 // NOTE: Temporary -- Sample Data
@@ -20,7 +20,7 @@ const initialState: MatchState[] = [
         dmgPerMin: 0,
         visionAmt: 0,
         csAmt: 0,
-        dmgAmt: 0
+        dmgAmt: 0,
     },
     {
         gameMode: 'CLASSIC',
@@ -37,7 +37,7 @@ const initialState: MatchState[] = [
         dmgPerMin: 0,
         visionAmt: 0,
         csAmt: 0,
-        dmgAmt: 0
+        dmgAmt: 0,
     },
     {
         gameMode: 'CLASSIC',
@@ -54,7 +54,7 @@ const initialState: MatchState[] = [
         dmgPerMin: 0,
         visionAmt: 0,
         csAmt: 0,
-        dmgAmt: 0
+        dmgAmt: 0,
     },
     {
         gameMode: 'CLASSIC',
@@ -71,7 +71,7 @@ const initialState: MatchState[] = [
         dmgPerMin: 0,
         visionAmt: 0,
         csAmt: 0,
-        dmgAmt: 0
+        dmgAmt: 0,
     },
     {
         gameMode: 'CLASSIC',
@@ -88,7 +88,7 @@ const initialState: MatchState[] = [
         dmgPerMin: 0,
         visionAmt: 0,
         csAmt: 0,
-        dmgAmt: 0
+        dmgAmt: 0,
     },
     {
         gameMode: 'CLASSIC',
@@ -105,8 +105,8 @@ const initialState: MatchState[] = [
         dmgPerMin: 0,
         visionAmt: 0,
         csAmt: 0,
-        dmgAmt: 0
-    }
+        dmgAmt: 0,
+    },
 ];
 
 export const matchesSlice = createSlice({
@@ -115,13 +115,17 @@ export const matchesSlice = createSlice({
     reducers: {
         setMatchesData: (state, action: PayloadAction<Array<MatchState>>) => {
             return [...action.payload];
-        }
+        },
     },
-})
+});
 
-function fetchMatchesData(query: string, numOfMatch: number, operation: string) {
+function fetchMatchesData(
+    query: string,
+    numOfMatch: number,
+    operation: string
+) {
     let fetchUrl: string;
-    switch(operation) {
+    switch (operation) {
         case FetchOperations.FETCH:
             fetchUrl = '/api/matches/';
             break;
@@ -136,31 +140,35 @@ function fetchMatchesData(query: string, numOfMatch: number, operation: string) 
         if (query) {
             const params = new URLSearchParams(query);
             const summonerName = params.get('summonerName');
-            const region = params.get('region') ?? "NA"; // Defaults to NA region
+            const region = params.get('region') ?? 'NA'; // Defaults to NA region
             if (summonerName) {
-                return axios.get(fetchUrl, {
-                    params: {
-                        summonerName: summonerName,
-                        region: region,
-                        numOfMatch: numOfMatch,
-                    }
-                })
-                .then((res) => {
-                    const matchesData = res.data;
-                    console.log('matches data found:', matchesData);
-                    dispatch(setMatchesData(matchesData));
-                })
-                .catch((err) => {
-                    console.log('matches data not found:\n', err.response || err);
-                    dispatch(setMatchesData(initialState));
-                });
+                return axios
+                    .get(fetchUrl, {
+                        params: {
+                            summonerName: summonerName,
+                            region: region,
+                            numOfMatch: numOfMatch,
+                        },
+                    })
+                    .then((res) => {
+                        const matchesData = res.data;
+                        console.log('matches data found:', matchesData);
+                        dispatch(setMatchesData(matchesData));
+                    })
+                    .catch((err) => {
+                        console.log(
+                            'matches data not found:\n',
+                            err.response || err
+                        );
+                        dispatch(setMatchesData(initialState));
+                    });
             }
         }
-    }
+    };
 }
 
-export const { setMatchesData } = matchesSlice.actions
+export const { setMatchesData } = matchesSlice.actions;
 
-export default matchesSlice.reducer
+export default matchesSlice.reducer;
 
-export { fetchMatchesData }
+export { fetchMatchesData };

@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { LoadingState } from "../../interfaces";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { LoadingState } from '../../interfaces';
 
 const initialState: LoadingState = {
     overall: false,
@@ -19,8 +19,9 @@ const loadingSlice = createSlice({
             return state;
         },
     },
-})
+});
 
-export const { setOverallLoading, setLeaderboardLoading } = loadingSlice.actions
+export const { setOverallLoading, setLeaderboardLoading } =
+    loadingSlice.actions;
 
-export default loadingSlice.reducer
+export default loadingSlice.reducer;

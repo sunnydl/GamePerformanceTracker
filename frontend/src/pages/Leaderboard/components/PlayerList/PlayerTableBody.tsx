@@ -1,6 +1,13 @@
 import React from 'react';
 import { useAppSelector } from '../../../../redux/hooks';
-import { useTheme, Avatar, Box, TableBody, TableRow, TableCell } from '@mui/material';
+import {
+    useTheme,
+    Avatar,
+    Box,
+    TableBody,
+    TableRow,
+    TableCell,
+} from '@mui/material';
 import { PlayerLink } from './style';
 import RatioBar from '../../../../components/RatioBar';
 
@@ -9,12 +16,14 @@ import { getSummonerIconURL, displayWinRate } from '../../../../util';
 /**
  * Returns a functional component of the leaderboard page that displays the
  * leaderboard information.
- * 
+ *
  * @returns {JSX.Element} A functional component.
  */
 export default function PlayerTableBody() {
     const theme = useTheme();
-    const leaderboard = useAppSelector((state) => state.leaderboard.leaderboard);
+    const leaderboard = useAppSelector(
+        (state) => state.leaderboard.leaderboard
+    );
 
     return (
         <TableBody>
@@ -23,8 +32,12 @@ export default function PlayerTableBody() {
                     <TableCell>{idx + 1}</TableCell>
                     <TableCell>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <Avatar src={getSummonerIconURL(player.summonerIcon)} />
-                            <PlayerLink to={`/overview?summonerName=${player.summonerName}&region=NA`}>
+                            <Avatar
+                                src={getSummonerIconURL(player.summonerIcon)}
+                            />
+                            <PlayerLink
+                                to={`/overview?summonerName=${player.summonerName}&region=NA`}
+                            >
                                 {player.summonerName}
                             </PlayerLink>
                         </Box>
@@ -32,8 +45,12 @@ export default function PlayerTableBody() {
                     <TableCell>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <RatioBar
-                                title={displayWinRate(player.winGames, player.lossGames, true)}
-                                firstValue={player.winGames} 
+                                title={displayWinRate(
+                                    player.winGames,
+                                    player.lossGames,
+                                    true
+                                )}
+                                firstValue={player.winGames}
                                 secondValue={player.lossGames}
                                 firstColor={theme.palette.info.light}
                                 secondColor={theme.palette.error.light}

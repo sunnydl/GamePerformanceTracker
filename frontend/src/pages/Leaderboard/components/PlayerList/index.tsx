@@ -7,7 +7,7 @@ import PlayerTableBody from './PlayerTableBody';
 /**
  * Returns a functional component of the leaderboard page that creates a
  * stylized table.
- * 
+ *
  * @returns {JSX.Element} A functional component.
  */
 export default function PlayerList() {

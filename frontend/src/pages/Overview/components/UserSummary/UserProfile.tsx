@@ -9,7 +9,7 @@ import { useAppSelector } from '../../../../redux/hooks';
 /**
  * Returns a functional component of the overview page that displays a
  * summoner's ranking data.
- * 
+ *
  * @returns {JSX.Element} A functional component.
  */
 export default function UserProfile() {
@@ -20,7 +20,7 @@ export default function UserProfile() {
         rank,
         summonerLevel,
         winGames,
-        lossGames
+        lossGames,
     } = useAppSelector((state) => state.user);
 
     return (
@@ -29,8 +29,17 @@ export default function UserProfile() {
                 <Badge
                     overlap='circular'
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                    badgeContent={<RankEmblemIcon rank={rank?.split(' ')?.[0] ?? 'IRON'} size={96} />}>
-                    <Avatar className='profile' src={getSummonerIconURL(summonerIcon)} />
+                    badgeContent={
+                        <RankEmblemIcon
+                            rank={rank?.split(' ')?.[0] ?? 'IRON'}
+                            size={96}
+                        />
+                    }
+                >
+                    <Avatar
+                        className='profile'
+                        src={getSummonerIconURL(summonerIcon)}
+                    />
                 </Badge>
                 {summonerName}
             </div>
@@ -50,7 +59,9 @@ export default function UserProfile() {
                 </div>
                 <div>
                     <span className='data-name'>Wins | Losses:</span>
-                    <span className='data-value'>{winGames} | {lossGames}</span>
+                    <span className='data-value'>
+                        {winGames} | {lossGames}
+                    </span>
                 </div>
             </div>
         </ProfileWrapper>

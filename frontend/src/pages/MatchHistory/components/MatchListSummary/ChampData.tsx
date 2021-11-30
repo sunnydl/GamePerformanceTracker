@@ -10,7 +10,7 @@ import { getChampionIconURL } from '../../../../util';
 /**
  * Returns a functional component of the match history page that displays
  * a summoner's recent performance on a specific champion.
- * 
+ *
  * @param {ChampPerformanceSummary} data An object containing the summoner's recent performance data on the champion.
  * @returns {JSX.Element} A functional component.
  */
@@ -24,7 +24,10 @@ export default function ChampData({ data }: { data: ChampPerformanceSummary }) {
                 <ChampPerformanceWrapper>
                     <div className='win-rate'>
                         <span className='win-ratio'>
-                            {displayWinRate(data.wins, data.matches - data.wins)}
+                            {displayWinRate(
+                                data.wins,
+                                data.matches - data.wins
+                            )}
                         </span>
                         &nbsp;
                         <span className='win-loss'>

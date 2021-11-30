@@ -5,30 +5,30 @@ export const MatchChampsGrid = styled(Grid)(({ theme }) => ({
     justifyContent: 'center',
 
     '& .outlined': {
-        borderTop:'1px solid',
+        borderTop: '1px solid',
         borderLeft: '1px solid',
         borderRight: '1px solid',
         borderColor: theme.palette.grey[600],
         padding: theme.spacing(2),
 
         '&:last-child': {
-            borderBottom: `1px solid ${theme.palette.grey[600]}`
-        }
+            borderBottom: `1px solid ${theme.palette.grey[600]}`,
+        },
     },
 }));
 
 export const OverallDataWrapper = styled('div')(({ theme }) => ({
     '& > *': {
-        ...theme.typography.h4
-    }
+        ...theme.typography.h4,
+    },
 }));
 
 export const ChampDataGrid = styled(Grid)(({ theme }) => ({
     '& .MuiAvatar-root': {
         width: '128px',
         height: '128px',
-        margin: 'auto'
-    }
+        margin: 'auto',
+    },
 }));
 
 export const ChampPerformanceWrapper = styled('div')(({ theme }) => ({
@@ -42,26 +42,26 @@ export const ChampPerformanceWrapper = styled('div')(({ theme }) => ({
         '& > span.win-ratio': {
             color: theme.palette.success.main,
             fontSize: theme.typography.h4.fontSize,
-            fontWeight: 'bold'
+            fontWeight: 'bold',
         },
         '& > span.win-loss': {
-            fontSize: theme.typography.body2.fontSize
-        }
+            fontSize: theme.typography.body2.fontSize,
+        },
     },
 
     '& > div.kda': {
         fontSize: theme.typography.body2.fontSize,
 
         '& > span.kills': {
-            color: theme.palette.success.main
+            color: theme.palette.success.main,
         },
         '& > span.deaths': {
-            color: theme.palette.error.main
+            color: theme.palette.error.main,
         },
         '& > span.assists': {
-            color: theme.palette.info.main
-        }
-    }
+            color: theme.palette.info.main,
+        },
+    },
 }));
 
 export const LeftButtonsWrapper = styled('div')(({ theme }) => ({
@@ -72,9 +72,9 @@ export const LeftButtonsWrapper = styled('div')(({ theme }) => ({
         marginBottom: theme.spacing(1),
 
         '&:not(:last-of-type)': {
-            marginRight: theme.spacing(1)
-        }
-    }
+            marginRight: theme.spacing(1),
+        },
+    },
 }));
 
 export const RightButtonsWrapper = styled('div')(({ theme }) => ({
@@ -85,7 +85,7 @@ export const RightButtonsWrapper = styled('div')(({ theme }) => ({
         marginBottom: theme.spacing(1),
 
         '&:not(:last-of-type)': {
-            marginRight: theme.spacing(1)
-        }
-    }
+            marginRight: theme.spacing(1),
+        },
+    },
 }));

@@ -1,9 +1,9 @@
 import { alpha, createTheme } from '@mui/material/styles';
 declare module '@mui/material/styles/createPalette' {
     interface TypeBackground {
-        default: string,
-        alternate: string,
-        paper: string,
+        default: string;
+        alternate: string;
+        paper: string;
     }
 }
 
@@ -38,8 +38,8 @@ let themeLight = createTheme({
         background: {
             default: '#fff',
             alternate: '#f2f7fd',
-            paper: '#fff'
-        }
+            paper: '#fff',
+        },
     },
 });
 
@@ -56,14 +56,16 @@ themeLight = createTheme(themeLight, {
                         '&:hover': {
                             backgroundColor: alpha(
                                 themeLight.palette.primary.main,
-                                themeLight.palette.action.focusOpacity + themeLight.palette.action.selectedOpacity * 4
-                            )
-                        }
-                    }
-                }
-            }
-        }
-    }
+                                themeLight.palette.action.focusOpacity +
+                                    themeLight.palette.action.selectedOpacity *
+                                        4
+                            ),
+                        },
+                    },
+                },
+            },
+        },
+    },
 });
 
 let themeDark = createTheme({
@@ -71,29 +73,29 @@ let themeDark = createTheme({
         mode: 'dark',
         primary: {
             main: '#0372bd',
-            contrastText: '#fff'
+            contrastText: '#fff',
         },
         secondary: {
             main: '#1b1b1b',
-            contrastText: '#0372bd'
+            contrastText: '#0372bd',
         },
-    //     error: {
+        //     error: {
 
-    //     },
-    //     warning: {
+        //     },
+        //     warning: {
 
-    //     },
-    //     info: {
+        //     },
+        //     info: {
 
-    //     },
-    //     success: {
-            
-    //     }
+        //     },
+        //     success: {
+
+        //     }
         background: {
             default: '#1b1b1b',
             alternate: '#212121',
-            paper: '#1b1b1b'
-        }
+            paper: '#1b1b1b',
+        },
     },
 });
 
@@ -110,15 +112,15 @@ themeDark = createTheme(themeDark, {
                         '&:hover': {
                             backgroundColor: alpha(
                                 themeDark.palette.primary.main,
-                                themeDark.palette.action.focusOpacity + themeDark.palette.action.selectedOpacity * 4
-                            )
-                        }
-                    }
-                }
-            }
-        }
-    }
+                                themeDark.palette.action.focusOpacity +
+                                    themeDark.palette.action.selectedOpacity * 4
+                            ),
+                        },
+                    },
+                },
+            },
+        },
+    },
 });
-
 
 export { themeLight, themeDark };

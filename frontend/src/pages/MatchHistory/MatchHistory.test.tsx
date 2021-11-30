@@ -22,7 +22,7 @@ test('match history', () => {
     expect(matchHistoryComponent).toBeInTheDocument();
 
     // Test header
-    expect(matchHistoryComponent).toHaveTextContent('Recent Matches'); 
+    expect(matchHistoryComponent).toHaveTextContent('Recent Matches');
 
     // Test options sliders
     expect(screen.getByTestId('match-slider')).toBeInTheDocument();
@@ -32,15 +32,28 @@ test('match history', () => {
 
     // Test list
     expect(screen.getByTestId('match-list')).toBeInTheDocument();
-})
+});
 
 test('top champs function', () => {
-    const mockMatches: MatchState[] = ['A', 'B', 'B', 'B', 'C', 'C', 'D'].map((val, idx) => ({
-        gameMode: val, gameDate: val, win: true, role: val, championName: val,
-        kills: idx, deaths: idx, assists: idx, gptScore: idx,
-        visionPerMin: idx, csPerMin: idx, dmgPerMin: idx, 
-        visionAmt: idx, csAmt: idx, dmgAmt: idx
-    }));
+    const mockMatches: MatchState[] = ['A', 'B', 'B', 'B', 'C', 'C', 'D'].map(
+        (val, idx) => ({
+            gameMode: val,
+            gameDate: val,
+            win: true,
+            role: val,
+            championName: val,
+            kills: idx,
+            deaths: idx,
+            assists: idx,
+            gptScore: idx,
+            visionPerMin: idx,
+            csPerMin: idx,
+            dmgPerMin: idx,
+            visionAmt: idx,
+            csAmt: idx,
+            dmgAmt: idx,
+        })
+    );
     const topChamps: ChampPerformanceSummary[] = getTopChamps(mockMatches);
 
     // Test top champs length (should not exceed 3)
@@ -65,4 +78,4 @@ test('top champs function', () => {
         expect(champ.deaths).toBeGreaterThanOrEqual(0);
         expect(champ.assists).toBeGreaterThanOrEqual(0);
     });
-})
+});

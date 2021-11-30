@@ -9,24 +9,26 @@ import Footer from './components/Footer';
 import { CssBaseline } from '@mui/material';
 
 function App() {
-  const [mode, setMode] = useState(localStorage.getItem('gptTheme') === 'true');
+    const [mode, setMode] = useState(
+        localStorage.getItem('gptTheme') === 'true'
+    );
 
-  const handleModeChange = () => {
-    setMode((prevMode) => {
-      const newMode = !prevMode;
-      localStorage.setItem('gptTheme', newMode.toString());
-      return newMode;
-    });
-  }
+    const handleModeChange = () => {
+        setMode((prevMode) => {
+            const newMode = !prevMode;
+            localStorage.setItem('gptTheme', newMode.toString());
+            return newMode;
+        });
+    };
 
-  return (
-    <ThemeProvider theme={mode ? themeDark : themeLight}>
-      <CssBaseline />
-      <NavBar mode={mode} onModeChange={handleModeChange} />
-      <Body />
-      <Footer/>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider theme={mode ? themeDark : themeLight}>
+            <CssBaseline />
+            <NavBar mode={mode} onModeChange={handleModeChange} />
+            <Body />
+            <Footer />
+        </ThemeProvider>
+    );
 }
 
 export default App;

@@ -10,7 +10,7 @@ import { getChampionIconURL } from '../../../../util';
 /**
  * Returns a functional component of the match history page that displays
  * a match's data.
- * 
+ *
  * @param {MatchState} match The match's data.
  * @returns {JSX.Element} A functional component.
  */

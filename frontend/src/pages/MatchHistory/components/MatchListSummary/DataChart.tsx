@@ -42,7 +42,7 @@ const matchDataColors = {
 /**
  * Returns a functional component of the match history page that displays
  * a chart of data on the summoner's most recently played champions.
- * 
+ *
  * @param {number} size The number of matches being displayed.
  * @returns {JSX.Element} A functional component.
  */
@@ -126,8 +126,9 @@ export default function DataChart({ size }: { size: number }) {
                         data={
                             (type.length === 0
                                 ? matches
-                                : matches.filter((match) => match.championName === type)
-                            ) as MatchData[]
+                                : matches.filter(
+                                      (match) => match.championName === type
+                                  )) as MatchData[]
                         }
                         margin={{
                             top: 16,
@@ -150,7 +151,11 @@ export default function DataChart({ size }: { size: number }) {
                                 key={key}
                                 type='monotone'
                                 dataKey={key}
-                                stroke={matchDataColors[key as keyof typeof matchDataColors]}
+                                stroke={
+                                    matchDataColors[
+                                        key as keyof typeof matchDataColors
+                                    ]
+                                }
                                 activeDot={{ r: 8 }}
                             />
                         ))}

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { store } from '../../redux/store';
 import { Provider } from 'react-redux';
-import SummonerSearchBar from '../NavBar/SummonerSearchBar'
+import SummonerSearchBar from '../NavBar/SummonerSearchBar';
 
 test('renders learn react link', () => {
     render(

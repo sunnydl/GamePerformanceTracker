@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
-import { ChartState } from "../../interfaces";
+import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit';
+import { ChartState } from '../../interfaces';
 import axios from 'axios';
 
 const initialState: Array<ChartState> = [
@@ -26,7 +26,7 @@ const initialState: Array<ChartState> = [
         deaths: 0,
         assists: 0,
         scores: 0,
-    }
+    },
 ];
 
 const chartSlice = createSlice({
@@ -37,38 +37,42 @@ const chartSlice = createSlice({
             return [...action.payload];
         },
     },
-})
+});
 
 function fetchChartData(query: string, numOfMatch: number) {
     return async (dispatch: Dispatch) => {
         if (query) {
             const params = new URLSearchParams(query);
             const summonerName = params.get('summonerName');
-            const region = params.get('region') ?? "NA"; // Defaults to NA region
+            const region = params.get('region') ?? 'NA'; // Defaults to NA region
             if (summonerName) {
-                return axios.get('/api/matches/chart', {
-                    params: {
-                        summonerName: summonerName,
-                        region: region,
-                        numOfMatch: numOfMatch,
-                    }
-                })
-                .then((res) => {
-                    const chartData = res.data;
-                    console.log('chart data found:', chartData);
-                    dispatch(setChartData(chartData));
-                })
-                .catch((err) => {
-                    console.log('chart data not found:\n', err.response || err);
-                    dispatch(setChartData(initialState));
-                });
+                return axios
+                    .get('/api/matches/chart', {
+                        params: {
+                            summonerName: summonerName,
+                            region: region,
+                            numOfMatch: numOfMatch,
+                        },
+                    })
+                    .then((res) => {
+                        const chartData = res.data;
+                        console.log('chart data found:', chartData);
+                        dispatch(setChartData(chartData));
+                    })
+                    .catch((err) => {
+                        console.log(
+                            'chart data not found:\n',
+                            err.response || err
+                        );
+                        dispatch(setChartData(initialState));
+                    });
             }
         }
-    }
+    };
 }
 
-export const { setChartData } = chartSlice.actions
+export const { setChartData } = chartSlice.actions;
 
-export default chartSlice.reducer
+export default chartSlice.reducer;
 
-export { fetchChartData }
+export { fetchChartData };

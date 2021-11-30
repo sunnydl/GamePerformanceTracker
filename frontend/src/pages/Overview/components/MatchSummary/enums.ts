@@ -4,4 +4,4 @@ export const Features: string[] = [
     'Assists',
     'WinRates',
     'GPT Score',
-]
+];

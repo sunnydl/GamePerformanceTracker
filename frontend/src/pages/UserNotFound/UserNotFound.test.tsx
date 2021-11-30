@@ -15,20 +15,20 @@ test('renders learn react link', () => {
             </Router>
         </Provider>
     );
-  const errorComponent = screen.getByTestId('UserNotFound');
-  expect(errorComponent).toBeInTheDocument();
+    const errorComponent = screen.getByTestId('UserNotFound');
+    expect(errorComponent).toBeInTheDocument();
 
-  // Test topsection
-  const topComponent = screen.getByTestId('topSection');
-  expect(topComponent).toBeInTheDocument();
-  expect(topComponent).toHaveTextContent('Oh no');
+    // Test topsection
+    const topComponent = screen.getByTestId('topSection');
+    expect(topComponent).toBeInTheDocument();
+    expect(topComponent).toHaveTextContent('Oh no');
 
-  // Test Buttons
-  const linkComponent = screen.getByTestId('ExtraLink');
-  expect(linkComponent).toBeInTheDocument();
-  expect(screen.getByTestId('extralink-button')).toBeInTheDocument();
+    // Test Buttons
+    const linkComponent = screen.getByTestId('ExtraLink');
+    expect(linkComponent).toBeInTheDocument();
+    expect(screen.getByTestId('extralink-button')).toBeInTheDocument();
 
-  // Test not found
-  const notFoundComponent = screen.getByTestId('NotFound');
-  expect(notFoundComponent).toBeInTheDocument();
+    // Test not found
+    const notFoundComponent = screen.getByTestId('NotFound');
+    expect(notFoundComponent).toBeInTheDocument();
 });

@@ -7,7 +7,7 @@ import { useAppSelector } from '../../../../redux/hooks';
 /**
  * Returns a functional component of the match history page that displays
  * a summoner's recent matches.
- * 
+ *
  * @param {number} size The number of matches being displayed.
  * @returns {JSX.Element} A functional component.
  */

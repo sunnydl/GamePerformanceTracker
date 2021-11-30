@@ -23,29 +23,28 @@ export function getTopChamps(matches: MatchState[]) {
             champ.kills += match.kills;
             champ.deaths += match.deaths;
             champ.assists += match.assists;
-        }
-        else {
+        } else {
             champs[match.championName] = {
                 championName: match.championName,
                 matches: 1,
                 wins: match.win ? 1 : 0,
                 kills: match.kills,
                 deaths: match.deaths,
-                assists: match.assists
-            }
+                assists: match.assists,
+            };
         }
     }
 
-    const topChamps = Object.values(champs).sort((a, b) => (
-        b.matches - a.matches
-    ));
+    const topChamps = Object.values(champs).sort(
+        (a, b) => b.matches - a.matches
+    );
     return topChamps.slice(0, 3);
 }
 
 /**
  * Returns a functional component of the match history page that displays
  * a list of data on the summoner's most recently played champions.
- * 
+ *
  * @param {number} size The number of matches being displayed.
  * @returns {JSX.Element} A functional component.
  */
@@ -60,15 +59,16 @@ export default function MatchChamps({ size }: { size: number }) {
     return (
         <MatchChampsGrid container>
             <Grid item xs={12} className='outlined'>
-                <OverallData
-                    wins={wins}
-                    losses={losses}
-                    ratio={ratio.value}
-                />
+                <OverallData wins={wins} losses={losses} ratio={ratio.value} />
             </Grid>
             <Grid item container xs={12}>
                 {champs.map((champ) => (
-                    <Grid key={champ.championName} item xs={12} className='outlined'>
+                    <Grid
+                        key={champ.championName}
+                        item
+                        xs={12}
+                        className='outlined'
+                    >
                         <ChampData data={champ} />
                     </Grid>
                 ))}

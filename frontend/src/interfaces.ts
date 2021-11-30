@@ -1,14 +1,14 @@
 // Redux state interfaces
 export interface UserState {
-    summonerName?:  string;
+    summonerName?: string;
     summonerLevel?: number;
-    summonerIcon?:  number;
-    rank?:          string;
-    leaguePoints?:  number;
-    winGames?:      number;
-    lossGames?:     number;
-    favChamps?:     string[];
-    region?:        string;
+    summonerIcon?: number;
+    rank?: string;
+    leaguePoints?: number;
+    winGames?: number;
+    lossGames?: number;
+    favChamps?: string[];
+    region?: string;
     summonerFound?: boolean;
 }
 
@@ -22,21 +22,21 @@ export interface ChartState {
 }
 
 export interface MatchState {
-    gameMode?: string,
-    gameDate: string,
-    win: boolean,
-    role: string,
-    championName: string,
-    kills: number,
-    deaths: number,
-    assists: number,
-    gptScore: number,
-    visionPerMin: number,
-    csPerMin: number,
-    dmgPerMin: number,
-    visionAmt: number,
-    csAmt: number,
-    dmgAmt: number
+    gameMode?: string;
+    gameDate: string;
+    win: boolean;
+    role: string;
+    championName: string;
+    kills: number;
+    deaths: number;
+    assists: number;
+    gptScore: number;
+    visionPerMin: number;
+    csPerMin: number;
+    dmgPerMin: number;
+    visionAmt: number;
+    csAmt: number;
+    dmgAmt: number;
 }
 
 export interface LeaderboardState {
@@ -51,8 +51,6 @@ export interface LoadingState {
     leaderboard: boolean;
 }
 
-
-
 // Helper interfaces
 export interface MatchData {
     kills: number;
@@ -65,12 +63,12 @@ export interface MatchData {
 }
 
 export interface ChampPerformanceSummary {
-    championName: string,
-    matches: number,
-    wins: number,
-    kills: number,
-    deaths: number,
-    assists: number
+    championName: string;
+    matches: number;
+    wins: number;
+    kills: number;
+    deaths: number;
+    assists: number;
 }
 
 export interface KDA {

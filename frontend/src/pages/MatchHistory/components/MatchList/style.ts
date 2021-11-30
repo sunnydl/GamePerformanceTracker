@@ -12,26 +12,26 @@ export const MatchTableContainer = styled(TableContainer)(({ theme }) => ({
             borderColor: theme.palette.grey[600],
 
             '& .MuiAvatar-root': {
-                width: "144px",
-                height: "144px",
-                marginRight: theme.spacing(4)
-            }
-        }
-    }
+                width: '144px',
+                height: '144px',
+                marginRight: theme.spacing(4),
+            },
+        },
+    },
 }));
 
 export const MatchTableRow = styled(TableRow)(({ theme }) => ({
     position: 'relative',
-    
+
     '& > td.MuiTableCell-root': {
         paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(2),
 
         '&.summary': {
             paddingTop: theme.spacing(0.25),
-            border: 0
-        }
-    }
+            border: 0,
+        },
+    },
 }));
 
 export const MatchResultsWrapper = styled('div')(({ theme }) => ({
@@ -46,19 +46,19 @@ export const MatchResultsWrapper = styled('div')(({ theme }) => ({
         fontWeight: 'bold',
 
         '&.victory': {
-            color: theme.palette.success.main
+            color: theme.palette.success.main,
         },
 
         '&.defeat': {
-            color: theme.palette.error.main
-        }
+            color: theme.palette.error.main,
+        },
     },
 
-    '& > .body-wrapper' : {
+    '& > .body-wrapper': {
         '& > .kills': { color: theme.palette.success.main },
         '& > .deaths': { color: theme.palette.error.main },
-        '& > .assists': { color: theme.palette.info.main }
-    }
+        '& > .assists': { color: theme.palette.info.main },
+    },
 }));
 
 export const MatchStatisticsWrapper = styled('div')(({ theme }) => ({
@@ -79,5 +79,5 @@ export const MatchSummaryCell = styled(TableCell)(({ theme }) => ({
     right: 0,
     width: '25%',
     minWidth: '300px',
-    padding: theme.spacing(0.25)
+    padding: theme.spacing(0.25),
 }));

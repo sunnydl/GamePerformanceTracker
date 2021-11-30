@@ -14,18 +14,18 @@ const MatchHistoryWrapper = styled('div')(({ theme }) => ({
     marginBottom: theme.spacing(8),
 
     '& > *': {
-        marginBottom: theme.spacing(4)
+        marginBottom: theme.spacing(4),
     },
 
     '& *': {
-        textAlign: 'center'
-    }
+        textAlign: 'center',
+    },
 }));
 
 const MatchHeading = styled('div')(({ theme }) => ({
     ...theme.typography.h3,
     marginBottom: theme.spacing(4),
-    textAlign: 'center'
+    textAlign: 'center',
 }));
 
 const options = [3, 4, 5, 6, 7, 8, 9, 10];
@@ -33,7 +33,7 @@ const options = [3, 4, 5, 6, 7, 8, 9, 10];
 /**
  * Returns a functional component of the match history page that displays
  * the components for a summoner's recent match history data.
- * 
+ *
  * @returns {JSX.Element} A functional component.
  */
 export default function MatchHistory() {
@@ -43,7 +43,7 @@ export default function MatchHistory() {
             <div>
                 <MatchHistoryWrapper data-testid='match-history'>
                     <MatchHeading>Recent Matches</MatchHeading>
-                    <MatchUpdateButton/>
+                    <MatchUpdateButton />
                     <MatchOptions options={options} setOption={setOption} />
                     <MatchListSummary size={option} />
                     <MatchList size={option} />

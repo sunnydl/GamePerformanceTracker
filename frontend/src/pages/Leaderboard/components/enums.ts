@@ -8,22 +8,14 @@ export const tiers: Array<string> = [
     'Silver',
     'Bronze',
     'Iron',
-]
+];
 
 export const high_tiers: Array<string> = [
     'Challenger',
     'GrandMaster',
     'Master',
-]
+];
 
-export const divisions: Array<string> = [
-    'I',
-    'II',
-    'III',
-    'IV',
-]
+export const divisions: Array<string> = ['I', 'II', 'III', 'IV'];
 
-export const queueTypes: Array<string> = [
-    'SOLO',
-    'FLEX',
-]
+export const queueTypes: Array<string> = ['SOLO', 'FLEX'];

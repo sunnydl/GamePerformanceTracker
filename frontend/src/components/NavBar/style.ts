@@ -9,9 +9,9 @@ export const NavBarTabs = styled(Tabs)(({ theme }) => ({
 
         '&.Mui-disabled': {
             color: theme.palette.secondary.contrastText,
-            opacity: theme.palette.action.disabledOpacity
-        }
-    }
+            opacity: theme.palette.action.disabledOpacity,
+        },
+    },
 }));
 
 export const Search = styled('div')(({ theme }) => ({
@@ -28,7 +28,7 @@ export const Search = styled('div')(({ theme }) => ({
         width: 'auto',
     },
 }));
-  
+
 export const SearchIconWrapper = styled('div')(({ theme }) => ({
     color: theme.palette.primary.light,
     padding: theme.spacing(0, 2),
@@ -39,7 +39,7 @@ export const SearchIconWrapper = styled('div')(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'center',
 }));
-  
+
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: theme.palette.primary.light,
     border: '1px solid',

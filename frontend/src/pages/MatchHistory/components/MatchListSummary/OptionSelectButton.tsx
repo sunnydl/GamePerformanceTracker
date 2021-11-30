@@ -21,7 +21,7 @@ interface OptionsSelectButtonProps {
 /**
  * Returns a functional component of the match history page that creates a
  * dropdown of a given amount of options.
- * 
+ *
  * @param {string} label The label for the dropdown button.
  * @param {string[]} options The list of options for the dropdown.
  * @param {string | string[]} selectedOptions The option(s) selected by the user.
@@ -49,8 +49,10 @@ export default function OptionSelectButton({
     };
 
     const handleClose = (event: Event) => {
-        if (anchorRef.current &&
-            anchorRef.current.contains(event.target as HTMLElement)) {
+        if (
+            anchorRef.current &&
+            anchorRef.current.contains(event.target as HTMLElement)
+        ) {
             return;
         }
 
@@ -94,10 +96,14 @@ export default function OptionSelectButton({
                                             key={option}
                                             selected={
                                                 multiple
-                                                    ? selectedOptions.includes(option)
+                                                    ? selectedOptions.includes(
+                                                          option
+                                                      )
                                                     : option === selectedOptions
                                             }
-                                            onClick={() => handleMenuItemClick(option)}
+                                            onClick={() =>
+                                                handleMenuItemClick(option)
+                                            }
                                         >
                                             {option}
                                         </MenuItem>

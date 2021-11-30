@@ -4,5 +4,5 @@ import Avatar from '@mui/material/Avatar';
 export const EmblemAvatar = styled(Avatar)(({ theme }) => ({
     backgroundColor: theme.palette.background.alternate,
     border: `${theme.spacing(0.5)} solid`,
-    borderColor: theme.palette.background.alternate
-}))
+    borderColor: theme.palette.background.alternate,
+}));

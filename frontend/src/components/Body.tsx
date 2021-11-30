@@ -1,13 +1,19 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 
-import { useAppDispatch, useAppSelector} from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { fetchUserData } from '../redux/slices/user';
 import { fetchChartData } from '../redux/slices/chart';
 import { fetchMatchesData } from '../redux/slices/matches';
 import { setOverallLoading } from '../redux/slices/loading';
 import { compareIgnoreCase } from '../util';
 
-import { useLocation, Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import {
+    useLocation,
+    Switch,
+    Route,
+    Redirect,
+    useHistory,
+} from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 import PageLoading from './PageLoading';
@@ -25,18 +31,22 @@ const Container = styled('div')(({ theme }) => ({
     paddingBottom: theme.spacing(25),
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
-}))
+}));
 
 function Body() {
     const location = useLocation();
     const loading = useAppSelector((state) => state.loading.overall);
-    const { summonerFound, summonerName='', region='' } = useAppSelector((state) => state.user);
+    const {
+        summonerFound,
+        summonerName = '',
+        region = '',
+    } = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
     const history = useHistory();
     useEffect(() => {
         const search = location.search;
         const params = new URLSearchParams(search);
-        
+
         const isDifferentSummoner = !(
             compareIgnoreCase(summonerName, params.get('summonerName') ?? '') &&
             compareIgnoreCase(region, params.get('region') ?? '')
@@ -47,8 +57,7 @@ function Body() {
                 dispatch(fetchUserData(search, history)),
                 dispatch(fetchChartData(search, 5)),
                 dispatch(fetchMatchesData(search, 10, FetchOperations.FETCH)),
-            ])
-            .then(() => {
+            ]).then(() => {
                 console.log('finished loading data');
                 dispatch(setOverallLoading(false));
             });
@@ -60,19 +69,19 @@ function Body() {
             {loading ? (
                 <PageLoading />
             ) : (
-                <Suspense fallback={<PageLoading/>}>
+                <Suspense fallback={<PageLoading />}>
                     <Switch>
                         <Route exact path='/'>
                             <Home />
                         </Route>
                         <Route exact path='/overview'>
-                            {summonerFound ? (<Overview />) : (<Search/>)}
+                            {summonerFound ? <Overview /> : <Search />}
                         </Route>
                         <Route exact path='/match-history'>
-                            {summonerFound ? (<MatchHistory />) : (<Search/>)}
+                            {summonerFound ? <MatchHistory /> : <Search />}
                         </Route>
                         <Route exact path='/leaderboard'>
-                            <Leaderboard/>
+                            <Leaderboard />
                         </Route>
                         <Route exact path='/usernotfound'>
                             <UserNotFound />

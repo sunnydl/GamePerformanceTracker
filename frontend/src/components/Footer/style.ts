@@ -15,16 +15,16 @@ export const FooterWrapper = styled('div')(({ theme }) => ({
 
         '&.gpt': {
             fontSize: theme.typography.h5.fontSize,
-            fontWeight: 'normal'
-        }
-    }
+            fontWeight: 'normal',
+        },
+    },
 }));
 
 export const FooterBreak = styled('hr')(({ theme }) => ({
     backgroundColor: theme.palette.grey[600],
     border: 'none',
     height: '1px',
-    width: '90%'
+    width: '90%',
 }));
 
 export const ParticipantsWrapper = styled('div')(({ theme }) => ({
@@ -34,7 +34,7 @@ export const ParticipantsWrapper = styled('div')(({ theme }) => ({
     color: 'inherit',
     textAlign: 'inherit',
 
-    "& *": {
-        margin: theme.spacing(1)
-    }
+    '& *': {
+        margin: theme.spacing(1),
+    },
 }));

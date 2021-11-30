@@ -30,35 +30,42 @@ const Ratio = styled(Box)(({ theme }) => ({
             fontSize: theme.typography.body2.fontSize,
             position: 'absolute',
             bottom: '100%',
-            marginBottom: theme.spacing(0.5)
+            marginBottom: theme.spacing(0.5),
         },
 
         '&.first': {
             textAlign: 'left',
-            paddingLeft: theme.spacing(0.5)
+            paddingLeft: theme.spacing(0.5),
         },
 
         '&.second': {
             textAlign: 'right',
-            paddingRight: theme.spacing(0.5)
-        }
-    } 
+            paddingRight: theme.spacing(0.5),
+        },
+    },
 }));
 
-export default function RatioBar({ title, firstValue, secondValue, firstColor, secondColor }: RatioBarProps) {
+export default function RatioBar({
+    title,
+    firstValue,
+    secondValue,
+    firstColor,
+    secondColor,
+}: RatioBarProps) {
     const firstPercent = calculateWinRate(firstValue, secondValue).intValue;
     const secondPercent = 100 - firstPercent;
-    
+
     return (
         <React.Fragment>
             <Ratio>
                 <div className='title'>{title}</div>
-                <div 
+                <div
                     className='first'
-                    style={{ width: `${firstPercent}%`,
+                    style={{
+                        width: `${firstPercent}%`,
                         background: firstColor,
                         borderTopRightRadius: 0,
-                        borderBottomRightRadius: 0
+                        borderBottomRightRadius: 0,
                     }}
                 >
                     {firstValue}
@@ -69,7 +76,7 @@ export default function RatioBar({ title, firstValue, secondValue, firstColor, s
                         width: `${secondPercent}%`,
                         background: secondColor,
                         borderTopLeftRadius: 0,
-                        borderBottomLeftRadius: 0
+                        borderBottomLeftRadius: 0,
                     }}
                 >
                     {secondValue}

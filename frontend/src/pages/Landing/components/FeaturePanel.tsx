@@ -6,21 +6,21 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 interface FeaturePanelProps {
-    image: string,
-    name: string
+    image: string;
+    name: string;
 }
 
 export default function FeaturePanel({ image, name }: FeaturePanelProps) {
     return (
-        <Card
-            sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-        >
-            <CardMedia
-                component="img"
-                image={image}
-            />
+        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <CardMedia component='img' image={image} />
             <CardContent sx={{ flexGrow: 1 }}>
-                <Typography align="center" gutterBottom variant="h6" component="h2">
+                <Typography
+                    align='center'
+                    gutterBottom
+                    variant='h6'
+                    component='h2'
+                >
                     {name}
                 </Typography>
             </CardContent>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Leaderboard from '.'
+import Leaderboard from '.';
 import { store } from '../../redux/store';
 import { Provider } from 'react-redux';
 import { createMemoryHistory } from 'history';

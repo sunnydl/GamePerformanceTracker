@@ -1,4 +1,3 @@
-
 import { TableContainer } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
@@ -16,16 +15,16 @@ export const PlayerTableContainer = styled(TableContainer)(({ theme }) => ({
             borderColor: theme.palette.grey[600],
 
             '& .MuiAvatar-root': {
-                width: "48px",
-                height: "48px",
-                marginRight: theme.spacing(2)
-            }
-        }
-    }
+                width: '48px',
+                height: '48px',
+                marginRight: theme.spacing(2),
+            },
+        },
+    },
 }));
 
 export const PlayerLink = styled(Link)(({ theme }) => ({
     color: theme.palette.text.primary,
-    textDecoration: 'none', 
-    fontWeight: 'bold'
+    textDecoration: 'none',
+    fontWeight: 'bold',
 }));

@@ -13,7 +13,7 @@ export const MatchSummaryPaper = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.alternate,
     borderRadius: theme.spacing(8),
     height: 'fit-content',
-}))
+}));
 
 export const Header = styled(Typography)(({ theme }) => ({
     padding: theme.spacing(4),
@@ -21,13 +21,13 @@ export const Header = styled(Typography)(({ theme }) => ({
     margin: 'auto',
     fontSize: theme.typography.h3.fontSize,
     width: '90%',
-    overflowWrap: "break-word"
-}))
+    overflowWrap: 'break-word',
+}));
 
 export const Paragraph = styled(Typography)(({ theme }) => ({
     fontSize: theme.typography.h5.fontSize,
     padding: theme.spacing(1),
-}))
+}));
 
 export const ButtonSelections = styled('div')(({ theme }) => ({
     width: '100%',
@@ -38,13 +38,13 @@ export const ButtonSelections = styled('div')(({ theme }) => ({
     justifyContent: 'center',
     textAlign: 'center',
     marginBottom: theme.spacing(4),
-}))
+}));
 
 export const Buttons = styled(Button)(({ theme }) => ({
     marginLeft: theme.spacing(4),
     marginRight: theme.spacing(4),
     width: theme.spacing(15),
-}))
+}));
 
 export const GraphWrapper = styled(Paper)(({ theme }) => ({
     display: 'flex',
@@ -59,4 +59,4 @@ export const GraphWrapper = styled(Paper)(({ theme }) => ({
     height: '750px',
     paddingBottom: theme.spacing(2),
     paddingTop: theme.spacing(4),
-}))
+}));

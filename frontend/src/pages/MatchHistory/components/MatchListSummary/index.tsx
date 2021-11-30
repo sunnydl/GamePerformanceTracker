@@ -8,7 +8,7 @@ import DataChart from './DataChart';
 /**
  * Returns a functional component of the match history page that displays
  * a summary of the recent match history.
- * 
+ *
  * @param {number} size The number of matches being displayed.
  * @returns {JSX.Element} A functional component.
  */
