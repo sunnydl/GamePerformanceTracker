@@ -10,13 +10,23 @@ import { MatchState, ChampPerformanceSummary } from '../../../../interfaces';
 import { calculateWinRate } from '../../../../util';
 import { useAppSelector } from '../../../../redux/hooks';
 
+/**
+ * Finds and returns the performance data for up to 3 most frequently played champions
+ * based on the given matches data.
+ *
+ * @param {MatchState[]} matches An array that represents a summoner's match history data.
+ * @returns {ChampPerformanceSummary[]} An array with a maximum length of 3 that contains
+ * the overall performance data of the 3 most frequent champions.
+ */
 export function getTopChamps(matches: MatchState[]) {
     const champs: { [key: string]: ChampPerformanceSummary } = {};
 
+    // Loop through every match's data
     for (const key in matches) {
         const match = matches[key];
         const champ = champs[match.championName];
 
+        // Retrieve and store the values into the champs variable
         if (champ) {
             champ.matches++;
             champ.wins += match.win ? 1 : 0;
@@ -35,6 +45,7 @@ export function getTopChamps(matches: MatchState[]) {
         }
     }
 
+    // Then sort the champions by match frequency and return the top 3
     const topChamps = Object.values(champs).sort(
         (a, b) => b.matches - a.matches
     );
