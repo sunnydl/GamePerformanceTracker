@@ -1,3 +1,0 @@
-win/loss -> list
-
-where should it be?

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test::singleUnit": "jest --coverage -c ./jest.singleUnit.json",
-    "test::unit": "jest --coverage -c ./jest.unit.json",
+    "test::unit": "jest --coverage --runInBand -c ./jest.unit.json",
     "test::integration": "jest -c jest.integration.json",
     "deploy": "node index.js",
     "dev": "nodemon index.ts",

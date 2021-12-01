@@ -2,15 +2,11 @@ import express, { Request, Response } from 'express';
 import http from 'http';
 import path from 'path';
 import config from './config/config';
-import logging from './config/logging';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 
 // path
 import api from './routes/index';
-
-// where the log is coming from
-const NAMESPACE = 'Server';
 
 const app = express();
 export const server = new http.Server(app);
@@ -19,11 +15,9 @@ export const server = new http.Server(app);
 mongoose
     .connect(config.mongo.url, config.mongo.options)
     .then((result) => {
-        logging.info(NAMESPACE, 'connected to mongoDB');
-        console.log('connected');
+        console.log('connected to mongoDB');
     })
     .catch((error) => {
-        logging.info(NAMESPACE, error.message, error);
         console.log('error happened');
     });
 
