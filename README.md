@@ -14,7 +14,7 @@ Web App
 * ...More to come
 
 ### Release plan
-![releasePlan](https://user-images.githubusercontent.com/46057691/143723217-5073910a-300c-449c-8de7-b4ebd24e4a43.png)
+![image](https://user-images.githubusercontent.com/56567343/144186552-4157f489-0f2f-4c62-afed-c081b81f9a27.png)
 
 ### Sprint plans
 Please navigate to the [scrum_resources](https://github.com/sunnydl/GamePerformanceTracker/tree/master/scrum_resource) folder.
@@ -23,10 +23,13 @@ Please navigate to the [scrum_resources](https://github.com/sunnydl/GamePerforma
 [Available via Figma](https://www.figma.com/file/LUBg4mluBsOVX0mYmEDoPT/GPT-Wireframe?node-id=0%3A1)
 
 ### Instruction
-1. Clone the repo into your local machine.
-2. Install the dependencies first before starting the app, use `npm install` or `npm i`.
-3. To run the frontend app, run `npm start` in frontend folder.
-4. Backend is still under development...
+1. Set up your environment by properlly installing [Node.js](https://nodejs.org/en/)
+2. Clone the repo into your local machine.
+3. Install the dependencies first in both frontend and backend before starting the app, use `npm install` or `npm i`.
+4. Get your Riot development key from [Riot Dev portal](https://developer.riotgames.com/), and paste it in `/backend/config/config.ts` in `RIOTAPIKEY` variable.
+5. To run the frontend app, run `npm start` in frontend folder.
+6. To run the backend app, run `npm run dev` in backend folder.
+7. To build the whole application, first run `npm run build` in frontend folder, then `npm run build` in backend folder
 
 ### File Structure
 ```
