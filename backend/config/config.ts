@@ -17,14 +17,14 @@ const SERVER_PORT = process.env.SERVER_PORT || 5000;
 
 const MONGO = {
     options: MONGO_OPTIONS,
-    url: `mongodb+srv://cse115a:0vWk0HnItDysKOyl@riot-api-database.fpqow.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+    url: ``,
 };
 const SERVER = {
     hostname: SERVER_HOSTNAME,
     port: SERVER_PORT,
 };
 
-const RIOTAPIKEY = `RGAPI-7f1c2251-7fdf-45c2-9ca5-514682b1478a`;
+const RIOTAPIKEY = ``;
 
 const config = {
     mongo: MONGO,
